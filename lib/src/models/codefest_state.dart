@@ -14,4 +14,6 @@ abstract class CodefestState implements Built<CodefestState, CodefestStateBuilde
   BuiltList<Lecture> get lectures;
 
   BuiltList<Location> get locations;
+
+  bool get isReady;
 }

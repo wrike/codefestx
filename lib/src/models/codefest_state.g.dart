@@ -11,16 +11,21 @@ class _$CodefestState extends CodefestState {
   final BuiltList<Lecture> lectures;
   @override
   final BuiltList<Location> locations;
+  @override
+  final bool isReady;
 
   factory _$CodefestState([void updates(CodefestStateBuilder b)]) =>
       (new CodefestStateBuilder()..update(updates)).build();
 
-  _$CodefestState._({this.lectures, this.locations}) : super._() {
+  _$CodefestState._({this.lectures, this.locations, this.isReady}) : super._() {
     if (lectures == null) {
       throw new BuiltValueNullFieldError('CodefestState', 'lectures');
     }
     if (locations == null) {
       throw new BuiltValueNullFieldError('CodefestState', 'locations');
+    }
+    if (isReady == null) {
+      throw new BuiltValueNullFieldError('CodefestState', 'isReady');
     }
   }
 
@@ -36,19 +41,22 @@ class _$CodefestState extends CodefestState {
     if (identical(other, this)) return true;
     return other is CodefestState &&
         lectures == other.lectures &&
-        locations == other.locations;
+        locations == other.locations &&
+        isReady == other.isReady;
   }
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, lectures.hashCode), locations.hashCode));
+    return $jf($jc(
+        $jc($jc(0, lectures.hashCode), locations.hashCode), isReady.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('CodefestState')
           ..add('lectures', lectures)
-          ..add('locations', locations))
+          ..add('locations', locations)
+          ..add('isReady', isReady))
         .toString();
   }
 }
@@ -68,12 +76,17 @@ class CodefestStateBuilder
   set locations(ListBuilder<Location> locations) =>
       _$this._locations = locations;
 
+  bool _isReady;
+  bool get isReady => _$this._isReady;
+  set isReady(bool isReady) => _$this._isReady = isReady;
+
   CodefestStateBuilder();
 
   CodefestStateBuilder get _$this {
     if (_$v != null) {
       _lectures = _$v.lectures?.toBuilder();
       _locations = _$v.locations?.toBuilder();
+      _isReady = _$v.isReady;
       _$v = null;
     }
     return this;
@@ -98,7 +111,9 @@ class CodefestStateBuilder
     try {
       _$result = _$v ??
           new _$CodefestState._(
-              lectures: lectures.build(), locations: locations.build());
+              lectures: lectures.build(),
+              locations: locations.build(),
+              isReady: isReady);
     } catch (_) {
       String _$failedField;
       try {
