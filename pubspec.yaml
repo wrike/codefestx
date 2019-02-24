@@ -13,6 +13,8 @@ dependencies:
   built_collection: ^4.1.0
   built_value: ^6.3.0
   redux: ^3.0.0
+  redux_epics: ^0.10.4
+  rxdart: ^0.21.0
 
 dev_dependencies:
   angular_test: ^2.2.0

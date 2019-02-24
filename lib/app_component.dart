@@ -1,9 +1,11 @@
 import 'dart:async';
 
 import 'package:angular/angular.dart';
-import 'package:codefest/src/actions/load_program_action.dart';
+import 'package:codefest/src/actions/init_action.dart';
 import 'package:codefest/src/models/codefest_state.dart';
 import 'package:codefest/src/services/dispather.dart';
+import 'package:codefest/src/services/effects.dart';
+import 'package:codefest/src/services/reducer.dart';
 import 'package:codefest/src/services/state_factory.dart';
 import 'package:codefest/src/services/store_factory.dart';
 import 'package:redux/redux.dart';
@@ -13,6 +15,13 @@ import 'package:redux/redux.dart';
   styleUrls: ['app_component.css'],
   templateUrl: 'app_component.html',
   directives: [],
+  providers: [
+    const ClassProvider(StoreFactory),
+    const ClassProvider(StateFactory),
+    const ClassProvider(CodefestReducer),
+    const ClassProvider(Effects),
+    const ClassProvider(Dispatcher),
+  ],
   preserveWhitespace: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 )
@@ -44,7 +53,7 @@ class AppComponent implements OnDestroy {
         _dispatcher.onAction.listen((action) => _store.dispatch(action)),
       ]);
 
-      _dispatcher.dispatch(LoadProgramAction());
+      _dispatcher.dispatch(InitAction());
     });
   }
 
