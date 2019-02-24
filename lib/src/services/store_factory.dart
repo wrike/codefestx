@@ -13,6 +13,7 @@ class StoreFactory {
     return Store(
       _reducer.getState,
       initialState: initialState,
+      distinct: true,
     );
   }
 }

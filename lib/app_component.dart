@@ -4,6 +4,7 @@ import 'package:angular/angular.dart';
 import 'package:codefest/src/actions/load_program_action.dart';
 import 'package:codefest/src/models/codefest_state.dart';
 import 'package:codefest/src/services/dispather.dart';
+import 'package:codefest/src/services/state_factory.dart';
 import 'package:codefest/src/services/store_factory.dart';
 import 'package:redux/redux.dart';
 
@@ -20,6 +21,7 @@ class AppComponent implements OnDestroy {
   final ChangeDetectorRef _cd;
   final Dispatcher _dispatcher;
   final StoreFactory _storeFactory;
+  final StateFactory _stateFactory;
 
   final List<StreamSubscription> _subscriptions = List<StreamSubscription>();
 
@@ -29,11 +31,11 @@ class AppComponent implements OnDestroy {
     this._zone,
     this._cd,
     this._storeFactory,
+    this._stateFactory,
     this._dispatcher,
   ) {
     _zone.runOutsideAngular(() {
-      final initialState = CodefestState([], []);
-      _store = _storeFactory.getStore(initialState);
+      _store = _storeFactory.getStore(_stateFactory.getInitialState());
 
       _subscriptions.addAll([
         _store.onChange.listen((_) {
