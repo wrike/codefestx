@@ -1,5 +1,10 @@
+import 'dart:async';
+
 import 'package:angular/angular.dart';
+import 'package:codefest/src/actions/load_program_action.dart';
 import 'package:codefest/src/models/codefest_state.dart';
+import 'package:codefest/src/services/dispather.dart';
+import 'package:codefest/src/services/store_factory.dart';
 import 'package:redux/redux.dart';
 
 @Component(
@@ -10,18 +15,39 @@ import 'package:redux/redux.dart';
   preserveWhitespace: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 )
-class AppComponent implements OnChanges {
+class AppComponent implements OnDestroy {
+  final NgZone _zone;
   final ChangeDetectorRef _cd;
+  final Dispatcher _dispatcher;
+  final StoreFactory _storeFactory;
 
-  final store = new Store<CodefestState>(
-    combineReducers<CodefestState>([]),
-    initialState: CodefestState([], []),
-  );
+  final List<StreamSubscription> _subscriptions = List<StreamSubscription>();
 
-  AppComponent(this._cd);
+  Store<CodefestState> _store;
+
+  AppComponent(
+    this._zone,
+    this._cd,
+    this._storeFactory,
+    this._dispatcher,
+  ) {
+    _zone.runOutsideAngular(() {
+      final initialState = CodefestState([], []);
+      _store = _storeFactory.getStore(initialState);
+
+      _subscriptions.addAll([
+        _store.onChange.listen((_) {
+          _zone.run(_cd.markForCheck);
+        }),
+        _dispatcher.onAction.listen((action) => _store.dispatch(action)),
+      ]);
+
+      _dispatcher.dispatch(LoadProgramAction());
+    });
+  }
 
   @override
-  void ngOnChanges(Map<String, SimpleChange> changes) {
-    store.onChange.listen((_) => _cd.markForCheck());
+  void ngOnDestroy() {
+    _subscriptions.forEach((s) => s.cancel());
   }
 }
