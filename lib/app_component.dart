@@ -4,6 +4,7 @@ import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:codefest/src/actions/init_action.dart';
 import 'package:codefest/src/models/codefest_state.dart';
+import 'package:codefest/src/services/data_loader.dart';
 import 'package:codefest/src/services/dispather.dart';
 import 'package:codefest/src/services/effects.dart';
 import 'package:codefest/src/services/reducer.dart';
@@ -27,6 +28,7 @@ import 'package:redux/redux.dart';
     const ClassProvider(Effects),
     const ClassProvider(Dispatcher),
     const ClassProvider(Selector),
+    const ClassProvider(DataLoader),
   ],
   preserveWhitespace: true,
   changeDetection: ChangeDetectionStrategy.OnPush,

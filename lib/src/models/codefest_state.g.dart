@@ -8,6 +8,8 @@ part of 'codefest_state.dart';
 
 class _$CodefestState extends CodefestState {
   @override
+  final BuiltList<Speaker> speakers;
+  @override
   final BuiltList<Lecture> lectures;
   @override
   final BuiltList<Location> locations;
@@ -17,7 +19,12 @@ class _$CodefestState extends CodefestState {
   factory _$CodefestState([void updates(CodefestStateBuilder b)]) =>
       (new CodefestStateBuilder()..update(updates)).build();
 
-  _$CodefestState._({this.lectures, this.locations, this.isReady}) : super._() {
+  _$CodefestState._(
+      {this.speakers, this.lectures, this.locations, this.isReady})
+      : super._() {
+    if (speakers == null) {
+      throw new BuiltValueNullFieldError('CodefestState', 'speakers');
+    }
     if (lectures == null) {
       throw new BuiltValueNullFieldError('CodefestState', 'lectures');
     }
@@ -40,6 +47,7 @@ class _$CodefestState extends CodefestState {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is CodefestState &&
+        speakers == other.speakers &&
         lectures == other.lectures &&
         locations == other.locations &&
         isReady == other.isReady;
@@ -48,12 +56,15 @@ class _$CodefestState extends CodefestState {
   @override
   int get hashCode {
     return $jf($jc(
-        $jc($jc(0, lectures.hashCode), locations.hashCode), isReady.hashCode));
+        $jc($jc($jc(0, speakers.hashCode), lectures.hashCode),
+            locations.hashCode),
+        isReady.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('CodefestState')
+          ..add('speakers', speakers)
           ..add('lectures', lectures)
           ..add('locations', locations)
           ..add('isReady', isReady))
@@ -64,6 +75,11 @@ class _$CodefestState extends CodefestState {
 class CodefestStateBuilder
     implements Builder<CodefestState, CodefestStateBuilder> {
   _$CodefestState _$v;
+
+  ListBuilder<Speaker> _speakers;
+  ListBuilder<Speaker> get speakers =>
+      _$this._speakers ??= new ListBuilder<Speaker>();
+  set speakers(ListBuilder<Speaker> speakers) => _$this._speakers = speakers;
 
   ListBuilder<Lecture> _lectures;
   ListBuilder<Lecture> get lectures =>
@@ -84,6 +100,7 @@ class CodefestStateBuilder
 
   CodefestStateBuilder get _$this {
     if (_$v != null) {
+      _speakers = _$v.speakers?.toBuilder();
       _lectures = _$v.lectures?.toBuilder();
       _locations = _$v.locations?.toBuilder();
       _isReady = _$v.isReady;
@@ -111,12 +128,15 @@ class CodefestStateBuilder
     try {
       _$result = _$v ??
           new _$CodefestState._(
+              speakers: speakers.build(),
               lectures: lectures.build(),
               locations: locations.build(),
               isReady: isReady);
     } catch (_) {
       String _$failedField;
       try {
+        _$failedField = 'speakers';
+        speakers.build();
         _$failedField = 'lectures';
         lectures.build();
         _$failedField = 'locations';
