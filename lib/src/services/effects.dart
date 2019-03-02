@@ -30,7 +30,7 @@ class Effects {
   Stream<Object> _onLoadProgram(Stream<Object> actions, EpicStore<CodefestState> store) =>
       Observable(actions).ofType(new TypeToken<LoadProgramStartAction>()).asyncExpand((_) async* {
         yield LoadProgramSuccessAction(
-          lectures: _dataLoader.getLectures(),
+          lectures: await _dataLoader.getLectures(),
           locations: await _dataLoader.getLocations(),
           speakers: await _dataLoader.getSpeakers(),
         );
