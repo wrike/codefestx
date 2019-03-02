@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:codefest/src/actions/init_action.dart';
+import 'package:codefest/src/components/lectures/lectures.dart';
 import 'package:codefest/src/models/codefest_state.dart';
 import 'package:codefest/src/services/data_loader.dart';
 import 'package:codefest/src/services/dispather.dart';
@@ -20,6 +21,7 @@ import 'package:redux/redux.dart';
   directives: [
     NgIf,
     MaterialSpinnerComponent,
+    LecturesComponent,
   ],
   providers: [
     const ClassProvider(StoreFactory),
