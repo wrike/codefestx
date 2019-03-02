@@ -1,5 +1,9 @@
+import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta.dart';
 
+part 'lecture_data.g.dart';
+
+@JsonSerializable(nullable: false)
 class LectureData {
   final String id;
   final String title;
@@ -18,4 +22,8 @@ class LectureData {
     @required this.startTime,
     @required this.duration,
   });
+
+  factory LectureData.fromJson(Map<String, dynamic> json) => _$LectureDataFromJson(json);
+
+  Map<String, dynamic> toJson() => _$LectureDataToJson(this);
 }
