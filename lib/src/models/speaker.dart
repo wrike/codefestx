@@ -1,5 +1,9 @@
+import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta.dart';
 
+part 'speaker.g.dart';
+
+@JsonSerializable(nullable: false)
 class Speaker {
   final String id;
   final String name;
@@ -10,8 +14,12 @@ class Speaker {
   Speaker({
     @required this.id,
     @required this.name,
-    this.company,
+    @required this.company,
     @required this.avatarPath,
     @required this.description,
   });
+
+  factory Speaker.fromJson(Map<String, dynamic> json) => _$SpeakerFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SpeakerToJson(this);
 }
