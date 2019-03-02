@@ -24,10 +24,13 @@ class CodefestReducer {
           Lecture(
             id: lecture.id,
             title: lecture.title,
+            type: lecture.type,
             description: lecture.description,
             startTime: lecture.startTime,
             duration: lecture.duration,
             location: action.locations.firstWhere((location) => location.id == lecture.locationId),
             speakers: action.speakers.where((speaker) => lecture.speakerIds.contains(speaker.id)),
+            isStarred: lecture.isStarred,
+            isLiked: lecture.isLiked,
           ))));
 }
