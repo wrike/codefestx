@@ -21,14 +21,14 @@ import 'package:redux/redux.dart';
     NgIf,
     MaterialSpinnerComponent,
   ],
-  providers: [
-    const ClassProvider(StoreFactory),
-    const ClassProvider(StateFactory),
-    const ClassProvider(CodefestReducer),
-    const ClassProvider(Effects),
-    const ClassProvider(Dispatcher),
-    const ClassProvider(Selector),
-    const ClassProvider(DataLoader),
+  providers: const <Object>[
+    const ClassProvider<StoreFactory>(StoreFactory),
+    const ClassProvider<StateFactory>(StateFactory),
+    const ClassProvider<CodefestReducer>(CodefestReducer),
+    const ClassProvider<Effects>(Effects),
+    const ClassProvider<Dispatcher>(Dispatcher),
+    const ClassProvider<Selector>(Selector),
+    const ClassProvider<DataLoader>(DataLoader),
   ],
   preserveWhitespace: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -41,7 +41,7 @@ class AppComponent implements OnDestroy {
   final StateFactory _stateFactory;
   final Selector _selector;
 
-  final List<StreamSubscription> _subscriptions = List<StreamSubscription>();
+  final List<StreamSubscription> _subscriptions = [];
 
   Store<CodefestState> _store;
 
