@@ -4,5 +4,14 @@
 
   <h2>{{ lecture.title }}</h2>
 
-  <p>{{ lecture.description }}</p>
+  <p
+    *ngFor="let speaker of lecture.speakers">
+
+    <img
+      [src]="speaker.avatarPath">
+
+    {{ speaker.name }} - {{ speaker.company }}
+  </p>
+
+  <p>{{ lecture.location.title }}</p>
 </div>
