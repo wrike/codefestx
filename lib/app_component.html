@@ -4,12 +4,4 @@
   *ngIf="!isReady">
 </material-spinner>
 
-<lectures
-  *ngIf="state.path.isEmpty"
-  [lectures]="state.lectures">
-</lectures>
-
-<div
-  *ngIf="state.path == 'lecture'">
-  Lecture!
-</div>
+<router-outlet [routes]="Routes.all"></router-outlet>
