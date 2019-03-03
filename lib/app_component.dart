@@ -53,6 +53,8 @@ class AppComponent implements OnDestroy {
 
   bool get isReady => _selector.isReady(state);
 
+  bool get isRootPath => _selector.isRootPath(state);
+
   AppComponent(
       this._zone,
       this._cd,
