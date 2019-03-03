@@ -1,0 +1,17 @@
+<div
+  *ngFor="let lecture of lectures"
+  (click)="handleLectureClick(lecture)">
+
+  <h2>{{ lecture.title }}</h2>
+
+  <p
+    *ngFor="let speaker of lecture.speakers">
+
+    <img
+      [src]="speaker.avatarPath">
+
+    {{ speaker.name }} - {{ speaker.company }}
+  </p>
+
+  <p>{{ lecture.location.title }}</p>
+</div>
