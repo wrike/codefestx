@@ -19,4 +19,6 @@ abstract class CodefestState implements Built<CodefestState, CodefestStateBuilde
   BuiltList<Location> get locations;
 
   bool get isReady;
+
+  String get path;
 }

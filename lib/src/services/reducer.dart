@@ -1,3 +1,4 @@
+import 'package:codefest/src/actions/change_location_action.dart';
 import 'package:codefest/src/actions/load_program_success_action.dart';
 import 'package:codefest/src/models/codefest_state.dart';
 import 'package:codefest/src/models/lecture.dart';
@@ -9,6 +10,7 @@ class CodefestReducer {
   CodefestReducer() {
     _reducer = combineReducers<CodefestState>([
       TypedReducer<CodefestState, LoadProgramSuccessAction>(_onLoadProgram),
+      TypedReducer<CodefestState, ChangeLocationAction>(_onChangeLocation),
     ]);
   }
 
@@ -33,4 +35,8 @@ class CodefestReducer {
             isStarred: lecture.isStarred,
             isLiked: lecture.isLiked,
           ))));
+
+  CodefestState _onChangeLocation(CodefestState state, ChangeLocationAction action) => state.rebuild((b) {
+    b.path = action.path;
+  });
 }
