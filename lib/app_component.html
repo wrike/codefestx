@@ -5,5 +5,11 @@
 </material-spinner>
 
 <lectures
+  *ngIf="state.path.isEmpty"
   [lectures]="state.lectures">
 </lectures>
+
+<div
+  *ngIf="state.path == 'lecture'">
+  Lecture!
+</div>

@@ -15,12 +15,14 @@ class _$CodefestState extends CodefestState {
   final BuiltList<Location> locations;
   @override
   final bool isReady;
+  @override
+  final String path;
 
   factory _$CodefestState([void updates(CodefestStateBuilder b)]) =>
       (new CodefestStateBuilder()..update(updates)).build();
 
   _$CodefestState._(
-      {this.speakers, this.lectures, this.locations, this.isReady})
+      {this.speakers, this.lectures, this.locations, this.isReady, this.path})
       : super._() {
     if (speakers == null) {
       throw new BuiltValueNullFieldError('CodefestState', 'speakers');
@@ -33,6 +35,9 @@ class _$CodefestState extends CodefestState {
     }
     if (isReady == null) {
       throw new BuiltValueNullFieldError('CodefestState', 'isReady');
+    }
+    if (path == null) {
+      throw new BuiltValueNullFieldError('CodefestState', 'path');
     }
   }
 
@@ -50,15 +55,18 @@ class _$CodefestState extends CodefestState {
         speakers == other.speakers &&
         lectures == other.lectures &&
         locations == other.locations &&
-        isReady == other.isReady;
+        isReady == other.isReady &&
+        path == other.path;
   }
 
   @override
   int get hashCode {
     return $jf($jc(
-        $jc($jc($jc(0, speakers.hashCode), lectures.hashCode),
-            locations.hashCode),
-        isReady.hashCode));
+        $jc(
+            $jc($jc($jc(0, speakers.hashCode), lectures.hashCode),
+                locations.hashCode),
+            isReady.hashCode),
+        path.hashCode));
   }
 
   @override
@@ -67,7 +75,8 @@ class _$CodefestState extends CodefestState {
           ..add('speakers', speakers)
           ..add('lectures', lectures)
           ..add('locations', locations)
-          ..add('isReady', isReady))
+          ..add('isReady', isReady)
+          ..add('path', path))
         .toString();
   }
 }
@@ -96,6 +105,10 @@ class CodefestStateBuilder
   bool get isReady => _$this._isReady;
   set isReady(bool isReady) => _$this._isReady = isReady;
 
+  String _path;
+  String get path => _$this._path;
+  set path(String path) => _$this._path = path;
+
   CodefestStateBuilder();
 
   CodefestStateBuilder get _$this {
@@ -104,6 +117,7 @@ class CodefestStateBuilder
       _lectures = _$v.lectures?.toBuilder();
       _locations = _$v.locations?.toBuilder();
       _isReady = _$v.isReady;
+      _path = _$v.path;
       _$v = null;
     }
     return this;
@@ -131,7 +145,8 @@ class CodefestStateBuilder
               speakers: speakers.build(),
               lectures: lectures.build(),
               locations: locations.build(),
-              isReady: isReady);
+              isReady: isReady,
+              path: path);
     } catch (_) {
       String _$failedField;
       try {

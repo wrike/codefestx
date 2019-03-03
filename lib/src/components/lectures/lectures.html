@@ -1,5 +1,6 @@
 <div
-  *ngFor="let lecture of lectures">
+  *ngFor="let lecture of lectures"
+  (click)="handleLectureClick(lecture)">
 
   <h2>{{ lecture.title }}</h2>
 

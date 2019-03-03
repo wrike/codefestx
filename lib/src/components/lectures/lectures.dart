@@ -1,5 +1,6 @@
 import 'package:angular/angular.dart';
 import 'package:codefest/src/models/lecture.dart';
+import 'package:codefest/src/services/router.dart';
 
 @Component(
   selector: 'lectures',
@@ -13,8 +14,14 @@ import 'package:codefest/src/models/lecture.dart';
   changeDetection: ChangeDetectionStrategy.OnPush,
 )
 class LecturesComponent {
+  Router _router;
+
   @Input()
   Iterable<Lecture> lectures;
 
-  LecturesComponent();
+  LecturesComponent(this._router);
+
+  void handleLectureClick(Lecture lecture) {
+    _router.push('lecture');
+  }
 }

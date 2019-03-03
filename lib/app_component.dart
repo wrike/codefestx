@@ -9,6 +9,7 @@ import 'package:codefest/src/services/data_loader.dart';
 import 'package:codefest/src/services/dispather.dart';
 import 'package:codefest/src/services/effects.dart';
 import 'package:codefest/src/services/reducer.dart';
+import 'package:codefest/src/services/router.dart';
 import 'package:codefest/src/services/selector.dart';
 import 'package:codefest/src/services/state_factory.dart';
 import 'package:codefest/src/services/store_factory.dart';
@@ -31,6 +32,7 @@ import 'package:redux/redux.dart';
     const ClassProvider(Dispatcher),
     const ClassProvider(Selector),
     const ClassProvider(DataLoader),
+    const ClassProvider(Router),
   ],
   preserveWhitespace: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -64,7 +66,9 @@ class AppComponent implements OnDestroy {
 
       _subscriptions.addAll([
         _store.onChange.listen((_) {
-          _zone.run(_cd.markForCheck);
+          _zone.run(() {
+            _cd..markForCheck()..detectChanges();
+          });
         }),
         _dispatcher.onAction.listen((action) => _store.dispatch(action)),
       ]);
