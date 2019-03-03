@@ -27,16 +27,20 @@ import 'package:angular_router/angular_router.dart';
     MaterialSpinnerComponent,
     LecturesComponent,
   ],
-  providers: [
-    const ClassProvider(StoreFactory),
-    const ClassProvider(StateFactory),
-    const ClassProvider(CodefestReducer),
-    const ClassProvider(Effects),
-    const ClassProvider(Dispatcher),
-    const ClassProvider(Selector),
-    const ClassProvider(DataLoader),
+  providers: const <Object>[
+    const ClassProvider<StoreFactory>(StoreFactory),
+    const ClassProvider<StateFactory>(StateFactory),
+    const ClassProvider<CodefestReducer>(CodefestReducer),
+    const ClassProvider<Effects>(Effects),
+    const ClassProvider<Dispatcher>(Dispatcher),
+    const ClassProvider<Selector>(Selector),
+    const ClassProvider<DataLoader>(DataLoader),
+    const ClassProvider<Router>(Router),
   ],
-  exports: [RoutePaths, Routes,],
+  exports: [
+    RoutePaths,
+    Routes,
+  ],
   preserveWhitespace: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 )
@@ -48,7 +52,7 @@ class AppComponent implements OnDestroy {
   final StateFactory _stateFactory;
   final Selector _selector;
 
-  final List<StreamSubscription> _subscriptions = List<StreamSubscription>();
+  final List<StreamSubscription> _subscriptions = [];
 
   Store<CodefestState> _store;
 
@@ -56,21 +60,26 @@ class AppComponent implements OnDestroy {
 
   bool get isReady => _selector.isReady(state);
 
+  bool get isRootPath => _selector.isRootPath(state);
+
   AppComponent(
-    this._zone,
-    this._cd,
-    this._storeFactory,
-    this._stateFactory,
-    this._dispatcher,
-    this._selector,
-  ) {
+      this._zone,
+      this._cd,
+      this._storeFactory,
+      this._stateFactory,
+      this._dispatcher,
+      this._selector,
+      ) {
     _zone.runOutsideAngular(() {
       _store = _storeFactory.getStore(_stateFactory.getInitialState());
 
       _subscriptions.addAll([
         _store.onChange.listen((_) {
           _zone.run(() {
-            _cd..markForCheck()..detectChanges();
+            // TODO: verify that `detectChanges` is needed
+            _cd
+              ..markForCheck()
+              ..detectChanges();
           });
         }),
         _dispatcher.onAction.listen((action) => _store.dispatch(action)),

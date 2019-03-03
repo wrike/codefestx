@@ -23,20 +23,19 @@ class CodefestReducer {
         ..speakers.replace(action.speakers)
         ..locations.replace(action.locations)
         ..lectures.replace(action.lectures.map((lecture) =>
-          Lecture(
-            id: lecture.id,
-            title: lecture.title,
-            type: lecture.type,
-            description: lecture.description,
-            startTime: lecture.startTime,
-            duration: lecture.duration,
-            location: action.locations.firstWhere((location) => location.id == lecture.locationId),
-            speakers: action.speakers.where((speaker) => lecture.speakerIds.contains(speaker.id)),
-            isStarred: lecture.isStarred,
-            isLiked: lecture.isLiked,
-          ))));
+            Lecture(
+              id: lecture.id,
+              title: lecture.title,
+              type: lecture.type,
+              description: lecture.description,
+              startTime: lecture.startTime,
+              duration: lecture.duration,
+              location: action.locations.firstWhere((location) => location.id == lecture.locationId),
+              speakers: action.speakers.where((speaker) => lecture.speakerIds.contains(speaker.id)),
+              isStarred: lecture.isStarred,
+              isLiked: lecture.isLiked,
+            ))));
 
-  CodefestState _onChangeLocation(CodefestState state, ChangeLocationAction action) => state.rebuild((b) {
-    b.path = action.path;
-  });
+  CodefestState _onChangeLocation(CodefestState state, ChangeLocationAction action) =>
+      state.rebuild((b) => b.path = action.path);
 }
