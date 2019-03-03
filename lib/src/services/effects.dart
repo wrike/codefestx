@@ -23,12 +23,12 @@ class Effects {
   }
 
   Stream<Object> _onInit(Stream<Object> actions, EpicStore<CodefestState> store) =>
-      Observable(actions).ofType(new TypeToken<InitAction>()).asyncExpand((_) async* {
+      Observable(actions).ofType(const TypeToken<InitAction>()).asyncExpand((_) async* {
         yield LoadProgramStartAction();
       });
 
   Stream<Object> _onLoadProgram(Stream<Object> actions, EpicStore<CodefestState> store) =>
-      Observable(actions).ofType(new TypeToken<LoadProgramStartAction>()).asyncExpand((_) async* {
+      Observable(actions).ofType(const TypeToken<LoadProgramStartAction>()).asyncExpand((_) async* {
         yield LoadProgramSuccessAction(
           lectures: await _dataLoader.getLectures(),
           locations: await _dataLoader.getLocations(),

@@ -122,7 +122,7 @@ class ApiService extends MockClient {
     if (_speakerDb == null) resetDb();
     var data;
 
-    switch (request.url.pathSegments.first) {
+    switch (request.url.pathSegments.last) {
       case 'locations':
         data = _locationDb;
         break;
@@ -133,10 +133,10 @@ class ApiService extends MockClient {
         data = _lecturesDb;
         break;
     }
-    return Response(json.encode({'data': data}), 200, headers: {'content-type': 'application/json; charset=utf-8'});
+    return Response(json.encode(data), 200, headers: {'content-type': 'application/json; charset=utf-8'});
   }
 
-  static resetDb() {
+  static void resetDb() {
     _speakerDb = _initialSpeakers.map((json) => Speaker.fromJson(json)).toList();
     _locationDb = _initialLocations.map((json) => Location.fromJson(json)).toList();
     _lecturesDb = _initialLectures.map((json) => LectureData.fromJson(json)).toList();

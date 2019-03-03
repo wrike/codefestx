@@ -10,13 +10,13 @@ LectureData _$LectureDataFromJson(Map<String, dynamic> json) {
   return LectureData(
       id: json['id'] as String,
       title: json['title'] as String,
-      type: _$enumDecodeNullable(_$LectureTypeEnumMap, json['type']) ??
-          LectureType.lecture,
       speakerIds: (json['speakerIds'] as List)?.map((e) => e as String) ?? [],
       description: json['description'] as String,
       locationId: json['locationId'] as String,
       startTime: DateTime.parse(json['startTime'] as String),
       duration: json['duration'] as int,
+      type: _$enumDecodeNullable(_$LectureTypeEnumMap, json['type']) ??
+          LectureType.lecture,
       isStarred: json['isStarred'] as bool ?? false,
       isLiked: json['isLiked'] as bool ?? false);
 }

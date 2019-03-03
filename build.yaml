@@ -1,0 +1,13 @@
+targets:
+  $default:
+    builders:
+      build_web_compilers|entrypoint:
+        generate_for:
+          - web/main.dart
+        release_options:
+          dart2js_args:
+            - --fast-startup
+            - --minify
+            - --trust-type-annotations
+            - --trust-primitives
+            - -DapiHost=https://codefest.wrike.tech/api
