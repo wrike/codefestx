@@ -35,7 +35,6 @@ import 'package:angular_router/angular_router.dart';
     const ClassProvider<Dispatcher>(Dispatcher),
     const ClassProvider<Selector>(Selector),
     const ClassProvider<DataLoader>(DataLoader),
-    const ClassProvider<Router>(Router),
   ],
   exports: [
     RoutePaths,
