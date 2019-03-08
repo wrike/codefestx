@@ -1,15 +1,7 @@
 <h1>CodeFest X</h1>
 
 <material-spinner
-  *ngIf="!isReady">
+        *ngIf="!isReady">
 </material-spinner>
 
-<lectures
-  *ngIf="isRootPath"
-  [lectures]="state.lectures">
-</lectures>
-
-<div
-  *ngIf="state.path == 'lecture'">
-  Lecture!
-</div>
+<router-outlet [routes]="Routes.all"></router-outlet>

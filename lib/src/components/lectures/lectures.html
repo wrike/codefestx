@@ -1,8 +1,10 @@
 <div
-  *ngFor="let lecture of lectures"
-  (click)="handleLectureClick(lecture)">
+  *ngFor="let lecture of lectures">
 
-  <h2>{{ lecture.title }}</h2>
+  <a
+    (click)="onSelectLecture(lecture)">
+    {{ lecture.title }}
+  </a>
 
   <p
     *ngFor="let speaker of lecture.speakers">

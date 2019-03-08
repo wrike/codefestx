@@ -8,19 +8,25 @@ class StoreFactory {
   final CodefestReducer _reducer;
   final Effects _effects;
 
+  Store<CodefestState> _store;
+
   StoreFactory(
     this._reducer,
     this._effects,
   );
 
-  Store<CodefestState> getStore(CodefestState initialState) {
-    return Store(
-      _reducer.getState,
-      initialState: initialState,
-      middleware: [
-        EpicMiddleware(_effects.getEffects()),
-      ],
-      distinct: true,
-    );
+  Store<CodefestState> getStore([CodefestState initialState]) {
+    if (_store == null) {
+      _store = new Store(
+        _reducer.getState,
+        initialState: initialState,
+        middleware: [
+          EpicMiddleware(_effects.getEffects()),
+        ],
+        distinct: true,
+      );
+    }
+
+    return _store;
   }
 }

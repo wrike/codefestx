@@ -5,21 +5,24 @@ import 'package:angular_components/angular_components.dart';
 import 'package:codefest/src/actions/init_action.dart';
 import 'package:codefest/src/components/lectures/lectures.dart';
 import 'package:codefest/src/models/codefest_state.dart';
+import 'package:codefest/src/route_paths.dart';
+import 'package:codefest/src/routes.dart';
 import 'package:codefest/src/services/data_loader.dart';
 import 'package:codefest/src/services/dispather.dart';
 import 'package:codefest/src/services/effects.dart';
 import 'package:codefest/src/services/reducer.dart';
-import 'package:codefest/src/services/router.dart';
 import 'package:codefest/src/services/selector.dart';
 import 'package:codefest/src/services/state_factory.dart';
 import 'package:codefest/src/services/store_factory.dart';
 import 'package:redux/redux.dart';
+import 'package:angular_router/angular_router.dart';
 
 @Component(
   selector: 'codefest',
   styleUrls: ['app_component.css'],
   templateUrl: 'app_component.html',
   directives: [
+    routerDirectives,
     NgIf,
     MaterialSpinnerComponent,
     LecturesComponent,
@@ -33,6 +36,10 @@ import 'package:redux/redux.dart';
     const ClassProvider<Selector>(Selector),
     const ClassProvider<DataLoader>(DataLoader),
     const ClassProvider<Router>(Router),
+  ],
+  exports: [
+    RoutePaths,
+    Routes,
   ],
   preserveWhitespace: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
