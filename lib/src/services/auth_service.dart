@@ -1,6 +1,7 @@
 import 'dart:html';
 
 import 'package:codefest/src/models/auth.response.dart';
+import 'package:codefest/src/models/auth_get_url.response.dart';
 import 'package:codefest/src/models/auth_type.enum.dart';
 import 'package:codefest/src/services/auth_store.dart';
 import 'package:codefest/src/services/http_proxy.dart';
@@ -17,13 +18,21 @@ class AuthService {
     _authStore.userName = window.localStorage[_userNameStorageKey];
   }
 
-  String _token;
-  String _userName;
+  void _clearToken() {
+    _authStore.token = null;
+    window.localStorage.remove(_tokenStorageKey);
+  }
+
+  void logout() {
+    _clearToken();
+    window.location.href = '/';
+  }
 
   void login(AuthType authType) async {
+    _clearToken();
     final url = _authUrls[authType];
-    final authUrl = await _http.get<String>(url);
-    window.location.href = authUrl;
+    final auth = await _http.get<AuthGetUrlResponse>(url, decoder: (j) => AuthGetUrlResponse.fromJson(j));
+    window.location.href = auth.url;
   }
 
   Map<AuthType, String> _authUrls = {
@@ -43,11 +52,10 @@ class AuthService {
     final state = queryParameters['state'];
     final url = '${_stateToUrl[state]}?code=$code';
     final authResponse = await _http.get<AuthResponse>(url, decoder: (j) => AuthResponse.fromJson(j));
-    _token = authResponse.token;
-    _userName = authResponse.userName;
-    window.localStorage[_tokenStorageKey] = _token;
-    window.localStorage[_userNameStorageKey] = _userName;
-    print('AUTH SUCCESS!');
+    window.localStorage[_tokenStorageKey] = authResponse.token;
+    window.localStorage[_userNameStorageKey] = authResponse.userName;
+    window.location.href = '/';
+
   }
 
 
