@@ -1,0 +1,14 @@
+@import 'package:angular_components/css/material/material';
+
+$padding-1: 2px;
+$padding-2: 4px;
+$padding-3: 6px;
+$padding-4: 8px;
+$padding-5: 10px;
+$padding-6: 12px;
+
+@mixin font-caption {
+  color: $mat-text-secondary;
+  font: $mat-font-weight-regular $mat-font-size-caption $mat-font-family;
+  letter-spacing: font-tracking(20);
+}

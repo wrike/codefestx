@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:angular/angular.dart';
-import 'package:angular_components/angular_components.dart';
 import 'package:codefest/src/actions/init_action.dart';
 import 'package:codefest/src/components/lectures/lectures.dart';
 import 'package:codefest/src/models/codefest_state.dart';
@@ -22,9 +21,8 @@ import 'package:angular_router/angular_router.dart';
   styleUrls: ['app_component.css'],
   templateUrl: 'app_component.html',
   directives: [
-    routerDirectives,
     NgIf,
-    MaterialSpinnerComponent,
+    routerDirectives,
     LecturesComponent,
   ],
   providers: const <Object>[
@@ -45,7 +43,7 @@ import 'package:angular_router/angular_router.dart';
 )
 class AppComponent implements OnDestroy {
   final NgZone _zone;
-  final ChangeDetectorRef _cd;
+  final ChangeDetectorRef _cdr;
   final Dispatcher _dispatcher;
   final StoreFactory _storeFactory;
   final StateFactory _stateFactory;
@@ -63,7 +61,7 @@ class AppComponent implements OnDestroy {
 
   AppComponent(
       this._zone,
-      this._cd,
+      this._cdr,
       this._storeFactory,
       this._stateFactory,
       this._dispatcher,
@@ -75,12 +73,10 @@ class AppComponent implements OnDestroy {
       _subscriptions.addAll([
         _store.onChange.listen((_) {
           _zone.run(() {
-            // TODO: verify that `detectChanges` is needed
-            _cd
-              ..markForCheck()
-              ..detectChanges();
+            _cdr.markForCheck();
           });
         }),
+
         _dispatcher.onAction.listen((action) => _store.dispatch(action)),
       ]);
 
