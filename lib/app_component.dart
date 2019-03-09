@@ -1,13 +1,18 @@
 import 'dart:async';
 
 import 'package:angular/angular.dart';
-import 'package:codefest/src/actions/init_action.dart';
+import 'package:codefest/src/components/lectures/lectures.dart';
+import 'package:codefest/src/components/login-callback/login_callback.dart';
+import 'package:codefest/src/components/login/login.dart';
 import 'package:codefest/src/models/codefest_state.dart';
 import 'package:codefest/src/route_paths.dart';
 import 'package:codefest/src/routes.dart';
+import 'package:codefest/src/services/auth_service.dart';
+import 'package:codefest/src/services/auth_store.dart';
 import 'package:codefest/src/services/data_loader.dart';
 import 'package:codefest/src/services/dispather.dart';
 import 'package:codefest/src/services/effects.dart';
+import 'package:codefest/src/services/http_proxy.dart';
 import 'package:codefest/src/services/reducer.dart';
 import 'package:codefest/src/services/selector.dart';
 import 'package:codefest/src/services/state_factory.dart';
@@ -22,6 +27,9 @@ import 'package:angular_router/angular_router.dart';
   directives: [
     NgIf,
     routerDirectives,
+    LecturesComponent,
+    LoginComponent,
+    LoginCallbackComponent,
   ],
   providers: const <Object>[
     const ClassProvider<StoreFactory>(StoreFactory),
@@ -31,6 +39,10 @@ import 'package:angular_router/angular_router.dart';
     const ClassProvider<Dispatcher>(Dispatcher),
     const ClassProvider<Selector>(Selector),
     const ClassProvider<DataLoader>(DataLoader),
+    const ClassProvider<HttpProxy>(HttpProxy),
+    const ClassProvider<AuthService>(AuthService),
+    const ClassProvider<AuthStore>(AuthStore),
+    routerProviders,
   ],
   exports: [
     RoutePaths,
@@ -46,7 +58,6 @@ class AppComponent implements OnDestroy {
   final StoreFactory _storeFactory;
   final StateFactory _stateFactory;
   final Selector _selector;
-
   final List<StreamSubscription> _subscriptions = [];
 
   Store<CodefestState> _store;
@@ -77,8 +88,6 @@ class AppComponent implements OnDestroy {
 
         _dispatcher.onAction.listen((action) => _store.dispatch(action)),
       ]);
-
-      _dispatcher.dispatch(InitAction());
     });
   }
 

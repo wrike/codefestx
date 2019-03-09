@@ -5,6 +5,8 @@ const idParam = 'id';
 
 class RoutePaths {
   static final lecture = RoutePath(path: 'lecture/:$idParam');
+  static final login = RoutePath(path: 'login');
+  static final loginCallback = RoutePath(path: 'loginCallback');
 
   // Menu route paths
   static final lectures = MenuRoutePath(title: 'Расписание', path: 'lectures');
@@ -16,6 +18,7 @@ class RoutePaths {
     lectures,
     speakers,
     map,
+    login,
     feedback,
   ];
 
