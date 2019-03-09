@@ -2,7 +2,6 @@ import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:codefest/src/components/layout/layout.dart';
-import 'package:codefest/src/components/layout/menu_item.dart';
 import 'package:codefest/src/components/lectures/actions/actions.dart';
 import 'package:codefest/src/components/stateful_component.dart';
 import 'package:codefest/src/models/lecture.dart';
@@ -19,14 +18,12 @@ import 'package:codefest/src/services/store_factory.dart';
     NgFor,
     MaterialButtonComponent,
     MaterialIconComponent,
-    routerDirectives,
     LayoutComponent,
     ActionsComponent,
   ],
   providers: [],
   preserveWhitespace: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  exports: [MenuItem],
 )
 class LecturesComponent extends StatefulComponent {
   final Router _router;
@@ -47,11 +44,15 @@ class LecturesComponent extends StatefulComponent {
 
   String getStartTime(Lecture lecture) => _getTime(lecture.startTime);
 
-  void onLectureSelect(Lecture lecture) => _gotoDetail(lecture.id);
+  void onLectureSelect(Lecture lecture) {
+    final url = RoutePaths.lecture.toUrl(
+      parameters: {idParam: lecture.id},
+    );
 
-  String _getTime(DateTime date) => '${date.hour}:${date.minute}';
+    _router.navigate(url);
+  }
 
-  Future<NavigationResult> _gotoDetail(String id) => _router.navigate(_lectureUrl(id));
+  String _getTime(DateTime date) => '${date.hour}:${_formatHours(date.minute.toString())}';
 
-  String _lectureUrl(String id) => RoutePaths.lecture.toUrl(parameters: {idParam: '$id'});
+  String _formatHours(String hours) => hours.length == 1 ? '${hours}0' : hours;
 }

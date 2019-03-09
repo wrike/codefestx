@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:angular/angular.dart';
 import 'package:codefest/src/actions/init_action.dart';
-import 'package:codefest/src/components/lectures/lectures.dart';
 import 'package:codefest/src/models/codefest_state.dart';
 import 'package:codefest/src/route_paths.dart';
 import 'package:codefest/src/routes.dart';
@@ -23,7 +22,6 @@ import 'package:angular_router/angular_router.dart';
   directives: [
     NgIf,
     routerDirectives,
-    LecturesComponent,
   ],
   providers: const <Object>[
     const ClassProvider<StoreFactory>(StoreFactory),
