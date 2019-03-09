@@ -6,7 +6,7 @@ import 'package:codefest/src/services/auth_service.dart';
 @Component(
   selector: 'login-callback',
   styleUrls: [],
-  template: '',
+  templateUrl: 'login_callback.html',
   directives: [],
   providers: [
     AuthService,

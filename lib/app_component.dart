@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:angular/angular.dart';
-import 'package:angular_components/angular_components.dart';
 import 'package:codefest/src/components/lectures/lectures.dart';
+import 'package:codefest/src/components/login-callback/login_callback.dart';
 import 'package:codefest/src/components/login/login.dart';
 import 'package:codefest/src/models/codefest_state.dart';
 import 'package:codefest/src/route_paths.dart';
@@ -29,6 +29,7 @@ import 'package:angular_router/angular_router.dart';
     routerDirectives,
     LecturesComponent,
     LoginComponent,
+    LoginCallbackComponent,
   ],
   providers: const <Object>[
     const ClassProvider<StoreFactory>(StoreFactory),

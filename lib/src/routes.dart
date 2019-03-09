@@ -4,7 +4,7 @@ import 'route_paths.dart';
 import 'components/lecture/lecture.template.dart' as lecture_template;
 import 'components/lectures/lectures.template.dart' as lectures_template;
 import 'components/login/login.template.dart' as login_template;
-import 'components/login/login_callback.template.dart' as login_callback_template;
+import 'components/login-callback/login_callback.template.dart' as login_callback_template;
 
 export 'route_paths.dart';
 
