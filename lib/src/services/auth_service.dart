@@ -55,8 +55,5 @@ class AuthService {
     window.localStorage[_tokenStorageKey] = authResponse.token;
     window.localStorage[_userNameStorageKey] = authResponse.userName;
     window.location.href = '/';
-
   }
-
-
 }

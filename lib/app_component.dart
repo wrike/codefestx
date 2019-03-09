@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:angular/angular.dart';
+import 'package:angular_components/angular_components.dart';
+import 'package:angular_router/angular_router.dart';
 import 'package:codefest/src/components/lectures/lectures.dart';
 import 'package:codefest/src/components/login-callback/login_callback.dart';
 import 'package:codefest/src/components/login/login.dart';
@@ -18,7 +20,6 @@ import 'package:codefest/src/services/selector.dart';
 import 'package:codefest/src/services/state_factory.dart';
 import 'package:codefest/src/services/store_factory.dart';
 import 'package:redux/redux.dart';
-import 'package:angular_router/angular_router.dart';
 
 @Component(
   selector: 'codefest',
@@ -30,6 +31,7 @@ import 'package:angular_router/angular_router.dart';
     LecturesComponent,
     LoginComponent,
     LoginCallbackComponent,
+    MaterialSpinnerComponent,
   ],
   providers: const <Object>[
     const ClassProvider<StoreFactory>(StoreFactory),
@@ -69,13 +71,13 @@ class AppComponent implements OnDestroy {
   bool get isRootPath => _selector.isRootPath(state);
 
   AppComponent(
-      this._zone,
-      this._cdr,
-      this._storeFactory,
-      this._stateFactory,
-      this._dispatcher,
-      this._selector,
-      ) {
+    this._zone,
+    this._cdr,
+    this._storeFactory,
+    this._stateFactory,
+    this._dispatcher,
+    this._selector,
+  ) {
     _zone.runOutsideAngular(() {
       _store = _storeFactory.getStore(_stateFactory.getInitialState());
 
@@ -85,7 +87,6 @@ class AppComponent implements OnDestroy {
             _cdr.markForCheck();
           });
         }),
-
         _dispatcher.onAction.listen((action) => _store.dispatch(action)),
       ]);
     });
