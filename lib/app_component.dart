@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:angular/angular.dart';
-import 'package:angular_components/angular_components.dart';
 import 'package:codefest/src/actions/init_action.dart';
 import 'package:codefest/src/components/lectures/lectures.dart';
 import 'package:codefest/src/models/codefest_state.dart';
@@ -19,21 +18,10 @@ import 'package:angular_router/angular_router.dart';
 
 @Component(
   selector: 'codefest',
-  styleUrls: [
-    'package:angular_components/app_layout/layout.scss.css',
-    'app_component.css',
-  ],
+  styleUrls: ['app_component.css'],
   templateUrl: 'app_component.html',
   directives: [
     NgIf,
-    MaterialSpinnerComponent,
-    DeferredContentDirective,
-    MaterialButtonComponent,
-    MaterialIconComponent,
-    MaterialTemporaryDrawerComponent,
-    MaterialToggleComponent,
-    MaterialListComponent,
-    MaterialListItemComponent,
     routerDirectives,
     LecturesComponent,
   ],

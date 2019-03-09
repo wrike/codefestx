@@ -3,8 +3,10 @@
 
 body {
   max-width: 600px;
+  min-width: 300px;
   margin: 0 auto;
   padding: 0;
+  line-height: 1.2;
 }
 
 * {

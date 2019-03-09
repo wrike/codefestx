@@ -1,6 +1,8 @@
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:angular_router/angular_router.dart';
+import 'package:codefest/src/components/layout/layout.dart';
+import 'package:codefest/src/components/layout/menu_item.dart';
 import 'package:codefest/src/components/lectures/actions/actions.dart';
 import 'package:codefest/src/components/stateful_component.dart';
 import 'package:codefest/src/models/lecture.dart';
@@ -13,16 +15,18 @@ import 'package:codefest/src/services/store_factory.dart';
   styleUrls: ['lectures.css'],
   templateUrl: 'lectures.html',
   directives: [
+    NgIf,
     NgFor,
     MaterialButtonComponent,
     MaterialIconComponent,
     routerDirectives,
+    LayoutComponent,
     ActionsComponent,
   ],
   providers: [],
   preserveWhitespace: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  exports: [RoutePaths, Routes],
+  exports: [MenuItem],
 )
 class LecturesComponent extends StatefulComponent {
   final Router _router;

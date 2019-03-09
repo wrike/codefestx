@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 
@@ -16,7 +18,8 @@ import 'package:angular_components/angular_components.dart';
 class ActionsComponent {
   bool isStarChecked = false;
 
-  void onStarButtonClick() {
+  void onStarButtonClick(MouseEvent event) {
     isStarChecked = !isStarChecked;
+    event.stopPropagation();
   }
 }
