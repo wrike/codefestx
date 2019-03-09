@@ -1,5 +1,5 @@
 FROM google/dart AS build-env
-WORKDIR /app
+WORKDIR /app/
 
 ADD pubspec.* /app/
 RUN pub get

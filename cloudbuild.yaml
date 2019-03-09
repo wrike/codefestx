@@ -3,3 +3,4 @@ steps:
     args: ['clone', 'https://github.com/GoogleCloudPlatform/cloud-builders']
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'gcr.io/rndcloud-codefest-wrike-tech/codefestx', '.']
+images: ['gcr.io/rndcloud-codefest-wrike-tech/codefestx']
