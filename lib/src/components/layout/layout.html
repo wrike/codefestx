@@ -1,0 +1,84 @@
+<material-drawer
+  temporary
+  #drawer="drawer"
+  [attr.overlay]="true">
+
+  <material-list
+    *deferredContent>
+
+    <div
+      group
+      class="mat-drawer-spacer">
+
+      <div
+        label>
+
+        Codefest X
+      </div>
+    </div>
+
+    <div
+      group>
+
+      <material-list-item
+        *ngFor="let item of MenuItem.values">
+
+        {{ item.title }}
+      </material-list-item>
+    </div>
+  </material-list>
+</material-drawer>
+
+<div
+  class="material-content">
+
+  <header
+    class="material-header shadow">
+
+    <div
+      class="material-header-row">
+
+      <material-button
+        icon
+        class="material-drawer-button"
+        (trigger)="drawer.toggle()">
+
+        <material-icon
+          icon="menu">
+        </material-icon>
+      </material-button>
+
+      <span
+        class="material-header-title">
+
+        {{ menu.title }}
+      </span>
+
+      <div
+        class="material-spacer">
+      </div>
+
+      <nav
+        class="material-navigation">
+
+        <material-button
+          icon>
+
+          <material-icon
+            icon="filter_list">
+          </material-icon>
+        </material-button>
+
+        <material-button
+          icon>
+
+          <material-icon
+            icon="search">
+          </material-icon>
+        </material-button>
+      </nav>
+    </div>
+  </header>
+</div>
+
+<ng-content></ng-content>
