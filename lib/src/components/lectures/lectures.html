@@ -1,19 +1,44 @@
 <div
-  *ngFor="let lecture of lectures">
+  *ngFor="let lecture of lectures"
+  class="lecture">
+
+  <div
+    class="lecture_location">
+    {{ lecture.location.title }}
+  </div>
 
   <a
-    (click)="onSelectLecture(lecture)">
+    (click)="onLectureSelect(lecture)"
+    class="lecture_title">
     {{ lecture.title }}
   </a>
 
-  <p
-    *ngFor="let speaker of lecture.speakers">
+  <div
+    *ngFor="let speaker of lecture.speakers"
+    class="lecture_speaker">
 
     <img
-      [src]="speaker.avatarPath">
+      [src]="speaker.avatarPath"
+      class="lecture_speaker__avatar">
 
-    {{ speaker.name }} - {{ speaker.company }}
-  </p>
+    <div
+      class="lecture_speaker__info">
 
-  <p>{{ lecture.location.title }}</p>
+      <div
+        class="lecture_speaker_info__name">
+        {{ speaker.name }}
+      </div>
+
+      <div
+        class="lecture_speaker_info_company">
+        {{ speaker.company }}
+      </div>
+    </div>
+
+    <div
+      class="lecture_actions">
+
+      <actions></actions>
+    </div>
+  </div>
 </div>

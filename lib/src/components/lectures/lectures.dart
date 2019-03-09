@@ -1,6 +1,8 @@
 import 'package:angular/angular.dart';
+import 'package:angular_components/angular_components.dart';
 import 'package:angular_router/angular_router.dart';
-import 'package:codefest/src/components/route_component.dart';
+import 'package:codefest/src/components/lectures/actions/actions.dart';
+import 'package:codefest/src/components/stateful_component.dart';
 import 'package:codefest/src/models/lecture.dart';
 import 'package:codefest/src/route_paths.dart';
 import 'package:codefest/src/routes.dart';
@@ -12,14 +14,17 @@ import 'package:codefest/src/services/store_factory.dart';
   templateUrl: 'lectures.html',
   directives: [
     NgFor,
+    MaterialButtonComponent,
+    MaterialIconComponent,
     routerDirectives,
+    ActionsComponent,
   ],
   providers: [],
   preserveWhitespace: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   exports: [RoutePaths, Routes],
 )
-class LecturesComponent extends RouteComponent {
+class LecturesComponent extends StatefulComponent {
   final Router _router;
 
   LecturesComponent(
@@ -31,9 +36,7 @@ class LecturesComponent extends RouteComponent {
 
   Iterable<Lecture> get lectures => state.lectures;
 
-  void handleLectureClick(Lecture lecture) {}
-
-  void onSelectLecture(Lecture lecture) => _gotoDetail(lecture.id);
+  void onLectureSelect(Lecture lecture) => _gotoDetail(lecture.id);
 
   String _lectureUrl(String id) => RoutePaths.lecture.toUrl(parameters: {idParam: '$id'});
 

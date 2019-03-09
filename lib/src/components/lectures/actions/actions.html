@@ -1,0 +1,14 @@
+<material-button
+  icon
+  (click)="onStarButtonClick()">
+
+  <material-icon
+    *ngIf="!isStarChecked"
+    icon="star_border">
+  </material-icon>
+
+  <material-icon
+    *ngIf="isStarChecked"
+    icon="star">
+  </material-icon>
+</material-button>

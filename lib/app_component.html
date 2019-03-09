@@ -1,7 +1,92 @@
-<h1>CodeFest X</h1>
-
 <material-spinner
-        *ngIf="!isReady">
+  *ngIf="!isReady">
 </material-spinner>
 
-<router-outlet [routes]="Routes.all"></router-outlet>
+<material-drawer
+  temporary
+  #drawer="drawer"
+  [attr.overlay]="true">
+
+  <material-list
+    *deferredContent>
+
+    <div
+      group
+      class="mat-drawer-spacer">
+
+      <div
+        label>
+        CodeFest X
+      </div>
+    </div>
+
+    <div
+      group>
+
+      <material-list-item>
+        Расписание
+      </material-list-item>
+
+      <material-list-item>
+        Рейтинг докладов
+      </material-list-item>
+
+      <material-list-item>
+        Карта
+      </material-list-item>
+
+      <material-list-item>
+        Участники
+      </material-list-item>
+
+      <material-list-item>
+        Конкурсы
+      </material-list-item>
+
+      <material-list-item>
+        Feedback
+      </material-list-item>
+    </div>
+  </material-list>
+</material-drawer>
+
+<div
+  class="material-content">
+
+  <header
+    class="material-header shadow">
+
+    <div
+      class="material-header-row">
+
+      <material-button
+        icon
+        class="material-drawer-button"
+        (trigger)="drawer.toggle()">
+
+        <material-icon
+          icon="menu">
+        </material-icon>
+      </material-button>
+
+      <span
+        class="material-header-title">
+        CodeFest X
+      </span>
+
+      <div
+        class="material-spacer">
+      </div>
+
+      <nav
+        class="material-navigation">
+
+        <a>Доклады</a>
+      </nav>
+    </div>
+  </header>
+
+  <router-outlet
+    [routes]="Routes.all">
+  </router-outlet>
+</div>
