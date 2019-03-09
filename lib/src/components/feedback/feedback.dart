@@ -2,9 +2,9 @@ import 'package:angular/angular.dart';
 import 'package:codefest/src/components/layout/layout.dart';
 
 @Component(
-  selector: 'lecture',
-  styleUrls: ['lecture.css'],
-  templateUrl: 'lecture.html',
+  selector: 'feedback',
+  styleUrls: ['feedback.css'],
+  templateUrl: 'feedback.html',
   directives: [
     LayoutComponent,
   ],
@@ -12,4 +12,6 @@ import 'package:codefest/src/components/layout/layout.dart';
   preserveWhitespace: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 )
-class LectureComponent {}
+class FeedbackComponent {
+
+}

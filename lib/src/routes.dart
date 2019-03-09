@@ -3,6 +3,9 @@ import 'package:angular_router/angular_router.dart';
 import 'route_paths.dart';
 import 'components/lecture/lecture.template.dart' as lecture_template;
 import 'components/lectures/lectures.template.dart' as lectures_template;
+import 'components/speakers/speakers.template.dart' as speakers_template;
+import 'components/map/map.template.dart' as map_template;
+import 'components/feedback/feedback.template.dart' as feedback_template;
 
 export 'route_paths.dart';
 
@@ -18,8 +21,26 @@ class Routes {
     useAsDefault: true,
   );
 
+  static final speakers = RouteDefinition(
+    routePath: RoutePaths.speakers,
+    component: speakers_template.SpeakersComponentNgFactory,
+  );
+
+  static final map = RouteDefinition(
+    routePath: RoutePaths.map,
+    component: map_template.MapComponentNgFactory,
+  );
+
+  static final feedback = RouteDefinition(
+    routePath: RoutePaths.feedback,
+    component: feedback_template.FeedbackComponentNgFactory,
+  );
+
   static final all = <RouteDefinition>[
     lecture,
     lectures,
+    speakers,
+    map,
+    feedback,
   ];
 }

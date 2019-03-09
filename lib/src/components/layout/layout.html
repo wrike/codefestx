@@ -21,7 +21,8 @@
       group>
 
       <material-list-item
-        *ngFor="let item of MenuItem.values">
+        *ngFor="let item of RoutePaths.menu"
+        (click)="onMenuItemClick(item)">
 
         {{ item.title }}
       </material-list-item>
@@ -51,7 +52,7 @@
       <span
         class="material-header-title">
 
-        {{ menu.title }}
+        {{ title }}
       </span>
 
       <div
