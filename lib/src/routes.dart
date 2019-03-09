@@ -5,6 +5,9 @@ import 'components/lecture/lecture.template.dart' as lecture_template;
 import 'components/lectures/lectures.template.dart' as lectures_template;
 import 'components/login/login.template.dart' as login_template;
 import 'components/login-callback/login_callback.template.dart' as login_callback_template;
+import 'components/speakers/speakers.template.dart' as speakers_template;
+import 'components/map/map.template.dart' as map_template;
+import 'components/feedback/feedback.template.dart' as feedback_template;
 
 export 'route_paths.dart';
 
@@ -30,9 +33,27 @@ class Routes {
     component: login_callback_template.LoginCallbackComponentNgFactory,
   );
 
+  static final speakers = RouteDefinition(
+    routePath: RoutePaths.speakers,
+    component: speakers_template.SpeakersComponentNgFactory,
+  );
+
+  static final map = RouteDefinition(
+    routePath: RoutePaths.map,
+    component: map_template.MapComponentNgFactory,
+  );
+
+  static final feedback = RouteDefinition(
+    routePath: RoutePaths.feedback,
+    component: feedback_template.FeedbackComponentNgFactory,
+  );
+
   static final all = <RouteDefinition>[
     lecture,
     lectures,
     login,
+    speakers,
+    map,
+    feedback,
   ];
 }
