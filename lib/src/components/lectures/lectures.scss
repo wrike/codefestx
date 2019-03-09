@@ -5,9 +5,28 @@
   padding: $padding-6 $padding-3;
 
   .lecture {
-    padding-bottom: $padding-6;
+    display: flex;
     margin-bottom: $padding-6;
+  }
+
+  .lecture_time {
+    margin-right: $padding-6;
+
+    .lecture_time_start {
+      @include mat-font-caption();
+      color: $mat-black;
+      padding-bottom: $padding-3;
+    }
+
+    .lecture_time_end {
+      @include mat-font-caption();
+    }
+  }
+
+  .lecture_info {
+    width: 100%;
     border-bottom: 1px $mat-border-light solid;
+    padding-bottom: $padding-6;
   }
 
   .lecture_location {

@@ -3,42 +3,66 @@
   class="lecture">
 
   <div
-    class="lecture_location">
-    {{ lecture.location.title }}
-  </div>
-
-  <a
-    (click)="onLectureSelect(lecture)"
-    class="lecture_title">
-    {{ lecture.title }}
-  </a>
-
-  <div
-    *ngFor="let speaker of lecture.speakers"
-    class="lecture_speaker">
-
-    <img
-      [src]="speaker.avatarPath"
-      class="lecture_speaker__avatar">
+    class="lecture_time">
 
     <div
-      class="lecture_speaker__info">
-
-      <div
-        class="lecture_speaker_info__name">
-        {{ speaker.name }}
-      </div>
-
-      <div
-        class="lecture_speaker_info_company">
-        {{ speaker.company }}
-      </div>
+      class="lecture_time_line">
     </div>
 
     <div
-      class="lecture_actions">
+      class="lecture_time_start">
 
-      <actions></actions>
+      {{ getStartTime(lecture) }}
+    </div>
+
+    <div
+      class="lecture_time_end">
+
+      {{ getEndTime(lecture) }}
+    </div>
+  </div>
+
+  <div
+    class="lecture_info">
+
+    <div
+      class="lecture_location">
+      {{ lecture.location.title }}
+    </div>
+
+    <a
+      (click)="onLectureSelect(lecture)"
+      class="lecture_title">
+      {{ lecture.title }}
+    </a>
+
+    <div
+      *ngFor="let speaker of lecture.speakers"
+      class="lecture_speaker">
+
+      <img
+        [src]="speaker.avatarPath"
+        class="lecture_speaker__avatar">
+
+      <div
+        class="lecture_speaker__info">
+
+        <div
+          class="lecture_speaker_info__name">
+          {{ speaker.name }}
+        </div>
+
+        <div
+          class="lecture_speaker_info_company">
+          {{ speaker.company }}
+        </div>
+      </div>
+
+      <div
+        class="lecture_actions">
+
+        <actions></actions>
+      </div>
     </div>
   </div>
 </div>

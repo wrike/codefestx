@@ -36,9 +36,18 @@ class LecturesComponent extends StatefulComponent {
 
   Iterable<Lecture> get lectures => state.lectures;
 
+  String getEndTime(Lecture lecture) {
+    final endTime = lecture.startTime.add(new Duration(minutes: lecture.duration));
+    return _getTime(endTime);
+  }
+
+  String getStartTime(Lecture lecture) => _getTime(lecture.startTime);
+
   void onLectureSelect(Lecture lecture) => _gotoDetail(lecture.id);
 
-  String _lectureUrl(String id) => RoutePaths.lecture.toUrl(parameters: {idParam: '$id'});
+  String _getTime(DateTime date) => '${date.hour}:${date.minute}';
 
   Future<NavigationResult> _gotoDetail(String id) => _router.navigate(_lectureUrl(id));
+
+  String _lectureUrl(String id) => RoutePaths.lecture.toUrl(parameters: {idParam: '$id'});
 }
