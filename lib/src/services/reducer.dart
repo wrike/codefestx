@@ -16,8 +16,7 @@ class CodefestReducer {
     ]);
   }
 
-  CodefestState getState(CodefestState state, Object action) =>
-      _reducer(state, action);
+  CodefestState getState(CodefestState state, Object action) => _reducer(state, action);
 
   CodefestState _onLoadProgram(CodefestState state, LoadProgramSuccessAction action) =>
       state.rebuild((b) => b

@@ -12,7 +12,10 @@ class HttpProxy {
   final Client _http;
   final AuthStore _authStore;
 
-  HttpProxy(this._http, this._authStore);
+  HttpProxy(
+    this._http,
+    this._authStore,
+  );
 
   dynamic _extractData(Response resp) => json.decode(resp.body);
 

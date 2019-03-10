@@ -2,5 +2,5 @@ class AuthStore {
   String token;
   String userName;
 
-  bool get isAuth => token != null && token.isNotEmpty;
+  bool get isAuth => token?.isNotEmpty ?? false;
 }
