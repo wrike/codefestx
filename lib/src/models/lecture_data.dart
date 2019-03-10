@@ -19,6 +19,8 @@ class LectureData {
   @JsonKey(nullable: false)
   final String locationId;
   @JsonKey(nullable: false)
+  final String sectionId;
+  @JsonKey(nullable: false)
   final DateTime startTime;
   @JsonKey(nullable: false)
   final int duration;
@@ -33,6 +35,7 @@ class LectureData {
     @required this.speakerIds,
     @required this.description,
     @required this.locationId,
+    @required this.sectionId,
     @required this.startTime,
     @required this.duration,
     this.type,

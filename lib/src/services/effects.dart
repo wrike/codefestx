@@ -36,15 +36,17 @@ class Effects {
           final apiData = await Future.wait([
             _dataLoader.getLectures(),
             _dataLoader.getLocations(),
+            _dataLoader.getSections(),
             _dataLoader.getSpeakers(),
           ]);
 
           yield LoadProgramSuccessAction(
             lectures: apiData[0],
             locations: apiData[1],
-            speakers: apiData[2],
+            sections: apiData[2],
+            speakers: apiData[3],
           );
-        } catch(e) {
+        } catch (e) {
           yield LoadDataErrorAction();
         }
       });

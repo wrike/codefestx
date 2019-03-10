@@ -28,6 +28,12 @@
 
       .lecture_location {
         @include font-caption();
+        float: left;
+        padding-right: $padding-3;
+      }
+
+      .lecture_section {
+        @include font-caption();
         padding-bottom: $padding-3;
       }
 

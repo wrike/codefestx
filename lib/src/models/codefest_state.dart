@@ -2,6 +2,7 @@ import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:codefest/src/models/lecture.dart';
 import 'package:codefest/src/models/location.dart';
+import 'package:codefest/src/models/section.dart';
 import 'package:codefest/src/models/speaker.dart';
 
 part 'codefest_state.g.dart';
@@ -17,6 +18,8 @@ abstract class CodefestState implements Built<CodefestState, CodefestStateBuilde
   BuiltList<Lecture> get lectures;
 
   BuiltList<Location> get locations;
+
+  BuiltList<Section> get sections;
 
   bool get isReady;
 
