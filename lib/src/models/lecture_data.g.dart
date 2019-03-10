@@ -13,6 +13,7 @@ LectureData _$LectureDataFromJson(Map<String, dynamic> json) {
       speakerIds: (json['speakerIds'] as List)?.map((e) => e as String) ?? [],
       description: json['description'] as String,
       locationId: json['locationId'] as String,
+      sectionId: json['sectionId'] as String,
       startTime: DateTime.parse(json['startTime'] as String),
       duration: json['duration'] as int,
       type: _$enumDecodeNullable(_$LectureTypeEnumMap, json['type']) ??
@@ -29,6 +30,7 @@ Map<String, dynamic> _$LectureDataToJson(LectureData instance) =>
       'speakerIds': instance.speakerIds?.toList(),
       'description': instance.description,
       'locationId': instance.locationId,
+      'sectionId': instance.sectionId,
       'startTime': instance.startTime.toIso8601String(),
       'duration': instance.duration,
       'isStarred': instance.isStarred,

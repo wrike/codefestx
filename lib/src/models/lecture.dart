@@ -1,5 +1,6 @@
 import 'package:codefest/src/models/lecture_type.dart';
 import 'package:codefest/src/models/location.dart';
+import 'package:codefest/src/models/section.dart';
 import 'package:codefest/src/models/speaker.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta.dart';
@@ -14,6 +15,7 @@ class Lecture {
   final Iterable<Speaker> speakers;
   final String description;
   final Location location;
+  final Section section;
   final DateTime startTime;
   final int duration;
   final bool isStarred;
@@ -26,6 +28,7 @@ class Lecture {
     @required this.speakers,
     @required this.description,
     @required this.location,
+    @required this.section,
     @required this.startTime,
     @required this.duration,
     @required this.isStarred,

@@ -24,6 +24,7 @@ class CodefestReducer {
         ..isReady = true
         ..speakers.replace(action.speakers)
         ..locations.replace(action.locations)
+        ..sections.replace(action.sections)
         ..lectures.replace(action.lectures.map((lecture) =>
             Lecture(
               id: lecture.id,
@@ -33,6 +34,7 @@ class CodefestReducer {
               startTime: lecture.startTime,
               duration: lecture.duration,
               location: action.locations.firstWhere((location) => location.id == lecture.locationId),
+              section: action.sections.firstWhere((section) => section.id == lecture.sectionId),
               speakers: action.speakers.where((speaker) => lecture.speakerIds.contains(speaker.id)),
               isStarred: lecture.isStarred,
               isLiked: lecture.isLiked,
