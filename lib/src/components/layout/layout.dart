@@ -9,31 +9,32 @@ import 'package:codefest/src/routes.dart';
 import 'package:codefest/src/services/dispatcher.dart';
 
 @Component(
-    selector: 'layout',
-    styleUrls: [
-      'package:angular_components/app_layout/layout.scss.css',
-      'layout.css',
-    ],
-    templateUrl: 'layout.html',
-    directives: [
-      NgFor,
-      MaterialSpinnerComponent,
-      DeferredContentDirective,
-      MaterialButtonComponent,
-      MaterialIconComponent,
-      MaterialTemporaryDrawerComponent,
-      MaterialToggleComponent,
-      MaterialListComponent,
-      MaterialListItemComponent,
-      MaterialButtonComponent,
-      MaterialIconComponent,
-    ],
-    providers: [],
-    preserveWhitespace: true,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    exports: [
-      RoutePaths,
-    ])
+  selector: 'layout',
+  styleUrls: [
+    'package:angular_components/app_layout/layout.scss.css',
+    'layout.css',
+  ],
+  templateUrl: 'layout.html',
+  directives: [
+    NgFor,
+    MaterialSpinnerComponent,
+    DeferredContentDirective,
+    MaterialButtonComponent,
+    MaterialIconComponent,
+    MaterialTemporaryDrawerComponent,
+    MaterialToggleComponent,
+    MaterialListComponent,
+    MaterialListItemComponent,
+    MaterialButtonComponent,
+    MaterialIconComponent,
+  ],
+  providers: [],
+  preserveWhitespace: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  exports: [
+    RoutePaths,
+  ],
+)
 class LayoutComponent implements OnDestroy, OnInit {
   final NgZone _zone;
   final ChangeDetectorRef _cdr;

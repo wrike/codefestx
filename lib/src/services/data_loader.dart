@@ -13,10 +13,10 @@ class DataLoader {
   DataLoader(this._http);
 
   Future<Iterable<Speaker>> getSpeakers() =>
-    _http.getList<Speaker>(_speakersPath, (json) => Speaker.fromJson(json));
+      _http.getList<Speaker>(_speakersPath, (json) => Speaker.fromJson(json));
 
   Future<Iterable<Location>> getLocations() =>
-    _http.getList<Location>(_locationsPath, (json) => Location.fromJson(json));
+      _http.getList<Location>(_locationsPath, (json) => Location.fromJson(json));
 
   Future<Iterable<LectureData>> getLectures() async =>
       _http.getList<LectureData>(_lecturesPath, (json) => LectureData.fromJson(json));

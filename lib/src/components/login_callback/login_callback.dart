@@ -8,17 +8,24 @@ import 'package:codefest/src/services/auth_service.dart';
   styleUrls: [],
   templateUrl: 'login_callback.html',
   directives: [],
-  providers: [
+  providers: <Object>[
     AuthService,
   ],
   preserveWhitespace: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  exports: [RoutePaths, Routes],
+  exports: [
+    RoutePaths,
+    Routes,
+  ],
 )
 class LoginCallbackComponent implements OnInit {
-  AuthService _service;
+  final AuthService _service;
   final Router _router;
-  LoginCallbackComponent(this._service, this._router);
+
+  LoginCallbackComponent(
+    this._service,
+    this._router,
+  );
 
   @override
   void ngOnInit() {

@@ -33,8 +33,8 @@ class HttpProxy {
 
   Future<T> get<T>(String path, {Decoder<T> decoder}) async {
     final response = await _http.get(_fullPath(path), headers: _getHeaders());
-    return decoder == null ?
-      _extractData(response) as T :
-      decoder((_extractData(response) as Map));
+    return decoder == null
+        ? _extractData(response) as T
+        : decoder((_extractData(response) as Map));
   }
 }

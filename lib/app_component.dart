@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
+import 'package:angular_router/angular_router.dart';
 import 'package:codefest/src/models/codefest_state.dart';
 import 'package:codefest/src/route_paths.dart';
 import 'package:codefest/src/routes.dart';
@@ -16,7 +17,6 @@ import 'package:codefest/src/services/selector.dart';
 import 'package:codefest/src/services/state_factory.dart';
 import 'package:codefest/src/services/store_factory.dart';
 import 'package:redux/redux.dart';
-import 'package:angular_router/angular_router.dart';
 
 @Component(
   selector: 'codefest',
@@ -58,20 +58,14 @@ class AppComponent implements OnDestroy {
 
   Store<CodefestState> _store;
 
-  CodefestState get state => _store.state;
-
-  bool get isReady => _selector.isReady(state);
-
-  bool get isError => _selector.isError(state);
-
   AppComponent(
-      this._zone,
-      this._cdr,
-      this._storeFactory,
-      this._stateFactory,
-      this._dispatcher,
-      this._selector,
-      ) {
+    this._zone,
+    this._cdr,
+    this._storeFactory,
+    this._stateFactory,
+    this._dispatcher,
+    this._selector,
+  ) {
     _zone.runOutsideAngular(() {
       _store = _storeFactory.getStore(_stateFactory.getInitialState());
 
@@ -81,11 +75,16 @@ class AppComponent implements OnDestroy {
             _cdr.markForCheck();
           });
         }),
-
         _dispatcher.onAction.listen((action) => _store.dispatch(action)),
       ]);
     });
   }
+
+  bool get isError => _selector.isError(state);
+
+  bool get isReady => _selector.isReady(state);
+
+  CodefestState get state => _store.state;
 
   @override
   void ngOnDestroy() {

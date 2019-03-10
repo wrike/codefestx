@@ -21,7 +21,6 @@ import 'package:codefest/src/services/store_factory.dart';
     LayoutComponent,
     ActionsComponent,
   ],
-  providers: [],
   preserveWhitespace: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 )
@@ -52,7 +51,7 @@ class LecturesComponent extends StatefulComponent {
     _router.navigate(url);
   }
 
-  String _getTime(DateTime date) => '${date.hour}:${_formatHours(date.minute.toString())}';
-
   String _formatHours(String hours) => hours.length == 1 ? '${hours}0' : hours;
+
+  String _getTime(DateTime date) => '${date.hour}:${_formatHours(date.minute.toString())}';
 }
