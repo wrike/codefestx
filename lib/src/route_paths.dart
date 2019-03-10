@@ -5,7 +5,6 @@ const idParam = 'id';
 
 class RoutePaths {
   static final lecture = RoutePath(path: 'lecture/:$idParam');
-  static final login = RoutePath(path: 'login');
   static final loginCallback = RoutePath(path: 'loginCallback');
 
   // Menu route paths
@@ -13,6 +12,7 @@ class RoutePaths {
   static final speakers = MenuRoutePath(title: 'Спикеры', path: 'speakers');
   static final map = MenuRoutePath(title: 'Карта', path: 'map');
   static final feedback = MenuRoutePath(title: 'Отправить feedback', path: 'feedback');
+  static final login = MenuRoutePath(title: 'Логинка', path: 'login');
 
   static final List<MenuRoutePath> _menu = [
     lectures,

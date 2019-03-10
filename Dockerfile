@@ -6,7 +6,7 @@ RUN pub get
 RUN pub global activate webdev
 ENV PATH="${PATH}:/root/.pub-cache/bin"
 ADD . /app/
-RUN webdev build
+RUN webdev build --output /app/build/
 
 FROM nginx:stable
 

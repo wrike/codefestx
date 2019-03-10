@@ -120,7 +120,7 @@ class ApiService extends MockClient {
 
   static Future<Response> _handler(Request request) async {
     if (_speakerDb == null) resetDb();
-    var data;
+    Iterable<Object> data;
 
     switch (request.url.pathSegments.last) {
       case 'locations':

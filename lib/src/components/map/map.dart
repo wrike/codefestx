@@ -8,7 +8,6 @@ import 'package:codefest/src/components/layout/layout.dart';
   directives: [
     LayoutComponent,
   ],
-  providers: [],
   preserveWhitespace: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 )

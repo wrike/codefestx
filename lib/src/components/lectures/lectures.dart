@@ -23,7 +23,6 @@ import 'package:codefest/src/services/store_factory.dart';
     LayoutComponent,
     ActionsComponent,
   ],
-  providers: [],
   preserveWhitespace: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 )

@@ -26,7 +26,6 @@ import 'package:codefest/src/routes.dart';
     MaterialButtonComponent,
     MaterialIconComponent,
   ],
-  providers: [],
   preserveWhitespace: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   exports: [

@@ -41,6 +41,6 @@ class CodefestReducer {
   CodefestState _onChangeLocation(CodefestState state, ChangeLocationAction action) =>
       state.rebuild((b) => b.path = action.path);
 
-  CodefestState _onStartLoading(CodefestState state, action) =>
+  CodefestState _onStartLoading(CodefestState state, InitAction action) =>
       state.rebuild((b) => b.isReady = false);
 }

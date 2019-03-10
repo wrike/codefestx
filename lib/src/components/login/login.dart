@@ -8,19 +8,25 @@ import 'package:codefest/src/services/auth_service.dart';
   styleUrls: ['login.css'],
   templateUrl: 'login.html',
   directives: [],
-  providers: [
+  providers: <Object>[
     AuthService,
   ],
   preserveWhitespace: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  exports: [RoutePaths, Routes],
+  exports: [
+    RoutePaths,
+    Routes,
+  ],
 )
-class LoginComponent  {
+class LoginComponent {
   AuthService _service;
+
   LoginComponent(this._service);
 
   void loginVk() => _login(AuthType.VK);
+
   void loginFacebook() => _login(AuthType.Facebook);
+
   void loginGitHub() => _login(AuthType.GitHub);
 
   void _login(AuthType type) {
