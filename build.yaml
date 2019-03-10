@@ -10,4 +10,4 @@ targets:
             - --minify
             - --trust-type-annotations
             - --trust-primitives
-            - -DapiHost=https://codefest.wrike.tech/api
+            - -DapiHost=http://35.204.3.140/
