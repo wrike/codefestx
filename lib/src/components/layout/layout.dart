@@ -3,8 +3,10 @@ import 'dart:async';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:angular_router/angular_router.dart';
+import 'package:codefest/src/actions/init_action.dart';
 import 'package:codefest/src/menu_route_path.dart';
 import 'package:codefest/src/routes.dart';
+import 'package:codefest/src/services/dispatcher.dart';
 
 @Component(
   selector: 'layout',
@@ -26,16 +28,18 @@ import 'package:codefest/src/routes.dart';
     MaterialButtonComponent,
     MaterialIconComponent,
   ],
+  providers: [],
   preserveWhitespace: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   exports: [
     RoutePaths,
   ],
 )
-class LayoutComponent implements OnDestroy {
+class LayoutComponent implements OnDestroy, OnInit {
   final NgZone _zone;
   final ChangeDetectorRef _cdr;
   final Router _router;
+  final Dispatcher _dispatcher;
 
   StreamSubscription _subscription;
 
@@ -44,10 +48,17 @@ class LayoutComponent implements OnDestroy {
   @ViewChild('drawer')
   MaterialTemporaryDrawerComponent drawerComponent;
 
-  LayoutComponent(this._zone, this._cdr, this._router) {
+  LayoutComponent(
+    this._zone,
+    this._cdr,
+    this._router,
+    this._dispatcher,
+  ) {
     _zone.runOutsideAngular(() {
       _subscription = _router.onRouteActivated.listen((data) {
-        title = RoutePaths.menu.firstWhere((RoutePath item) => item.path == data?.routePath?.path, orElse: () => RoutePaths.lectures).title;
+        title = RoutePaths.menu
+            .firstWhere((RoutePath item) => item.path == data?.routePath?.path, orElse: () => RoutePaths.lectures)
+            .title;
 
         _zone.run(() {
           _cdr.markForCheck();
@@ -59,6 +70,11 @@ class LayoutComponent implements OnDestroy {
   @override
   void ngOnDestroy() {
     _subscription.cancel();
+  }
+
+  @override
+  void ngOnInit() {
+    _dispatcher.dispatch(InitAction());
   }
 
   void onMenuItemClick(MenuRoutePath item) {

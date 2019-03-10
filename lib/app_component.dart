@@ -3,16 +3,13 @@ import 'dart:async';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:angular_router/angular_router.dart';
-import 'package:codefest/src/components/lectures/lectures.dart';
-import 'package:codefest/src/components/login-callback/login_callback.dart';
-import 'package:codefest/src/components/login/login.dart';
 import 'package:codefest/src/models/codefest_state.dart';
 import 'package:codefest/src/route_paths.dart';
 import 'package:codefest/src/routes.dart';
 import 'package:codefest/src/services/auth_service.dart';
 import 'package:codefest/src/services/auth_store.dart';
 import 'package:codefest/src/services/data_loader.dart';
-import 'package:codefest/src/services/dispather.dart';
+import 'package:codefest/src/services/dispatcher.dart';
 import 'package:codefest/src/services/effects.dart';
 import 'package:codefest/src/services/http_proxy.dart';
 import 'package:codefest/src/services/reducer.dart';
@@ -28,9 +25,6 @@ import 'package:redux/redux.dart';
   directives: [
     NgIf,
     routerDirectives,
-    LecturesComponent,
-    LoginComponent,
-    LoginCallbackComponent,
     MaterialSpinnerComponent,
   ],
   providers: const <Object>[
@@ -44,7 +38,6 @@ import 'package:redux/redux.dart';
     const ClassProvider<HttpProxy>(HttpProxy),
     const ClassProvider<AuthService>(AuthService),
     const ClassProvider<AuthStore>(AuthStore),
-    routerProviders,
   ],
   exports: [
     RoutePaths,
@@ -60,15 +53,10 @@ class AppComponent implements OnDestroy {
   final StoreFactory _storeFactory;
   final StateFactory _stateFactory;
   final Selector _selector;
+
   final List<StreamSubscription> _subscriptions = [];
 
   Store<CodefestState> _store;
-
-  CodefestState get state => _store.state;
-
-  bool get isReady => _selector.isReady(state);
-
-  bool get isRootPath => _selector.isRootPath(state);
 
   AppComponent(
     this._zone,
@@ -91,6 +79,12 @@ class AppComponent implements OnDestroy {
       ]);
     });
   }
+
+  bool get isError => _selector.isError(state);
+
+  bool get isReady => _selector.isReady(state);
+
+  CodefestState get state => _store.state;
 
   @override
   void ngOnDestroy() {

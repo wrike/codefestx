@@ -1,5 +1,5 @@
-import 'package:codefest/src/actions/change_location_action.dart';
-import 'package:codefest/src/actions/init_action.dart';
+import 'package:codefest/src/actions/load_data_error_action.dart';
+import 'package:codefest/src/actions/load_program_start_action.dart';
 import 'package:codefest/src/actions/load_program_success_action.dart';
 import 'package:codefest/src/models/codefest_state.dart';
 import 'package:codefest/src/models/lecture.dart';
@@ -10,9 +10,9 @@ class CodefestReducer {
 
   CodefestReducer() {
     _reducer = combineReducers<CodefestState>([
-      TypedReducer<CodefestState, InitAction>(_onStartLoading),
+      TypedReducer<CodefestState, LoadProgramStartAction>(_onStartLoading),
       TypedReducer<CodefestState, LoadProgramSuccessAction>(_onLoadProgram),
-      TypedReducer<CodefestState, ChangeLocationAction>(_onChangeLocation),
+      TypedReducer<CodefestState, LoadDataErrorAction>(_onError),
     ]);
   }
 
@@ -22,6 +22,7 @@ class CodefestReducer {
   CodefestState _onLoadProgram(CodefestState state, LoadProgramSuccessAction action) =>
       state.rebuild((b) => b
         ..isReady = true
+        ..isLoaded = true
         ..speakers.replace(action.speakers)
         ..locations.replace(action.locations)
         ..sections.replace(action.sections)
@@ -40,9 +41,9 @@ class CodefestReducer {
               isLiked: lecture.isLiked,
             ))));
 
-  CodefestState _onChangeLocation(CodefestState state, ChangeLocationAction action) =>
-      state.rebuild((b) => b.path = action.path);
-
-  CodefestState _onStartLoading(CodefestState state, InitAction action) =>
+  CodefestState _onStartLoading(CodefestState state, LoadProgramStartAction action) =>
       state.rebuild((b) => b.isReady = false);
+
+  CodefestState _onError(CodefestState state, LoadDataErrorAction action) =>
+      state.rebuild((b) => b.isError = true);
 }
