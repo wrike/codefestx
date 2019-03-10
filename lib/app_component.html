@@ -1,7 +1,21 @@
-<material-spinner
-  *ngIf="!isReady">
-</material-spinner>
+<div
+  [class.hidden]="isError || !isReady">
 
-<router-outlet
-  [routes]="Routes.all">
-</router-outlet>
+  <router-outlet
+    [routes]="Routes.all">
+  </router-outlet>
+</div>
+
+<div
+  class="info">
+
+  <material-spinner
+    *ngIf="!isReady && !isError">
+  </material-spinner>
+
+  <h2
+    *ngIf="isError"
+    class="error">
+    Что-то пошло не так, попробуй перезагрузить страницу :|
+  </h2>
+</div>
