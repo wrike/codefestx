@@ -12,7 +12,7 @@ class RoutePaths {
   static final speakers = MenuRoutePath(title: 'Спикеры', path: 'speakers');
   static final map = MenuRoutePath(title: 'Карта', path: 'map');
   static final feedback = MenuRoutePath(title: 'Отправить feedback', path: 'feedback');
-  static final login = MenuRoutePath(title: 'Логинка', path: 'login');
+  static final login = MenuRoutePath(title: 'Войти', path: 'login');
 
   static final List<MenuRoutePath> _menu = [
     lectures,

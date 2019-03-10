@@ -20,5 +20,7 @@ abstract class CodefestState implements Built<CodefestState, CodefestStateBuilde
 
   bool get isReady;
 
-  String get path;
+  bool get isLoaded;
+
+  bool get isError;
 }

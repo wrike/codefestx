@@ -4,8 +4,11 @@ import 'dart:convert';
 import 'package:codefest/src/services/auth_store.dart';
 import 'package:http/http.dart';
 
+typedef T Decoder<T>(dynamic item);
+
 class HttpProxy {
   static const _host = const String.fromEnvironment('apiHost', defaultValue: 'http://localhost:3000');
+
   final Client _http;
   final AuthStore _authStore;
 
@@ -23,12 +26,12 @@ class HttpProxy {
     return headers;
   }
 
-  Future<Iterable<T>> getList<T>(String path, Function decoder) async {
+  Future<Iterable<T>> getList<T>(String path, Decoder<T> decoder) async {
     final response = await _http.get(_fullPath(path), headers: _getHeaders());
-    return (_extractData(response) as List).map(decoder);
+    return (_extractData(response) as List).map(decoder).toList();
   }
 
-  Future<T> get<T>(String path, {Function decoder}) async {
+  Future<T> get<T>(String path, {Decoder<T> decoder}) async {
     final response = await _http.get(_fullPath(path), headers: _getHeaders());
     return decoder == null
         ? _extractData(response) as T

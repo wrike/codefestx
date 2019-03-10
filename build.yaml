@@ -10,4 +10,4 @@ targets:
             - --minify
             - --trust-type-annotations
             - --trust-primitives
-            - -DapiHost=http://35.204.3.140/
+            - -DapiHost=http://35.204.3.140
