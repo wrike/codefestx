@@ -9,5 +9,5 @@ steps:
     - 'CLOUDSDK_COMPUTE_ZONE=europe-west4-a'
     - 'CLOUDSDK_CONTAINER_CLUSTER=codefest'
 substitutions:
-  _IMAGE_NAME: 'gcr.io/$PROJECT_ID/codefestx'
+  _IMAGE_NAME: 'gcr.io/rndcloud-codefest-wrike-tech/codefestx'
 images: ['gcr.io/rndcloud-codefest-wrike-tech/codefestx']
