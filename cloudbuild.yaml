@@ -2,7 +2,7 @@ steps:
   - name: 'gcr.io/cloud-builders/git'
     args: ['clone', 'https://github.com/GoogleCloudPlatform/cloud-builders']
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', '${_IMAGE_NAME}:$REVISION_ID', '.']
+    args: ['build', '--no-cache', '-t', '${_IMAGE_NAME}:$REVISION_ID', '.']
   - name: 'gcr.io/cloud-builders/kubectl'
     args: ['set', 'image', 'deployment/codefestx', 'nginx-front=${_IMAGE_NAME}:$REVISION_ID']
     env:
