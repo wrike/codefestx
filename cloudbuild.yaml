@@ -2,5 +2,12 @@ steps:
   - name: 'gcr.io/cloud-builders/git'
     args: ['clone', 'https://github.com/GoogleCloudPlatform/cloud-builders']
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/rndcloud-codefest-wrike-tech/codefestx', '.']
+    args: ['build', '-t', '${_IMAGE_NAME}:$REVISION_ID', '.']
+  - name: 'gcr.io/cloud-builders/kubectl'
+    args: ['set', 'image', 'deployment/codefestx', 'nginx-front=${_IMAGE_NAME}:$REVISION_ID']
+    env:
+    - 'CLOUDSDK_COMPUTE_ZONE=europe-west4-a'
+    - 'CLOUDSDK_CONTAINER_CLUSTER=codefest'
+substitutions:
+  _IMAGE_NAME: 'gcr.io/$PROJECT_ID/codefestx'
 images: ['gcr.io/rndcloud-codefest-wrike-tech/codefestx']
