@@ -1,4 +1,4 @@
-import 'package:codefest/src/models/lecture_type.dart';
+import 'package:codefest/src/models/lecture.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta.dart';
 

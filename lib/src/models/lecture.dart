@@ -1,4 +1,3 @@
-import 'package:codefest/src/models/lecture_type.dart';
 import 'package:codefest/src/models/location.dart';
 import 'package:codefest/src/models/section.dart';
 import 'package:codefest/src/models/speaker.dart';
@@ -38,4 +37,13 @@ class Lecture {
   factory Lecture.fromJson(Map<String, dynamic> json) => _$LectureFromJson(json);
 
   Map<String, dynamic> toJson() => _$LectureToJson(this);
+}
+
+enum LectureType {
+  @JsonValue('lecture')
+  lecture,
+  @JsonValue('custom')
+  custom,
+  @JsonValue('wrike')
+  wrike,
 }
