@@ -1,5 +1,8 @@
 .idea
 .git
-.dart_tool
+.dart_tool/
+.packages
+.pub/
 build/
+pubspec.lock
 **/*.g.dart
