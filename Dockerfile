@@ -1,4 +1,4 @@
-FROM google/dart AS build-env
+FROM google/dart:2.2 AS build-env
 WORKDIR /app/
 
 ADD pubspec.* /app/
