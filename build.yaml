@@ -8,6 +8,6 @@ targets:
           dart2js_args:
             - --fast-startup
             - --minify
-            - --trust-type-annotations
+            - --omit-implicit-checks
             - --trust-primitives
             - -DapiHost=http://35.204.3.140
