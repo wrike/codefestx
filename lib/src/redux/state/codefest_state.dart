@@ -4,6 +4,7 @@ import 'package:codefest/src/models/lecture.dart';
 import 'package:codefest/src/models/location.dart';
 import 'package:codefest/src/models/section.dart';
 import 'package:codefest/src/models/speaker.dart';
+import 'package:codefest/src/redux/state/user_state.dart';
 
 part 'codefest_state.g.dart';
 
@@ -26,4 +27,6 @@ abstract class CodefestState implements Built<CodefestState, CodefestStateBuilde
   bool get isLoaded;
 
   bool get isError;
+
+  UserState get user;
 }

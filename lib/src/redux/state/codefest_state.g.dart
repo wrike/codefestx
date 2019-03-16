@@ -21,6 +21,8 @@ class _$CodefestState extends CodefestState {
   final bool isLoaded;
   @override
   final bool isError;
+  @override
+  final UserState user;
 
   factory _$CodefestState([void updates(CodefestStateBuilder b)]) =>
       (new CodefestStateBuilder()..update(updates)).build();
@@ -32,7 +34,8 @@ class _$CodefestState extends CodefestState {
       this.sections,
       this.isReady,
       this.isLoaded,
-      this.isError})
+      this.isError,
+      this.user})
       : super._() {
     if (speakers == null) {
       throw new BuiltValueNullFieldError('CodefestState', 'speakers');
@@ -55,6 +58,9 @@ class _$CodefestState extends CodefestState {
     if (isError == null) {
       throw new BuiltValueNullFieldError('CodefestState', 'isError');
     }
+    if (user == null) {
+      throw new BuiltValueNullFieldError('CodefestState', 'user');
+    }
   }
 
   @override
@@ -74,7 +80,8 @@ class _$CodefestState extends CodefestState {
         sections == other.sections &&
         isReady == other.isReady &&
         isLoaded == other.isLoaded &&
-        isError == other.isError;
+        isError == other.isError &&
+        user == other.user;
   }
 
   @override
@@ -83,12 +90,14 @@ class _$CodefestState extends CodefestState {
         $jc(
             $jc(
                 $jc(
-                    $jc($jc($jc(0, speakers.hashCode), lectures.hashCode),
-                        locations.hashCode),
-                    sections.hashCode),
-                isReady.hashCode),
-            isLoaded.hashCode),
-        isError.hashCode));
+                    $jc(
+                        $jc($jc($jc(0, speakers.hashCode), lectures.hashCode),
+                            locations.hashCode),
+                        sections.hashCode),
+                    isReady.hashCode),
+                isLoaded.hashCode),
+            isError.hashCode),
+        user.hashCode));
   }
 
   @override
@@ -100,7 +109,8 @@ class _$CodefestState extends CodefestState {
           ..add('sections', sections)
           ..add('isReady', isReady)
           ..add('isLoaded', isLoaded)
-          ..add('isError', isError))
+          ..add('isError', isError)
+          ..add('user', user))
         .toString();
   }
 }
@@ -142,6 +152,10 @@ class CodefestStateBuilder
   bool get isError => _$this._isError;
   set isError(bool isError) => _$this._isError = isError;
 
+  UserStateBuilder _user;
+  UserStateBuilder get user => _$this._user ??= new UserStateBuilder();
+  set user(UserStateBuilder user) => _$this._user = user;
+
   CodefestStateBuilder();
 
   CodefestStateBuilder get _$this {
@@ -153,6 +167,7 @@ class CodefestStateBuilder
       _isReady = _$v.isReady;
       _isLoaded = _$v.isLoaded;
       _isError = _$v.isError;
+      _user = _$v.user?.toBuilder();
       _$v = null;
     }
     return this;
@@ -183,7 +198,8 @@ class CodefestStateBuilder
               sections: sections.build(),
               isReady: isReady,
               isLoaded: isLoaded,
-              isError: isError);
+              isError: isError,
+              user: user.build());
     } catch (_) {
       String _$failedField;
       try {
@@ -195,6 +211,9 @@ class CodefestStateBuilder
         locations.build();
         _$failedField = 'sections';
         sections.build();
+
+        _$failedField = 'user';
+        user.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'CodefestState', _$failedField, e.toString());
