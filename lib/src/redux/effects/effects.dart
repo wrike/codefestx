@@ -1,10 +1,10 @@
 import 'dart:async';
 
-import 'package:codefest/src/actions/init_action.dart';
-import 'package:codefest/src/actions/load_data_error_action.dart';
-import 'package:codefest/src/actions/load_program_start_action.dart';
-import 'package:codefest/src/actions/load_program_success_action.dart';
-import 'package:codefest/src/models/codefest_state.dart';
+import 'package:codefest/src/redux/actions/init_action.dart';
+import 'package:codefest/src/redux/actions/load_data_error_action.dart';
+import 'package:codefest/src/redux/actions/load_program_start_action.dart';
+import 'package:codefest/src/redux/actions/load_program_success_action.dart';
+import 'package:codefest/src/redux/state/codefest_state.dart';
 import 'package:codefest/src/services/data_loader.dart';
 import 'package:redux_epics/redux_epics.dart';
 import 'package:rxdart/rxdart.dart';

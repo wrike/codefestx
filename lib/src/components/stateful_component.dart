@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:angular/core.dart';
 import 'package:angular/di.dart';
-import 'package:codefest/src/models/codefest_state.dart';
-import 'package:codefest/src/services/store_factory.dart';
+import 'package:codefest/src/redux/services/store_factory.dart';
+import 'package:codefest/src/redux/state/codefest_state.dart';
 import 'package:redux/redux.dart';
 
 abstract class StatefulComponent implements OnDestroy {
@@ -14,8 +14,6 @@ abstract class StatefulComponent implements OnDestroy {
   final List<StreamSubscription> _subscriptions = List<StreamSubscription>();
 
   Store<CodefestState> _store;
-
-  CodefestState get state => _store.state;
 
   StatefulComponent(
     this._zone,
@@ -34,6 +32,8 @@ abstract class StatefulComponent implements OnDestroy {
       ]);
     });
   }
+
+  CodefestState get state => _store.state;
 
   @override
   void ngOnDestroy() {

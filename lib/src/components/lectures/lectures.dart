@@ -6,9 +6,9 @@ import 'package:codefest/src/components/lectures/actions/actions.dart';
 import 'package:codefest/src/components/stateful_component.dart';
 import 'package:codefest/src/models/_types.dart';
 import 'package:codefest/src/models/lecture.dart';
+import 'package:codefest/src/redux/services/store_factory.dart';
 import 'package:codefest/src/route_paths.dart';
 import 'package:codefest/src/routes.dart';
-import 'package:codefest/src/services/store_factory.dart';
 
 @Component(
   selector: 'lectures',

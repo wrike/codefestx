@@ -1,6 +1,6 @@
-import 'package:codefest/src/models/codefest_state.dart';
-import 'package:codefest/src/services/effects.dart';
-import 'package:codefest/src/services/reducer.dart';
+import 'package:codefest/src/redux/effects/effects.dart';
+import 'package:codefest/src/redux/reducers/reducer.dart';
+import 'package:codefest/src/redux/state/codefest_state.dart';
 import 'package:redux/redux.dart';
 import 'package:redux_epics/redux_epics.dart';
 

@@ -3,10 +3,10 @@ import 'dart:async';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:angular_router/angular_router.dart';
-import 'package:codefest/src/actions/init_action.dart';
 import 'package:codefest/src/menu_route_path.dart';
+import 'package:codefest/src/redux/actions/init_action.dart';
+import 'package:codefest/src/redux/services/dispatcher.dart';
 import 'package:codefest/src/routes.dart';
-import 'package:codefest/src/services/dispatcher.dart';
 
 @Component(
   selector: 'layout',

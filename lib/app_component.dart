@@ -4,20 +4,20 @@ import 'dart:html';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:angular_router/angular_router.dart';
-import 'package:codefest/src/models/codefest_state.dart';
+import 'package:codefest/src/redux/effects/effects.dart';
+import 'package:codefest/src/redux/reducers/reducer.dart';
+import 'package:codefest/src/redux/selectors/selector.dart';
+import 'package:codefest/src/redux/services/dispatcher.dart';
+import 'package:codefest/src/redux/services/state_factory.dart';
+import 'package:codefest/src/redux/services/store_factory.dart';
+import 'package:codefest/src/redux/state/codefest_state.dart';
 import 'package:codefest/src/route_paths.dart';
 import 'package:codefest/src/routes.dart';
 import 'package:codefest/src/services/auth_service.dart';
 import 'package:codefest/src/services/auth_store.dart';
 import 'package:codefest/src/services/data_loader.dart';
-import 'package:codefest/src/services/dispatcher.dart';
-import 'package:codefest/src/services/effects.dart';
 import 'package:codefest/src/services/http_proxy.dart';
-import 'package:codefest/src/services/reducer.dart';
-import 'package:codefest/src/services/selector.dart';
 import 'package:codefest/src/services/sockets_service.dart';
-import 'package:codefest/src/services/state_factory.dart';
-import 'package:codefest/src/services/store_factory.dart';
 import 'package:redux/redux.dart';
 
 @Component(
