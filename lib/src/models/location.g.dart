@@ -10,7 +10,7 @@ Location _$LocationFromJson(Map<String, dynamic> json) {
   return Location(
       id: json['id'] as String,
       title: json['title'] as String,
-      logoPath: json['logoPath'] as String,
+      iconPath: json['iconPath'] as String,
       mapPath: json['mapPath'] as String,
       description: json['description'] as String);
 }
@@ -18,7 +18,7 @@ Location _$LocationFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$LocationToJson(Location instance) => <String, dynamic>{
       'id': instance.id,
       'title': instance.title,
-      'logoPath': instance.logoPath,
+      'iconPath': instance.iconPath,
       'mapPath': instance.mapPath,
       'description': instance.description
     };
