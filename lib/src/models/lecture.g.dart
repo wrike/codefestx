@@ -18,6 +18,7 @@ Lecture _$LectureFromJson(Map<String, dynamic> json) {
       section: Section.fromJson(json['section'] as Map<String, dynamic>),
       startTime: DateTime.parse(json['startTime'] as String),
       duration: json['duration'] as int,
+      lang: json['lang'] as String,
       isStarred: json['isStarred'] as bool,
       isLiked: json['isLiked'] as bool);
 }
@@ -32,6 +33,7 @@ Map<String, dynamic> _$LectureToJson(Lecture instance) => <String, dynamic>{
       'section': instance.section,
       'startTime': instance.startTime.toIso8601String(),
       'duration': instance.duration,
+      'lang': instance.lang,
       'isStarred': instance.isStarred,
       'isLiked': instance.isLiked
     };
