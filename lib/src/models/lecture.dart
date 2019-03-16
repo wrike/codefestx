@@ -1,7 +1,7 @@
+import 'package:codefest/src/models/_types.dart';
 import 'package:codefest/src/models/location.dart';
 import 'package:codefest/src/models/section.dart';
 import 'package:codefest/src/models/speaker.dart';
-import 'package:codefest/src/models/types.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta.dart';
 
