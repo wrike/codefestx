@@ -1,4 +1,4 @@
-import 'package:codefest/src/models/types.dart';
+import 'package:codefest/src/models/_types.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta.dart';
 
