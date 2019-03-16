@@ -100,6 +100,7 @@ class AppComponent implements OnDestroy, OnInit {
 
   @override
   void ngOnInit() {
-    _socketService.onEvent.where((event) => event == 'reload').listen((data) => window.location.reload());
+    _socketService.onEvent.where((event) => event.command == 'reload').listen((data) => window.location.reload());
+    _socketService.onEvent.where((event) => event.command == 'change-lectures').listen((data) => 0 /* todo показать нотификцию и загрузить стейт */);
   }
 }
