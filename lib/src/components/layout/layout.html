@@ -62,24 +62,10 @@
       <nav
         class="material-navigation">
 
-        <material-button
-          icon>
-
-          <material-icon
-            icon="filter_list">
-          </material-icon>
-        </material-button>
-
-        <material-button
-          icon>
-
-          <material-icon
-            icon="search">
-          </material-icon>
-        </material-button>
+        <ng-content select="[actions]"></ng-content>
       </nav>
     </div>
   </header>
 </div>
 
-<ng-content></ng-content>
+<ng-content select="[content]"></ng-content>

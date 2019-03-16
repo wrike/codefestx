@@ -3,9 +3,11 @@ import 'package:angular_components/angular_components.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:codefest/src/components/layout/layout.dart';
 import 'package:codefest/src/components/lectures/actions/actions.dart';
+import 'package:codefest/src/components/lectures/layout_actions/layout_actions.dart';
 import 'package:codefest/src/components/stateful_component.dart';
 import 'package:codefest/src/models/_types.dart';
 import 'package:codefest/src/models/lecture.dart';
+import 'package:codefest/src/redux/selectors/selector.dart';
 import 'package:codefest/src/redux/services/store_factory.dart';
 import 'package:codefest/src/route_paths.dart';
 import 'package:codefest/src/routes.dart';
@@ -21,12 +23,15 @@ import 'package:codefest/src/routes.dart';
     MaterialIconComponent,
     LayoutComponent,
     ActionsComponent,
+    LayoutActionsComponent,
   ],
   preserveWhitespace: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 )
 class LecturesComponent extends StatefulComponent {
   final Router _router;
+
+  String _searchText = '';
 
   LecturesComponent(
     NgZone zone,
@@ -35,7 +40,7 @@ class LecturesComponent extends StatefulComponent {
     this._router,
   ) : super(zone, cdr, storeFactory);
 
-  Iterable<Lecture> get lectures => state.lectures;
+  Iterable<Lecture> get lectures => searchLectures(state, _searchText);
 
   String getEndTime(Lecture lecture) {
     final endTime = lecture.startTime.add(new Duration(minutes: lecture.duration));
@@ -57,4 +62,8 @@ class LecturesComponent extends StatefulComponent {
   String _formatHours(String hours) => hours.length == 1 ? '${hours}0' : hours;
 
   String _getTime(DateTime date) => '${date.hour}:${_formatHours(date.minute.toString())}';
+
+  void onSearch(String searchText) {
+    _searchText = searchText;
+  }
 }

@@ -1,7 +1,13 @@
 <layout>
 
+  <layout-actions
+    actions
+    (onSearch)="onSearch($event)">
+  </layout-actions>
+
   <div
     *ngFor="let lecture of lectures"
+    content
     class="lecture">
 
     <div
