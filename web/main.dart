@@ -5,6 +5,7 @@ import 'package:http/http.dart';
 import 'package:angular_router/angular_router.dart';
 
 import 'main.template.dart' as self;
+
 @GenerateInjector([
   // For local development without backend
   //ClassProvider<Client>(Client, useClass: ApiService),
