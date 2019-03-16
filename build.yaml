@@ -10,4 +10,4 @@ targets:
             - --minify
             - --omit-implicit-checks
             - --trust-primitives
-            - -DapiHost=http://api.codefest.wrike.tech
+            - -DapiHost=https://api.codefest.wrike.tech§
