@@ -4,12 +4,6 @@ import 'package:codefest/src/redux/state/codefest_state.dart';
 import 'package:codefest/src/redux/state/user_state.dart';
 import 'package:reselect/reselect.dart';
 
-Selector<CodefestState, Iterable<Lecture>> getVisibleLectures = createSelector2(
-  getLecturesFromSelectedSections,
-  getSearchText,
-  _getLecturesBySearchText,
-);
-
 Selector<CodefestState, Iterable<Lecture>> getLecturesFromSelectedSections = createSelector2(
   getLectures,
   getSelectedSectionIds,
@@ -20,6 +14,12 @@ Selector<CodefestState, Iterable<Section>> getSelectedSections = createSelector2
   getSections,
   getSelectedSectionIds,
   _getSelectedSections,
+);
+
+Selector<CodefestState, Iterable<Lecture>> getVisibleLectures = createSelector2(
+  getLecturesFromSelectedSections,
+  getSearchText,
+  _getLecturesBySearchText,
 );
 
 Iterable<Lecture> getLectures(CodefestState state) => state.lectures;
@@ -38,14 +38,9 @@ Iterable<Lecture> _getLecturesBySearchText(Iterable<Lecture> lectures, String se
   }
 
   return lectures.where((lecture) {
-    final data = <String>[];
+    final fields = _getLectureSearchFields(lecture);
 
-    data
-      ..addAll([lecture.title, lecture.description])
-      ..addAll(lecture.speakers.expand((speaker) => [speaker.name, speaker.description, speaker.company]))
-      ..addAll([lecture.location.title, lecture.location.description]);
-
-    if (_isContainsSearchText(data, searchText)) {
+    if (_isFieldsContainsSearchText(fields, searchText)) {
       return true;
     }
 
@@ -57,13 +52,19 @@ Iterable<Lecture> _getLecturesBySectionIds(Iterable<Lecture> lectures, Iterable<
   return sectionIds.isEmpty ? lectures : lectures.where((lecture) => sectionIds.contains(lecture.section.id));
 }
 
+Iterable<String> _getLectureSearchFields(Lecture lecture) {
+  return [lecture.title, lecture.description]
+    ..addAll(lecture.speakers.expand((speaker) => [speaker.name, speaker.description, speaker.company]))
+    ..addAll([lecture.location.title, lecture.location.description]);
+}
+
 Iterable<Section> _getSelectedSections(Iterable<Section> sections, Iterable<String> sectionIds) {
   return sections.where((section) => sectionIds.contains(section.id));
 }
 
-bool _isContainsSearchText(Iterable<String> strings, String searchText) {
-  for (final string in strings) {
-    if (string != null && string.toLowerCase().contains(searchText.toLowerCase())) {
+bool _isFieldsContainsSearchText(Iterable<String> fields, String searchText) {
+  for (final field in fields) {
+    if (field != null && field.toLowerCase().contains(searchText.toLowerCase())) {
       return true;
     }
   }
