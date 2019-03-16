@@ -5,6 +5,7 @@ import 'package:codefest/src/components/layout/layout.dart';
 import 'package:codefest/src/components/lectures/actions/actions.dart';
 import 'package:codefest/src/components/stateful_component.dart';
 import 'package:codefest/src/models/lecture.dart';
+import 'package:codefest/src/models/types.dart';
 import 'package:codefest/src/route_paths.dart';
 import 'package:codefest/src/routes.dart';
 import 'package:codefest/src/services/store_factory.dart';
@@ -40,6 +41,8 @@ class LecturesComponent extends StatefulComponent {
     final endTime = lecture.startTime.add(new Duration(minutes: lecture.duration));
     return _getTime(endTime);
   }
+
+  String getFlag(Lecture lecture) => lecture.language == LanguageType.en ? '🇬🇧󠁧󠁢󠁥󠁮󠁧󠁿' : '🇷🇺';
 
   String getStartTime(Lecture lecture) => _getTime(lecture.startTime);
 
