@@ -7,7 +7,7 @@ import 'package:http/http.dart';
 typedef T Decoder<T>(dynamic item);
 
 class HttpProxy {
-  static const _host = const String.fromEnvironment('apiHost', defaultValue: 'http://localhost:3000');
+  static const host = const String.fromEnvironment('apiHost', defaultValue: '//api.codefest.wrike.tech');
 
   final Client _http;
   final AuthStore _authStore;
@@ -19,7 +19,7 @@ class HttpProxy {
 
   dynamic _extractData(Response resp) => json.decode(resp.body);
 
-  String _fullPath(String path) => '${_host}/${path}';
+  String _fullPath(String path) => '${host}/${path}';
 
   Map<String, String> _getHeaders() {
     final headers = Map<String, String>();

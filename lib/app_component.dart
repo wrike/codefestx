@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:html';
 
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
@@ -14,6 +15,7 @@ import 'package:codefest/src/services/effects.dart';
 import 'package:codefest/src/services/http_proxy.dart';
 import 'package:codefest/src/services/reducer.dart';
 import 'package:codefest/src/services/selector.dart';
+import 'package:codefest/src/services/sockets_service.dart';
 import 'package:codefest/src/services/state_factory.dart';
 import 'package:codefest/src/services/store_factory.dart';
 import 'package:redux/redux.dart';
@@ -38,6 +40,7 @@ import 'package:redux/redux.dart';
     const ClassProvider<HttpProxy>(HttpProxy),
     const ClassProvider<AuthService>(AuthService),
     const ClassProvider<AuthStore>(AuthStore),
+    const ClassProvider<SocketService>(SocketService),
   ],
   exports: [
     RoutePaths,
@@ -46,19 +49,21 @@ import 'package:redux/redux.dart';
   preserveWhitespace: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 )
-class AppComponent implements OnDestroy {
+class AppComponent implements OnDestroy, OnInit {
   final NgZone _zone;
   final ChangeDetectorRef _cdr;
   final Dispatcher _dispatcher;
   final StoreFactory _storeFactory;
   final StateFactory _stateFactory;
   final Selector _selector;
-
+  final SocketService _socketService;
   final List<StreamSubscription> _subscriptions = [];
 
   Store<CodefestState> _store;
 
+
   AppComponent(
+    this._socketService,
     this._zone,
     this._cdr,
     this._storeFactory,
@@ -78,6 +83,7 @@ class AppComponent implements OnDestroy {
         _dispatcher.onAction.listen((action) => _store.dispatch(action)),
       ]);
     });
+
   }
 
   bool get isError => _selector.isError(state);
@@ -89,5 +95,11 @@ class AppComponent implements OnDestroy {
   @override
   void ngOnDestroy() {
     _subscriptions.forEach((s) => s.cancel());
+  }
+
+
+  @override
+  void ngOnInit() {
+    _socketService.onEvent.where((event) => event == 'reload').listen((data) => window.location.reload());
   }
 }
