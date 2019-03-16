@@ -1,4 +1,4 @@
-import 'package:codefest/src/models/lecture.dart';
+import 'package:codefest/src/models/types.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta.dart';
 
@@ -24,6 +24,8 @@ class LectureData {
   final DateTime startTime;
   @JsonKey(nullable: false)
   final int duration;
+  @JsonKey(defaultValue: LanguageType.ru)
+  final LanguageType lang;
   @JsonKey(defaultValue: false)
   final bool isStarred;
   @JsonKey(defaultValue: false)
@@ -38,6 +40,7 @@ class LectureData {
     @required this.sectionId,
     @required this.startTime,
     @required this.duration,
+    this.lang,
     this.type,
     this.isStarred,
     this.isLiked,

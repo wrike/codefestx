@@ -7,14 +7,14 @@ part 'location.g.dart';
 class Location {
   final String id;
   final String title;
-  final String logoPath;
+  final String iconPath;
   final String mapPath;
   final String description;
 
   Location({
     @required this.id,
     @required this.title,
-    @required this.logoPath,
+    @required this.iconPath,
     @required this.mapPath,
     @required this.description,
   });

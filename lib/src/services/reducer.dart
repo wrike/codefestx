@@ -30,6 +30,7 @@ class CodefestReducer {
               id: lecture.id,
               title: lecture.title,
               type: lecture.type,
+              language: lecture.lang,
               description: lecture.description,
               startTime: lecture.startTime,
               duration: lecture.duration,

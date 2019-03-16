@@ -1,6 +1,7 @@
 import 'package:codefest/src/models/location.dart';
 import 'package:codefest/src/models/section.dart';
 import 'package:codefest/src/models/speaker.dart';
+import 'package:codefest/src/models/types.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta.dart';
 
@@ -17,7 +18,7 @@ class Lecture {
   final Section section;
   final DateTime startTime;
   final int duration;
-  final String lang;
+  final LanguageType language;
   final bool isStarred;
   final bool isLiked;
 
@@ -31,7 +32,7 @@ class Lecture {
     @required this.section,
     @required this.startTime,
     @required this.duration,
-    @required this.lang,
+    @required this.language,
     @required this.isStarred,
     @required this.isLiked,
   });
@@ -39,13 +40,4 @@ class Lecture {
   factory Lecture.fromJson(Map<String, dynamic> json) => _$LectureFromJson(json);
 
   Map<String, dynamic> toJson() => _$LectureToJson(this);
-}
-
-enum LectureType {
-  @JsonValue('lecture')
-  lecture,
-  @JsonValue('custom')
-  custom,
-  @JsonValue('wrike')
-  wrike,
 }

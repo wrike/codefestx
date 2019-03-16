@@ -16,6 +16,8 @@ LectureData _$LectureDataFromJson(Map<String, dynamic> json) {
       sectionId: json['sectionId'] as String,
       startTime: DateTime.parse(json['startTime'] as String),
       duration: json['duration'] as int,
+      lang: _$enumDecodeNullable(_$LanguageTypeEnumMap, json['lang']) ??
+          LanguageType.ru,
       type: _$enumDecodeNullable(_$LectureTypeEnumMap, json['type']) ??
           LectureType.lecture,
       isStarred: json['isStarred'] as bool ?? false,
@@ -33,6 +35,7 @@ Map<String, dynamic> _$LectureDataToJson(LectureData instance) =>
       'sectionId': instance.sectionId,
       'startTime': instance.startTime.toIso8601String(),
       'duration': instance.duration,
+      'lang': _$LanguageTypeEnumMap[instance.lang],
       'isStarred': instance.isStarred,
       'isLiked': instance.isLiked
     };
@@ -56,6 +59,11 @@ T _$enumDecodeNullable<T>(Map<T, dynamic> enumValues, dynamic source) {
   }
   return _$enumDecode<T>(enumValues, source);
 }
+
+const _$LanguageTypeEnumMap = <LanguageType, dynamic>{
+  LanguageType.ru: 'ru',
+  LanguageType.en: 'en'
+};
 
 const _$LectureTypeEnumMap = <LectureType, dynamic>{
   LectureType.lecture: 'lecture',
