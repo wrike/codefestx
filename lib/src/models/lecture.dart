@@ -17,6 +17,7 @@ class Lecture {
   final Section section;
   final DateTime startTime;
   final int duration;
+  final String lang;
   final bool isStarred;
   final bool isLiked;
 
@@ -30,6 +31,7 @@ class Lecture {
     @required this.section,
     @required this.startTime,
     @required this.duration,
+    @required this.lang,
     @required this.isStarred,
     @required this.isLiked,
   });
