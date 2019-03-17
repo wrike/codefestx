@@ -1,43 +1,46 @@
-<layout
-  *ngIf="isReady"
-  [title]="'Доклад'">
+<loader
+  [isReady]="isReady">
 
-  <div
-    actions>
-
-    <button
-      *ngIf="isAuthorized"
-      (click)="onLikeClick()">
-      Лайк
-    </button>
-
-    <button
-      (click)="onStarClick()">
-      В избранное
-    </button>
-  </div>
-
-  <div
-    content>
-
-    <div>{{ lecture.section.title }}</div>
-
-    <div>{{ lecture.title }}</div>
+  <layout
+    [title]="'Доклад'">
 
     <div
-      *ngFor="let speaker of lecture.speakers">
+      actions>
 
-      <div>{{ speaker.avatarPath }}</div>
+      <button
+        *ngIf="isAuthorized"
+        (click)="onLikeClick()">
+        Лайк
+      </button>
 
-      <div>{{ speaker.name }}</div>
-
-      <div>{{ speaker.company }}</div>
+      <button
+        (click)="onStarClick()">
+        В избранное
+      </button>
     </div>
 
-    <div>{{ lecture.location.title }}</div>
+    <div
+      content>
 
-    <div>{{ startTime }}</div>
+      <div>{{ lecture.section.title }}</div>
 
-    <div>{{ lecture.description }}</div>
-  </div>
-</layout>
+      <div>{{ lecture.title }}</div>
+
+      <div
+        *ngFor="let speaker of lecture.speakers">
+
+        <div>{{ speaker.avatarPath }}</div>
+
+        <div>{{ speaker.name }}</div>
+
+        <div>{{ speaker.company }}</div>
+      </div>
+
+      <div>{{ lecture.location.title }}</div>
+
+      <div>{{ startTime }}</div>
+
+      <div>{{ lecture.description }}</div>
+    </div>
+  </layout>
+</loader>
