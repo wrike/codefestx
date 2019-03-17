@@ -1,9 +1,8 @@
 <div
+  *ngIf="!isReady"
   class="loader">
 
-  <material-spinner
-    *ngIf="!isReady">
-  </material-spinner>
+  <material-spinner></material-spinner>
 </div>
 
 <div
