@@ -12,7 +12,8 @@ class StateFactory {
               (b) => b
                 ..selectedSectionIds.replace([])
                 ..isSearchMode = false
-                ..filterType = FilterTypeEnum.all,
+                ..filterType = FilterTypeEnum.all
+                ..isAuthorized = false,
             ),
           ),
       );

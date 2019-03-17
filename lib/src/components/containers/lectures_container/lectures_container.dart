@@ -4,7 +4,8 @@ import 'package:angular_router/angular_router.dart';
 import 'package:codefest/src/components/containers/lectures_container/actions/actions.dart';
 import 'package:codefest/src/components/containers/lectures_container/layout_actions/layout_actions.dart';
 import 'package:codefest/src/components/layout/layout.dart';
-import 'package:codefest/src/components/stateful_component.dart';
+import 'package:codefest/src/components/containers/stateful_component.dart';
+import 'package:codefest/src/components/loader/loader.dart';
 import 'package:codefest/src/models/lecture.dart';
 import 'package:codefest/src/models/section.dart';
 import 'package:codefest/src/redux/actions/change_search_mode_action.dart';
@@ -29,6 +30,7 @@ import 'package:codefest/src/route_paths.dart';
     LayoutComponent,
     ActionsComponent,
     LayoutActionsComponent,
+    LoaderComponent,
   ],
   preserveWhitespace: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -46,6 +48,8 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
     this._router,
     this._selectors,
   ) : super(zone, cdr, storeFactory);
+
+  bool get isReady => _selectors.isReady(state);
 
   bool get isFavoriteVisible => _selectors.getFilterType(state) == FilterTypeEnum.favorite;
 

@@ -87,6 +87,8 @@ class Selectors {
 
   bool isReady(CodefestState state) => state.isReady;
 
+  bool isAuthorized(CodefestState state) => getUser(state).isAuthorized;
+
   bool isSearchMode(CodefestState state) => getUser(state).isSearchMode;
 
   bool isSectionSelected(CodefestState state, String sectionId) => getSelectedSectionIds(state).contains(sectionId);

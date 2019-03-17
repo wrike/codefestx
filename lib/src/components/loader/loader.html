@@ -1,0 +1,13 @@
+<div
+  class="loader">
+
+  <material-spinner
+    *ngIf="!isReady">
+  </material-spinner>
+</div>
+
+<div
+  *ngIf="isReady">
+
+  <ng-content></ng-content>
+</div>

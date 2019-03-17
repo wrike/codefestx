@@ -6,6 +6,7 @@
     actions>
 
     <button
+      *ngIf="isAuthorized"
       (click)="onLikeClick()">
       Лайк
     </button>

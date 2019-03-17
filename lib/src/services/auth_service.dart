@@ -10,12 +10,21 @@ class AuthService {
   static const _tokenStorageKey = 'token';
   static const _userNameStorageKey = 'userName';
 
+  static const _initKey = 'init';
+  static const _initValue = 'yes';
+
   final HttpProxy _http;
   final AuthStore _authStore;
 
   AuthService(this._http, this._authStore) {
     _authStore.token = window.localStorage[_tokenStorageKey];
     _authStore.userName = window.localStorage[_userNameStorageKey];
+    _authStore.init = window.localStorage[_initKey];
+  }
+  
+  void init() {
+   window.localStorage[_initKey] = _initValue;
+   _authStore.init = _initValue;
   }
 
   void _clearToken() {
@@ -54,6 +63,5 @@ class AuthService {
     final authResponse = await _http.get<AuthResponse>(url, decoder: (j) => AuthResponse.fromJson(j));
     window.localStorage[_tokenStorageKey] = authResponse.token;
     window.localStorage[_userNameStorageKey] = authResponse.userName;
-    window.location.href = '/';
   }
 }
