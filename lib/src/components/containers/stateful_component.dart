@@ -11,7 +11,7 @@ abstract class StatefulComponent implements OnDestroy {
   final ChangeDetectorRef _cdr;
   final StoreFactory _storeFactory;
 
-  final List<StreamSubscription> _subscriptions = List<StreamSubscription>();
+  final List<StreamSubscription> _subscriptions = [];
 
   Store<CodefestState> _store;
 

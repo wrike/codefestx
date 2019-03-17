@@ -3,8 +3,9 @@ import 'package:codefest/src/redux/actions/change_search_mode_action.dart';
 import 'package:codefest/src/redux/actions/change_selected_sections_action.dart';
 import 'package:codefest/src/redux/actions/filter_lectures_action.dart';
 import 'package:codefest/src/redux/actions/load_data_error_action.dart';
-import 'package:codefest/src/redux/actions/load_program_start_action.dart';
-import 'package:codefest/src/redux/actions/load_program_success_action.dart';
+import 'package:codefest/src/redux/actions/load_data_start_action.dart';
+import 'package:codefest/src/redux/actions/load_data_success_action.dart';
+import 'package:codefest/src/redux/actions/authorize_action.dart';
 import 'package:codefest/src/redux/actions/search_lectures_action.dart';
 import 'package:codefest/src/redux/state/codefest_state.dart';
 import 'package:redux/redux.dart';
@@ -14,9 +15,10 @@ class CodefestReducer {
 
   CodefestReducer() {
     _reducer = combineReducers<CodefestState>([
-      TypedReducer<CodefestState, LoadProgramStartAction>(_onStartLoading),
-      TypedReducer<CodefestState, LoadProgramSuccessAction>(_onLoadProgram),
+      TypedReducer<CodefestState, LoadDataStartAction>(_onStartLoading),
+      TypedReducer<CodefestState, LoadDataSuccessAction>(_onLoadData),
       TypedReducer<CodefestState, LoadDataErrorAction>(_onError),
+      TypedReducer<CodefestState, AuthorizeAction>(_onAuthorize),
       TypedReducer<CodefestState, SearchLecturesAction>(_onSearchLectures),
       TypedReducer<CodefestState, ChangeSelectedSectionsAction>(_onChangeSelectedSections),
       TypedReducer<CodefestState, FilterLecturesAction>(_onFilterLectures),
@@ -52,6 +54,16 @@ class CodefestReducer {
 
   CodefestState _onError(CodefestState state, LoadDataErrorAction action) => state.rebuild((b) => b.isError = true);
 
+  CodefestState _onAuthorize(CodefestState state, AuthorizeAction action) {
+    return state.rebuild((b) {
+      final user = b.user.build().rebuild((b) {
+        b.isAuthorized = true;
+      });
+
+      b.user.replace(user);
+    });
+  }
+
   CodefestState _onFilterLectures(CodefestState state, FilterLecturesAction action) {
     return state.rebuild((b) {
       final user = b.user.build().rebuild((b) {
@@ -63,7 +75,7 @@ class CodefestReducer {
     });
   }
 
-  CodefestState _onLoadProgram(CodefestState state, LoadProgramSuccessAction action) => state.rebuild((b) => b
+  CodefestState _onLoadData(CodefestState state, LoadDataSuccessAction action) => state.rebuild((b) => b
     ..isReady = true
     ..isLoaded = true
     ..speakers.replace(action.speakers)
@@ -100,6 +112,6 @@ class CodefestReducer {
     });
   }
 
-  CodefestState _onStartLoading(CodefestState state, LoadProgramStartAction action) =>
+  CodefestState _onStartLoading(CodefestState state, LoadDataStartAction action) =>
       state.rebuild((b) => b.isReady = false);
 }

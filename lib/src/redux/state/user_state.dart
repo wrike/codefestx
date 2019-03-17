@@ -25,6 +25,8 @@ abstract class UserState implements Built<UserState, UserStateBuilder> {
 
   FilterTypeEnum get filterType;
 
+  bool get isAuthorized;
+
   bool get isSearchMode;
 
   @nullable

@@ -2,8 +2,8 @@ import 'dart:async';
 import 'dart:html';
 
 import 'package:angular/angular.dart';
-import 'package:angular_components/angular_components.dart';
 import 'package:angular_router/angular_router.dart';
+import 'package:codefest/src/redux/actions/authorize_action.dart';
 import 'package:codefest/src/redux/effects/effects.dart';
 import 'package:codefest/src/redux/reducers/reducer.dart';
 import 'package:codefest/src/redux/selectors/selectors.dart';
@@ -27,7 +27,6 @@ import 'package:redux/redux.dart';
   directives: [
     NgIf,
     routerDirectives,
-    MaterialSpinnerComponent,
   ],
   providers: const <Object>[
     const ClassProvider<StoreFactory>(StoreFactory),
@@ -50,12 +49,16 @@ import 'package:redux/redux.dart';
   changeDetection: ChangeDetectionStrategy.OnPush,
 )
 class AppComponent implements OnDestroy, OnInit {
+  final ChangeDetectorRef _cdr;
   final NgZone _zone;
   final Dispatcher _dispatcher;
   final StoreFactory _storeFactory;
   final StateFactory _stateFactory;
   final Selectors _selectors;
   final SocketService _socketService;
+  final AuthStore _authStore;
+  final AuthService _authService;
+  final Router _router;
 
   final List<StreamSubscription> _subscriptions = [];
 
@@ -63,24 +66,29 @@ class AppComponent implements OnDestroy, OnInit {
 
   AppComponent(
     this._socketService,
+    this._cdr,
     this._zone,
     this._storeFactory,
     this._stateFactory,
     this._dispatcher,
     this._selectors,
+    this._authStore,
+    this._authService,
+    this._router,
   ) {
     _zone.runOutsideAngular(() {
       _store = _storeFactory.getStore(_stateFactory.getInitialState());
 
       _subscriptions.addAll([
+        _store.onChange.listen((_) {
+          _zone.run(_cdr.markForCheck);
+        }),
         _dispatcher.onAction.listen((action) => _store.dispatch(action)),
       ]);
     });
   }
 
   bool get isError => _selectors.isError(state);
-
-  bool get isReady => _selectors.isReady(state);
 
   CodefestState get state => _store.state;
 
@@ -91,10 +99,19 @@ class AppComponent implements OnDestroy, OnInit {
 
   @override
   void ngOnInit() {
-    _socketService.onEvent.where((event) => event.command == 'reload')
-        .listen((data) => window.location.reload());
+    if (_authStore.isAuth) {
+      _dispatcher.dispatch(new AuthorizeAction());
+    } else if (_authStore.isNewUser) {
+      _router.onRouteActivated.first.then((state) {
+        _router.navigateByUrl(RoutePaths.login.toUrl());
+        _authService.init();
+      });
+    }
 
-    _socketService.onEvent.where((event) => event.command == 'change-lectures')
+    _socketService.onEvent.where((event) => event.command == 'reload').listen((data) => window.location.reload());
+
+    _socketService.onEvent
+        .where((event) => event.command == 'change-lectures')
         .listen((data) => 0 /* todo показать нотификцию и загрузить стейт */);
   }
 }

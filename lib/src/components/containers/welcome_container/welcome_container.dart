@@ -10,9 +10,9 @@ import 'package:codefest/src/redux/services/store_factory.dart';
 import 'package:codefest/src/route_paths.dart';
 
 @Component(
-  selector: 'sections-container',
-  styleUrls: ['sections_container.css'],
-  templateUrl: 'sections_container.html',
+  selector: 'welcome-container',
+  styleUrls: ['welcome_container.css'],
+  templateUrl: 'welcome_container.html',
   directives: [
     NgFor,
     SectionsComponent,
@@ -21,31 +21,38 @@ import 'package:codefest/src/route_paths.dart';
   preserveWhitespace: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 )
-class SectionsContainerComponent extends StatefulComponent {
+class WelcomeContainerComponent extends StatefulComponent {
   final Dispatcher _dispatcher;
   final Selectors _selectors;
   final Router _router;
 
-  SectionsContainerComponent(
-    NgZone zone,
-    ChangeDetectorRef cdr,
-    StoreFactory storeFactory,
-    this._dispatcher,
-    this._selectors,
-    this._router,
-  ) : super(zone, cdr, storeFactory);
+  WelcomeContainerComponent(
+      NgZone zone,
+      ChangeDetectorRef cdr,
+      StoreFactory storeFactory,
+      this._dispatcher,
+      this._selectors,
+      this._router,
+      ) : super(zone, cdr, storeFactory);
 
   Iterable<Section> get sections => _selectors.getSections(state);
 
-  int get selectedSectionCount => _selectors.getSelectedSectionCount(state);
-
-  Iterable<String> get selectedSectionIds => _selectors.getSelectedSectionIds(state);
+  Iterable<String> selectedSectionIds = [];
 
   void onClose() {
-    _router.navigate(RoutePaths.lectures.toUrl());
+    _navigateToLectures();
+  }
+
+  void onApply() {
+    _dispatcher.dispatch(new ChangeSelectedSectionsAction(sectionIds: selectedSectionIds));
+    _navigateToLectures();
   }
 
   void onSectionsChange(Iterable<String> sectionIds) {
-    _dispatcher.dispatch(new ChangeSelectedSectionsAction(sectionIds: sectionIds));
+    selectedSectionIds = sectionIds;
+  }
+  
+  void _navigateToLectures() {
+    _router.navigate(RoutePaths.lectures.toUrl());
   }
 }

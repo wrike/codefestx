@@ -36,6 +36,8 @@ class _$UserState extends UserState {
   @override
   final FilterTypeEnum filterType;
   @override
+  final bool isAuthorized;
+  @override
   final bool isSearchMode;
   @override
   final String searchText;
@@ -48,12 +50,16 @@ class _$UserState extends UserState {
   _$UserState._(
       {this.filterSectionId,
       this.filterType,
+      this.isAuthorized,
       this.isSearchMode,
       this.searchText,
       this.selectedSectionIds})
       : super._() {
     if (filterType == null) {
       throw new BuiltValueNullFieldError('UserState', 'filterType');
+    }
+    if (isAuthorized == null) {
+      throw new BuiltValueNullFieldError('UserState', 'isAuthorized');
     }
     if (isSearchMode == null) {
       throw new BuiltValueNullFieldError('UserState', 'isSearchMode');
@@ -76,6 +82,7 @@ class _$UserState extends UserState {
     return other is UserState &&
         filterSectionId == other.filterSectionId &&
         filterType == other.filterType &&
+        isAuthorized == other.isAuthorized &&
         isSearchMode == other.isSearchMode &&
         searchText == other.searchText &&
         selectedSectionIds == other.selectedSectionIds;
@@ -85,7 +92,9 @@ class _$UserState extends UserState {
   int get hashCode {
     return $jf($jc(
         $jc(
-            $jc($jc($jc(0, filterSectionId.hashCode), filterType.hashCode),
+            $jc(
+                $jc($jc($jc(0, filterSectionId.hashCode), filterType.hashCode),
+                    isAuthorized.hashCode),
                 isSearchMode.hashCode),
             searchText.hashCode),
         selectedSectionIds.hashCode));
@@ -96,6 +105,7 @@ class _$UserState extends UserState {
     return (newBuiltValueToStringHelper('UserState')
           ..add('filterSectionId', filterSectionId)
           ..add('filterType', filterType)
+          ..add('isAuthorized', isAuthorized)
           ..add('isSearchMode', isSearchMode)
           ..add('searchText', searchText)
           ..add('selectedSectionIds', selectedSectionIds))
@@ -114,6 +124,10 @@ class UserStateBuilder implements Builder<UserState, UserStateBuilder> {
   FilterTypeEnum _filterType;
   FilterTypeEnum get filterType => _$this._filterType;
   set filterType(FilterTypeEnum filterType) => _$this._filterType = filterType;
+
+  bool _isAuthorized;
+  bool get isAuthorized => _$this._isAuthorized;
+  set isAuthorized(bool isAuthorized) => _$this._isAuthorized = isAuthorized;
 
   bool _isSearchMode;
   bool get isSearchMode => _$this._isSearchMode;
@@ -135,6 +149,7 @@ class UserStateBuilder implements Builder<UserState, UserStateBuilder> {
     if (_$v != null) {
       _filterSectionId = _$v.filterSectionId;
       _filterType = _$v.filterType;
+      _isAuthorized = _$v.isAuthorized;
       _isSearchMode = _$v.isSearchMode;
       _searchText = _$v.searchText;
       _selectedSectionIds = _$v.selectedSectionIds?.toBuilder();
@@ -164,6 +179,7 @@ class UserStateBuilder implements Builder<UserState, UserStateBuilder> {
           new _$UserState._(
               filterSectionId: filterSectionId,
               filterType: filterType,
+              isAuthorized: isAuthorized,
               isSearchMode: isSearchMode,
               searchText: searchText,
               selectedSectionIds: selectedSectionIds.build());

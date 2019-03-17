@@ -10,6 +10,7 @@ import 'components/containers/map_container/map_container.template.dart' as map_
 import 'components/containers/feedback_container/feedback_container.template.dart' as feedback_template;
 import 'components/containers/sections_container/sections_container.template.dart' as sections_template;
 import 'components/containers/rating_container/rating_container.template.dart' as rating_template;
+import 'components/containers/welcome_container/welcome_container.template.dart' as welcome_template;
 
 class Routes {
   static final lecture = RouteDefinition(
@@ -58,15 +59,21 @@ class Routes {
     component: rating_template.RatingContainerComponentNgFactory,
   );
 
+  static final welcome = RouteDefinition(
+    routePath: RoutePaths.welcome,
+    component: welcome_template.WelcomeContainerComponentNgFactory,
+  );
+
   static final all = <RouteDefinition>[
+    login,
+    loginCallback,
     lecture,
     lectures,
-    login,
     speakers,
     map,
     feedback,
     sections,
     rating,
-    loginCallback,
+    welcome,
   ];
 }

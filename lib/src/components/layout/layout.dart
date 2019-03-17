@@ -14,7 +14,6 @@ import 'package:gtag_analytics/gtag_analytics.dart';
   templateUrl: 'layout.html',
   directives: [
     NgFor,
-    MaterialSpinnerComponent,
     DeferredContentDirective,
     MaterialButtonComponent,
     MaterialIconComponent,

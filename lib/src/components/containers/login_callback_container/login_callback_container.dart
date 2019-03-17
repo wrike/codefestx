@@ -33,6 +33,7 @@ class LoginCallbackContainerComponent implements OnInit {
     _router.onRouteActivated.listen((routerState) async {
       if (routerState.queryParameters.containsKey('code')) {
         await _service.processAuth(routerState.queryParameters);
+        await _router.navigateByUrl(RoutePaths.welcome.toUrl());
       }
     });
   }
