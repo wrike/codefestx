@@ -51,21 +51,19 @@ import 'package:redux/redux.dart';
 )
 class AppComponent implements OnDestroy, OnInit {
   final NgZone _zone;
-  final ChangeDetectorRef _cdr;
   final Dispatcher _dispatcher;
   final StoreFactory _storeFactory;
   final StateFactory _stateFactory;
   final Selectors _selectors;
   final SocketService _socketService;
+
   final List<StreamSubscription> _subscriptions = [];
 
   Store<CodefestState> _store;
 
-
   AppComponent(
     this._socketService,
     this._zone,
-    this._cdr,
     this._storeFactory,
     this._stateFactory,
     this._dispatcher,
@@ -75,15 +73,9 @@ class AppComponent implements OnDestroy, OnInit {
       _store = _storeFactory.getStore(_stateFactory.getInitialState());
 
       _subscriptions.addAll([
-        _store.onChange.listen((_) {
-          _zone.run(() {
-            _cdr.markForCheck();
-          });
-        }),
         _dispatcher.onAction.listen((action) => _store.dispatch(action)),
       ]);
     });
-
   }
 
   bool get isError => _selectors.isError(state);
@@ -94,13 +86,14 @@ class AppComponent implements OnDestroy, OnInit {
 
   @override
   void ngOnDestroy() {
-    _subscriptions.forEach((s) => s.cancel());
+    _subscriptions.forEach((subscription) => subscription.cancel());
   }
-
 
   @override
   void ngOnInit() {
     _socketService.onEvent.where((event) => event.command == 'reload').listen((data) => window.location.reload());
-    _socketService.onEvent.where((event) => event.command == 'change-lectures').listen((data) => 0 /* todo показать нотификцию и загрузить стейт */);
+    _socketService.onEvent
+        .where((event) => event.command == 'change-lectures')
+        .listen((data) => 0 /* todo показать нотификцию и загрузить стейт */);
   }
 }

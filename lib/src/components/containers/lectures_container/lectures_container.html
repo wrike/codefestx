@@ -1,17 +1,36 @@
-<layout>
+<layout
+  [title]="'Lectures'">
 
   <layout-actions
     actions
-    (onSearch)="onSearch($event)">
+    [searchText]="searchText"
+    [isSearchMode]="isSearchMode"
+    (onSearch)="onSearch($event)"
+    (onSearchModeChange)="onSearchModeChange($event)"
+    (onFilter)="onFilter()">
   </layout-actions>
 
   <div
     content>
 
     <button
+      (click)="onShowAllClick()"
+      [class.selected]="isShowAllVisible">
+
+      Все
+    </button>
+
+    <button
+      (click)="onShowFavoriteClick()"
+      [class.selected]="isFavoriteVisible">
+
+      Избранные
+    </button>
+
+    <button
       *ngFor="let section of sections"
-      (click)="onSectionClick(section)"
-      [class.selected]="isSectionSelected(section)">
+      (click)="onShowSectionClick(section)"
+      [class.selected]="isShowSectionVisible(section)">
 
       {{ section.title }}
     </button>
@@ -30,13 +49,13 @@
         <div
           class="lecture_time_start">
 
-          {{ getStartTime(lecture) }}
+          {{ startTime(lecture) }}
         </div>
 
         <div
           class="lecture_time_end">
 
-          {{ getEndTime(lecture) }}
+          {{ endTime(lecture) }}
         </div>
       </div>
 
@@ -55,7 +74,7 @@
 
           <div
             class="lecture_language">
-            {{ getFlag(lecture) }}
+            {{ flag(lecture) }}
           </div>
         </div>
 

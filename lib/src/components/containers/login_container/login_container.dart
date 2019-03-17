@@ -1,12 +1,13 @@
 import 'package:angular/angular.dart';
 import 'package:codefest/src/models/auth_type.enum.dart';
+import 'package:codefest/src/route_paths.dart';
 import 'package:codefest/src/routes.dart';
 import 'package:codefest/src/services/auth_service.dart';
 
 @Component(
-  selector: 'login',
-  styleUrls: ['login.css'],
-  templateUrl: 'login.html',
+  selector: 'login-container',
+  styleUrls: ['login_container.css'],
+  templateUrl: 'login_container.html',
   directives: [],
   providers: <Object>[
     AuthService,
@@ -18,10 +19,10 @@ import 'package:codefest/src/services/auth_service.dart';
     Routes,
   ],
 )
-class LoginComponent {
+class LoginContainerComponent {
   AuthService _service;
 
-  LoginComponent(this._service);
+  LoginContainerComponent(this._service);
 
   void loginVk() => _login(AuthType.VK);
 

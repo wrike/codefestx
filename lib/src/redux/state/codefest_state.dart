@@ -14,7 +14,11 @@ abstract class CodefestState implements Built<CodefestState, CodefestStateBuilde
 
   CodefestState._();
 
-  BuiltList<Speaker> get speakers;
+  bool get isError;
+
+  bool get isLoaded;
+
+  bool get isReady;
 
   BuiltList<Lecture> get lectures;
 
@@ -22,11 +26,7 @@ abstract class CodefestState implements Built<CodefestState, CodefestStateBuilde
 
   BuiltList<Section> get sections;
 
-  bool get isReady;
-
-  bool get isLoaded;
-
-  bool get isError;
+  BuiltList<Speaker> get speakers;
 
   UserState get user;
 }

@@ -3,6 +3,7 @@
 
   <input
     text-input
+    [value]="searchText"
     [isAutoFocused]="true"
     (keyup)="onSearchTextChange($event)"
     type="text">
@@ -21,7 +22,8 @@
   [ngIf]="!isSearchMode">
 
   <material-button
-    icon>
+    icon
+    (click)="onFilterClick()">
 
     <material-icon
       icon="filter_list">

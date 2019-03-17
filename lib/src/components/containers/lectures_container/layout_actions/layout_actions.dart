@@ -21,18 +21,34 @@ import 'package:codefest/src/components/ui/text_input/text_input.dart';
 )
 class LayoutActionsComponent {
   final _onSearchStreamController = new StreamController<String>.broadcast();
+  final _onSearchModeChangeStreamController = new StreamController<bool>.broadcast();
+  final _onFilterStreamController = new StreamController<Null>.broadcast();
 
+  @Input()
   bool isSearchMode = false;
+
+  @Input()
+  String searchText = '';
 
   @Output()
   Stream<String> get onSearch => _onSearchStreamController.stream;
 
+  @Output()
+  Stream<bool> get onSearchModeChange => _onSearchModeChangeStreamController.stream;
+
+  @Output()
+  Stream<Null> get onFilter => _onFilterStreamController.stream;
+
   void onSearchModeDisable() {
-    isSearchMode = false;
+    _onSearchModeChangeStreamController.add(false);
   }
 
   void onSearchModeEnable() {
-    isSearchMode = true;
+    _onSearchModeChangeStreamController.add(true);
+  }
+
+  void onFilterClick() {
+    _onFilterStreamController.add(null);
   }
 
   void onSearchTextChange(KeyboardEvent event) {

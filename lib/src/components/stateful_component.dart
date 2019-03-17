@@ -35,8 +35,10 @@ abstract class StatefulComponent implements OnDestroy {
 
   CodefestState get state => _store.state;
 
+  List<StreamSubscription> get subscriptions => _subscriptions;
+
   @override
   void ngOnDestroy() {
-    _subscriptions.forEach((s) => s.cancel());
+    _subscriptions.forEach((subscription) => subscription.cancel());
   }
 }
