@@ -4,13 +4,13 @@ import 'package:codefest/src/models/section.dart';
 import 'package:codefest/src/models/speaker.dart';
 import 'package:meta/meta.dart';
 
-class LoadProgramSuccessAction {
+class LoadDataSuccessAction {
   final Iterable<LectureData> lectures;
   final Iterable<Location> locations;
   final Iterable<Section> sections;
   final Iterable<Speaker> speakers;
 
-  LoadProgramSuccessAction({
+  LoadDataSuccessAction({
     @required this.lectures,
     @required this.locations,
     @required this.sections,
