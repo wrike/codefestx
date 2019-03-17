@@ -19,8 +19,10 @@ class Lecture {
   final DateTime startTime;
   final int duration;
   final LanguageType language;
-  final bool isStarred;
+  final bool isFavorite;
   final bool isLiked;
+  final int likesCount;
+  final int favoritesCount;
 
   Lecture({
     @required this.id,
@@ -33,8 +35,10 @@ class Lecture {
     @required this.startTime,
     @required this.duration,
     @required this.language,
-    @required this.isStarred,
+    @required this.isFavorite,
     @required this.isLiked,
+    @required this.likesCount,
+    @required this.favoritesCount,
   });
 
   factory Lecture.fromJson(Map<String, dynamic> json) => _$LectureFromJson(json);

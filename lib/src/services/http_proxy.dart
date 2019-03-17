@@ -23,6 +23,7 @@ class HttpProxy {
 
   Map<String, String> _getHeaders() {
     final headers = Map<String, String>();
+    print('readAuthStore: ${_authStore.isAuth}');
     if (_authStore.isAuth) {
       headers['authorization'] = 'bearer ${_authStore.token}';
     }
