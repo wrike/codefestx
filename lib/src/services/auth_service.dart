@@ -16,6 +16,7 @@ class AuthService {
   AuthService(this._http, this._authStore) {
     _authStore.token = window.localStorage[_tokenStorageKey];
     _authStore.userName = window.localStorage[_userNameStorageKey];
+    print('setAuthStore: ${_authStore.token}');
   }
 
   void _clearToken() {
