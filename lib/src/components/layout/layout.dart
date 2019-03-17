@@ -3,6 +3,7 @@ import 'package:angular_components/angular_components.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:codefest/src/menu_route_path.dart';
 import 'package:codefest/src/route_paths.dart';
+import 'package:gtag_analytics/gtag_analytics.dart';
 
 @Component(
   selector: 'layout',
@@ -33,6 +34,7 @@ import 'package:codefest/src/route_paths.dart';
 )
 class LayoutComponent {
   final Router _router;
+  final ga = GoogleAnalytics();
 
   @Input()
   String title;
@@ -42,7 +44,9 @@ class LayoutComponent {
 
   LayoutComponent(
     this._router,
-  );
+  ) {
+    ga.sendPageView();
+  }
 
   void onMenuItemClick(MenuRoutePath item) {
     _router.navigate(item.toUrl());
