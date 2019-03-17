@@ -57,7 +57,6 @@ class AppComponent implements OnDestroy, OnInit {
   final Selectors _selectors;
   final SocketService _socketService;
   final AuthStore _authStore;
-  final AuthService _authService;
   final Router _router;
 
   final List<StreamSubscription> _subscriptions = [];
@@ -73,7 +72,6 @@ class AppComponent implements OnDestroy, OnInit {
     this._dispatcher,
     this._selectors,
     this._authStore,
-    this._authService,
     this._router,
   ) {
     _zone.runOutsideAngular(() {
@@ -104,7 +102,6 @@ class AppComponent implements OnDestroy, OnInit {
     } else if (_authStore.isNewUser) {
       _router.onRouteActivated.first.then((state) {
         _router.navigateByUrl(RoutePaths.login.toUrl());
-        _authService.init();
       });
     }
 

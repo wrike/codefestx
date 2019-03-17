@@ -8,6 +8,7 @@ class RoutePaths {
   static final loginCallback = RoutePath(path: 'loginCallback');
   static final sections = RoutePath(path: 'sections');
   static final welcome = RoutePath(path: 'welcome');
+  static final empty = RoutePath(path: '404');
 
   // Menu route paths
   static final lectures = MenuRoutePath(title: 'Расписание', path: 'lectures');

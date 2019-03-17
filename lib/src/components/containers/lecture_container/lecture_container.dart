@@ -1,7 +1,7 @@
 import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
-import 'package:codefest/src/components/layout/layout.dart';
 import 'package:codefest/src/components/containers/stateful_component.dart';
+import 'package:codefest/src/components/layout/layout.dart';
 import 'package:codefest/src/components/loader/loader.dart';
 import 'package:codefest/src/models/lecture.dart';
 import 'package:codefest/src/redux/actions/init_action.dart';
@@ -46,17 +46,21 @@ class LectureContainerComponent extends StatefulComponent implements OnInit {
           _isActivated = true;
           _parameters = data.parameters;
 
-          zone.run(cdr.markForCheck);
+          if (lecture == null) {
+            _router.navigateByUrl(RoutePaths.empty.toUrl());
+          } else {
+            zone.run(cdr.markForCheck);
+          }
         }),
       ]);
     });
   }
 
-  bool get isReady => _selectors.isReady(state) && _isActivated;
-
   bool get isAuthorized => _selectors.isAuthorized(state);
 
-  Lecture get lecture => _parameters.isNotEmpty ? _selectors.getLecture(state, _parameters[idParam]) : null;
+  bool get isReady => _selectors.isReady(state) && _isActivated && lecture != null;
+
+  Lecture get lecture => _selectors.getLecture(state, _parameters[idParam]);
 
   String get startTime => _selectors.getStartTime(lecture);
 

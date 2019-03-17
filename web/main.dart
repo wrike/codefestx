@@ -7,9 +7,6 @@ import 'package:angular_router/angular_router.dart';
 import 'main.template.dart' as self;
 
 @GenerateInjector([
-  // For local development without backend
-  //ClassProvider<Client>(Client, useClass: ApiService),
-  // For real development with backend
   ClassProvider<Client>(Client, useClass: BrowserClient),
   routerProviders,
 ])
