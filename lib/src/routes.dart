@@ -67,5 +67,6 @@ class Routes {
     feedback,
     sections,
     rating,
+    loginCallback,
   ];
 }
