@@ -1,13 +1,17 @@
-Фильтр ({{ selectedSectionCount }})
+<loader
+  [isReady]="isReady">
 
-<button
-  (click)="onClose()">
+  Фильтр ({{ selectedSectionCount }})
 
- X
-</button>
+  <button
+    (click)="onClose()">
 
-<sections
-  [sections]="sections"
-  [selectedSectionIds]="selectedSectionIds"
-  (onSectionsChange)="onSectionsChange($event)">
-</sections>
+    X
+  </button>
+
+  <sections
+    [sections]="sections"
+    [selectedSectionIds]="selectedSectionIds"
+    (onSectionsChange)="onSectionsChange($event)">
+  </sections>
+</loader>
