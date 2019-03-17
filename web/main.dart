@@ -11,7 +11,7 @@ import 'main.template.dart' as self;
   //ClassProvider<Client>(Client, useClass: ApiService),
   // For real development with backend
   ClassProvider<Client>(Client, useClass: BrowserClient),
-  routerProvidersHash,
+  routerProviders,
 ])
 final InjectorFactory injector = self.injector$Injector;
 
