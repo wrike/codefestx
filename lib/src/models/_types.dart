@@ -8,3 +8,10 @@ enum LectureType {
   @JsonValue('wrike')
   wrike,
 }
+
+enum LanguageType {
+  @JsonValue('ru')
+  ru,
+  @JsonValue('en')
+  en,
+}

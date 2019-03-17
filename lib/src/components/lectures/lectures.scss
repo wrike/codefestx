@@ -35,6 +35,12 @@
       .lecture_section {
         @include font-caption();
         padding-bottom: $padding-3;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .lecture_language {
+        text-transform: uppercase;
       }
 
       .lecture_title {

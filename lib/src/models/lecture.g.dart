@@ -18,6 +18,7 @@ Lecture _$LectureFromJson(Map<String, dynamic> json) {
       section: Section.fromJson(json['section'] as Map<String, dynamic>),
       startTime: DateTime.parse(json['startTime'] as String),
       duration: json['duration'] as int,
+      language: _$enumDecode(_$LanguageTypeEnumMap, json['language']),
       isStarred: json['isStarred'] as bool,
       isLiked: json['isLiked'] as bool);
 }
@@ -32,6 +33,7 @@ Map<String, dynamic> _$LectureToJson(Lecture instance) => <String, dynamic>{
       'section': instance.section,
       'startTime': instance.startTime.toIso8601String(),
       'duration': instance.duration,
+      'language': _$LanguageTypeEnumMap[instance.language],
       'isStarred': instance.isStarred,
       'isLiked': instance.isLiked
     };
@@ -53,4 +55,9 @@ const _$LectureTypeEnumMap = <LectureType, dynamic>{
   LectureType.lecture: 'lecture',
   LectureType.custom: 'custom',
   LectureType.wrike: 'wrike'
+};
+
+const _$LanguageTypeEnumMap = <LanguageType, dynamic>{
+  LanguageType.ru: 'ru',
+  LanguageType.en: 'en'
 };
