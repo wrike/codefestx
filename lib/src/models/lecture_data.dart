@@ -27,9 +27,13 @@ class LectureData {
   @JsonKey(defaultValue: LanguageType.ru)
   final LanguageType lang;
   @JsonKey(defaultValue: false)
-  final bool isStarred;
+  final bool isFavorite;
   @JsonKey(defaultValue: false)
   final bool isLiked;
+  @JsonKey(defaultValue: 0)
+  final int likesCount;
+  @JsonKey(defaultValue: 0)
+  final int favoritesCount;
 
   LectureData({
     @required this.id,
@@ -42,8 +46,10 @@ class LectureData {
     @required this.duration,
     this.lang,
     this.type,
-    this.isStarred,
+    this.isFavorite,
     this.isLiked,
+    this.likesCount,
+    this.favoritesCount,
   });
 
   factory LectureData.fromJson(Map<String, dynamic> json) => _$LectureDataFromJson(json);

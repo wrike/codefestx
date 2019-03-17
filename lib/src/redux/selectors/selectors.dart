@@ -65,9 +65,8 @@ class Selectors {
 
   String getFlag(Lecture lecture) => lecture.language == LanguageType.en ? '🇬🇧󠁧󠁢󠁥󠁮󠁧󠁿' : '🇷🇺';
 
-  Lecture getLecture(CodefestState state, String lectureId) {
-    return getVisibleLectures(state).firstWhere((lecture) => lecture.id == lectureId, orElse: () => null);
-  }
+  Lecture getLecture(CodefestState state, String lectureId) =>
+    getVisibleLectures(state).firstWhere((lecture) => lecture.id == lectureId, orElse: () => null);
 
   Iterable<Lecture> getLectures(CodefestState state) => state.lectures;
 
@@ -103,9 +102,8 @@ class Selectors {
 
   String _formatHours(String hours) => hours.length == 1 ? '${hours}0' : hours;
 
-  Iterable<Lecture> _getFavoriteLectures(Iterable<Lecture> lectures) {
-    return lectures.where((lectures) => lectures.isStarred).toList();
-  }
+  Iterable<Lecture> _getFavoriteLectures(Iterable<Lecture> lectures) =>
+      lectures.where((lectures) => lectures.isFavorite).toList();
 
   Iterable<Lecture> _getFilterLectures(Iterable<Lecture> lectures, UserState user, FilterTypeEnum filterType) {
     switch (filterType) {
@@ -118,19 +116,16 @@ class Selectors {
     }
   }
 
-  Iterable<String> _getLectureSearchFields(Lecture lecture) {
-    return [lecture.title, lecture.description]
+  Iterable<String> _getLectureSearchFields(Lecture lecture) =>
+    [lecture.title, lecture.description]
       ..addAll(lecture.speakers.expand((speaker) => [speaker.name, speaker.description, speaker.company]))
       ..addAll([lecture.location.title, lecture.location.description]);
-  }
 
-  Iterable<Lecture> _getSectionLectures(Iterable<Lecture> lectures, String sectionId) {
-    return lectures.where((lecture) => lecture.section.id == sectionId);
-  }
+  Iterable<Lecture> _getSectionLectures(Iterable<Lecture> lectures, String sectionId) =>
+    lectures.where((lecture) => lecture.section.id == sectionId);
 
-  Iterable<Section> _getSelectedSections(Iterable<Section> sections, Iterable<String> sectionIds) {
-    return sections.where((section) => sectionIds.contains(section.id));
-  }
+  Iterable<Section> _getSelectedSections(Iterable<Section> sections, Iterable<String> sectionIds) =>
+    sections.where((section) => sectionIds.contains(section.id));
 
   String _getTime(DateTime date) => '${date.hour}:${_formatHours(date.minute.toString())}';
 

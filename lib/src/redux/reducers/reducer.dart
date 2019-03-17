@@ -82,8 +82,10 @@ class CodefestReducer {
               location: action.locations.firstWhere((location) => location.id == lecture.locationId),
               section: action.sections.firstWhere((section) => section.id == lecture.sectionId),
               speakers: action.speakers.where((speaker) => lecture.speakerIds.contains(speaker.id)),
-              isStarred: lecture.isStarred,
+              isFavorite: lecture.isFavorite,
               isLiked: lecture.isLiked,
+              likesCount: lecture.likesCount,
+              favoritesCount: lecture.favoritesCount,
             ),
       ),
     ));
