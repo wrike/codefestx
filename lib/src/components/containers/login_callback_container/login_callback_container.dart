@@ -31,10 +31,6 @@ class LoginCallbackContainerComponent implements OnInit {
   @override
   void ngOnInit() {
     _router.onRouteActivated.listen((routerState) async {
-      print('router state changed');
-      print(routerState.queryParameters);
-      print(routerState.path);
-      print(routerState.toUrl());
       if (routerState.queryParameters.containsKey('code')) {
         await _service.processAuth(routerState.queryParameters);
       }

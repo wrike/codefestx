@@ -3,25 +3,17 @@ import 'dart:html';
 import 'package:codefest/src/models/auth.response.dart';
 import 'package:codefest/src/models/auth_get_url.response.dart';
 import 'package:codefest/src/models/auth_type.enum.dart';
-import 'package:codefest/src/services/auth_store.dart';
 import 'package:codefest/src/services/http_proxy.dart';
 
 class AuthService {
-  static const _tokenStorageKey = 'token';
-  static const _userNameStorageKey = 'userName';
-
+  static const tokenStorageKey = 'token';
+  static const userNameStorageKey = 'userName';
   final HttpProxy _http;
-  final AuthStore _authStore;
 
-  AuthService(this._http, this._authStore) {
-    _authStore.token = window.localStorage[_tokenStorageKey];
-    _authStore.userName = window.localStorage[_userNameStorageKey];
-    print('setAuthStore: ${_authStore.token}');
-  }
+  AuthService(this._http);
 
   void _clearToken() {
-    _authStore.token = null;
-    window.localStorage.remove(_tokenStorageKey);
+    window.localStorage.remove(tokenStorageKey);
   }
 
   void logout() {
@@ -53,8 +45,8 @@ class AuthService {
     final state = queryParameters['state'];
     final url = '${_stateToUrl[state]}?code=$code';
     final authResponse = await _http.get<AuthResponse>(url, decoder: (j) => AuthResponse.fromJson(j));
-    window.localStorage[_tokenStorageKey] = authResponse.token;
-    window.localStorage[_userNameStorageKey] = authResponse.userName;
+    window.localStorage[tokenStorageKey] = authResponse.token;
+    window.localStorage[userNameStorageKey] = authResponse.userName;
     window.location.href = '/';
   }
 }
