@@ -1,0 +1,11 @@
+@import '../../../styles/main';
+
+:host {
+  button {
+    display: block;
+  }
+
+  .selected {
+    background-color: $mat-blue;
+  }
+}

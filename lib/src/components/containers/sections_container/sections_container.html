@@ -1,0 +1,13 @@
+Фильтр ({{ selectedSectionCount }})
+
+<button
+  (click)="onClose()">
+
+ X
+</button>
+
+<sections
+  [sections]="sections"
+  [selectedSectionIds]="selectedSectionIds"
+  (onSectionsChange)="onSectionsChange($event)">
+</sections>

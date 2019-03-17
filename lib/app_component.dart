@@ -6,7 +6,7 @@ import 'package:angular_components/angular_components.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:codefest/src/redux/effects/effects.dart';
 import 'package:codefest/src/redux/reducers/reducer.dart';
-import 'package:codefest/src/redux/selectors/selector.dart';
+import 'package:codefest/src/redux/selectors/selectors.dart';
 import 'package:codefest/src/redux/services/dispatcher.dart';
 import 'package:codefest/src/redux/services/state_factory.dart';
 import 'package:codefest/src/redux/services/store_factory.dart';
@@ -35,7 +35,7 @@ import 'package:redux/redux.dart';
     const ClassProvider<CodefestReducer>(CodefestReducer),
     const ClassProvider<Effects>(Effects),
     const ClassProvider<Dispatcher>(Dispatcher),
-    const ClassProvider<Selector>(Selector),
+    const ClassProvider<Selectors>(Selectors),
     const ClassProvider<DataLoader>(DataLoader),
     const ClassProvider<HttpProxy>(HttpProxy),
     const ClassProvider<AuthService>(AuthService),
@@ -51,12 +51,12 @@ import 'package:redux/redux.dart';
 )
 class AppComponent implements OnDestroy, OnInit {
   final NgZone _zone;
-  final ChangeDetectorRef _cdr;
   final Dispatcher _dispatcher;
   final StoreFactory _storeFactory;
   final StateFactory _stateFactory;
-  final Selector _selector;
+  final Selectors _selectors;
   final SocketService _socketService;
+
   final List<StreamSubscription> _subscriptions = [];
 
   Store<CodefestState> _store;
@@ -64,35 +64,29 @@ class AppComponent implements OnDestroy, OnInit {
   AppComponent(
     this._socketService,
     this._zone,
-    this._cdr,
     this._storeFactory,
     this._stateFactory,
     this._dispatcher,
-    this._selector,
+    this._selectors,
   ) {
     _zone.runOutsideAngular(() {
       _store = _storeFactory.getStore(_stateFactory.getInitialState());
 
       _subscriptions.addAll([
-        _store.onChange.listen((_) {
-          _zone.run(() {
-            _cdr.markForCheck();
-          });
-        }),
         _dispatcher.onAction.listen((action) => _store.dispatch(action)),
       ]);
     });
   }
 
-  bool get isError => _selector.isError(state);
+  bool get isError => _selectors.isError(state);
 
-  bool get isReady => _selector.isReady(state);
+  bool get isReady => _selectors.isReady(state);
 
   CodefestState get state => _store.state;
 
   @override
   void ngOnDestroy() {
-    _subscriptions.forEach((s) => s.cancel());
+    _subscriptions.forEach((subscription) => subscription.cancel());
   }
 
   @override

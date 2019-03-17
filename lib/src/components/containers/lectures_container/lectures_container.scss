@@ -1,0 +1,84 @@
+@import '../../../styles/main';
+
+:host {
+  display: block;
+
+  .lecture {
+    display: flex;
+    padding: $padding-6 $padding-3 0;
+
+    .lecture__time {
+      margin-right: $padding-6;
+
+      .lecture_time_start {
+        @include font-caption();
+        color: $mat-black;
+        padding-bottom: $padding-3;
+      }
+
+      .lecture_time_end {
+        @include font-caption();
+      }
+    }
+
+    .lecture__info {
+      width: 100%;
+      border-bottom: 1px $mat-border-light solid;
+      padding-bottom: $padding-3;
+
+      .lecture_location {
+        @include font-caption();
+        float: left;
+        padding-right: $padding-3;
+      }
+
+      .lecture_section {
+        @include font-caption();
+        padding-bottom: $padding-3;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .lecture_language {
+        text-transform: uppercase;
+      }
+
+      .lecture_title {
+        display: block;
+        padding-bottom: $padding-4;
+      }
+
+      .lecture__speaker {
+        display: flex;
+        margin-bottom: $padding-3;
+
+        .lecture_speaker_avatar {
+          display: block;
+          justify-content: center;
+          align-items: center;
+          border-radius: 50%;
+          width: 50px;
+          height: 50px;
+          margin-right: $padding-6;
+        }
+
+        .lecture_speaker_info_name {
+          @include mat-font-body();
+          padding-bottom: $padding-1;
+        }
+
+        .lecture_speaker_info_company {
+          @include font-caption();
+        }
+
+        .lecture__actions {
+          margin-left: auto;
+        }
+      }
+    }
+  }
+
+  .selected {
+    background-color: $mat-blue;
+  }
+}

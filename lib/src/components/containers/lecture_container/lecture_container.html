@@ -1,0 +1,42 @@
+<layout
+  *ngIf="isReady"
+  [title]="'Доклад'">
+
+  <div
+    actions>
+
+    <button
+      (click)="onLikeClick()">
+      Лайк
+    </button>
+
+    <button
+      (click)="onStarClick()">
+      В избранное
+    </button>
+  </div>
+
+  <div
+    content>
+
+    <div>{{ lecture.section.title }}</div>
+
+    <div>{{ lecture.title }}</div>
+
+    <div
+      *ngFor="let speaker of lecture.speakers">
+
+      <div>{{ speaker.avatarPath }}</div>
+
+      <div>{{ speaker.name }}</div>
+
+      <div>{{ speaker.company }}</div>
+    </div>
+
+    <div>{{ lecture.location.title }}</div>
+
+    <div>{{ startTime }}</div>
+
+    <div>{{ lecture.description }}</div>
+  </div>
+</layout>

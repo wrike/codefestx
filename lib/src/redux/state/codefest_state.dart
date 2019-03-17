@@ -4,6 +4,7 @@ import 'package:codefest/src/models/lecture.dart';
 import 'package:codefest/src/models/location.dart';
 import 'package:codefest/src/models/section.dart';
 import 'package:codefest/src/models/speaker.dart';
+import 'package:codefest/src/redux/state/user_state.dart';
 
 part 'codefest_state.g.dart';
 
@@ -13,7 +14,11 @@ abstract class CodefestState implements Built<CodefestState, CodefestStateBuilde
 
   CodefestState._();
 
-  BuiltList<Speaker> get speakers;
+  bool get isError;
+
+  bool get isLoaded;
+
+  bool get isReady;
 
   BuiltList<Lecture> get lectures;
 
@@ -21,9 +26,7 @@ abstract class CodefestState implements Built<CodefestState, CodefestStateBuilde
 
   BuiltList<Section> get sections;
 
-  bool get isReady;
+  BuiltList<Speaker> get speakers;
 
-  bool get isLoaded;
-
-  bool get isError;
+  UserState get user;
 }
