@@ -61,7 +61,6 @@ class AppComponent implements OnDestroy, OnInit {
 
   Store<CodefestState> _store;
 
-
   AppComponent(
     this._socketService,
     this._zone,
@@ -83,7 +82,6 @@ class AppComponent implements OnDestroy, OnInit {
         _dispatcher.onAction.listen((action) => _store.dispatch(action)),
       ]);
     });
-
   }
 
   bool get isError => _selector.isError(state);
@@ -96,7 +94,6 @@ class AppComponent implements OnDestroy, OnInit {
   void ngOnDestroy() {
     _subscriptions.forEach((s) => s.cancel());
   }
-
 
   @override
   void ngOnInit() {
