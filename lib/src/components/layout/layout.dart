@@ -7,6 +7,7 @@ import 'package:codefest/src/menu_route_path.dart';
 import 'package:codefest/src/redux/actions/init_action.dart';
 import 'package:codefest/src/redux/services/dispatcher.dart';
 import 'package:codefest/src/routes.dart';
+import 'package:gtag_analytics/gtag_analytics.dart';
 
 @Component(
   selector: 'layout',
@@ -40,6 +41,7 @@ class LayoutComponent implements OnDestroy, OnInit {
   final ChangeDetectorRef _cdr;
   final Router _router;
   final Dispatcher _dispatcher;
+  final ga = GoogleAnalytics();
 
   StreamSubscription _subscription;
 
@@ -59,6 +61,8 @@ class LayoutComponent implements OnDestroy, OnInit {
         title = RoutePaths.menu
             .firstWhere((RoutePath item) => item.path == data?.routePath?.path, orElse: () => RoutePaths.lectures)
             .title;
+
+        ga.sendPageView();
 
         _zone.run(() {
           _cdr.markForCheck();
