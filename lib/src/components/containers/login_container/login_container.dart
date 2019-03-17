@@ -20,23 +20,31 @@ import 'package:codefest/src/services/auth_service.dart';
     Routes,
   ],
 )
-class LoginContainerComponent {
-  final AuthService _service;
+class LoginContainerComponent implements OnInit {
+  final AuthService _authService;
   final Router _router;
 
-  LoginContainerComponent(this._service, this._router);
-
-  void loginVk() => _login(AuthType.VK);
+  LoginContainerComponent(
+    this._authService,
+    this._router,
+  );
 
   void loginFacebook() => _login(AuthType.Facebook);
 
   void loginGitHub() => _login(AuthType.GitHub);
 
-  void _login(AuthType type) {
-    _service.login(type);
+  void loginVk() => _login(AuthType.VK);
+
+  @override
+  void ngOnInit() {
+    _authService.init();
   }
 
   void onClose() {
     _router.navigateByUrl(RoutePaths.welcome.toUrl());
+  }
+
+  void _login(AuthType type) {
+    _authService.login(type);
   }
 }
