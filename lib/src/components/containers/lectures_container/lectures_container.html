@@ -39,6 +39,13 @@
       </button>
 
       <div
+          *ngIf="lectures.isEmpty"
+          class="empty-lecture">
+        Пока ничего нет.
+        Жми звезду -- создавай свой CodeFestX
+      </div>
+
+      <div
         *ngFor="let lecture of lectures"
         class="lecture">
 
