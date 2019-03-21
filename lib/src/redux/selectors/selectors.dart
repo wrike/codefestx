@@ -142,11 +142,7 @@ class Selectors {
       result = result.where((lecture) {
         final fields = _getLectureSearchFields(lecture);
 
-        if (_fieldsContainsText(fields, searchText)) {
-          return true;
-        }
-
-        return false;
+        return _fieldsContainsText(fields, searchText);
       }).toList();
     }
 
