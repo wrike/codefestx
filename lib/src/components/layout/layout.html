@@ -1,3 +1,4 @@
+<!-- Drawer -->
 <material-drawer
   temporary
   #drawer="drawer"
@@ -12,7 +13,6 @@
 
       <div
         label>
-
         Codefest X
       </div>
     </div>
@@ -23,18 +23,19 @@
       <material-list-item
         *ngFor="let item of RoutePaths.menu"
         (click)="onMenuItemClick(item)">
-
         {{ item.title }}
       </material-list-item>
     </div>
   </material-list>
 </material-drawer>
 
+<!-- Content -->
 <div
-  class="material-content">
+  class="layout__content">
 
+  <!-- Header -->
   <header
-    class="material-header shadow">
+    class="material-header">
 
     <div
       class="material-header-row">
@@ -51,7 +52,6 @@
 
       <span
         class="material-header-title">
-
         {{ title }}
       </span>
 
@@ -62,10 +62,19 @@
       <nav
         class="material-navigation">
 
-        <ng-content select="[actions]"></ng-content>
+        <ng-content
+          select="[actions]"
+        ></ng-content>
       </nav>
     </div>
   </header>
-</div>
 
-<ng-content select="[content]"></ng-content>
+  <!-- Content -->
+  <main
+    class="content">
+
+    <ng-content
+      select="[content]"
+    ></ng-content>
+  </main>
+</div>

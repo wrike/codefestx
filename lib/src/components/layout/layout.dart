@@ -35,6 +35,9 @@ class LayoutComponent {
   final Router _router;
   final ga = GoogleAnalytics();
 
+  @HostBinding('class.layout')
+  final bool isHostMarked = true;
+
   @Input()
   String title;
 

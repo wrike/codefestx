@@ -4,6 +4,7 @@
   <layout
     [title]="'Lectures'">
 
+    <!-- Actions -->
     <layout-actions
       actions
       [searchText]="searchText"
@@ -13,20 +14,19 @@
       (onFilter)="onFilter()">
     </layout-actions>
 
+    <!-- Content -->
     <div
       content>
 
       <button
         (click)="onShowAllClick()"
         [class.selected]="isShowAllVisible">
-
         Все
       </button>
 
       <button
         (click)="onShowFavoriteClick()"
         [class.selected]="isFavoriteVisible">
-
         Избранные
       </button>
 
@@ -34,15 +34,13 @@
         *ngFor="let section of sections"
         (click)="onShowSectionClick(section)"
         [class.selected]="isShowSectionVisible(section)">
-
         {{ section.title }}
       </button>
 
       <div
-          *ngIf="lectures.isEmpty"
-          class="empty-lecture">
-        Пока ничего нет.
-        Жми звезду -- создавай свой CodeFestX
+        *ngIf="lectures.isEmpty"
+        class="empty-lecture">
+        Пока ничего нет. Жми звезду -- создавай свой CodeFestX
       </div>
 
       <div
@@ -58,13 +56,11 @@
 
           <div
             class="lecture_time_start">
-
             {{ startTime(lecture) }}
           </div>
 
           <div
             class="lecture_time_end">
-
             {{ endTime(lecture) }}
           </div>
         </div>

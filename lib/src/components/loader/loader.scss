@@ -1,8 +1,8 @@
 :host {
   display: block;
+  height: 100%;
 
-  .loader {
-    text-align: center;
-    margin: 20px 10px;
+  .loader__content {
+    height: 100%;
   }
 }

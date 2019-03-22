@@ -1,10 +1,7 @@
-<div
-  [class.hidden]="isError">
-
-  <router-outlet
-    [routes]="Routes.all">
-  </router-outlet>
-</div>
+<router-outlet
+  [class.hidden]="isError"
+  [routes]="Routes.all">
+</router-outlet>
 
 <div
   *ngIf="isError"
