@@ -1,0 +1,22 @@
+@import "normalize";
+@import "fonts";
+@import "variabless";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: $font-stack;
+  -webkit-font-smoothing: antialiased;
+  width: 600px;
+  margin: 0 auto;
+  background-color: $bgr-color;
+}
