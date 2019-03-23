@@ -32,7 +32,7 @@ class LoginContainerComponent implements OnInit {
     this._authStore,
   ) {
     if (!_authStore.isNewUser) {
-      _authService.setRoutePath(_router.current.path);
+      _authService.setRoutePath(_router.current?.path ?? '');
     }
   }
 
