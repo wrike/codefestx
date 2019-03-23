@@ -1,7 +1,7 @@
 import 'package:angular_router/angular_router.dart';
 
 import 'components/containers/empty_container/empty_container.template.dart' as empty_template;
-import 'components/containers/feedback_container/feedback_container.template.dart' as feedback_template;
+import 'components/containers/about_container/about_container.template.dart' as about_template;
 import 'components/containers/lecture_container/lecture_container.template.dart' as lecture_template;
 import 'components/containers/lectures_container/lectures_container.template.dart' as lectures_template;
 import 'components/containers/login_callback_container/login_callback_container.template.dart'
@@ -10,7 +10,7 @@ import 'components/containers/login_container/login_container.template.dart' as 
 import 'components/containers/map_container/map_container.template.dart' as map_template;
 import 'components/containers/rating_container/rating_container.template.dart' as rating_template;
 import 'components/containers/sections_container/sections_container.template.dart' as sections_template;
-import 'components/containers/speakers_container/speakers_container.template.dart' as speakers_template;
+import 'components/containers/release_notes_container/release_notes_container.template.dart' as release_notes_template;
 import 'components/containers/welcome_container/welcome_container.template.dart' as welcome_template;
 import 'route_paths.dart';
 
@@ -36,9 +36,9 @@ class Routes {
     component: login_callback_template.LoginCallbackContainerComponentNgFactory,
   );
 
-  static final speakers = RouteDefinition(
-    routePath: RoutePaths.speakers,
-    component: speakers_template.SpeakersContainerComponentNgFactory,
+  static final releaseNotes = RouteDefinition(
+    routePath: RoutePaths.release_notes,
+    component: release_notes_template.ReleaseNotesContainerComponentNgFactory,
   );
 
   static final map = RouteDefinition(
@@ -46,9 +46,9 @@ class Routes {
     component: map_template.MapContainerComponentNgFactory,
   );
 
-  static final feedback = RouteDefinition(
-    routePath: RoutePaths.feedback,
-    component: feedback_template.FeedbackContainerComponentNgFactory,
+  static final about = RouteDefinition(
+    routePath: RoutePaths.about,
+    component: about_template.AboutContainerComponentNgFactory,
   );
 
   static final sections = RouteDefinition(
@@ -78,9 +78,9 @@ class Routes {
     loginCallback,
     lecture,
     lectures,
-    speakers,
+    releaseNotes,
     map,
-    feedback,
+    about,
     sections,
     rating,
     welcome,
