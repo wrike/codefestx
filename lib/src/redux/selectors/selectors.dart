@@ -41,10 +41,14 @@ class Selectors {
     );
   }
 
+  bool canLikeLecture(Lecture lecture) => lecture.startTime.isAfter(DateTime.now());
+
   String getEndTime(Lecture lecture) {
     final endTime = lecture.startTime.add(new Duration(minutes: lecture.duration));
     return _getTime(endTime);
   }
+
+  Iterable<String> getFavoriteLectureIds(CodefestState state) => getUser(state).favoriteLectureIds;
 
   String getFilterSectionId(CodefestState state) {
     final user = getUser(state);
@@ -63,7 +67,11 @@ class Selectors {
   Lecture getLecture(CodefestState state, String lectureId) =>
       getVisibleLectures(state).firstWhere((lecture) => lecture.id == lectureId, orElse: () => null);
 
+  bool isFavoriteLecture(CodefestState state, Lecture lecture) => getFavoriteLectureIds(state).contains(lecture.id);
+
   Iterable<Lecture> getLectures(CodefestState state) => state.lectures;
+
+  Iterable<String> getLikedLectureIds(CodefestState state) => getUser(state).likedLectureIds;
 
   String getSearchText(CodefestState state) => getUser(state).searchText;
 
@@ -80,6 +88,8 @@ class Selectors {
   bool isAuthorized(CodefestState state) => getUser(state).isAuthorized;
 
   bool isError(CodefestState state) => state.isError;
+
+  bool isLikedLecture(CodefestState state, Lecture lecture) => getLikedLectureIds(state).contains(lecture.id);
 
   bool isLoaded(CodefestState state) => state.isLoaded;
 
@@ -115,7 +125,7 @@ class Selectors {
     ..addAll([lecture.location.title, lecture.location.description]);
 
   Iterable<Lecture> _getRatingLectures(Iterable<Lecture> lectures) =>
-      lectures.toList()..sort((lecture1, lecture2) => lecture1.likesCount > lecture2.likesCount ? 1 : -1);
+      lectures.toList()..sort((lecture1, lecture2) => lecture1.likesCount < lecture2.likesCount ? 1 : -1);
 
   Iterable<Lecture> _getSectionLectures(Iterable<Lecture> lectures, String sectionId) =>
       lectures.where((lecture) => lecture.section.id == sectionId);

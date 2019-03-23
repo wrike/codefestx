@@ -156,9 +156,28 @@
         <!-- Vote -->
         <button
           cf-button
+          *ngIf="canLikeLecture && !isLiked && isAuthorized"
           (click)="onLikeClick()"
           class="event__vote button-primary button-block">
           Проголосовать
+        </button>
+
+        <!-- Vote -->
+        <button
+          cf-button
+          *ngIf="!canLikeLecture || !isAuthorized"
+          (click)="onLikeClick()"
+          class="event__vote button-primary button-block">
+          Проголосовать нельзя
+        </button>
+
+        <!-- Vote -->
+        <button
+          cf-button
+          *ngIf="isLiked && isAuthorized"
+          (click)="onLikeClick()"
+          class="event__vote button-primary button-block">
+          Уже проголосовал
         </button>
       </article>
 

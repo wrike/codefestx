@@ -3,6 +3,7 @@ import 'package:angular_router/angular_router.dart';
 import 'package:codefest/src/route_paths.dart';
 import 'package:codefest/src/routes.dart';
 import 'package:codefest/src/services/auth_service.dart';
+import 'package:codefest/src/services/auth_store.dart';
 
 @Component(
   selector: 'login-callback-container',
@@ -20,20 +21,28 @@ import 'package:codefest/src/services/auth_service.dart';
   ],
 )
 class LoginCallbackContainerComponent implements OnInit {
-  final AuthService _service;
+  final AuthService _authService;
+  final AuthStore _authStore;
   final Router _router;
 
   LoginCallbackContainerComponent(
-    this._service,
+    this._authService,
     this._router,
+    this._authStore,
   );
 
   @override
   void ngOnInit() {
     _router.onRouteActivated.listen((routerState) async {
       if (routerState.queryParameters.containsKey('code')) {
-        await _service.processAuth(routerState.queryParameters);
-        await _router.navigateByUrl(RoutePaths.welcome.toUrl());
+        await _authService.processAuth(routerState.queryParameters);
+
+        if (_authStore.hasRoutePath) {
+          await _router.navigateByUrl(_authStore.routePath);
+          _authService.setRoutePath(null);
+        } else {
+          await _router.navigateByUrl(RoutePaths.welcome.toUrl());
+        }
       }
     });
   }

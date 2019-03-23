@@ -3,12 +3,13 @@ import 'package:angular_components/angular_components.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:codefest/src/components/containers/lectures_container/actions/actions.dart';
 import 'package:codefest/src/components/containers/lectures_container/layout_actions/layout_actions.dart';
-import 'package:codefest/src/components/layout/layout.dart';
 import 'package:codefest/src/components/containers/stateful_component.dart';
+import 'package:codefest/src/components/layout/layout.dart';
 import 'package:codefest/src/components/loader/loader.dart';
 import 'package:codefest/src/components/ui/button/button.dart';
 import 'package:codefest/src/models/lecture.dart';
 import 'package:codefest/src/models/section.dart';
+import 'package:codefest/src/redux/actions/change_lecture_favorite_action.dart';
 import 'package:codefest/src/redux/actions/change_search_mode_action.dart';
 import 'package:codefest/src/redux/actions/filter_lectures_action.dart';
 import 'package:codefest/src/redux/actions/init_action.dart';
@@ -51,9 +52,9 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
     this._selectors,
   ) : super(zone, cdr, storeFactory);
 
-  bool get isReady => _selectors.isReady(state);
-
   bool get isFavoriteVisible => _selectors.getFilterType(state) == FilterTypeEnum.favorite;
+
+  bool get isReady => _selectors.isReady(state);
 
   bool get isSearchMode => _selectors.isSearchMode(state);
 
@@ -69,11 +70,17 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
 
   String flag(Lecture lecture) => _selectors.getFlag(lecture);
 
+  bool isFavoriteLecture(Lecture lecture) => _selectors.isFavoriteLecture(state, lecture);
+
   bool isShowSectionVisible(Section section) => _selectors.getFilterSectionId(state) == section.id;
 
   @override
   void ngOnInit() {
     _dispatcher.dispatch(InitAction());
+  }
+
+  void onFavoriteChange(Lecture lecture, bool value) {
+    _dispatcher.dispatch(ChangeLectureFavoriteAction(lectureId: lecture.id, isFavorite: value));
   }
 
   void onFilter() {

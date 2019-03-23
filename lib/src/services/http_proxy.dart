@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:html';
 
+import 'package:codefest/src/services/api_response.dart';
 import 'package:codefest/src/services/auth_store.dart';
 import 'package:http/http.dart';
 
@@ -28,21 +29,33 @@ class HttpProxy {
     return (_extractData(response) as List).map(decoder).toList();
   }
 
-  Future post(String path, Map<String, String> data) async {
-    final token = window.localStorage['token'];
-    final headers = {'authorization': 'bearer $token'};
-    await _http.post(_fullPath(path), headers: headers, body: data);
+  Future<ApiResponse> post(String path, Map<String, dynamic> data) async {
+    final response = await _http.post(_fullPath(path), headers: _getHeaders(), body: _encodeData(data));
+    return _toApiResponse(response);
   }
 
-  dynamic _extractData(Response resp) => json.decode(resp.body);
+  Future<ApiResponse> put(String path, Map<String, dynamic> data) async {
+    final response = await _http.put(_fullPath(path), headers: _getHeaders(), body: _encodeData(data));
+    return _toApiResponse(response);
+  }
+
+  dynamic _encodeData(Map<String, dynamic> data) => jsonEncode(data);
+
+  dynamic _extractData(Response response) => json.decode(response.body);
 
   String _fullPath(String path) => '${host}/${path}';
 
   Map<String, String> _getHeaders() {
     final headers = Map<String, String>();
     if (_authStore.isAuth) {
+      headers['content-type'] = 'application/json';
       headers['authorization'] = 'bearer ${_authStore.token}';
     }
     return headers;
+  }
+
+  ApiResponse _toApiResponse(Response response) {
+    final statusCode = response.statusCode == 200 ? StatusCode.success : StatusCode.error;
+    return ApiResponse(statusCode: statusCode);
   }
 }

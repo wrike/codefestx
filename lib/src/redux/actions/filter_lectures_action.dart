@@ -7,6 +7,6 @@ class FilterLecturesAction {
 
   FilterLecturesAction({
     @required this.filterType,
-    @required this.filterSectionId,
+    this.filterSectionId,
   });
 }

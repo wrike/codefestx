@@ -32,6 +32,8 @@ final BuiltSet<FilterTypeEnum> _$values =
 
 class _$UserState extends UserState {
   @override
+  final BuiltList<String> favoriteLectureIds;
+  @override
   final String filterSectionId;
   @override
   final FilterTypeEnum filterType;
@@ -39,6 +41,8 @@ class _$UserState extends UserState {
   final bool isAuthorized;
   @override
   final bool isSearchMode;
+  @override
+  final BuiltList<String> likedLectureIds;
   @override
   final String searchText;
   @override
@@ -48,13 +52,18 @@ class _$UserState extends UserState {
       (new UserStateBuilder()..update(updates)).build();
 
   _$UserState._(
-      {this.filterSectionId,
+      {this.favoriteLectureIds,
+      this.filterSectionId,
       this.filterType,
       this.isAuthorized,
       this.isSearchMode,
+      this.likedLectureIds,
       this.searchText,
       this.selectedSectionIds})
       : super._() {
+    if (favoriteLectureIds == null) {
+      throw new BuiltValueNullFieldError('UserState', 'favoriteLectureIds');
+    }
     if (filterType == null) {
       throw new BuiltValueNullFieldError('UserState', 'filterType');
     }
@@ -63,6 +72,9 @@ class _$UserState extends UserState {
     }
     if (isSearchMode == null) {
       throw new BuiltValueNullFieldError('UserState', 'isSearchMode');
+    }
+    if (likedLectureIds == null) {
+      throw new BuiltValueNullFieldError('UserState', 'likedLectureIds');
     }
     if (selectedSectionIds == null) {
       throw new BuiltValueNullFieldError('UserState', 'selectedSectionIds');
@@ -80,10 +92,12 @@ class _$UserState extends UserState {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is UserState &&
+        favoriteLectureIds == other.favoriteLectureIds &&
         filterSectionId == other.filterSectionId &&
         filterType == other.filterType &&
         isAuthorized == other.isAuthorized &&
         isSearchMode == other.isSearchMode &&
+        likedLectureIds == other.likedLectureIds &&
         searchText == other.searchText &&
         selectedSectionIds == other.selectedSectionIds;
   }
@@ -93,9 +107,15 @@ class _$UserState extends UserState {
     return $jf($jc(
         $jc(
             $jc(
-                $jc($jc($jc(0, filterSectionId.hashCode), filterType.hashCode),
-                    isAuthorized.hashCode),
-                isSearchMode.hashCode),
+                $jc(
+                    $jc(
+                        $jc(
+                            $jc($jc(0, favoriteLectureIds.hashCode),
+                                filterSectionId.hashCode),
+                            filterType.hashCode),
+                        isAuthorized.hashCode),
+                    isSearchMode.hashCode),
+                likedLectureIds.hashCode),
             searchText.hashCode),
         selectedSectionIds.hashCode));
   }
@@ -103,10 +123,12 @@ class _$UserState extends UserState {
   @override
   String toString() {
     return (newBuiltValueToStringHelper('UserState')
+          ..add('favoriteLectureIds', favoriteLectureIds)
           ..add('filterSectionId', filterSectionId)
           ..add('filterType', filterType)
           ..add('isAuthorized', isAuthorized)
           ..add('isSearchMode', isSearchMode)
+          ..add('likedLectureIds', likedLectureIds)
           ..add('searchText', searchText)
           ..add('selectedSectionIds', selectedSectionIds))
         .toString();
@@ -115,6 +137,12 @@ class _$UserState extends UserState {
 
 class UserStateBuilder implements Builder<UserState, UserStateBuilder> {
   _$UserState _$v;
+
+  ListBuilder<String> _favoriteLectureIds;
+  ListBuilder<String> get favoriteLectureIds =>
+      _$this._favoriteLectureIds ??= new ListBuilder<String>();
+  set favoriteLectureIds(ListBuilder<String> favoriteLectureIds) =>
+      _$this._favoriteLectureIds = favoriteLectureIds;
 
   String _filterSectionId;
   String get filterSectionId => _$this._filterSectionId;
@@ -133,6 +161,12 @@ class UserStateBuilder implements Builder<UserState, UserStateBuilder> {
   bool get isSearchMode => _$this._isSearchMode;
   set isSearchMode(bool isSearchMode) => _$this._isSearchMode = isSearchMode;
 
+  ListBuilder<String> _likedLectureIds;
+  ListBuilder<String> get likedLectureIds =>
+      _$this._likedLectureIds ??= new ListBuilder<String>();
+  set likedLectureIds(ListBuilder<String> likedLectureIds) =>
+      _$this._likedLectureIds = likedLectureIds;
+
   String _searchText;
   String get searchText => _$this._searchText;
   set searchText(String searchText) => _$this._searchText = searchText;
@@ -147,10 +181,12 @@ class UserStateBuilder implements Builder<UserState, UserStateBuilder> {
 
   UserStateBuilder get _$this {
     if (_$v != null) {
+      _favoriteLectureIds = _$v.favoriteLectureIds?.toBuilder();
       _filterSectionId = _$v.filterSectionId;
       _filterType = _$v.filterType;
       _isAuthorized = _$v.isAuthorized;
       _isSearchMode = _$v.isSearchMode;
+      _likedLectureIds = _$v.likedLectureIds?.toBuilder();
       _searchText = _$v.searchText;
       _selectedSectionIds = _$v.selectedSectionIds?.toBuilder();
       _$v = null;
@@ -177,15 +213,23 @@ class UserStateBuilder implements Builder<UserState, UserStateBuilder> {
     try {
       _$result = _$v ??
           new _$UserState._(
+              favoriteLectureIds: favoriteLectureIds.build(),
               filterSectionId: filterSectionId,
               filterType: filterType,
               isAuthorized: isAuthorized,
               isSearchMode: isSearchMode,
+              likedLectureIds: likedLectureIds.build(),
               searchText: searchText,
               selectedSectionIds: selectedSectionIds.build());
     } catch (_) {
       String _$failedField;
       try {
+        _$failedField = 'favoriteLectureIds';
+        favoriteLectureIds.build();
+
+        _$failedField = 'likedLectureIds';
+        likedLectureIds.build();
+
         _$failedField = 'selectedSectionIds';
         selectedSectionIds.build();
       } catch (e) {
