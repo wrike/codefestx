@@ -5,6 +5,7 @@ import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:codefest/src/components/popups/new_version_popup/new_version_popup.dart';
 import 'package:codefest/src/redux/actions/authorize_action.dart';
+import 'package:codefest/src/redux/actions/load_user_data_action.dart';
 import 'package:codefest/src/redux/actions/new_version_action.dart';
 import 'package:codefest/src/redux/effects/effects.dart';
 import 'package:codefest/src/redux/reducers/reducer.dart';
@@ -103,6 +104,7 @@ class AppComponent implements OnDestroy, OnInit {
   @override
   void ngOnInit() {
     if (_authStore.isAuth) {
+      _dispatcher.dispatch(LoadUserDataAction());
       _dispatcher.dispatch(AuthorizeAction());
     } else if (_authStore.isNewUser) {
       _router.onRouteActivated.first.then((state) {
