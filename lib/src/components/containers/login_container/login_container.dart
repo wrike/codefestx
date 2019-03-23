@@ -52,7 +52,7 @@ class LoginContainerComponent implements OnInit {
       _router.navigateByUrl(RoutePaths.welcome.toUrl());
     } else {
       _router.navigateByUrl(_authStore.routePath);
-      _authService.setRoutePath(null);
+      _authService.clearRoutePath();
     }
   }
 

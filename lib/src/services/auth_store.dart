@@ -10,5 +10,5 @@ class AuthStore {
 
   bool get isAuth => token?.isNotEmpty ?? false;
   bool get isNewUser => init?.isEmpty ?? true;
-  bool get hasRoutePath => routePath?.isEmpty ?? false;
+  bool get hasRoutePath => routePath?.isNotEmpty ?? false;
 }
