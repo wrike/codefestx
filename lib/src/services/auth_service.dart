@@ -10,6 +10,7 @@ class AuthService {
   static const userNameStorageKey = 'userName';
   static const initStorageKey = 'init';
   static const initStorageValue = 'yes';
+  static const routePathKey = 'routePath';
 
   final HttpProxy _http;
 
@@ -29,6 +30,10 @@ class AuthService {
 
   void init() {
     window.localStorage[initStorageKey] = initStorageValue;
+  }
+
+  void setRoutePath(String path) {
+    window.localStorage[routePathKey] = path;
   }
 
   void login(AuthType authType) async {

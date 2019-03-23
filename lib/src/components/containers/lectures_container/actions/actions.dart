@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:html';
 
 import 'package:angular/angular.dart';
@@ -16,10 +17,16 @@ import 'package:angular_components/angular_components.dart';
   changeDetection: ChangeDetectionStrategy.OnPush,
 )
 class ActionsComponent {
-  bool isStarChecked = false;
+  final _onFavoriteChangeStreamController = new StreamController<bool>.broadcast();
+
+  @Input()
+  bool isFavorite = false;
+
+  @Output()
+  Stream<bool> get onFavoriteChange => _onFavoriteChangeStreamController.stream;
 
   void onStarButtonClick(MouseEvent event) {
-    isStarChecked = !isStarChecked;
+    _onFavoriteChangeStreamController.add(!isFavorite);
     event.stopPropagation();
   }
 }

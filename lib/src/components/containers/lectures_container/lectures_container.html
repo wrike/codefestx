@@ -161,7 +161,10 @@
                 *ngIf="lecture.speakers.length == i + 1"
                 class="event-card__actions">
 
-                <actions></actions>
+                <actions
+                  [isFavorite]="isFavoriteLecture(lecture)"
+                  (onFavoriteChange)="onFavoriteChange(lecture, $event)">
+                </actions>
               </div>
             </ng-container>
           </article>

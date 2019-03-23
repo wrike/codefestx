@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:codefest/src/redux/actions/change_lecture_favorite_action.dart';
 import 'package:codefest/src/redux/actions/init_action.dart';
+import 'package:codefest/src/redux/actions/change_lecture_like_action.dart';
 import 'package:codefest/src/redux/actions/load_data_error_action.dart';
 import 'package:codefest/src/redux/actions/load_data_start_action.dart';
 import 'package:codefest/src/redux/actions/load_data_success_action.dart';
@@ -18,6 +20,8 @@ class Effects {
     final streams = [
       _onInit,
       _onLoadData,
+      _onChangeLectureLike,
+      _onChangeLectureFavorite,
     ];
 
     return combineEpics<CodefestState>(streams);
@@ -30,6 +34,16 @@ class Effects {
         }
       });
 
+  Stream<Object> _onChangeLectureLike(Stream<Object> actions, EpicStore<CodefestState> store) =>
+      Observable(actions).ofType(const TypeToken<ChangeLectureLikeAction>()).asyncExpand((action) async* {
+        await _dataLoader.updateLectureLike(lectureId: action.lectureId, value: action.isLiked);
+      });
+
+  Stream<Object> _onChangeLectureFavorite(Stream<Object> actions, EpicStore<CodefestState> store) =>
+      Observable(actions).ofType(const TypeToken<ChangeLectureFavoriteAction>()).asyncExpand((action) async* {
+        await _dataLoader.updateLectureFavorite(lectureId: action.lectureId, value: action.isFavorite);
+      });
+
   Stream<Object> _onLoadData(Stream<Object> actions, EpicStore<CodefestState> store) =>
       Observable(actions).ofType(const TypeToken<LoadDataStartAction>()).asyncExpand((_) async* {
         try {
@@ -38,6 +52,7 @@ class Effects {
             _dataLoader.getLocations(),
             _dataLoader.getSections(),
             _dataLoader.getSpeakers(),
+            _dataLoader.getUser(),
           ]);
 
           yield LoadDataSuccessAction(
@@ -45,6 +60,7 @@ class Effects {
             locations: apiData[1],
             sections: apiData[2],
             speakers: apiData[3],
+            user: apiData[4],
           );
         } catch (e) {
           yield LoadDataErrorAction();
