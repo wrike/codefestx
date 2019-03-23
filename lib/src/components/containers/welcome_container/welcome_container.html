@@ -1,0 +1,23 @@
+<loader
+  [isReady]="isReady">
+
+  <div>
+    Выберите секции
+  </div>
+
+  <sections
+    [sections]="sections"
+    [selectedSectionIds]="selectedSectionIds"
+    (onSectionsChange)="onSectionsChange($event)">
+  </sections>
+
+  <button
+    (click)="onApply()">
+    Применить
+  </button>
+
+  <button
+    (click)="onClose()">
+    Пропустить
+  </button>
+</loader>

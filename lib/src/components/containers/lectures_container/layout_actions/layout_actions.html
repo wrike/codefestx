@@ -1,0 +1,41 @@
+<template
+  [ngIf]="isSearchMode">
+
+  <input
+    text-input
+    [value]="searchText"
+    [isAutoFocused]="true"
+    (keyup)="onSearchTextChange($event)"
+    type="text">
+
+  <material-button
+    icon
+    (click)="onSearchModeDisable()">
+
+    <material-icon
+      icon="close">
+    </material-icon>
+  </material-button>
+</template>
+
+<template
+  [ngIf]="!isSearchMode">
+
+  <material-button
+    icon
+    (click)="onFilterClick()">
+
+    <material-icon
+      icon="filter_list">
+    </material-icon>
+  </material-button>
+
+  <material-button
+    icon
+    (click)="onSearchModeEnable()">
+
+    <material-icon
+      icon="search">
+    </material-icon>
+  </material-button>
+</template>

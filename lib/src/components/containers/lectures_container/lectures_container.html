@@ -1,0 +1,172 @@
+<loader
+  [isReady]="isReady">
+
+  <layout
+    [title]="'Расписание'">
+
+    <!-- Actions -->
+    <layout-actions
+      actions
+      [searchText]="searchText"
+      [isSearchMode]="isSearchMode"
+      (onSearch)="onSearch($event)"
+      (onSearchModeChange)="onSearchModeChange($event)"
+      (onFilter)="onFilter()">
+    </layout-actions>
+
+    <!-- Content -->
+    <div
+      content>
+
+      <!-- Tags -->
+      <div
+        class="tags">
+
+        <button
+          cf-button
+          (click)="onShowAllClick()"
+          [class.button-primary]="isShowAllVisible"
+          class="tags__item button-tag">
+          Все
+        </button>
+
+        <button
+          cf-button
+          (click)="onShowFavoriteClick()"
+          [class.button-primary]="isFavoriteVisible"
+          class="tags__item button-tag">
+          Избранные
+        </button>
+
+        <button
+          *ngFor="let section of sections"
+          cf-button
+          (click)="onShowSectionClick(section)"
+          [class.button-primary]="isShowSectionVisible(section)"
+          class="tags__item button-tag">
+          {{ section.title }}
+        </button>
+      </div>
+
+      <!-- Schedule -->
+      <div
+        *ngIf="lectures.isEmpty"
+        class="empty-lecture">
+        Пока ничего нет. Жми звезду -- создавай свой CodeFestX
+      </div>
+
+      <div
+        class="schedule">
+
+        <div
+          *ngFor="let lecture of lectures"
+          class="schedule__event event">
+
+          <!-- Time -->
+          <div
+            class="event__time">
+
+            <!-- Start -->
+            <time
+              class="event__time-item event__time-item--start">
+              {{ startTime(lecture) }}
+            </time>
+
+            <!-- End -->
+            <time
+              class="event__time-item">
+              {{ endTime(lecture) }}
+            </time>
+          </div>
+
+          <!-- Info (todo details)-->
+          <article
+            (click)="onLectureSelect(lecture)"
+            class="event__info event-card">
+
+            <!-- Meta -->
+            <div
+              class="event-card__meta">
+
+              <!-- Location -->
+              <span
+                class="event-card__meta-item">
+                {{ lecture.location.title }}
+              </span>
+
+              <!-- Section -->
+              <span
+                class="event-card__meta-item">
+                {{ lecture.section.title }}
+              </span>
+
+              <!--{{ flag(lecture) }}-->
+            </div>
+
+            <!-- Title -->
+            <h1
+              class="event-card__title">
+              {{ lecture.title }}
+            </h1>
+
+            <!-- Speakers (todo: info item) -->
+            <div
+              class="event-card__speakers info-item">
+
+              <!-- Media -->
+              <div
+                class="info-item__media">
+
+                <span
+                  *ngFor="let speaker of lecture.speakers"
+                  class="info-item__media-container">
+
+                  <img
+                    [src]="speaker.avatarPath"
+                    [alt]="speaker.name"
+                    class="info-item__media-image">
+                </span>
+              </div>
+
+              <!-- Details -->
+              <div
+                class="info-item__details">
+
+                <!-- Title -->
+                <div
+                  class="info-item__title">
+
+                  <ng-container
+                    *ngFor="let speaker of lecture.speakers">
+                    {{ speaker.name }}
+                  </ng-container>
+                </div>
+
+                <!-- Subtitle -->
+                <div
+                  class="info-item__subtitle">
+
+                  <ng-container
+                    *ngFor="let speaker of lecture.speakers">
+                    {{ speaker.company }}
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+
+            <ng-container
+              *ngFor="let speaker of lecture.speakers; let i = index">
+
+              <div
+                *ngIf="lecture.speakers.length == i + 1"
+                class="event-card__actions">
+
+                <actions></actions>
+              </div>
+            </ng-container>
+          </article>
+        </div>
+      </div>
+    </div>
+  </layout>
+</loader>

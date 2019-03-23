@@ -1,3 +1,7 @@
-<div>
- Sections Component
-</div>
+<button
+  *ngFor="let section of sections"
+  (click)="onSectionClick(section)"
+  [class.selected]="isSectionSelected(section)">
+
+ {{ section.title }}
+</button>

@@ -1,4 +1,19 @@
 :host {
   display: block;
-  min-height: 400px;
+  height: 100%;
+  position: relative; // for drawer
+
+  .layout__content {
+    display: grid;
+    grid-template-rows: [header] auto [content] 1fr;
+    height: 100%;
+    position: relative;
+    z-index: 0;
+  }
+
+  .content {
+    max-height: 100%;
+    padding: 0 24px;
+    overflow-y: auto;
+  }
 }

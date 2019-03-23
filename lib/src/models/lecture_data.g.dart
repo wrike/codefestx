@@ -20,8 +20,10 @@ LectureData _$LectureDataFromJson(Map<String, dynamic> json) {
           LanguageType.ru,
       type: _$enumDecodeNullable(_$LectureTypeEnumMap, json['type']) ??
           LectureType.lecture,
-      isStarred: json['isStarred'] as bool ?? false,
-      isLiked: json['isLiked'] as bool ?? false);
+      isFavorite: json['isFavorite'] as bool ?? false,
+      isLiked: json['isLiked'] as bool ?? false,
+      likesCount: json['likesCount'] as int ?? 0,
+      favoritesCount: json['favoritesCount'] as int ?? 0);
 }
 
 Map<String, dynamic> _$LectureDataToJson(LectureData instance) =>
@@ -36,8 +38,10 @@ Map<String, dynamic> _$LectureDataToJson(LectureData instance) =>
       'startTime': instance.startTime.toIso8601String(),
       'duration': instance.duration,
       'lang': _$LanguageTypeEnumMap[instance.lang],
-      'isStarred': instance.isStarred,
-      'isLiked': instance.isLiked
+      'isFavorite': instance.isFavorite,
+      'isLiked': instance.isLiked,
+      'likesCount': instance.likesCount,
+      'favoritesCount': instance.favoritesCount
     };
 
 T _$enumDecode<T>(Map<T, dynamic> enumValues, dynamic source) {

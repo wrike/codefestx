@@ -1,0 +1,41 @@
+@mixin info-item {
+  .info-item {
+    display: flex;
+
+    .info-item__media {
+      flex-shrink: 0;
+      margin-right: 8px;
+    }
+
+    .info-item__media-container {
+      flex-shrink: 0;
+      display: inline-flex;
+      width: 40px; // todo
+      height: 40px; // todo
+      border-radius: 50%;
+      overflow: hidden;
+      vertical-align: top;
+
+      + .info-item__media-container {
+        margin-left: -8px; // todo
+      }
+
+      &.info-item__media-container--placeholder {
+        border-color: transparent;
+        background-color: #e7f0f8; // todo
+        background-origin: border-box;
+        color: #5faed9; // todo
+      }
+    }
+
+    .info-item__media-image {
+      display: block;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    .info-item__subtitle {
+      color: $font-color-secondary;
+    }
+  }
+}

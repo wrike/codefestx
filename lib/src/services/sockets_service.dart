@@ -5,6 +5,7 @@ import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class SocketService {
   final _eventController = new StreamController<SocketMessage>.broadcast();
+
   Stream<SocketMessage> get onEvent => _eventController.stream;
 
   IO.Socket socket = IO.io(HttpProxy.host);
@@ -19,6 +20,7 @@ class SocketService {
 class SocketMessage {
   final String command;
   final String data;
+
   SocketMessage._(this.command, this.data);
 
   factory SocketMessage(List<dynamic> message) {

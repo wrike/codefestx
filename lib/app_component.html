@@ -1,17 +1,11 @@
-<div
-  [class.hidden]="isError || !isReady">
-
-  <router-outlet
-    [routes]="Routes.all">
-  </router-outlet>
-</div>
+<router-outlet
+  [class.hidden]="isError"
+  [routes]="Routes.all">
+</router-outlet>
 
 <div
+  *ngIf="isError"
   class="info">
-
-  <material-spinner
-    *ngIf="!isReady && !isError">
-  </material-spinner>
 
   <h2
     *ngIf="isError"
