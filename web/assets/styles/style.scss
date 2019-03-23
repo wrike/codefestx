@@ -1,6 +1,6 @@
 @import "normalize";
 @import "fonts";
-@import "variabless";
+@import "variables";
 
 *,
 *::before,
@@ -14,9 +14,8 @@ body {
 }
 
 body {
-  font-family: $font-family-default;
-  -webkit-font-smoothing: antialiased;
   width: 600px;
   margin: 0 auto;
-  background-color: $bgr-color;
+  background-color: #ffffff; // todo
+  @include font-main;
 }
