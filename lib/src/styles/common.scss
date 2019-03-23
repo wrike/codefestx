@@ -10,16 +10,14 @@
     .info-item__media-container {
       flex-shrink: 0;
       display: inline-flex;
-      width: 36px; // todo
-      height: 36px; // todo
-      margin: -2px; // todo
-      border: 2px solid #ffffff; // todo
+      width: 40px; // todo
+      height: 40px; // todo
       border-radius: 50%;
       overflow: hidden;
       vertical-align: top;
 
       + .info-item__media-container {
-        margin-left: -20px; // todo
+        margin-left: -8px; // todo
       }
 
       &.info-item__media-container--placeholder {
@@ -34,11 +32,6 @@
       display: block;
       width: 100%;
       object-fit: cover;
-    }
-
-    .info-item__title,
-    .info-item__subtitle {
-      line-height: 16px;
     }
 
     .info-item__subtitle {
