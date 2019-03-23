@@ -1,0 +1,80 @@
+@import "../../../../../web/assets/styles/variables.scss";
+
+:host {
+    .about__logos {
+        display: flex;
+        margin: 24px auto 30px;
+        align-items: center;
+        justify-content: center;
+
+        > :nth-child(1) {
+            //124=88+36/2
+            margin: auto 10px auto 26px;
+        }
+
+        > :nth-child(2) {
+            //88/2
+            margin: auto 44px;
+        }
+    }
+
+    .about__description {
+        text-align: center;
+        
+        @include font-generator(14px, 22px);
+    }
+
+    .about__options {
+        margin: 35px 0 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        justify-content: center;
+    }
+
+    .about__options-item {
+        flex-basis: 100px;
+
+        &:not(:last-child) {
+            margin-right: 20px;
+        }
+
+        img {
+            display: block;
+        }
+        .about__options-item-text {
+            margin-top: 18px;
+        }
+    }
+
+    .about__alt {
+        margin-top: 40px;
+        text-align: center;
+        position: relative;
+
+        &::before {
+            position: absolute;
+            content: '';
+            display: block;
+            left: 0;
+            right: 0;
+            top: .8em;
+            border-bottom: 1px solid #dfdfdf;
+        }
+    }
+
+    .about__alt-text {
+        position: relative;
+        background: $bgr-color;
+        padding: 0 10px;
+    }
+
+    .about__github {
+        text-align: center;
+        margin: 18px 0 36px;
+
+        a {
+            color: $link-color
+        }
+    }
+}
