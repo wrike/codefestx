@@ -1,11 +1,12 @@
 import 'package:codefest/src/models/lecture.dart';
+import 'package:codefest/src/redux/actions/authorize_action.dart';
 import 'package:codefest/src/redux/actions/change_search_mode_action.dart';
 import 'package:codefest/src/redux/actions/change_selected_sections_action.dart';
 import 'package:codefest/src/redux/actions/filter_lectures_action.dart';
 import 'package:codefest/src/redux/actions/load_data_error_action.dart';
 import 'package:codefest/src/redux/actions/load_data_start_action.dart';
 import 'package:codefest/src/redux/actions/load_data_success_action.dart';
-import 'package:codefest/src/redux/actions/authorize_action.dart';
+import 'package:codefest/src/redux/actions/new_version_action.dart';
 import 'package:codefest/src/redux/actions/search_lectures_action.dart';
 import 'package:codefest/src/redux/state/codefest_state.dart';
 import 'package:redux/redux.dart';
@@ -23,24 +24,24 @@ class CodefestReducer {
       TypedReducer<CodefestState, ChangeSelectedSectionsAction>(_onChangeSelectedSections),
       TypedReducer<CodefestState, FilterLecturesAction>(_onFilterLectures),
       TypedReducer<CodefestState, ChangeSearchModeAction>(_onChangeSearchMode),
+      TypedReducer<CodefestState, NewVersionAction>(_onNewVersion),
     ]);
   }
 
   CodefestState getState(CodefestState state, Object action) => _reducer(state, action);
 
-  CodefestState _onChangeSearchMode(CodefestState state, ChangeSearchModeAction action) {
-    return state.rebuild((b) {
-      final user = b.user.build().rebuild((b) {
-        b.isSearchMode = action.isSearchMode;
+  CodefestState _onChangeSearchMode(CodefestState state, ChangeSearchModeAction action) =>
+      state.rebuild((b) {
+        final user = b.user.build().rebuild((b) {
+          b.isSearchMode = action.isSearchMode;
 
-        if (!action.isSearchMode) {
-          b.searchText = '';
-        }
+          if (!action.isSearchMode) {
+            b.searchText = '';
+          }
+        });
+
+        b.user.replace(user);
       });
-
-      b.user.replace(user);
-    });
-  }
 
   CodefestState _onChangeSelectedSections(CodefestState state, ChangeSelectedSectionsAction action) {
     return state.rebuild((b) {
@@ -114,4 +115,7 @@ class CodefestReducer {
 
   CodefestState _onStartLoading(CodefestState state, LoadDataStartAction action) =>
       state.rebuild((b) => b.isReady = false);
+
+  CodefestState _onNewVersion(CodefestState state, NewVersionAction action) =>
+      state.rebuild((b) => b.isUpdateAvailable = action.isAvailable);
 }

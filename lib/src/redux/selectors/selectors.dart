@@ -66,7 +66,7 @@ class Selectors {
   String getFlag(Lecture lecture) => lecture.language == LanguageType.en ? '🇬🇧󠁧󠁢󠁥󠁮󠁧󠁿' : '🇷🇺';
 
   Lecture getLecture(CodefestState state, String lectureId) =>
-    getVisibleLectures(state).firstWhere((lecture) => lecture.id == lectureId, orElse: () => null);
+      getVisibleLectures(state).firstWhere((lecture) => lecture.id == lectureId, orElse: () => null);
 
   Iterable<Lecture> getLectures(CodefestState state) => state.lectures;
 
@@ -86,21 +86,16 @@ class Selectors {
 
   bool isReady(CodefestState state) => state.isReady;
 
+  bool isUpdateAvailable(CodefestState state) => state.isUpdateAvailable;
+
   bool isAuthorized(CodefestState state) => getUser(state).isAuthorized;
 
   bool isSearchMode(CodefestState state) => getUser(state).isSearchMode;
 
   bool isSectionSelected(CodefestState state, String sectionId) => getSelectedSectionIds(state).contains(sectionId);
 
-  bool _fieldsContainsText(Iterable<String> fields, String text) {
-    for (final field in fields) {
-      if (field != null && field.toLowerCase().contains(text.toLowerCase())) {
-        return true;
-      }
-    }
-
-    return false;
-  }
+  bool _fieldsContainsText(Iterable<String> fields, String text) =>
+    fields.any((field) => field?.toLowerCase()?.contains(text.toLowerCase()) ?? false);
 
   String _formatHours(String hours) => hours.length == 1 ? '${hours}0' : hours;
 
@@ -124,10 +119,10 @@ class Selectors {
       ..addAll([lecture.location.title, lecture.location.description]);
 
   Iterable<Lecture> _getSectionLectures(Iterable<Lecture> lectures, String sectionId) =>
-    lectures.where((lecture) => lecture.section.id == sectionId);
+      lectures.where((lecture) => lecture.section.id == sectionId);
 
   Iterable<Section> _getSelectedSections(Iterable<Section> sections, Iterable<String> sectionIds) =>
-    sections.where((section) => sectionIds.contains(section.id));
+      sections.where((section) => sectionIds.contains(section.id));
 
   String _getTime(DateTime date) => '${date.hour}:${_formatHours(date.minute.toString())}';
 

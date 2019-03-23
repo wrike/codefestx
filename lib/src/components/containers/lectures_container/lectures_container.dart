@@ -89,23 +89,23 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
   }
 
   void onSearch(String searchText) {
-    _dispatcher.dispatch(new SearchLecturesAction(searchText: searchText));
+    _dispatcher.dispatch(SearchLecturesAction(searchText: searchText));
   }
 
   void onSearchModeChange(bool isSearchMode) {
-    _dispatcher.dispatch(new ChangeSearchModeAction(isSearchMode: isSearchMode));
+    _dispatcher.dispatch(ChangeSearchModeAction(isSearchMode: isSearchMode));
   }
 
   void onShowAllClick() {
-    _dispatcher.dispatch(new FilterLecturesAction(filterType: FilterTypeEnum.all));
+    _dispatcher.dispatch(FilterLecturesAction(filterType: FilterTypeEnum.all));
   }
 
   void onShowFavoriteClick() {
-    _dispatcher.dispatch(new FilterLecturesAction(filterType: FilterTypeEnum.favorite));
+    _dispatcher.dispatch(FilterLecturesAction(filterType: FilterTypeEnum.favorite));
   }
 
   void onShowSectionClick(Section section) {
-    _dispatcher.dispatch(new FilterLecturesAction(filterType: FilterTypeEnum.section, filterSectionId: section.id));
+    _dispatcher.dispatch(FilterLecturesAction(filterType: FilterTypeEnum.section, filterSectionId: section.id));
   }
 
   String startTime(Lecture lecture) => _selectors.getStartTime(lecture);
