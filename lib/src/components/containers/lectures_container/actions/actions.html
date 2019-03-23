@@ -3,12 +3,12 @@
   (click)="onStarButtonClick($event)">
 
   <material-icon
-    *ngIf="!isStarChecked"
+    *ngIf="!isFavorite"
     icon="star_border">
   </material-icon>
 
   <material-icon
-    *ngIf="isStarChecked"
+    *ngIf="isFavorite"
     icon="star">
   </material-icon>
 </material-button>

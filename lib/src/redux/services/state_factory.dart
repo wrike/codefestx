@@ -12,6 +12,8 @@ class StateFactory {
             UserState(
               (b) => b
                 ..selectedSectionIds.replace([])
+                ..likedLectureIds.replace([])
+                ..favoriteLectureIds.replace([])
                 ..isSearchMode = false
                 ..filterType = FilterTypeEnum.all
                 ..isAuthorized = false,

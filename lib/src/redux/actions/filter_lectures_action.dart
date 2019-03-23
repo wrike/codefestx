@@ -1,11 +1,12 @@
 import 'package:codefest/src/redux/state/user_state.dart';
+import 'package:meta/meta.dart';
 
 class FilterLecturesAction {
   final FilterTypeEnum filterType;
   final String filterSectionId;
 
   FilterLecturesAction({
-    this.filterType,
+    @required this.filterType,
     this.filterSectionId,
   });
 }

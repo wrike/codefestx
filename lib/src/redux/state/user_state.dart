@@ -20,6 +20,8 @@ abstract class UserState implements Built<UserState, UserStateBuilder> {
 
   UserState._();
 
+  BuiltList<String> get favoriteLectureIds;
+
   @nullable
   String get filterSectionId;
 
@@ -28,6 +30,8 @@ abstract class UserState implements Built<UserState, UserStateBuilder> {
   bool get isAuthorized;
 
   bool get isSearchMode;
+
+  BuiltList<String> get likedLectureIds;
 
   @nullable
   String get searchText;

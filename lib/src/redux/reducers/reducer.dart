@@ -1,5 +1,7 @@
 import 'package:codefest/src/models/lecture.dart';
 import 'package:codefest/src/redux/actions/authorize_action.dart';
+import 'package:codefest/src/redux/actions/change_lecture_favorite_action.dart';
+import 'package:codefest/src/redux/actions/change_lecture_like_action.dart';
 import 'package:codefest/src/redux/actions/change_search_mode_action.dart';
 import 'package:codefest/src/redux/actions/change_selected_sections_action.dart';
 import 'package:codefest/src/redux/actions/filter_lectures_action.dart';
@@ -9,6 +11,7 @@ import 'package:codefest/src/redux/actions/load_data_success_action.dart';
 import 'package:codefest/src/redux/actions/new_version_action.dart';
 import 'package:codefest/src/redux/actions/search_lectures_action.dart';
 import 'package:codefest/src/redux/state/codefest_state.dart';
+import 'package:codefest/src/redux/state/user_state.dart';
 import 'package:redux/redux.dart';
 
 class CodefestReducer {
@@ -24,6 +27,8 @@ class CodefestReducer {
       TypedReducer<CodefestState, ChangeSelectedSectionsAction>(_onChangeSelectedSections),
       TypedReducer<CodefestState, FilterLecturesAction>(_onFilterLectures),
       TypedReducer<CodefestState, ChangeSearchModeAction>(_onChangeSearchMode),
+      TypedReducer<CodefestState, ChangeLectureLikeAction>(_onChangeLectureLike),
+      TypedReducer<CodefestState, ChangeLectureFavoriteAction>(_onChangeLectureFavorite),
       TypedReducer<CodefestState, NewVersionAction>(_onNewVersion),
     ]);
   }
@@ -32,7 +37,7 @@ class CodefestReducer {
 
   CodefestState _onChangeSearchMode(CodefestState state, ChangeSearchModeAction action) =>
       state.rebuild((b) {
-        final user = b.user.build().rebuild((b) {
+        final user = state.user.rebuild((b) {
           b.isSearchMode = action.isSearchMode;
 
           if (!action.isSearchMode) {
@@ -66,7 +71,7 @@ class CodefestReducer {
 
   CodefestState _onFilterLectures(CodefestState state, FilterLecturesAction action) =>
     state.rebuild((b) {
-      final user = b.user.build().rebuild((b) {
+      final user = state.user.rebuild((b) {
         b.filterType = action.filterType;
         b.filterSectionId = action.filterSectionId;
       });
@@ -99,11 +104,18 @@ class CodefestReducer {
               favoritesCount: lecture.favoritesCount,
             ),
       ),
-    ));
+    )
+    ..user.replace(state.user.rebuild((b) {
+      b
+        ..selectedSectionIds.replace(action.user.sectionIds)
+        ..likedLectureIds.replace(action.user.likedLecturesIds)
+        ..favoriteLectureIds.replace(action.user.favoriteLecturesIds);
+    })),
+  );
 
   CodefestState _onSearchLectures(CodefestState state, SearchLecturesAction action) =>
     state.rebuild((b) {
-      final user = b.user.build().rebuild((b) {
+      final user = state.user.rebuild((b) {
         b.searchText = action.searchText;
       });
 
@@ -112,6 +124,28 @@ class CodefestReducer {
 
   CodefestState _onStartLoading(CodefestState state, LoadDataStartAction action) =>
       state.rebuild((b) => b.isReady = false);
+
+  CodefestState _onChangeLectureFavorite(CodefestState state, ChangeLectureFavoriteAction action) =>
+      state.rebuild((b) {
+        b.user.replace(state.user.rebuild((b) {
+          if (action.isFavorite) {
+            b.favoriteLectureIds.add(action.lectureId);
+          } else {
+            b.favoriteLectureIds.remove(action.lectureId);
+          }
+        }));
+      });
+
+  CodefestState _onChangeLectureLike(CodefestState state, ChangeLectureLikeAction action) =>
+      state.rebuild((b) {
+        b.user.replace(state.user.rebuild((b) {
+          if (action.isLiked) {
+            b.likedLectureIds.add(action.lectureId);
+          } else {
+            b.likedLectureIds.remove(action.lectureId);
+          }
+        }));
+      });
 
   CodefestState _onNewVersion(CodefestState state, NewVersionAction action) =>
       state.rebuild((b) => b.isUpdateAvailable = action.isAvailable);
