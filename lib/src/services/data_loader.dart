@@ -1,9 +1,9 @@
+import 'package:codefest/src/models/api_response.dart';
 import 'package:codefest/src/models/lecture_data.dart';
 import 'package:codefest/src/models/location.dart';
 import 'package:codefest/src/models/section.dart';
 import 'package:codefest/src/models/speaker.dart';
 import 'package:codefest/src/models/user.dart';
-import 'package:codefest/src/services/api_response.dart';
 import 'package:codefest/src/services/http_proxy.dart';
 import 'package:meta/meta.dart';
 
