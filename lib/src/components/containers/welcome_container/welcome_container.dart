@@ -50,7 +50,7 @@ class WelcomeContainerComponent extends StatefulComponent implements OnInit {
   }
 
   void onApply() {
-    _dispatcher.dispatch(new ChangeSelectedSectionsAction(sectionIds: selectedSectionIds));
+    _dispatcher.dispatch(ChangeSelectedSectionsAction(sectionIds: selectedSectionIds));
     _navigateToLectures();
   }
 

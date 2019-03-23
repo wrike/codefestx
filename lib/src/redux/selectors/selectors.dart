@@ -89,15 +89,10 @@ class Selectors {
 
   bool isSectionSelected(CodefestState state, String sectionId) => getSelectedSectionIds(state).contains(sectionId);
 
-  bool _fieldsContainsText(Iterable<String> fields, String text) {
-    for (final field in fields) {
-      if (field != null && field.toLowerCase().contains(text.toLowerCase())) {
-        return true;
-      }
-    }
+  bool isUpdateAvailable(CodefestState state) => state.isUpdateAvailable;
 
-    return false;
-  }
+  bool _fieldsContainsText(Iterable<String> fields, String text) =>
+      fields.any((field) => field?.toLowerCase()?.contains(text.toLowerCase()) ?? false);
 
   String _formatHours(String hours) => hours.length == 1 ? '${hours}0' : hours;
 

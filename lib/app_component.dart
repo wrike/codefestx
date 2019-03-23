@@ -1,9 +1,10 @@
 import 'dart:async';
-import 'dart:html';
 
 import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
+import 'package:codefest/src/components/popups/new_version_popup/new_version_popup.dart';
 import 'package:codefest/src/redux/actions/authorize_action.dart';
+import 'package:codefest/src/redux/actions/new_version_action.dart';
 import 'package:codefest/src/redux/effects/effects.dart';
 import 'package:codefest/src/redux/reducers/reducer.dart';
 import 'package:codefest/src/redux/selectors/selectors.dart';
@@ -27,6 +28,7 @@ import 'package:redux/redux.dart';
   directives: [
     NgIf,
     routerDirectives,
+    NewVersionPopupComponent,
   ],
   providers: const <Object>[
     const ClassProvider<StoreFactory>(StoreFactory),
@@ -88,6 +90,8 @@ class AppComponent implements OnDestroy, OnInit {
 
   bool get isError => _selectors.isError(state);
 
+  bool get isUpdateAvailable => _selectors.isUpdateAvailable(state);
+
   CodefestState get state => _store.state;
 
   @override
@@ -98,14 +102,16 @@ class AppComponent implements OnDestroy, OnInit {
   @override
   void ngOnInit() {
     if (_authStore.isAuth) {
-      _dispatcher.dispatch(new AuthorizeAction());
+      _dispatcher.dispatch(AuthorizeAction());
     } else if (_authStore.isNewUser) {
       _router.onRouteActivated.first.then((state) {
         _router.navigateByUrl(RoutePaths.login.toUrl());
       });
     }
 
-    _socketService.onEvent.where((event) => event.command == 'reload').listen((data) => window.location.reload());
+    _socketService.onEvent
+        .where((event) => event.command == 'reload')
+        .listen((data) => _dispatcher.dispatch(NewVersionAction(isAvailable: true)));
 
     _socketService.onEvent
         .where((event) => event.command == 'change-lectures')

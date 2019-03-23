@@ -14,6 +14,8 @@ class _$CodefestState extends CodefestState {
   @override
   final bool isReady;
   @override
+  final bool isUpdateAvailable;
+  @override
   final BuiltList<Lecture> lectures;
   @override
   final BuiltList<Location> locations;
@@ -31,6 +33,7 @@ class _$CodefestState extends CodefestState {
       {this.isError,
       this.isLoaded,
       this.isReady,
+      this.isUpdateAvailable,
       this.lectures,
       this.locations,
       this.sections,
@@ -45,6 +48,9 @@ class _$CodefestState extends CodefestState {
     }
     if (isReady == null) {
       throw new BuiltValueNullFieldError('CodefestState', 'isReady');
+    }
+    if (isUpdateAvailable == null) {
+      throw new BuiltValueNullFieldError('CodefestState', 'isUpdateAvailable');
     }
     if (lectures == null) {
       throw new BuiltValueNullFieldError('CodefestState', 'lectures');
@@ -77,6 +83,7 @@ class _$CodefestState extends CodefestState {
         isError == other.isError &&
         isLoaded == other.isLoaded &&
         isReady == other.isReady &&
+        isUpdateAvailable == other.isUpdateAvailable &&
         lectures == other.lectures &&
         locations == other.locations &&
         sections == other.sections &&
@@ -91,8 +98,12 @@ class _$CodefestState extends CodefestState {
             $jc(
                 $jc(
                     $jc(
-                        $jc($jc($jc(0, isError.hashCode), isLoaded.hashCode),
-                            isReady.hashCode),
+                        $jc(
+                            $jc(
+                                $jc($jc(0, isError.hashCode),
+                                    isLoaded.hashCode),
+                                isReady.hashCode),
+                            isUpdateAvailable.hashCode),
                         lectures.hashCode),
                     locations.hashCode),
                 sections.hashCode),
@@ -106,6 +117,7 @@ class _$CodefestState extends CodefestState {
           ..add('isError', isError)
           ..add('isLoaded', isLoaded)
           ..add('isReady', isReady)
+          ..add('isUpdateAvailable', isUpdateAvailable)
           ..add('lectures', lectures)
           ..add('locations', locations)
           ..add('sections', sections)
@@ -130,6 +142,11 @@ class CodefestStateBuilder
   bool _isReady;
   bool get isReady => _$this._isReady;
   set isReady(bool isReady) => _$this._isReady = isReady;
+
+  bool _isUpdateAvailable;
+  bool get isUpdateAvailable => _$this._isUpdateAvailable;
+  set isUpdateAvailable(bool isUpdateAvailable) =>
+      _$this._isUpdateAvailable = isUpdateAvailable;
 
   ListBuilder<Lecture> _lectures;
   ListBuilder<Lecture> get lectures =>
@@ -163,6 +180,7 @@ class CodefestStateBuilder
       _isError = _$v.isError;
       _isLoaded = _$v.isLoaded;
       _isReady = _$v.isReady;
+      _isUpdateAvailable = _$v.isUpdateAvailable;
       _lectures = _$v.lectures?.toBuilder();
       _locations = _$v.locations?.toBuilder();
       _sections = _$v.sections?.toBuilder();
@@ -195,6 +213,7 @@ class CodefestStateBuilder
               isError: isError,
               isLoaded: isLoaded,
               isReady: isReady,
+              isUpdateAvailable: isUpdateAvailable,
               lectures: lectures.build(),
               locations: locations.build(),
               sections: sections.build(),

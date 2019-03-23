@@ -49,7 +49,7 @@ class SectionsContainerComponent extends StatefulComponent implements OnInit {
   }
 
   void onSectionsChange(Iterable<String> sectionIds) {
-    _dispatcher.dispatch(new ChangeSelectedSectionsAction(sectionIds: sectionIds));
+    _dispatcher.dispatch(ChangeSelectedSectionsAction(sectionIds: sectionIds));
   }
 
   bool get isReady => _selectors.isReady(state);
