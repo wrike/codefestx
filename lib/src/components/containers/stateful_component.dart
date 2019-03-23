@@ -24,10 +24,9 @@ abstract class StatefulComponent implements OnDestroy {
       _store = _storeFactory.getStore();
 
       _subscriptions.addAll([
-        _store.onChange.listen((_) {
-          _zone.run(() {
-            _cdr.markForCheck();
-          });
+        _store.onChange.listen((state) {
+          onStateChange(state);
+          detectChanges();
         }),
       ]);
     });
@@ -36,6 +35,14 @@ abstract class StatefulComponent implements OnDestroy {
   CodefestState get state => _store.state;
 
   List<StreamSubscription> get subscriptions => _subscriptions;
+
+  void detectChanges() {
+    _zone.run(_cdr.markForCheck);
+  }
+
+  void onStateChange(CodefestState state) {
+    // call when state changed
+  }
 
   @override
   void ngOnDestroy() {

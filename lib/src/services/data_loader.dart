@@ -9,20 +9,24 @@ class DataLoader {
   static const _locationsPath = 'locations';
   static const _sectionsPath = 'sections';
   static const _lecturesPath = 'lectures';
+  static const _lecturesLikePath = '${_lecturesPath}/like';
 
   final HttpProxy _http;
 
   DataLoader(this._http);
 
-  Future<Iterable<Speaker>> getSpeakers() =>
-      _http.getList<Speaker>(_speakersPath, (json) => Speaker.fromJson(json));
+  Future<Null> addLecturesLike(String lectureId) => _http.post(_lecturesLikePath, {
+        'lectureId': lectureId,
+        'action': 'true',
+      });
+
+  Future<Iterable<LectureData>> getLectures() =>
+      _http.getList<LectureData>(_lecturesPath, (json) => LectureData.fromJson(json));
 
   Future<Iterable<Location>> getLocations() =>
       _http.getList<Location>(_locationsPath, (json) => Location.fromJson(json));
 
-  Future<Iterable<Section>> getSections() =>
-      _http.getList<Section>(_sectionsPath, (json) => Section.fromJson(json));
+  Future<Iterable<Section>> getSections() => _http.getList<Section>(_sectionsPath, (json) => Section.fromJson(json));
 
-  Future<Iterable<LectureData>> getLectures() async =>
-      _http.getList<LectureData>(_lecturesPath, (json) => LectureData.fromJson(json));
+  Future<Iterable<Speaker>> getSpeakers() => _http.getList<Speaker>(_speakersPath, (json) => Speaker.fromJson(json));
 }

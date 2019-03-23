@@ -1,7 +1,9 @@
+import 'package:meta/meta.dart';
+
 class SearchLecturesAction {
   final String searchText;
 
   SearchLecturesAction({
-    this.searchText,
+    @required this.searchText,
   });
 }

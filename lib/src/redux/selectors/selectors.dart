@@ -41,11 +41,6 @@ class Selectors {
     );
   }
 
-  Iterable<Lecture> _getRatingLectures(Iterable<Lecture> lectures) {
-    final result = lectures.toList();
-    return result..sort((lecture1, lecture2) => lecture1.isLiked && !lecture2.isLiked ? 1 : -1);
-  }
-
   String getEndTime(Lecture lecture) {
     final endTime = lecture.startTime.add(new Duration(minutes: lecture.duration));
     return _getTime(endTime);
@@ -66,7 +61,7 @@ class Selectors {
   String getFlag(Lecture lecture) => lecture.language == LanguageType.en ? '🇬🇧󠁧󠁢󠁥󠁮󠁧󠁿' : '🇷🇺';
 
   Lecture getLecture(CodefestState state, String lectureId) =>
-    getVisibleLectures(state).firstWhere((lecture) => lecture.id == lectureId, orElse: () => null);
+      getVisibleLectures(state).firstWhere((lecture) => lecture.id == lectureId, orElse: () => null);
 
   Iterable<Lecture> getLectures(CodefestState state) => state.lectures;
 
@@ -82,11 +77,13 @@ class Selectors {
 
   UserState getUser(CodefestState state) => state.user;
 
+  bool isAuthorized(CodefestState state) => getUser(state).isAuthorized;
+
   bool isError(CodefestState state) => state.isError;
 
-  bool isReady(CodefestState state) => state.isReady;
+  bool isLoaded(CodefestState state) => state.isLoaded;
 
-  bool isAuthorized(CodefestState state) => getUser(state).isAuthorized;
+  bool isReady(CodefestState state) => state.isReady;
 
   bool isSearchMode(CodefestState state) => getUser(state).isSearchMode;
 
@@ -118,16 +115,18 @@ class Selectors {
     }
   }
 
-  Iterable<String> _getLectureSearchFields(Lecture lecture) =>
-    [lecture.title, lecture.description]
-      ..addAll(lecture.speakers.expand((speaker) => [speaker.name, speaker.description, speaker.company]))
-      ..addAll([lecture.location.title, lecture.location.description]);
+  Iterable<String> _getLectureSearchFields(Lecture lecture) => [lecture.title, lecture.description]
+    ..addAll(lecture.speakers.expand((speaker) => [speaker.name, speaker.description, speaker.company]))
+    ..addAll([lecture.location.title, lecture.location.description]);
+
+  Iterable<Lecture> _getRatingLectures(Iterable<Lecture> lectures) =>
+      lectures.toList()..sort((lecture1, lecture2) => lecture1.likesCount > lecture2.likesCount ? 1 : -1);
 
   Iterable<Lecture> _getSectionLectures(Iterable<Lecture> lectures, String sectionId) =>
-    lectures.where((lecture) => lecture.section.id == sectionId);
+      lectures.where((lecture) => lecture.section.id == sectionId);
 
   Iterable<Section> _getSelectedSections(Iterable<Section> sections, Iterable<String> sectionIds) =>
-    sections.where((section) => sectionIds.contains(section.id));
+      sections.where((section) => sectionIds.contains(section.id));
 
   String _getTime(DateTime date) => '${date.hour}:${_formatHours(date.minute.toString())}';
 

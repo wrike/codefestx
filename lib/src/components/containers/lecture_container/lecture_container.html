@@ -8,14 +8,13 @@
     <div
       actions>
 
-      <button
+      <popularity-icon
         *ngIf="isAuthorized"
-        (click)="onLikeClick()">
-        Лайк
-      </button>
+        [popularity]="lecture.favoritesCount">
+      </popularity-icon>
 
       <button
-        (click)="onStarClick()">
+        (click)="onFavoriteClick()">
         В избранное
       </button>
     </div>
@@ -157,6 +156,7 @@
         <!-- Vote -->
         <button
           cf-button
+          (click)="onLikeClick()"
           class="event__vote button-primary button-block">
           Проголосовать
         </button>

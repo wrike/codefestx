@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:codefest/src/redux/actions/init_action.dart';
+import 'package:codefest/src/redux/actions/like_lecture_action.dart';
 import 'package:codefest/src/redux/actions/load_data_error_action.dart';
 import 'package:codefest/src/redux/actions/load_data_start_action.dart';
 import 'package:codefest/src/redux/actions/load_data_success_action.dart';
@@ -18,6 +19,7 @@ class Effects {
     final streams = [
       _onInit,
       _onLoadData,
+      _onLikeLecture,
     ];
 
     return combineEpics<CodefestState>(streams);
@@ -28,6 +30,11 @@ class Effects {
         if (!store.state.isLoaded || action.isReload) {
           yield LoadDataStartAction();
         }
+      });
+
+  Stream<Object> _onLikeLecture(Stream<Object> actions, EpicStore<CodefestState> store) =>
+      Observable(actions).ofType(const TypeToken<LikeLectureAction>()).asyncExpand((action) async* {
+        await _dataLoader.addLecturesLike(action.lectureId);
       });
 
   Stream<Object> _onLoadData(Stream<Object> actions, EpicStore<CodefestState> store) =>

@@ -1,14 +1,17 @@
 import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
+import 'package:codefest/src/components/containers/lecture_container/popularity_icon/popularity_icon.dart';
 import 'package:codefest/src/components/containers/stateful_component.dart';
 import 'package:codefest/src/components/layout/layout.dart';
 import 'package:codefest/src/components/loader/loader.dart';
 import 'package:codefest/src/components/ui/button/button.dart';
 import 'package:codefest/src/models/lecture.dart';
 import 'package:codefest/src/redux/actions/init_action.dart';
+import 'package:codefest/src/redux/actions/like_lecture_action.dart';
 import 'package:codefest/src/redux/selectors/selectors.dart';
 import 'package:codefest/src/redux/services/dispatcher.dart';
 import 'package:codefest/src/redux/services/store_factory.dart';
+import 'package:codefest/src/redux/state/codefest_state.dart';
 import 'package:codefest/src/route_paths.dart';
 
 @Component(
@@ -20,7 +23,8 @@ import 'package:codefest/src/route_paths.dart';
     NgFor,
     LayoutComponent,
     LoaderComponent,
-    ButtonComponent
+    ButtonComponent,
+    PopularityIconComponent,
   ],
   preserveWhitespace: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -44,36 +48,52 @@ class LectureContainerComponent extends StatefulComponent implements OnInit {
   ) : super(zone, cdr, storeFactory) {
     zone.runOutsideAngular(() {
       subscriptions.addAll([
-        _router.onRouteActivated.listen((data) {
-          _isActivated = true;
-          _parameters = data.parameters;
-
-          if (lecture == null) {
-            _router.navigateByUrl(RoutePaths.empty.toUrl());
-          } else {
-            zone.run(cdr.markForCheck);
-          }
-        }),
+        _router.onRouteActivated.listen(_onRouteActivated),
       ]);
     });
   }
 
+  String get endTime => _selectors.getEndTime(lecture);
+
   bool get isAuthorized => _selectors.isAuthorized(state);
 
-  bool get isReady => _selectors.isReady(state) && _isActivated && lecture != null;
+  bool get isLectureAvailable => lecture != null;
+
+  bool get isLoaded => _selectors.isLoaded(state);
+
+  bool get isReady => _selectors.isReady(state) && _isActivated && isLectureAvailable;
 
   Lecture get lecture => _selectors.getLecture(state, _parameters[idParam]);
 
   String get startTime => _selectors.getStartTime(lecture);
-
-  String get endTime => _selectors.getEndTime(lecture);
 
   @override
   void ngOnInit() {
     _dispatcher.dispatch(InitAction());
   }
 
-  void onLikeClick() {}
+  void onFavoriteClick() {}
 
-  void onStarClick() {}
+  void onLikeClick() {
+    _dispatcher.dispatch(LikeLectureAction(lectureId: lecture.id));
+  }
+
+  @override
+  void onStateChange(CodefestState state) {
+    _processAvailability();
+  }
+
+  void _onRouteActivated(RouterState state) {
+    _isActivated = true;
+    _parameters = state.parameters;
+    _processAvailability();
+
+    detectChanges();
+  }
+
+  void _processAvailability() {
+    if (isLoaded && !isLectureAvailable) {
+      _router.navigateByUrl(RoutePaths.empty.toUrl());
+    }
+  }
 }
