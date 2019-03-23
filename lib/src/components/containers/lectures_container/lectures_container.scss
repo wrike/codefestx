@@ -11,9 +11,12 @@
     margin-right: -24px; // todo
     overflow-x: auto;
 
-    .tags__item + .tags__item {
+    .tags__item {
       flex-shrink: 0;
-      margin-left: 8px;
+
+      + .tags__item {
+        margin-left: 8px;
+      }
     }
   }
   // --- end tags
