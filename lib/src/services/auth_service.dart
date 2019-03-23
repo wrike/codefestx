@@ -28,12 +28,12 @@ class AuthService {
 
   AuthService(this._http);
 
-  void init() {
-    window.localStorage[initStorageKey] = initStorageValue;
+  void clearRoutePath() {
+    window.localStorage.remove(routePathKey);
   }
 
-  void setRoutePath(String path) {
-    window.localStorage[routePathKey] = path;
+  void init() {
+    window.localStorage[initStorageKey] = initStorageValue;
   }
 
   void login(AuthType authType) async {
@@ -55,6 +55,10 @@ class AuthService {
     final authResponse = await _http.get<AuthResponse>(url, decoder: (j) => AuthResponse.fromJson(j));
     window.localStorage[tokenStorageKey] = authResponse.token;
     window.localStorage[userNameStorageKey] = authResponse.userName;
+  }
+
+  void setRoutePath(String path) {
+    window.localStorage[routePathKey] = path;
   }
 
   void _clearToken() {
