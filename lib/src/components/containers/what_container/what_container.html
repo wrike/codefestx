@@ -1,0 +1,18 @@
+<layout
+  [title]="'Что происходит'">
+
+  <div
+    content>
+
+    <div>
+      <button 
+        cf-button
+        (click)="goto('about')">О нас</button>
+      <button 
+        cf-button
+        (click)="goto('release_notes')">Релизы</button>
+    </div>
+
+    <router-outlet [routes]="Routes.all"></router-outlet>
+  </div>
+</layout>
