@@ -3,6 +3,7 @@ import 'package:angular_router/angular_router.dart';
 import 'package:codefest/src/components/containers/stateful_component.dart';
 import 'package:codefest/src/components/layout/layout.dart';
 import 'package:codefest/src/components/loader/loader.dart';
+import 'package:codefest/src/components/ui/button/button.dart';
 import 'package:codefest/src/models/lecture.dart';
 import 'package:codefest/src/redux/actions/init_action.dart';
 import 'package:codefest/src/redux/selectors/selectors.dart';
@@ -19,6 +20,7 @@ import 'package:codefest/src/route_paths.dart';
     NgFor,
     LayoutComponent,
     LoaderComponent,
+    ButtonComponent
   ],
   preserveWhitespace: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -63,6 +65,8 @@ class LectureContainerComponent extends StatefulComponent implements OnInit {
   Lecture get lecture => _selectors.getLecture(state, _parameters[idParam]);
 
   String get startTime => _selectors.getStartTime(lecture);
+
+  String get endTime => _selectors.getEndTime(lecture);
 
   @override
   void ngOnInit() {

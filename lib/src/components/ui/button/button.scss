@@ -1,0 +1,95 @@
+@import "../../../../../web/assets/styles/variables";
+
+$button-height: 48px;
+$button-padding-horizontal: 16px;
+$button-padding-vertical: round(($button-height - $font-line-box-main) / 2);
+
+$button-tag-height: 32px;
+$button-tag-padding-vertical: round(($button-tag-height - $font-line-box-main) / 2);
+
+:host {
+  display: inline-block;
+  box-sizing: border-box;
+  padding: $button-padding-vertical $button-padding-horizontal;
+  margin: 0;
+  border: 1px solid; // todo
+  border-color: $font-color-secondary; // todo
+  border-radius: 8px; // todo
+  background-color: #ffffff; // todo
+  box-shadow: 0 2px 23px 0 rgba(0, 0, 0, 0.06); // todo
+  outline: none;
+  font-family: $font-family-default;
+  font-weight: $font-weight-bold;
+  font-size: $font-size-main;
+  line-height: $font-line-height-main;
+  text-align: center;
+  color: $font-color-main;
+  cursor: pointer;
+  @include user-select(none);
+
+  &:hover {
+    // todo
+  }
+
+  &:active {
+    // todo
+  }
+
+  &:focus {
+    // todo
+  }
+
+  &:disabled {
+    opacity: .5;
+    cursor: default;
+  }
+}
+
+:host(.button-primary) {
+  border-color: transparent;
+  background-image: linear-gradient(to right, #33a7d8, #62d3ee); // todo
+  background-origin: border-box;
+  box-shadow: 0 0 40px 0 rgba(51, 167, 216, 0.56); // todo
+  color: #ffffff; // todo
+
+  &:hover {
+    // todo
+  }
+
+  &:active {
+    // todo
+  }
+
+  &:focus {
+    // todo
+  }
+}
+
+:host(.button-tag) {
+  padding-top: $button-tag-padding-vertical;
+  padding-bottom: $button-tag-padding-vertical;
+  border-color: transparent;
+  border-radius: 4px; // todo
+  box-shadow: 0 2px 23px 0 rgba(0, 0, 0, 0.06); // todo
+
+  &:not(.button-primary) {
+    color: $font-color-secondary;
+  }
+
+  &:hover {
+    // todo
+  }
+
+  &:active {
+    // todo
+  }
+
+  &:focus {
+    // todo
+  }
+}
+
+:host(.button-block) {
+  display: block;
+  width: 100%;
+}

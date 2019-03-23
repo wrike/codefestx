@@ -1,8 +1,9 @@
+@import "../web/assets/styles/variables.scss";
+
 :host {
   display: block;
   height: 100%;
-  position: relative;
-  width: 100%;
+  background: $bgr-color;
 
   .hidden {
     display: none;

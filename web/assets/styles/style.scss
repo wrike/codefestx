@@ -1,0 +1,22 @@
+@import "normalize";
+@import "fonts";
+@import "variables";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  width: 600px;
+  height: 100%;
+  margin: 0 auto;
+  background-color: #ffffff; // todo
+  @include font-main;
+}

@@ -21,27 +21,155 @@
     </div>
 
     <div
-      content>
-
-      <div>{{ lecture.section.title }}</div>
-
-      <div>{{ lecture.title }}</div>
+      content
+      class="event">
 
       <div
-        *ngFor="let speaker of lecture.speakers">
+        class="tabs">
 
-        <div>{{ speaker.avatarPath }}</div>
+        <button
+          cf-button
+          class="tabs__item button-tag button-primary">
+          Инфо
+        </button>
 
-        <div>{{ speaker.name }}</div>
-
-        <div>{{ speaker.company }}</div>
+        <button
+          cf-button
+          class="tabs__item button-tag">
+          Обсуждение
+        </button>
       </div>
 
-      <div>{{ lecture.location.title }}</div>
+      <!-- Event -->
+      <article
+        class="event__article">
 
-      <div>{{ startTime }}</div>
+        <!-- Meta -->
+        <div
+          class="event__meta">
 
-      <div>{{ lecture.description }}</div>
+          <!-- Location -->
+          <span
+            class="event__meta-item">
+            {{ lecture.location.title }}
+          </span>
+
+          <!-- Section -->
+          <span
+            class="event__meta-item">
+            {{ lecture.section.title }}
+          </span>
+        </div>
+
+        <!-- Title -->
+        <h1
+          class="event__title">
+          {{ lecture.title }}
+        </h1>
+
+        <!-- Info -->
+        <div
+          class="event__info">
+
+          <!-- Speakers -->
+          <div
+            class="event__info-item info-item">
+
+            <!-- Media -->
+            <div
+              class="info-item__media">
+
+                <span
+                  *ngFor="let speaker of lecture.speakers"
+                  class="info-item__media-container">
+
+                  <img
+                    [src]="speaker.avatarPath"
+                    [alt]="speaker.name"
+                    class="info-item__media-image">
+                </span>
+            </div>
+
+            <!-- Details -->
+            <div
+              class="info-item__details">
+
+              <!-- Title -->
+              <div
+                class="info-item__title">
+
+                <ng-container
+                  *ngFor="let speaker of lecture.speakers">
+                  {{ speaker.name }}
+                </ng-container>
+              </div>
+
+              <!-- Subtitle -->
+              <div
+                class="info-item__subtitle">
+
+                <ng-container
+                  *ngFor="let speaker of lecture.speakers">
+                  {{ speaker.company }}
+                </ng-container>
+              </div>
+            </div>
+          </div>
+
+          <!-- Time -->
+          <div
+            class="event__info-item info-item">
+
+            <!-- Media -->
+            <div
+              class="info-item__media">
+
+                <span
+                  class="info-item__media-container info-item__media-container--placeholder">
+                </span>
+            </div>
+
+            <!-- Details -->
+            <div
+              class="info-item__details">
+
+              <!-- Title -->
+              <div
+                class="info-item__title">
+                {{ startTime }}
+              </div>
+
+              <!-- Subtitle -->
+              <div
+                class="info-item__subtitle">
+                {{ endTime }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Description -->
+        <div
+          [innerHTML]="lecture.description"
+          class="event__description">
+        </div>
+
+        <!-- Vote -->
+        <button
+          cf-button
+          class="event__vote button-primary button-block">
+          Проголосовать
+        </button>
+      </article>
+
+      <section
+        class="event__related">
+
+        <h2
+          class="related-events__title">
+          Это может быть интересно
+        </h2>
+      </section>
     </div>
   </layout>
 </loader>

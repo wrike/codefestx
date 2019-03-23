@@ -6,6 +6,7 @@ import 'package:codefest/src/components/containers/lectures_container/layout_act
 import 'package:codefest/src/components/layout/layout.dart';
 import 'package:codefest/src/components/containers/stateful_component.dart';
 import 'package:codefest/src/components/loader/loader.dart';
+import 'package:codefest/src/components/ui/button/button.dart';
 import 'package:codefest/src/models/lecture.dart';
 import 'package:codefest/src/models/section.dart';
 import 'package:codefest/src/redux/actions/change_search_mode_action.dart';
@@ -31,6 +32,7 @@ import 'package:codefest/src/route_paths.dart';
     ActionsComponent,
     LayoutActionsComponent,
     LoaderComponent,
+    ButtonComponent
   ],
   preserveWhitespace: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
