@@ -7,6 +7,7 @@ class StateFactory {
           ..isReady = false
           ..isLoaded = false
           ..isError = false
+          ..isUpdateAvailable = false
           ..user.replace(
             UserState(
               (b) => b
