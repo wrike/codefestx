@@ -43,30 +43,29 @@ class CodefestReducer {
         b.user.replace(user);
       });
 
-  CodefestState _onChangeSelectedSections(CodefestState state, ChangeSelectedSectionsAction action) {
-    return state.rebuild((b) {
+  CodefestState _onChangeSelectedSections(CodefestState state, ChangeSelectedSectionsAction action) =>
+    state.rebuild((b) {
       final user = b.user.build().rebuild((b) {
         b.selectedSectionIds.replace(action.sectionIds);
       });
 
       b.user.replace(user);
     });
-  }
 
-  CodefestState _onError(CodefestState state, LoadDataErrorAction action) => state.rebuild((b) => b.isError = true);
+  CodefestState _onError(CodefestState state, LoadDataErrorAction action) =>
+      state.rebuild((b) => b.isError = true);
 
-  CodefestState _onAuthorize(CodefestState state, AuthorizeAction action) {
-    return state.rebuild((b) {
+  CodefestState _onAuthorize(CodefestState state, AuthorizeAction action) =>
+    state.rebuild((b) {
       final user = b.user.build().rebuild((b) {
         b.isAuthorized = true;
       });
 
       b.user.replace(user);
     });
-  }
 
-  CodefestState _onFilterLectures(CodefestState state, FilterLecturesAction action) {
-    return state.rebuild((b) {
+  CodefestState _onFilterLectures(CodefestState state, FilterLecturesAction action) =>
+    state.rebuild((b) {
       final user = b.user.build().rebuild((b) {
         b.filterType = action.filterType;
         b.filterSectionId = action.filterSectionId;
@@ -74,7 +73,6 @@ class CodefestReducer {
 
       b.user.replace(user);
     });
-  }
 
   CodefestState _onLoadData(CodefestState state, LoadDataSuccessAction action) => state.rebuild((b) => b
     ..isReady = true
@@ -103,15 +101,14 @@ class CodefestReducer {
       ),
     ));
 
-  CodefestState _onSearchLectures(CodefestState state, SearchLecturesAction action) {
-    return state.rebuild((b) {
+  CodefestState _onSearchLectures(CodefestState state, SearchLecturesAction action) =>
+    state.rebuild((b) {
       final user = b.user.build().rebuild((b) {
         b.searchText = action.searchText;
       });
 
       b.user.replace(user);
     });
-  }
 
   CodefestState _onStartLoading(CodefestState state, LoadDataStartAction action) =>
       state.rebuild((b) => b.isReady = false);
