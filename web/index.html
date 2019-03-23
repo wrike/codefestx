@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <title>Сodefest Х</title>
+  <link rel="manifest" href="/manifest.json">
+  <script type="text/javascript" src="//cdn.pushwoosh.com/webpush/v3/pushwoosh-web-notifications.js" async></script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Сodefest Х</title>
@@ -25,8 +28,25 @@
   <base href="/">
 </head>
 <body>
-  <codefest>
-    Loading...
-  </codefest>
+
+<codefest>
+  Loading...
+</codefest>
+
+
+<script type="text/javascript">
+  var Pushwoosh = Pushwoosh || [];
+  Pushwoosh.push(['init', {
+    logLevel: 'info', // possible values: error, info, debug
+    applicationCode: '7DA94-50B16', // you application code from Pushwoosh Control Panel
+    //safariWebsitePushID: 'web.com.example.domain', //  unique reverse-domain string, obtained in you Apple Developer Portal. Only needed if you send push notifications to Safari browser
+    defaultNotificationTitle: 'CodeFest', // sets a default title for push notifications
+    defaultNotificationImage: 'https://2019.codefest.ru/assets/frontend/2019/dist/assets/img/logo--on-white.svg', // URL to custom custom notification image
+    autoSubscribe: true, // or true. If true, prompts a user to subscribe for pushes upon SDK initialization
+    subscribeWidget: {
+      enabled: true
+    },
+  }]);
+</script>
 </body>
 </html>
