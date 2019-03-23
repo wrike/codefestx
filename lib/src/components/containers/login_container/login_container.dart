@@ -49,10 +49,10 @@ class LoginContainerComponent implements OnInit {
 
   void onClose() {
     if (_authStore.hasRoutePath) {
-      _router.navigateByUrl(RoutePaths.welcome.toUrl());
-    } else {
       _router.navigateByUrl(_authStore.routePath);
       _authService.clearRoutePath();
+    } else {
+      _router.navigateByUrl(RoutePaths.welcome.toUrl());
     }
   }
 
