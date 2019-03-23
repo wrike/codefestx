@@ -1,0 +1,74 @@
+@import "../../../../../web/assets/styles/variables.scss";
+@import "../../../styles/common.scss";
+
+:host {
+
+  // tabs ---
+
+  .tabs {
+    display: flex;
+    padding: 12px 0;
+  }
+
+  .tabs__item {
+    flex-shrink: 0;
+
+    + .tabs__item {
+      margin-left: 8px;
+    }
+  }
+  // --- end tabs
+
+  // event ---
+
+  .event__meta {
+    color: $font-color-secondary;
+    margin-bottom: 4px;
+  }
+
+  .event__meta-item + .event__meta-item {
+
+    &::before {
+      content: "•";
+    }
+  }
+
+  .event__title {
+    @include font-heading-1;
+  }
+
+  .event__info {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 24px;
+  }
+
+  .event__info-item + .event__info-item {
+    margin-left: 16px;
+  }
+
+  .event__description {
+    margin-top: 24px;
+    font-size: 14px; // todo
+    line-height: 20px; // todo
+  }
+
+  .event__vote {
+    margin-top: 24px;
+  }
+
+  .event__related {
+    margin-top: 24px;
+  }
+
+  .event__related-title {
+    @include font-heading-3;
+  }
+  // --- end event
+
+  // info item (todo: replace in component)
+  @include info-item;
+
+  // related events ---
+  // --- end related events
+}
