@@ -1,85 +1,168 @@
-@import '../../../styles/main';
+@import "../../../../../web/assets/styles/variables.scss";
 
 :host {
-  display: block;
-  height: 100%;
 
-  .lecture {
+  // tags ---
+
+  .tags {
     display: flex;
-    padding: $padding-6 $padding-3 0;
+    flex-wrap: nowrap;
+    padding: 12px 0;
+    margin-right: -24px; // todo
+    overflow-x: auto;
 
-    .lecture__time {
-      margin-right: $padding-6;
-
-      .lecture_time_start {
-        @include font-caption();
-        color: $mat-black;
-        padding-bottom: $padding-3;
-      }
-
-      .lecture_time_end {
-        @include font-caption();
-      }
+    .tags__item + .tags__item {
+      flex-shrink: 0;
+      margin-left: 8px;
     }
+  }
+  // --- end tags
 
-    .lecture__info {
-      width: 100%;
-      border-bottom: 1px $mat-border-light solid;
-      padding-bottom: $padding-3;
+  // schedule ---
 
-      .lecture_location {
-        @include font-caption();
-        float: left;
-        padding-right: $padding-3;
-      }
+  .schedule {
+    margin-right: -16px;
 
-      .lecture_section {
-        @include font-caption();
-        padding-bottom: $padding-3;
-        display: flex;
-        justify-content: space-between;
-      }
+    .schedule__event + .schedule__event {
+      margin-top: 8px;
+    }
+  }
+  // --- end schedule
 
-      .lecture_language {
-        text-transform: uppercase;
-      }
+  // event ---
 
-      .lecture_title {
+  .event {
+    display: flex;
+
+    .event__time {
+      flex-shrink: 0;
+      margin-right: 16px;
+      width: 5ch;
+      padding-top: 16px;
+      color: $font-color-secondary;
+      position: relative;
+
+      &::before {
+        content: "";
         display: block;
-        padding-bottom: $padding-4;
+        width: 2px;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: -22px;
+        background-image: repeating-radial-gradient(circle, #b9bac1 0px, #b9bac1 1px, transparent 1px, transparent 100%);
+        background-size: 2px 14px;
+        background-position-y: -10px;
+        background-position-x: 0px;
+        background-repeat: repeat-y;
+      }
+    }
+
+    .event__time-item {
+      display: block;
+
+      + .event__time-item {
+        margin-top: 4px;
       }
 
-      .lecture__speaker {
-        display: flex;
-        margin-bottom: $padding-3;
+      &.event__time-item--start {
+        font-weight: $font-weight-bold;
+        position: relative;
 
-        .lecture_speaker_avatar {
+        &::before {
+          content: "";
           display: block;
-          justify-content: center;
-          align-items: center;
-          border-radius: 50%;
-          width: 50px;
-          height: 50px;
-          margin-right: $padding-6;
-        }
-
-        .lecture_speaker_info_name {
-          @include mat-font-body();
-          padding-bottom: $padding-1;
-        }
-
-        .lecture_speaker_info_company {
-          @include font-caption();
-        }
-
-        .lecture__actions {
-          margin-left: auto;
+          background: #94959b;
+          width: 16px;
+          height: 2px;
+          position: absolute;
+          top: 8px;
+          left: -22px;
         }
       }
     }
-  }
 
-  .selected {
-    background-color: $mat-blue;
+    .event__info {
+      flex-grow: 1;
+    }
   }
+  // --- end event
+
+  // event card ---
+
+  .event-card {
+    padding: 16px 24px 16px 16px; // todo
+    position: relative; // for actions
+    border-radius: 6px; // todo
+    background-color: #ffffff; // todo
+    box-shadow: 0 2px 23px 0 rgba(0, 0, 0, 0.06); // todo
+
+    .event-card__meta {
+      color: $font-color-secondary;
+      margin-bottom: 4px;
+    }
+
+    .event-card__meta-item + .event-card__meta-item {
+
+      &::before {
+        content: "•";
+      }
+    }
+
+    .event-card__title {
+      @include font-heading-3;
+    }
+
+    .event-card__speakers {
+      margin-top: 8px;
+    }
+
+    .event-card__actions {
+      position: absolute;
+      right: 8px; // todo
+      bottom: 8px; // todo
+    }
+
+    // info item (todo: replace in component)
+    .info-item {
+      display: flex;
+
+      .info-item__media {
+        flex-shrink: 0;
+        margin-right: 8px;
+      }
+
+      .info-item__media-container {
+        flex-shrink: 0;
+        display: inline-flex;
+        width: 36px; // todo
+        height: 36px; // todo
+        margin: -2px; // todo
+        border: 2px solid #ffffff; // todo
+        border-radius: 50%;
+        overflow: hidden;
+        vertical-align: top;
+
+        + .info-item__media-container {
+          margin-left: -15px; // todo
+        }
+      }
+
+      .info-item__media-image {
+        display: block;
+        width: 100%;
+        object-fit: cover;
+      }
+
+      .info-item__title,
+      .info-item__subtitle {
+        line-height: 16px;
+      }
+
+      .info-item__subtitle {
+        color: $font-color-secondary;
+      }
+    }
+  }
+  // --- end event card
 }
