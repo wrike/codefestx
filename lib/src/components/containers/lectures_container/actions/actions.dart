@@ -3,6 +3,7 @@ import 'dart:html';
 
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
+import 'package:codefest/src/components/ui/button/button.dart';
 
 @Component(
   selector: 'actions',
@@ -12,6 +13,7 @@ import 'package:angular_components/angular_components.dart';
     NgIf,
     MaterialButtonComponent,
     MaterialIconComponent,
+    ButtonComponent
   ],
   preserveWhitespace: true,
   changeDetection: ChangeDetectionStrategy.OnPush,

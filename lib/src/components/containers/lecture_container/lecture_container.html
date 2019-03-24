@@ -158,7 +158,14 @@
           cf-button
           *ngIf="canLikeLecture && !isLiked && isAuthorized"
           (click)="onLikeClick()"
-          class="event__vote button-primary button-block">
+          class="event__vote button-primary button-full-width">
+
+          <svg
+            xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="24" height="24" viewBox="0 0 24 24"
+            class="button-icon">
+            <path d="M15.4 7H20l-7.08 7.06-2.3-2.29L15.41 7zm-6.8 4.04l3.67 3.67L9.97 17 4 11.04h4.6z" fill-rule="evenodd"/>
+          </svg>
+
           Проголосовать
         </button>
 
