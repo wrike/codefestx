@@ -10,10 +10,8 @@
       [searchText]="searchText"
       [isSearchMode]="isSearchMode"
       (onSearch)="onSearch($event)"
-      (onSearchModeChange)="onSearchModeChange($event)"
-      (onFilter)="onFilter()">
+      (onSearchModeChange)="onSearchModeChange($event)">
     </layout-actions>
-
 
     <!-- Tags -->
     <div
@@ -22,13 +20,13 @@
 
       <!-- Buttons group -->
       <div
-        (click)="onShowAllClick()"
-        [class.buttons-group--selected]="isShowAllVisible"
+        [class.buttons-group--selected]="isAllSelected"
         class="tags__item buttons-group">
 
         <!-- Filters -->
         <button
           cf-button
+          (click)="onFilter()"
           class="button-tag button-icon-only">
 
           <svg
@@ -42,6 +40,7 @@
         <!-- All -->
         <button
           cf-button
+          (click)="onShowAllClick()"
           class="button-tag">
           Все
         </button>
@@ -50,7 +49,7 @@
       <button
         cf-button
         (click)="onShowFavoriteClick()"
-        [class.button-primary]="isFavoriteVisible"
+        [class.button-primary]="isFavoriteSelected"
         class="tags__item button-tag">
         Избранные
       </button>
@@ -59,7 +58,7 @@
         *ngFor="let section of sections"
         cf-button
         (click)="onShowSectionClick(section)"
-        [class.button-primary]="isShowSectionVisible(section)"
+        [class.button-primary]="isSectionSelected(section)"
         class="tags__item button-tag">
         {{ section.title }}
       </button>
@@ -69,11 +68,9 @@
     <div
       content>
       <!-- Schedule -->
-      <div
-        *ngIf="lectures.isEmpty"
-        class="empty-lecture">
-        Пока ничего нет. Жми звезду -- создавай свой CodeFestX
-      </div>
+      <favorite-empty-state
+        *ngIf="lectures.isEmpty && isFavoriteSelected">
+      </favorite-empty-state>
 
       <div
         class="schedule">
