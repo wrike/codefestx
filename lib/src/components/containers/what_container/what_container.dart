@@ -11,20 +11,35 @@ import 'what_routes.dart';
   selector: 'what-container',
   styleUrls: ['what_container.css'],
   templateUrl: 'what_container.html',
-  directives: [LayoutComponent, RouterOutlet, TabsComponent],
-  exports: [Routes, RoutePaths],
+  directives: [
+    LayoutComponent,
+    RouterOutlet,
+    TabsComponent,
+  ],
+  exports: [
+    Routes,
+    RoutePaths,
+  ],
   preserveWhitespace: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 )
 class WhatContainerComponent extends StatefulComponent {
   final Router _router;
 
+  bool isAboutUsEnable = true;
+
   WhatContainerComponent(
     NgZone zone,
     ChangeDetectorRef cdr,
     StoreFactory storeFactory,
     this._router,
-  ) : super(zone, cdr, storeFactory);
+  ) : super(zone, cdr, storeFactory) {
+    zone.runOutsideAngular(() {
+      subscriptions.addAll([
+        _router.onRouteActivated.listen(_onRouteActivated),
+      ]);
+    });
+  }
 
   void goto(String name) {
     RouteDefinition path;
@@ -41,5 +56,10 @@ class WhatContainerComponent extends StatefulComponent {
     }
 
     _router.navigate('${RoutePaths.what.toUrl()}${path.toUrl()}');
+  }
+
+  void _onRouteActivated(RouterState event) {
+    isAboutUsEnable = !event.path.contains(Routes.releaseNotes.path);
+    detectChanges();
   }
 }
