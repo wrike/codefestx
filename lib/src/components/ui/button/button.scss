@@ -14,10 +14,10 @@ $button-tag-padding-vertical: round(($button-tag-height - $font-line-box-main) /
   box-sizing: border-box;
   padding: $button-padding-vertical $button-padding-horizontal;
   margin: 0;
-  border: 1px solid; // todo
-  border-color: $font-color-secondary; // todo
+  border: 1px solid transparent; // todo
   border-radius: 8px; // todo
   background-color: #ffffff; // todo
+  background-origin: border-box;
   box-shadow: 0 2px 23px 0 rgba(0, 0, 0, 0.06); // todo
   outline: none;
   vertical-align: top;
@@ -58,9 +58,7 @@ $button-tag-padding-vertical: round(($button-tag-height - $font-line-box-main) /
 }
 
 :host(.button-primary) {
-  border-color: transparent;
   background-image: linear-gradient(to right, #33a7d8, #62d3ee); // todo
-  background-origin: border-box;
   box-shadow: 0 0 40px 0 rgba(51, 167, 216, 0.56); // todo
   color: #ffffff; // todo
 
@@ -80,7 +78,6 @@ $button-tag-padding-vertical: round(($button-tag-height - $font-line-box-main) /
 :host(.button-tag) {
   padding-top: $button-tag-padding-vertical;
   padding-bottom: $button-tag-padding-vertical;
-  border-color: transparent;
   border-radius: 4px; // todo
   box-shadow: 0 2px 23px 0 rgba(0, 0, 0, 0.06); // todo
   font-size: $font-size-main;
@@ -100,6 +97,23 @@ $button-tag-padding-vertical: round(($button-tag-height - $font-line-box-main) /
 
   &:focus {
     // todo
+  }
+}
+
+:host(.button-icon-only) {
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  box-shadow: none;
+  color: $font-color-main;
+  padding: 0;
+
+  // todo
+  ::ng-deep {
+
+    .button-icon {
+      margin-right: 0;
+    }
   }
 }
 
