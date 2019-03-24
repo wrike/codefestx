@@ -74,6 +74,21 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
 
   bool isShowSectionVisible(Section section) => _selectors.getFilterSectionId(state) == section.id;
 
+  String getDay(DateTime date) {
+    if (date.day == 30) {
+      return '30 Марта';
+    } else if (date.day == 31) {
+      return '31 Марта';
+    }
+
+    return '';
+  }
+
+  bool isDayVisible(Lecture next, int index) {
+    final prev = index > 0 ? lectures.elementAt(index - 1) : null;
+    return prev == null || next.startTime.day != prev.startTime.day;
+  }
+
   @override
   void ngOnInit() {
     _dispatcher.dispatch(InitAction());

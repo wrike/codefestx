@@ -47,7 +47,10 @@ class LoginContainerComponent implements OnInit {
   @override
   void ngOnInit() {
     _authService.init();
-    _authService.setRoutePath(_routePath);
+
+    if (_routePath != null) {
+      _authService.setRoutePath(_routePath);
+    }
   }
 
   void onClose() {
