@@ -64,6 +64,11 @@
     padding-bottom: 24px;
   }
 
+  .schedule__section-day + .schedule__section-day,
+  .schedule__section-time + .schedule__section-time {
+    margin-top: 8px;
+  }
+
   .schedule__event + .schedule__event {
     margin-top: 8px;
   }

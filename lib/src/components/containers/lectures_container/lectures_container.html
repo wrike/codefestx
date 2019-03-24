@@ -79,14 +79,14 @@
         class="schedule">
 
         <sectin
-          *ngFor="let group1 of groupedLectures; let i = index; trackBy: trackByIdentity">
+          *ngFor="let group1 of groupedLectures; let i = index">
 
           <div>
             {{ getDay(group1[i]) }}
           </div>
 
           <section
-            *ngFor="let group2 of group1; trackBy: trackByIdentity">
+            *ngFor="let group2 of group1">
 
             <template
               ngFor let-lecture [ngForOf]="group2" let-i="index">
@@ -129,14 +129,14 @@
                     <!-- Location -->
                     <span
                       class="event-card__meta-item">
-                {{ lecture.location.title }}
-              </span>
+                      {{ lecture.location.title }}
+                    </span>
 
                     <!-- Section -->
                     <span
                       class="event-card__meta-item">
-                {{ lecture.section.title }}
-              </span>
+                      {{ lecture.section.title }}
+                    </span>
 
                     <!--{{ flag(lecture) }}-->
                   </div>
