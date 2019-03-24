@@ -81,6 +81,10 @@ class Selectors {
 
   UserState getUser(CodefestState state) => state.user;
 
+  String getUserAvatarPath(CodefestState state) => getUser(state).avatarPath;
+
+  String getUserName(CodefestState state) => getUser(state).displayName;
+
   bool isAuthorized(CodefestState state) => getUser(state).isAuthorized;
 
   bool isError(CodefestState state) => state.isError;

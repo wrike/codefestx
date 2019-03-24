@@ -19,6 +19,8 @@ class RoutePaths {
   static final what = MenuRoutePath(title: 'Что происходит', path: 'what');
   static final login = MenuRoutePath(title: 'Войти', path: 'login');
 
+  static final logout = MenuRoutePath(title: 'Выйти', path: 'logout');
+
   static final List<MenuRoutePath> _menu = [
     lectures,
     rating,

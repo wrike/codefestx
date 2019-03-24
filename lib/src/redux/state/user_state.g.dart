@@ -32,6 +32,10 @@ final BuiltSet<FilterTypeEnum> _$values =
 
 class _$UserState extends UserState {
   @override
+  final String avatarPath;
+  @override
+  final String displayName;
+  @override
   final BuiltList<String> favoriteLectureIds;
   @override
   final String filterSectionId;
@@ -52,7 +56,9 @@ class _$UserState extends UserState {
       (new UserStateBuilder()..update(updates)).build();
 
   _$UserState._(
-      {this.favoriteLectureIds,
+      {this.avatarPath,
+      this.displayName,
+      this.favoriteLectureIds,
       this.filterSectionId,
       this.filterType,
       this.isAuthorized,
@@ -92,6 +98,8 @@ class _$UserState extends UserState {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is UserState &&
+        avatarPath == other.avatarPath &&
+        displayName == other.displayName &&
         favoriteLectureIds == other.favoriteLectureIds &&
         filterSectionId == other.filterSectionId &&
         filterType == other.filterType &&
@@ -110,7 +118,11 @@ class _$UserState extends UserState {
                 $jc(
                     $jc(
                         $jc(
-                            $jc($jc(0, favoriteLectureIds.hashCode),
+                            $jc(
+                                $jc(
+                                    $jc($jc(0, avatarPath.hashCode),
+                                        displayName.hashCode),
+                                    favoriteLectureIds.hashCode),
                                 filterSectionId.hashCode),
                             filterType.hashCode),
                         isAuthorized.hashCode),
@@ -123,6 +135,8 @@ class _$UserState extends UserState {
   @override
   String toString() {
     return (newBuiltValueToStringHelper('UserState')
+          ..add('avatarPath', avatarPath)
+          ..add('displayName', displayName)
           ..add('favoriteLectureIds', favoriteLectureIds)
           ..add('filterSectionId', filterSectionId)
           ..add('filterType', filterType)
@@ -137,6 +151,14 @@ class _$UserState extends UserState {
 
 class UserStateBuilder implements Builder<UserState, UserStateBuilder> {
   _$UserState _$v;
+
+  String _avatarPath;
+  String get avatarPath => _$this._avatarPath;
+  set avatarPath(String avatarPath) => _$this._avatarPath = avatarPath;
+
+  String _displayName;
+  String get displayName => _$this._displayName;
+  set displayName(String displayName) => _$this._displayName = displayName;
 
   ListBuilder<String> _favoriteLectureIds;
   ListBuilder<String> get favoriteLectureIds =>
@@ -181,6 +203,8 @@ class UserStateBuilder implements Builder<UserState, UserStateBuilder> {
 
   UserStateBuilder get _$this {
     if (_$v != null) {
+      _avatarPath = _$v.avatarPath;
+      _displayName = _$v.displayName;
       _favoriteLectureIds = _$v.favoriteLectureIds?.toBuilder();
       _filterSectionId = _$v.filterSectionId;
       _filterType = _$v.filterType;
@@ -213,6 +237,8 @@ class UserStateBuilder implements Builder<UserState, UserStateBuilder> {
     try {
       _$result = _$v ??
           new _$UserState._(
+              avatarPath: avatarPath,
+              displayName: displayName,
               favoriteLectureIds: favoriteLectureIds.build(),
               filterSectionId: filterSectionId,
               filterType: filterType,
