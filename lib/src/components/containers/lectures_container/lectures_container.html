@@ -75,17 +75,23 @@
             <div
               class="event__time">
 
-              <!-- Start -->
-              <time
-                class="event__time-item event__time-item--start">
-                {{ startTime(lecture) }}
-              </time>
+              <template
+                [ngIf]="isTimeVisible(lecture, i)">
 
-              <!-- End -->
-              <time
-                class="event__time-item">
-                {{ endTime(lecture) }}
-              </time>
+                <!-- Start -->
+                <time
+                  class="event__time-item event__time-item--start"
+                  [class.right_now]="isRightNow(lecture)"
+                  [class.finished]="isFinished(lecture)">
+                  {{ startTime(lecture) }}
+                </time>
+
+                <!-- End -->
+                <time
+                  class="event__time-item">
+                  {{ endTime(lecture) }}
+                </time>
+              </template>
             </div>
 
             <!-- Info (todo details)-->
@@ -171,6 +177,7 @@
                   class="event-card__actions">
 
                   <actions
+                    [popularity]="lecture.likesCount"
                     [isFavorite]="isFavoriteLecture(lecture)"
                     (onFavoriteChange)="onFavoriteChange(lecture, $event)">
                   </actions>

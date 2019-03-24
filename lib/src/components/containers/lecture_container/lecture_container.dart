@@ -1,10 +1,10 @@
 import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
-import 'package:codefest/src/components/containers/lecture_container/popularity_icon/popularity_icon.dart';
 import 'package:codefest/src/components/containers/stateful_component.dart';
 import 'package:codefest/src/components/layout/layout.dart';
 import 'package:codefest/src/components/loader/loader.dart';
 import 'package:codefest/src/components/ui/button/button.dart';
+import 'package:codefest/src/components/ui/popularity_icon/popularity_icon.dart';
 import 'package:codefest/src/components/ui/tabs/tabs.dart';
 import 'package:codefest/src/models/lecture.dart';
 import 'package:codefest/src/redux/actions/change_lecture_favorite_action.dart';
@@ -58,7 +58,7 @@ class LectureContainerComponent extends StatefulComponent implements OnInit {
 
   bool get lectureStarted => true;//_selectors.lectureStarted(lecture);
 
-  String get endTime => _selectors.getEndTime(lecture);
+  String get endTime => _selectors.getEndTimeText(lecture);
 
   bool get isAuthorized => _selectors.isAuthorized(state);
 
@@ -78,7 +78,7 @@ class LectureContainerComponent extends StatefulComponent implements OnInit {
 
   Lecture get lecture => _selectors.getLecture(state, _parameters[idParam]);
 
-  String get startTime => _selectors.getStartTime(lecture);
+  String get startTime => _selectors.getStartTimeText(lecture);
 
   @override
   void ngOnInit() {

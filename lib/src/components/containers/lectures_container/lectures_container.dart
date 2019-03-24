@@ -33,7 +33,7 @@ import 'package:codefest/src/route_paths.dart';
     ActionsComponent,
     LayoutActionsComponent,
     LoaderComponent,
-    ButtonComponent
+    ButtonComponent,
   ],
   preserveWhitespace: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -42,6 +42,8 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
   final Dispatcher _dispatcher;
   final Router _router;
   final Selectors _selectors;
+
+  final _now = DateTime.now().toUtc();
 
   LecturesContainerComponent(
     NgZone zone,
@@ -66,13 +68,9 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
 
   Iterable<Section> get sections => _selectors.getSelectedSections(state);
 
-  String endTime(Lecture lecture) => _selectors.getEndTime(lecture);
+  String endTime(Lecture lecture) => _selectors.getEndTimeText(lecture);
 
   String flag(Lecture lecture) => _selectors.getFlag(lecture);
-
-  bool isFavoriteLecture(Lecture lecture) => _selectors.isFavoriteLecture(state, lecture);
-
-  bool isShowSectionVisible(Section section) => _selectors.getFilterSectionId(state) == section.id;
 
   String getDay(DateTime date) {
     if (date.day == 30) {
@@ -87,6 +85,25 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
   bool isDayVisible(Lecture next, int index) {
     final prev = index > 0 ? lectures.elementAt(index - 1) : null;
     return prev == null || next.startTime.day != prev.startTime.day;
+  }
+
+  bool isFavoriteLecture(Lecture lecture) => _selectors.isFavoriteLecture(state, lecture);
+
+  bool isFinished(Lecture lecture) {
+    final endTime = _selectors.getEndTime(lecture);
+    return _now.isAfter(endTime);
+  }
+
+  bool isRightNow(Lecture lecture) {
+    final endTime = _selectors.getEndTime(lecture);
+    return _now.isAfter(lecture.startTime) && _now.isBefore(endTime);
+  }
+
+  bool isShowSectionVisible(Section section) => _selectors.getFilterSectionId(state) == section.id;
+
+  bool isTimeVisible(Lecture next, int index) {
+    final prev = index > 0 ? lectures.elementAt(index - 1) : null;
+    return prev == null || next.startTime != prev.startTime || next.duration != prev.duration;
   }
 
   @override
@@ -130,5 +147,5 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
     _dispatcher.dispatch(FilterLecturesAction(filterType: FilterTypeEnum.section, filterSectionId: section.id));
   }
 
-  String startTime(Lecture lecture) => _selectors.getStartTime(lecture);
+  String startTime(Lecture lecture) => _selectors.getStartTimeText(lecture);
 }
