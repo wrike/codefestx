@@ -23,21 +23,36 @@
       content
       class="event">
 
-      <div
-        class="tabs">
+      <tabs
+        role="tablist"
+        aria-orientation="horizontal">
 
         <button
-          cf-button
-          class="tabs__item button-tag button-primary">
-          Инфо
+          role="tab"
+          class="tabs__button tabs__button--active">
+
+          <span
+            class="tabs__button-text">
+            Инфо
+          </span>
         </button>
 
         <button
-          cf-button
-          class="tabs__item button-tag">
-          Обсуждение
+          role="tab"
+          class="tabs__button">
+
+          <span
+            class="tabs__button-text">
+
+            Обсуждение&ngsp;
+
+            <span
+              class="tabs__button-text-amount">
+              (123)
+            </span>
+          </span>
         </button>
-      </div>
+      </tabs>
 
       <!-- Event -->
       <article
