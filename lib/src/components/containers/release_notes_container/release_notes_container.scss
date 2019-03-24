@@ -1,5 +1,8 @@
 :host {
-  img {
-    width: 50px;
+  ::ng-deep .event {
+    margin-right: -16px;
+  }
+  ::ng-deep .event + .event {
+    margin-top: 8px;
   }
 }

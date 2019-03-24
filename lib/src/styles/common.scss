@@ -43,5 +43,11 @@
     .info-item__subtitle {
       color: $fg-color-secondary;
     }
+
+    .info-item__details {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
   }
 }

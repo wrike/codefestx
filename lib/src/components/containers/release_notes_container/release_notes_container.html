@@ -1,14 +1,8 @@
-<div
-		*ngFor="let release of releases">
-
-	<div>{{release.version}}</div>
-	<div>{{release.title}}</div>
-	<div
-			[innerHTML]="release.description">
-	</div>
-	<div>
-		<img [src]="release.avatar"/>
-	</div>
-	<div>{{release.author}}</div>
-	<div>{{release.company}}</div>
-</div>
+<template ngFor let-release [ngForOf]="releases">
+  <event-card
+    [startTime]="release.version"
+    [title]="release.title"
+    [description]="release.description"
+    [speaker]="createSpeaker(release)">
+  </event-card>
+</template>

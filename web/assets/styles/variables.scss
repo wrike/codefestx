@@ -62,6 +62,10 @@ $font-weight-bold: 600;
   @include font-generator($font-heading-3-size, $font-heading-3-line-height);
 }
 
+@mixin font-title {
+  @include font-generator($font-size-main, $font-line-height-main, $font-weight: $font-heading-base-weight);
+}
+
 @mixin user-select($selection) {
   -webkit-user-select: $selection;
   -moz-user-select: $selection;

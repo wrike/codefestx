@@ -1,0 +1,69 @@
+
+<!-- host: event -->
+
+<!-- Time -->
+<div
+  class="event__time">
+
+  <!-- Start -->
+  <time
+    class="event__time-item event__time-item--start">
+    {{ startTime }}
+  </time>
+
+  <!-- End -->
+  <time
+    *ngIf="hasEndTime"
+    class="event__time-item">
+    {{ endTime }}
+  </time>
+</div>
+<!-- Info (todo details)-->
+<article (click)="onClick()" class="event-card">
+
+  <!-- Meta -->
+  <div class="event-card__meta">
+    <ng-content select="[meta]"></ng-content>
+  </div>
+
+  <!-- Title -->
+  <h1 class="event-card__title">
+    {{ title }}
+  </h1>
+
+  <div
+    class="event-card__description"
+    [innerHTML]="description">
+  </div>
+
+  <!-- Speakers (todo: info item) -->
+  <div class="event-card__speakers info-item">
+
+    <!-- Media -->
+    <div class="info-item__media">
+
+      <span class="info-item__media-container">
+
+        <img [src]="speaker.avatarPath" [alt]="speaker.name" class="info-item__media-image">
+
+      </span>
+    </div>
+
+    <!-- Details -->
+    <div class="info-item__details">
+
+      <!-- Title -->
+      <div class="info-item__title">
+
+        {{ speaker.name }}
+      </div>
+
+      <!-- Subtitle -->
+      <div
+        class="info-item__subtitle">
+
+        {{ speaker.company }}
+      </div>
+    </div>
+  </div>
+</article>
