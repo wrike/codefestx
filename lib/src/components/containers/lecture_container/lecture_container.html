@@ -10,13 +10,26 @@
       actions>
 
       <popularity-icon
-        *ngIf="isAuthorized"
+        *ngIf="false && isAuthorized"
         [popularity]="lecture.favoritesCount">
       </popularity-icon>
 
       <button
-        (click)="onFavoriteClick()">
-        В избранное
+        cf-button
+        (click)="onFavoriteClick()"
+        class="button-icon-only">
+
+        <svg
+          *ngIf="!isFavorite"
+          xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="24" height="24" viewBox="0 0 24 24">
+          <path d="M19.18 9.02a.93.93 0 0 1 .53 1.6l-3.16 3.02.75 4.26c.13.77-.7 1.35-1.4.99L12 16.88l-3.9 2.01c-.7.36-1.53-.22-1.4-.99l.75-4.26-3.16-3.02a.93.93 0 0 1 .53-1.6l4.37-.62 1.95-3.88a.97.97 0 0 1 1.72 0L14.8 8.4l4.37.62zm-4.25 3.96l2.94-2.74-4.06-.57L12 6.14l-1.81 3.53-4.06.57 2.94 2.74-.7 3.88L12 15.03l3.62 1.83-.69-3.88z" fill-rule="evenodd"/>
+        </svg>
+
+        <svg
+          *ngIf="isFavorite"
+          xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="24" height="24" viewBox="0 0 24 24">
+          <path d="M19.18 9.02a.93.93 0 0 1 .53 1.6l-3.16 3.02.75 4.26c.13.77-.7 1.35-1.4.99L12 16.88l-3.9 2.01c-.7.36-1.53-.22-1.4-.99l.75-4.26-3.16-3.02a.93.93 0 0 1 .53-1.6l4.37-.62 1.95-3.88a.97.97 0 0 1 1.72 0L14.8 8.4l4.37.62z" fill-rule="evenodd"/>
+        </svg>
       </button>
     </div>
 
