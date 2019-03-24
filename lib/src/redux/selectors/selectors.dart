@@ -106,13 +106,13 @@ class Selectors {
 
   String _formatHours(String hours) => hours.length == 1 ? '${hours}0' : hours;
 
-  Iterable<Lecture> _getFavoriteLectures(Iterable<Lecture> lectures) =>
-      lectures.where((lectures) => lectures.isFavorite).toList();
+  Iterable<Lecture> _getFavoriteLectures(Iterable<Lecture> lectures, UserState user) =>
+      lectures.where((lecture) => user.favoriteLectureIds.contains(lecture.id)).toList();
 
   Iterable<Lecture> _getFilterLectures(Iterable<Lecture> lectures, UserState user, FilterTypeEnum filterType) {
     switch (filterType) {
       case FilterTypeEnum.favorite:
-        return _getFavoriteLectures(lectures);
+        return _getFavoriteLectures(lectures, user);
       case FilterTypeEnum.section:
         return _getSectionLectures(lectures, user.filterSectionId);
       default:
