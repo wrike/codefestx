@@ -20,6 +20,7 @@
     @include button-reset;
     @include font-main;
     color: $link-color;
+    cursor: pointer;
   }
 
   .welcome__content {
