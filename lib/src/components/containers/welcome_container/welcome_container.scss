@@ -55,6 +55,11 @@
     }
   }
 
+  .welcome__description-icon {
+    transform: translateY(3px);
+    color: $font-color-main;
+  }
+
   .welcome__sections {
     margin-top: 24px;
   }
