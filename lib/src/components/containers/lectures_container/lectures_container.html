@@ -17,6 +17,7 @@
     <!-- Tags -->
     <nav
       pre-content
+      *ngIf="!isSearchMode"
       class="tags">
 
       <!-- Buttons group -->
@@ -77,78 +78,82 @@
       <div
         class="schedule">
 
-        <template
-          ngFor let-lecture [ngForOf]="lectures" let-i="index">
+        <sectin
+          *ngFor="let group1 of groupedLectures; let i = index">
 
-          <div
-            *ngIf="isDayVisible(lecture, i)">
-
-            {{ getDay(lecture.startTime) }}
+          <div>
+            {{ getDay(group1[i]) }}
           </div>
 
-          <div
-            class="schedule__event event">
+          <section
+            *ngFor="let group2 of group1">
 
-            <!-- Time -->
-            <div
-              class="event__time">
+            <template
+              ngFor let-lecture [ngForOf]="group2" let-i="index">
 
-              <template
-                [ngIf]="isTimeVisible(lecture, i)">
-
-                <!-- Start -->
-                <time
-                  class="event__time-item event__time-item--start"
-                  [class.right_now]="isRightNow(lecture)"
-                  [class.finished]="isFinished(lecture)">
-                  {{ startTime(lecture) }}
-                </time>
-
-                <!-- End -->
-                <time
-                  class="event__time-item">
-                  {{ endTime(lecture) }}
-                </time>
-              </template>
-            </div>
-
-            <!-- Info (todo details)-->
-            <article
-              (click)="onLectureSelect(lecture)"
-              class="event__info event-card">
-
-              <!-- Meta -->
               <div
-                class="event-card__meta">
+                class="schedule__event event">
 
-                <!-- Location -->
-                <span
-                  class="event-card__meta-item">
+                <!-- Time -->
+                <div
+                  class="event__time">
+
+                  <template
+                    [ngIf]="i == 0">
+
+                    <!-- Start -->
+                    <time
+                      class="event__time-item event__time-item--start"
+                      [class.right_now]="isRightNow(lecture)"
+                      [class.finished]="isFinished(lecture)">
+                      {{ startTime(lecture) }}
+                    </time>
+
+                    <!-- End -->
+                    <time
+                      class="event__time-item">
+                      {{ endTime(lecture) }}
+                    </time>
+                  </template>
+                </div>
+
+                <!-- Info (todo details)-->
+                <article
+                  (click)="onLectureSelect(lecture)"
+                  class="event__info event-card">
+
+                  <!-- Meta -->
+                  <div
+                    class="event-card__meta">
+
+                    <!-- Location -->
+                    <span
+                      class="event-card__meta-item">
                 {{ lecture.location.title }}
               </span>
 
-                <!-- Section -->
-                <span
-                  class="event-card__meta-item">
+                    <!-- Section -->
+                    <span
+                      class="event-card__meta-item">
                 {{ lecture.section.title }}
               </span>
 
-                <!--{{ flag(lecture) }}-->
-              </div>
+                    <!--{{ flag(lecture) }}-->
+                  </div>
 
-              <!-- Title -->
-              <h1
-                class="event-card__title">
-                {{ lecture.title }}
-              </h1>
+                  <!-- Title -->
+                  <h1
+                    class="event-card__title">
+                    {{ lecture.title }}
+                  </h1>
 
-              <!-- Speakers (todo: info item) -->
-              <div
-                class="event-card__speakers info-item">
+                  <!-- Speakers (todo: info item) -->
+                  <div
+                    class="event-card__speakers info-item">
 
-                <!-- Media -->
-                <div
-                  class="info-item__media">
+                    <!-- Media -->
+                    <div
+                      class="info-item__media">
 
                 <span
                   *ngFor="let speaker of lecture.speakers"
@@ -159,51 +164,53 @@
                     [alt]="speaker.name"
                     class="info-item__media-image">
                 </span>
-                </div>
+                    </div>
 
-                <!-- Details -->
-                <div
-                  class="info-item__details">
+                    <!-- Details -->
+                    <div
+                      class="info-item__details">
 
-                  <!-- Title -->
-                  <div
-                    class="info-item__title">
+                      <!-- Title -->
+                      <div
+                        class="info-item__title">
 
-                    <ng-container
-                      *ngFor="let speaker of lecture.speakers">
-                      {{ speaker.name }}
-                    </ng-container>
+                        <ng-container
+                          *ngFor="let speaker of lecture.speakers">
+                          {{ speaker.name }}
+                        </ng-container>
+                      </div>
+
+                      <!-- Subtitle -->
+                      <div
+                        class="info-item__subtitle">
+
+                        <ng-container
+                          *ngFor="let speaker of lecture.speakers">
+                          {{ speaker.company }}
+                        </ng-container>
+                      </div>
+                    </div>
                   </div>
 
-                  <!-- Subtitle -->
-                  <div
-                    class="info-item__subtitle">
+                  <ng-container
+                    *ngFor="let speaker of lecture.speakers; let i = index">
 
-                    <ng-container
-                      *ngFor="let speaker of lecture.speakers">
-                      {{ speaker.company }}
-                    </ng-container>
-                  </div>
-                </div>
+                    <div
+                      *ngIf="lecture.speakers.length == i + 1"
+                      class="event-card__actions">
+
+                      <actions
+                        [popularity]="lecture.likesCount"
+                        [isFavorite]="isFavoriteLecture(lecture)"
+                        (onFavoriteChange)="onFavoriteChange(lecture, $event)">
+                      </actions>
+                    </div>
+                  </ng-container>
+                </article>
               </div>
-
-              <ng-container
-                *ngFor="let speaker of lecture.speakers; let i = index">
-
-                <div
-                  *ngIf="lecture.speakers.length == i + 1"
-                  class="event-card__actions">
-
-                  <actions
-                    [popularity]="lecture.likesCount"
-                    [isFavorite]="isFavoriteLecture(lecture)"
-                    (onFavoriteChange)="onFavoriteChange(lecture, $event)">
-                  </actions>
-                </div>
-              </ng-container>
-            </article>
-          </div>
-        </template>
+            </template>
+          </section>
+        </sectin>
       </div>
     </div>
   </layout>

@@ -1,1 +1,14 @@
-Пока ничего...
+<div
+		*ngFor="let release of releases">
+
+	<div>{{release.version}}</div>
+	<div>{{release.title}}</div>
+	<div
+			[innerHTML]="release.description">
+	</div>
+	<div>
+		<img [src]="release.avatar"/>
+	</div>
+	<div>{{release.author}}</div>
+	<div>{{release.company}}</div>
+</div>

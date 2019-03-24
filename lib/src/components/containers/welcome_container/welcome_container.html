@@ -24,25 +24,37 @@
         <p
           class="welcome__description">
 
-          Давай выберем секции и события, которые тебе интересны. Ты всегда сможешь поменять их, нажав на кнопку фильтра
+          Давай выберем секции и события, которые тебе интересны.
+          &ngsp;
+          Ты всегда сможешь поменять их, нажав на кнопку фильтра
+          &ngsp;
 
           <svg
-            xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
             class="welcome__description-icon">
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="14" height="14" viewBox="0 0 24 24">
             <path d="M5 6h14a1 1 0 0 1 0 2H5a1 1 0 1 1 0-2zm3 5h8a1 1 0 0 1 0 2H8a1 1 0 0 1 0-2zm3 5h2a1 1 0 0 1 0 2h-2a1 1 0 0 1 0-2z" fill-rule="evenodd"/>
           </svg>
         </p>
       </div>
 
       <sections
-        [sections]="sections"
+        [mainSections]="mainSections"
+        [customSections]="customSections"
         [selectedSectionIds]="selectedSectionIds"
         (onSectionsChange)="onSectionsChange($event)"
         class="welcome__sections">
       </sections>
+
+      <div
+        *ngIf="hasSelection"
+        class="welcome__container-apply-button-gutter">
+      </div>
     </section>
 
     <div
+      *ngIf="hasSelection"
       class="welcome__apply-button-container">
 
       <button

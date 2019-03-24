@@ -19,13 +19,15 @@
       </material-button>
     </div>
 
+    <span
+      badge>{{ selectedSectionCount }}</span>
+
     <div
       content>
 
-      {{ selectedSectionCount }}
-
       <sections
-        [sections]="sections"
+        [mainSections]="mainSections"
+        [customSections]="customSections"
         [selectedSectionIds]="selectedSectionIds"
         (onSectionsChange)="onSectionsChange($event)">
       </sections>

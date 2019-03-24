@@ -12,7 +12,8 @@
       <button
         role="tab"
         (click)="goto('about')"
-        class="tabs__button tabs__button--active">
+        [class.tabs__button--active]="isAboutUsEnable"
+        class="tabs__button">
 
         <span
           class="tabs__button-text">
@@ -23,11 +24,12 @@
       <button
         role="tab"
         (click)="goto('release_notes')"
+        [class.tabs__button--active]="!isAboutUsEnable"
         class="tabs__button">
 
         <span
           class="tabs__button-text">
-          Релизы
+          Релизы {{ releaseCount }}
         </span>
       </button>
     </tabs>

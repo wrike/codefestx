@@ -21,7 +21,10 @@ class SectionsComponent {
   final bool isHostMarked = true;
 
   @Input()
-  Iterable<Section> sections = [];
+  Iterable<Section> mainSections = [];
+
+  @Input()
+  Iterable<Section> customSections = [];
 
   @Input()
   Iterable<String> selectedSectionIds = [];
