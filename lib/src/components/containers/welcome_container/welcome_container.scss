@@ -1,0 +1,71 @@
+@import "../../../../../web/assets/styles/variables.scss";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+  position: relative;
+
+  .welcome__wrapper {
+    min-height: 100%;
+    position: relative;
+  }
+
+  .welcome__skip-button {
+    position: absolute;
+    top: 16px;
+    right: 24px;
+    @include button-reset;
+    @include font-main;
+    color: $link-color;
+  }
+
+  .welcome__content {
+    min-height: 100%;
+    position: relative;
+    padding: 0 24px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .welcome__container {
+    padding: 44px 0 120px;
+    margin: auto 0;
+  }
+
+  .welcome__text {
+    text-align: center;
+  }
+
+  .welcome__title {
+    @include font-heading-2;
+  }
+
+  .welcome__description {
+    margin-top: 8px;
+    font-size: $font-heading-3-size; // todo
+    line-height: $font-heading-3-line-height; // todo
+    color: $fg-color-secondary; // todo
+  }
+
+  .welcome__sections {
+    margin-top: 24px;
+  }
+
+  // todo
+  .welcome__apply-button-container {
+    padding: 0 24px 24px 24px;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 600px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 120px;
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), #ffffff 24%, #ffffff);
+  }
+}
