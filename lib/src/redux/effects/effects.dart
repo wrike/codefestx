@@ -61,7 +61,7 @@ class Effects {
         final user = store.state.user;
 
         if (user.isAuthorized) {
-          await _dataLoader.updateUser(sectionIds: action.sectionIds, favoriteLectureIds: user.favoriteLectureIds);
+          await _dataLoader.updateUser(sectionIds: action.sectionIds, favoriteLectureIds: user.favoriteLectureIds.toList());
         } else {
           _storageService.setSections(action.sectionIds);
         }

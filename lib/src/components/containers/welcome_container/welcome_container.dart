@@ -40,9 +40,9 @@ class WelcomeContainerComponent extends StatefulComponent implements OnInit {
     this._router,
   ) : super(zone, cdr, storeFactory);
 
-  Iterable<Section> get sections => _selectors.getSections(state);
-
   bool get isReady => _selectors.isReady(state);
+
+  Iterable<Section> get sections => _selectors.getSections(state);
 
   @override
   void ngOnInit() {

@@ -26,13 +26,15 @@ class LoginContainerComponent implements OnInit {
   final AuthStore _authStore;
   final Router _router;
 
+  String _routePath;
+
   LoginContainerComponent(
     this._authService,
     this._router,
     this._authStore,
   ) {
     if (!_authStore.isNewUser) {
-      _authService.setRoutePath(_router.current?.path ?? '');
+      _routePath = _router.current?.path;
     }
   }
 
@@ -45,6 +47,7 @@ class LoginContainerComponent implements OnInit {
   @override
   void ngOnInit() {
     _authService.init();
+    _authService.setRoutePath(_routePath);
   }
 
   void onClose() {
