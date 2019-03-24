@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:codefest/src/models/section.dart';
 import 'package:codefest/src/redux/actions/change_lecture_favorite_action.dart';
 import 'package:codefest/src/redux/actions/change_lecture_like_action.dart';
 import 'package:codefest/src/redux/actions/change_selected_sections_action.dart';
@@ -91,6 +92,18 @@ class Effects {
             sections: apiData[2],
             speakers: apiData[3],
           );
+
+          final sections = apiData[2] as Iterable<Section>;
+          final sectionIds = sections.where((section) => section.isCustom).map((section) => section.id).toList();
+
+          if (_storageService.getSections().isEmpty && !store.state.user.isAuthorized) {
+            yield LoadUserDataSuccessAction(
+              favoriteLectureIds: [],
+              selectedSectionIds: sectionIds,
+            );
+
+            _storageService.setSections(sectionIds);
+          }
         } catch (e) {
           yield LoadDataErrorAction();
         }
