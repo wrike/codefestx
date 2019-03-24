@@ -28,10 +28,11 @@ class Selectors {
       _getFilterLectures,
     );
 
-    getVisibleLectures = createSelector3(
+    getVisibleLectures = createSelector4(
       getFilterLectures,
       getSelectedSectionIds,
       getSearchText,
+      getFilterType,
       _getVisibleLectures,
     );
 
@@ -137,8 +138,12 @@ class Selectors {
 
   String _getTime(DateTime date) => '${date.hour}:${_formatHours(date.minute.toString())}';
 
-  Iterable<Lecture> _getVisibleLectures(Iterable<Lecture> lectures, Iterable<String> sectionIds, String searchText) {
-    Iterable<Lecture> result = lectures;
+  Iterable<Lecture> _getVisibleLectures(Iterable<Lecture> lectures, Iterable<String> sectionIds, String searchText, FilterTypeEnum filterType) {
+    var result = lectures;
+
+    if (filterType == FilterTypeEnum.favorite) {
+      return result;
+    }
 
     if (sectionIds.isNotEmpty) {
       result = result.where((lecture) => sectionIds.contains(lecture.section.id)).toList();
