@@ -20,6 +20,7 @@
     @include button-reset;
     @include font-main;
     color: $link-color;
+    cursor: pointer;
   }
 
   .welcome__content {
@@ -31,7 +32,7 @@
   }
 
   .welcome__container {
-    padding: 44px 0 120px;
+    padding: 44px 0;
     margin: auto 0;
   }
 
@@ -48,6 +49,10 @@
     font-size: $font-heading-3-size; // todo
     line-height: $font-heading-3-line-height; // todo
     color: $fg-color-secondary; // todo
+
+    svg {
+      vertical-align: -.18em;
+    }
   }
 
   .welcome__description-icon {
@@ -71,7 +76,11 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    height: 120px;
+    height: 72px;
     background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), #ffffff 24%, #ffffff);
+  }
+
+  .welcome__container-apply-button-gutter {
+    height: 72px;
   }
 }

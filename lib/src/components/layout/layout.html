@@ -66,6 +66,11 @@
       <span
         class="material-header-title">
         {{ title }}
+        <span class="badge">
+          <ng-content
+            select="[badge]"
+          ></ng-content>
+        </span>
       </span>
 
       <div

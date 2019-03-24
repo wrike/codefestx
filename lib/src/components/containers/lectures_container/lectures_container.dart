@@ -56,6 +56,8 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
     this._selectors,
   ) : super(zone, cdr, storeFactory);
 
+  List<List<List<Lecture>>> get groupedLectures => _selectors.getGroupedVisibleLectures(state);
+
   bool get isAllSelected => _selectors.getFilterType(state) == FilterTypeEnum.all;
 
   bool get isFavoriteSelected => _selectors.getFilterType(state) == FilterTypeEnum.favorite;
@@ -68,16 +70,22 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
 
   String get searchText => _selectors.getSearchText(state);
 
-  Iterable<Section> get sections => _selectors.getSelectedSections(state);
+  Iterable<Section> get sections => _selectors.getSelectedFilterSections(state);
 
   String endTime(Lecture lecture) => _selectors.getEndTimeText(lecture);
 
   String flag(Lecture lecture) => _selectors.getFlag(lecture);
 
-  String getDay(DateTime date) {
-    if (date.day == 30) {
+  String getDay(Iterable<Lecture> list) {
+    if (list.isEmpty) {
+      return '';
+    }
+
+    final lecture = list.elementAt(0);
+
+    if (lecture.startTime.day == 30) {
       return '30 Марта';
-    } else if (date.day == 31) {
+    } else if (lecture.startTime.day == 31) {
       return '31 Марта';
     }
 

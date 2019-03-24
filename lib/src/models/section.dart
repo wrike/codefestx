@@ -10,6 +10,7 @@ class Section {
   final String iconPath;
   final String color;
   final String description;
+  final bool isCustom;
 
   Section({
     @required this.id,
@@ -17,6 +18,7 @@ class Section {
     @required this.iconPath,
     @required this.color,
     @required this.description,
+    @required this.isCustom,
   });
 
   factory Section.fromJson(Map<String, dynamic> json) => _$SectionFromJson(json);

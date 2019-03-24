@@ -140,13 +140,8 @@ class CodefestReducer {
   CodefestState _onNewVersion(CodefestState state, NewVersionAction action) =>
       state.rebuild((b) => b.releaseNote = action.releaseNote);
 
-  CodefestState _onSearchLectures(CodefestState state, SearchLecturesAction action) => state.rebuild((b) {
-        final user = state.user.rebuild((b) {
-          b.searchText = action.searchText;
-        });
-
-        b.user.replace(user);
-      });
+  CodefestState _onSearchLectures(CodefestState state, SearchLecturesAction action) =>
+      state.rebuild((b) => b.user.update((u) => u.searchText = action.searchText));
 
   CodefestState _onStartLoading(CodefestState state, LoadDataStartAction action) =>
       state.rebuild((b) => b.isReady = false);
