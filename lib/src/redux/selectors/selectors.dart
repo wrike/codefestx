@@ -10,6 +10,8 @@ class Selectors {
 
   Selector<CodefestState, Iterable<Lecture>> getVisibleLectures;
 
+  Selector<CodefestState, List<List<List<Lecture>>>> getGroupedVisibleLectures;
+
   Selector<CodefestState, Iterable<Lecture>> getFilterLectures;
 
   Selector<CodefestState, Iterable<Lecture>> getRatingSortedLectures;
@@ -51,6 +53,11 @@ class Selectors {
       getSearchText,
       getFilterType,
       _getVisibleLectures,
+    );
+
+    getGroupedVisibleLectures = createSelector1(
+      getVisibleLectures,
+      _getGroupedVisibleLectures,
     );
 
     getRatingSortedLectures = createSelector1(
@@ -156,6 +163,16 @@ class Selectors {
     return selectedSectionIds.where(sectionIds.contains).toList();
   }
 
+  List<List<List<Lecture>>> _getGroupedVisibleLectures(Iterable<Lecture> lectures) {
+    final group = _group(lectures.toList(), (last, next) {
+      return last.startTime == next.startTime && last.duration == next.duration;
+    });
+
+    return _group(group, (last, next) {
+      return last.last.startTime.day == next.last.startTime.day;
+    });
+  }
+
   Iterable<String> _getLectureSearchFields(Lecture lecture) => [lecture.title, lecture.description]
     ..addAll(lecture.speakers.expand((speaker) => [speaker.name, speaker.description, speaker.company]))
     ..addAll([lecture.location.title, lecture.location.description]);
@@ -210,4 +227,22 @@ class Selectors {
 
     return result;
   }
+
+  List<List<T>> _group<T>(List<T> list, Function expression) => list.isEmpty
+      ? [[]]
+      : list.fold<List<List<T>>>([[]], (prev, next) {
+          if (prev.last.isEmpty) {
+            prev.last.add(next);
+          } else {
+            final last = prev.last.last;
+
+            if (expression(last, next)) {
+              prev.last.add(next);
+            } else {
+              prev.add([next]);
+            }
+          }
+
+          return prev;
+        }).toList();
 }
