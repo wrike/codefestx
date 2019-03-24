@@ -1,5 +1,13 @@
 @import '../../../../styles/main';
+@import "../../../../../../web/assets/styles/variables.scss";
 
 :host {
   display: block;
+
+  p {
+    text-align: center;
+    margin: 35px 0 0;
+
+    @include font-generator(14px, 22px);
+  }
 }
