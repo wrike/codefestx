@@ -64,3 +64,19 @@ $font-weight-bold: 600;
   -ms-user-select: $selection;
   user-select: $selection;
 }
+
+// Button reset
+@mixin button-reset {
+  padding: 0;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  outline: none;
+  -webkit-tap-highlight-color: transparent; // gets rid of tap active state
+
+  &::-moz-focus-inner {
+    padding: 0;
+    border: 0;
+  }
+}
+

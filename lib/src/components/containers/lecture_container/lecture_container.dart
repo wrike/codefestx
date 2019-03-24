@@ -5,6 +5,7 @@ import 'package:codefest/src/components/containers/stateful_component.dart';
 import 'package:codefest/src/components/layout/layout.dart';
 import 'package:codefest/src/components/loader/loader.dart';
 import 'package:codefest/src/components/ui/button/button.dart';
+import 'package:codefest/src/components/ui/tabs/tabs.dart';
 import 'package:codefest/src/models/lecture.dart';
 import 'package:codefest/src/redux/actions/change_lecture_favorite_action.dart';
 import 'package:codefest/src/redux/actions/change_lecture_like_action.dart';
@@ -25,6 +26,7 @@ import 'package:codefest/src/route_paths.dart';
     LayoutComponent,
     LoaderComponent,
     ButtonComponent,
+    TabsComponent,
     PopularityIconComponent,
   ],
   preserveWhitespace: true,
