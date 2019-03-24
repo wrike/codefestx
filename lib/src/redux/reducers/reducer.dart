@@ -129,6 +129,8 @@ class CodefestReducer {
         (b) => b
           ..user.replace(state.user.rebuild((b) {
             b
+              ..displayName = action.displayName
+              ..avatarPath = action.avatarPath
               ..favoriteLectureIds.replace(action.favoriteLectureIds)
               ..selectedSectionIds.replace(action.selectedSectionIds)
               ..likedLectureIds.replace(action.likedLectureIds ?? []);

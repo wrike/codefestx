@@ -25,6 +25,19 @@
         (click)="onMenuItemClick(item)">
         {{ item.title }}
       </material-list-item>
+
+      <div
+        *ngIf="isAuthorized">
+
+        <img [src]="avatarPath" alt="" width="50">
+
+        <div>{{ userName }}</div>
+
+        <div
+          (click)="onLogout()">
+          Выйти
+        </div>
+      </div>
     </div>
   </material-list>
 </material-drawer>

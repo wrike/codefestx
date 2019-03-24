@@ -5,9 +5,7 @@ import 'package:codefest/src/components/layout/layout.dart';
   selector: 'empty-container',
   styleUrls: ['empty_container.css'],
   templateUrl: 'empty_container.html',
-  directives: [
-    LayoutComponent,
-  ],
+  directives: [],
   preserveWhitespace: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 )

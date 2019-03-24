@@ -61,7 +61,8 @@ class Effects {
         final user = store.state.user;
 
         if (user.isAuthorized) {
-          await _dataLoader.updateUser(sectionIds: action.sectionIds, favoriteLectureIds: user.favoriteLectureIds.toList());
+          await _dataLoader.updateUser(
+              sectionIds: action.sectionIds, favoriteLectureIds: user.favoriteLectureIds.toList());
         } else {
           _storageService.setSections(action.sectionIds);
         }
@@ -104,6 +105,8 @@ class Effects {
             favoriteLectureIds: data.favoriteLecturesIds,
             likedLectureIds: data.likedLecturesIds,
             selectedSectionIds: data.sectionIds,
+            displayName: data.displayName,
+            avatarPath: data.avatar,
           );
         } catch (e) {
           yield LoadDataErrorAction();
@@ -148,6 +151,8 @@ class Effects {
             favoriteLectureIds: favoriteLectureIds,
             selectedSectionIds: sectionIds,
             likedLectureIds: data.likedLecturesIds,
+            displayName: data.displayName,
+            avatarPath: data.avatar,
           );
         } catch (e) {
           yield LoadDataErrorAction();

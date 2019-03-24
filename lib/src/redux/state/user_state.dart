@@ -20,6 +20,12 @@ abstract class UserState implements Built<UserState, UserStateBuilder> {
 
   UserState._();
 
+  @nullable
+  String get avatarPath;
+
+  @nullable
+  String get displayName;
+
   BuiltList<String> get favoriteLectureIds;
 
   @nullable

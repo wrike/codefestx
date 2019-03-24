@@ -5,12 +5,8 @@ import 'package:codefest/src/components/layout/layout.dart';
   selector: 'about-container',
   styleUrls: ['about_container.css'],
   templateUrl: 'about_container.html',
-  directives: [
-    LayoutComponent,
-  ],
+  directives: [],
   preserveWhitespace: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 )
-class AboutContainerComponent {
-
-}
+class AboutContainerComponent {}
