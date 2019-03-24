@@ -1,11 +1,11 @@
 import 'dart:async';
-import 'dart:html';
 
 import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:codefest/src/components/popups/new_version_popup/new_version_popup.dart';
 import 'package:codefest/src/redux/actions/authorize_action.dart';
 import 'package:codefest/src/redux/actions/load_user_data_action.dart';
+import 'package:codefest/src/redux/actions/load_user_data_from_storage_action.dart';
 import 'package:codefest/src/redux/actions/new_version_action.dart';
 import 'package:codefest/src/redux/effects/effects.dart';
 import 'package:codefest/src/redux/reducers/reducer.dart';
@@ -21,6 +21,7 @@ import 'package:codefest/src/services/auth_store.dart';
 import 'package:codefest/src/services/data_loader.dart';
 import 'package:codefest/src/services/http_proxy.dart';
 import 'package:codefest/src/services/sockets_service.dart';
+import 'package:codefest/src/services/storage_service.dart';
 import 'package:redux/redux.dart';
 
 @Component(
@@ -44,6 +45,7 @@ import 'package:redux/redux.dart';
     const ClassProvider<AuthService>(AuthService),
     const ClassProvider<AuthStore>(AuthStore),
     const ClassProvider<SocketService>(SocketService),
+    const ClassProvider<StorageService>(StorageService),
   ],
   exports: [
     RoutePaths,
@@ -106,10 +108,14 @@ class AppComponent implements OnDestroy, OnInit {
     if (_authStore.isAuth) {
       _dispatcher.dispatch(LoadUserDataAction());
       _dispatcher.dispatch(AuthorizeAction());
-    } else if (_authStore.isNewUser) {
-      _router.onRouteActivated.first.then((state) {
-        _router.navigateByUrl(RoutePaths.login.toUrl());
-      });
+    } else {
+      _dispatcher.dispatch(LoadUserDataFromStorageAction());
+
+      if (_authStore.isNewUser) {
+        _router.onRouteActivated.first.then((state) {
+          _router.navigateByUrl(RoutePaths.login.toUrl());
+        });
+      }
     }
 
     _socketService.onEvent
