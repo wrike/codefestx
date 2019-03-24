@@ -134,9 +134,12 @@
                       {{ lecture.location.title }}
                     </span>
 
+                    &ngsp;•&ngsp;
+
                     <!-- Section -->
                     <span
-                      class="event-card__meta-item">
+                      class="event-card__meta-item"
+                      [style.color]="lecture.section.color">
                       {{ lecture.section.title }}
                     </span>
 

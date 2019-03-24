@@ -83,10 +83,13 @@
             class="event__meta-item">
             {{ lecture.location.title }}
           </span>
+          
+          &ngsp;•&ngsp;
 
           <!-- Section -->
           <span
-            class="event__meta-item">
+            class="event__meta-item"
+            [style.color]="lecture.section.color">
             {{ lecture.section.title }}
           </span>
         </div>

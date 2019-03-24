@@ -10,6 +10,8 @@
     flex-wrap: nowrap;
     padding: 12px 0 12px 24px;
     overflow-x: auto;
+    z-index: 0;
+    -webkit-overflow-scrolling: touch;
   }
 
   .tags__item {
@@ -147,13 +149,6 @@
   .event-card__meta {
     color: $fg-color-secondary;
     margin-bottom: 4px;
-  }
-
-  .event-card__meta-item + .event-card__meta-item {
-
-    &::before {
-      content: "•";
-    }
   }
 
   .event-card__title {

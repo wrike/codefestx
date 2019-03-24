@@ -26,13 +26,6 @@
     margin-bottom: 4px;
   }
 
-  .event__meta-item + .event__meta-item {
-
-    &::before {
-      content: "•";
-    }
-  }
-
   .event__title {
     @include font-heading-1;
   }
