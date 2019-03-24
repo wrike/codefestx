@@ -1,5 +1,4 @@
 import 'package:angular/angular.dart';
-import 'package:codefest/src/components/layout/layout.dart';
 
 @Component(
   selector: 'about-container',

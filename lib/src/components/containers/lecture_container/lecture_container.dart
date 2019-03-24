@@ -74,8 +74,6 @@ class LectureContainerComponent extends StatefulComponent implements OnInit {
 
   bool get isReady => _selectors.isReady(state) && _isActivated && isLectureAvailable;
 
-  bool get hasRelated => true;
-
   Lecture get lecture => _selectors.getLecture(state, _parameters[idParam]);
 
   String get startTime => _selectors.getStartTimeText(lecture);
