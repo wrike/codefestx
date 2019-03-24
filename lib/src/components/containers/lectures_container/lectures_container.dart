@@ -78,6 +78,8 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
 
   String flag(Lecture lecture) => _selectors.getFlag(lecture);
 
+  String get title => isSearchMode ? '' : 'Расписание';
+
   String getDay(Iterable<Lecture> list) {
     if (list.isEmpty) {
       return '';
