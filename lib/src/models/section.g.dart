@@ -12,7 +12,8 @@ Section _$SectionFromJson(Map<String, dynamic> json) {
       title: json['title'] as String,
       iconPath: json['iconPath'] as String,
       color: json['color'] as String,
-      description: json['description'] as String);
+      description: json['description'] as String,
+      isCustom: json['isCustom'] as bool);
 }
 
 Map<String, dynamic> _$SectionToJson(Section instance) => <String, dynamic>{
@@ -20,5 +21,6 @@ Map<String, dynamic> _$SectionToJson(Section instance) => <String, dynamic>{
       'title': instance.title,
       'iconPath': instance.iconPath,
       'color': instance.color,
-      'description': instance.description
+      'description': instance.description,
+      'isCustom': instance.isCustom
     };
