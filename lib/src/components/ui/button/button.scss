@@ -14,10 +14,9 @@ $button-tag-padding-vertical: round(($button-tag-height - $font-line-box-main) /
   box-sizing: border-box;
   padding: $button-padding-vertical $button-padding-horizontal;
   margin: 0;
-  border: 1px solid transparent; // todo
+  border: none;
   border-radius: 8px; // todo
   background-color: #ffffff; // todo
-  background-origin: border-box;
   box-shadow: 0 2px 23px 0 rgba(0, 0, 0, 0.06); // todo
   outline: none;
   vertical-align: top;
@@ -59,6 +58,7 @@ $button-tag-padding-vertical: round(($button-tag-height - $font-line-box-main) /
 
 :host(.button-primary) {
   background-image: linear-gradient(to right, #33a7d8, #62d3ee); // todo
+  background-repeat-x: repeat; // todo
   box-shadow: 0 0 40px 0 rgba(51, 167, 216, 0.56); // todo
   color: #ffffff; // todo
 
