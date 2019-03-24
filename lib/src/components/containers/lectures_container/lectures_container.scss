@@ -21,6 +21,42 @@
   }
   // --- end tags
 
+  .buttons-group {
+    display: flex;
+    border-radius: 4px; // todo
+    background: #ffffff;
+
+    .button {
+      border-radius: 0;
+      background: none;
+      color: $fg-color-secondary; // todo
+
+      &.button-icon-only {
+        width: 40px; // todo
+      }
+
+      + .button {
+        border-left: 1px solid; // todo
+        border-color: #e8e9e8; // todo
+      }
+    }
+
+    &.buttons-group--selected {
+      background-image: linear-gradient(to right, #33a7d8, #62d3ee); // todo
+      background-size: 103% auto; // todo
+      box-shadow: 0 2px 23px 0 rgba(0, 0, 0, 0.06); // todo
+      color: #ffffff; // todo
+
+      .button {
+        color: #ffffff; // todo
+
+        + .button {
+          border-color: #98d0e8; // todo
+        }
+      }
+    }
+  }
+
   // schedule ---
 
   .schedule {
