@@ -100,7 +100,9 @@ class Selectors {
 
   bool isSectionSelected(CodefestState state, String sectionId) => getSelectedSectionIds(state).contains(sectionId);
 
-  bool isUpdateAvailable(CodefestState state) => state.isUpdateAvailable;
+  bool isUpdateAvailable(CodefestState state) => state.releaseNote.isNotEmpty;
+
+  String releaseNote(CodefestState state) => state.releaseNote;
 
   bool _fieldsContainsText(Iterable<String> fields, String text) =>
       fields.any((field) => field?.toLowerCase()?.contains(text.toLowerCase()) ?? false);

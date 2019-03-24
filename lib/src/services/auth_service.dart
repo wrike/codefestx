@@ -3,9 +3,7 @@ import 'dart:html';
 import 'package:codefest/src/models/auth.response.dart';
 import 'package:codefest/src/models/auth_get_url.response.dart';
 import 'package:codefest/src/models/auth_type.enum.dart';
-import 'package:codefest/src/services/auth_store.dart';
 import 'package:codefest/src/services/http_proxy.dart';
-import 'package:codefest/src/services/push_service.dart';
 
 class AuthService {
   static const tokenStorageKey = 'token';

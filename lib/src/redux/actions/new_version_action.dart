@@ -1,9 +1,9 @@
 import 'package:meta/meta.dart';
 
 class NewVersionAction {
-  final bool isAvailable;
+  final String releaseNote;
 
   NewVersionAction({
-    @required this.isAvailable,
+    @required this.releaseNote,
   });
 }
