@@ -1,23 +1,49 @@
 <loader
   [isReady]="isReady">
 
-  <div>
-    Выберите секции
+  <div
+    class="welcome__content">
+
+    <button
+      (click)="onClose()"
+      class="welcome__skip-button">
+      Пропустить
+    </button>
+
+    <section
+      class="welcome__container">
+
+      <div
+        class="welcome__text">
+
+        <h1
+          class="welcome__title">
+          Let’s get started
+        </h1>
+
+        <p
+          class="welcome__description">
+          Давай выберем секции и события, которые тебе интересны. Ты всегда сможешь поменять их, нажав на кнопку фильтра
+        </p>
+      </div>
+
+      <sections
+        [sections]="sections"
+        [selectedSectionIds]="selectedSectionIds"
+        (onSectionsChange)="onSectionsChange($event)"
+        class="welcome__sections">
+      </sections>
+    </section>
+
+    <div
+      class="welcome__apply-button-container">
+
+      <button
+        cf-button
+        (click)="onApply()"
+        class="welcome__apply-button button-primary button-full-width">
+        Применить
+      </button>
+    </div>
   </div>
-
-  <sections
-    [sections]="sections"
-    [selectedSectionIds]="selectedSectionIds"
-    (onSectionsChange)="onSectionsChange($event)">
-  </sections>
-
-  <button
-    (click)="onApply()">
-    Применить
-  </button>
-
-  <button
-    (click)="onClose()">
-    Пропустить
-  </button>
 </loader>
