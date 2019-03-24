@@ -41,7 +41,7 @@ class Selectors {
     );
   }
 
-  bool canLikeLecture(Lecture lecture) => lecture.startTime.isAfter(DateTime.now());
+  bool lectureStarted(Lecture lecture) => lecture.startTime.isBefore(DateTime.now());
 
   String getEndTime(Lecture lecture) {
     final endTime = lecture.startTime.add(new Duration(minutes: lecture.duration));
@@ -88,6 +88,8 @@ class Selectors {
   bool isAuthorized(CodefestState state) => getUser(state).isAuthorized;
 
   bool isError(CodefestState state) => state.isError;
+
+  bool isLikableLecture(Lecture lecture) => lecture.type == LectureType.lecture;
 
   bool isLikedLecture(CodefestState state, Lecture lecture) => getLikedLectureIds(state).contains(lecture.id);
 

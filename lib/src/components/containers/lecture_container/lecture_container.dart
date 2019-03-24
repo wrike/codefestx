@@ -54,7 +54,7 @@ class LectureContainerComponent extends StatefulComponent implements OnInit {
     });
   }
 
-  bool get canLikeLecture => _selectors.canLikeLecture(lecture);
+  bool get lectureStarted => _selectors.lectureStarted(lecture);
 
   String get endTime => _selectors.getEndTime(lecture);
 
@@ -64,11 +64,15 @@ class LectureContainerComponent extends StatefulComponent implements OnInit {
 
   bool get isLectureAvailable => lecture != null;
 
+  bool get isLikable => _selectors.isLikableLecture(lecture);
+
   bool get isLiked => _selectors.isLikedLecture(state, lecture);
 
   bool get isLoaded => _selectors.isLoaded(state);
 
   bool get isReady => _selectors.isReady(state) && _isActivated && isLectureAvailable;
+
+  bool get hasRelated => true;
 
   Lecture get lecture => _selectors.getLecture(state, _parameters[idParam]);
 
@@ -86,7 +90,7 @@ class LectureContainerComponent extends StatefulComponent implements OnInit {
   void onLikeClick() {
     if (!isAuthorized) {
       _router.navigateByUrl(RoutePaths.login.toUrl());
-    } else if (canLikeLecture) {
+    } else if (lectureStarted) {
       _dispatcher.dispatch(ChangeLectureLikeAction(lectureId: lecture.id, isLiked: !isLiked));
     }
   }
