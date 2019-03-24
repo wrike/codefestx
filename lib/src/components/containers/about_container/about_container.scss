@@ -34,16 +34,15 @@
 
     .about__options-item {
         flex-basis: 100px;
+        display: flex;
+        flex-direction: column;
 
         &:not(:last-child) {
             margin-right: 20px;
         }
 
-        img {
-            display: block;
-        }
         .about__options-item-text {
-            margin-top: 18px;
+            margin-top: 16px;
         }
     }
 
@@ -65,7 +64,7 @@
 
     .about__alt-text {
         position: relative;
-        background: $bgr-color;
+        background: $bg-color;
         padding: 0 10px;
     }
 

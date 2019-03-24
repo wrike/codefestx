@@ -28,10 +28,11 @@ class Selectors {
       _getFilterLectures,
     );
 
-    getVisibleLectures = createSelector3(
+    getVisibleLectures = createSelector4(
       getFilterLectures,
       getSelectedSectionIds,
       getSearchText,
+      getFilterType,
       _getVisibleLectures,
     );
 
@@ -41,7 +42,7 @@ class Selectors {
     );
   }
 
-  bool canLikeLecture(Lecture lecture) => lecture.startTime.isAfter(DateTime.now());
+  bool lectureStarted(Lecture lecture) => lecture.startTime.isBefore(DateTime.now());
 
   String getEndTime(Lecture lecture) {
     final endTime = lecture.startTime.add(new Duration(minutes: lecture.duration));
@@ -89,6 +90,8 @@ class Selectors {
 
   bool isError(CodefestState state) => state.isError;
 
+  bool isLikableLecture(Lecture lecture) => lecture.type == LectureType.lecture;
+
   bool isLikedLecture(CodefestState state, Lecture lecture) => getLikedLectureIds(state).contains(lecture.id);
 
   bool isLoaded(CodefestState state) => state.isLoaded;
@@ -99,20 +102,22 @@ class Selectors {
 
   bool isSectionSelected(CodefestState state, String sectionId) => getSelectedSectionIds(state).contains(sectionId);
 
-  bool isUpdateAvailable(CodefestState state) => state.isUpdateAvailable;
+  bool isUpdateAvailable(CodefestState state) => state.releaseNote.isNotEmpty;
+
+  String releaseNote(CodefestState state) => state.releaseNote;
 
   bool _fieldsContainsText(Iterable<String> fields, String text) =>
       fields.any((field) => field?.toLowerCase()?.contains(text.toLowerCase()) ?? false);
 
   String _formatHours(String hours) => hours.length == 1 ? '${hours}0' : hours;
 
-  Iterable<Lecture> _getFavoriteLectures(Iterable<Lecture> lectures) =>
-      lectures.where((lectures) => lectures.isFavorite).toList();
+  Iterable<Lecture> _getFavoriteLectures(Iterable<Lecture> lectures, UserState user) =>
+      lectures.where((lecture) => user.favoriteLectureIds.contains(lecture.id)).toList();
 
   Iterable<Lecture> _getFilterLectures(Iterable<Lecture> lectures, UserState user, FilterTypeEnum filterType) {
     switch (filterType) {
       case FilterTypeEnum.favorite:
-        return _getFavoriteLectures(lectures);
+        return _getFavoriteLectures(lectures, user);
       case FilterTypeEnum.section:
         return _getSectionLectures(lectures, user.filterSectionId);
       default:
@@ -135,8 +140,12 @@ class Selectors {
 
   String _getTime(DateTime date) => '${date.hour}:${_formatHours(date.minute.toString())}';
 
-  Iterable<Lecture> _getVisibleLectures(Iterable<Lecture> lectures, Iterable<String> sectionIds, String searchText) {
-    Iterable<Lecture> result = lectures;
+  Iterable<Lecture> _getVisibleLectures(Iterable<Lecture> lectures, Iterable<String> sectionIds, String searchText, FilterTypeEnum filterType) {
+    var result = lectures;
+
+    if (filterType == FilterTypeEnum.favorite) {
+      return result;
+    }
 
     if (sectionIds.isNotEmpty) {
       result = result.where((lecture) => sectionIds.contains(lecture.section.id)).toList();

@@ -13,7 +13,6 @@ import 'package:codefest/src/redux/services/dispatcher.dart';
 import 'package:codefest/src/redux/services/store_factory.dart';
 import 'package:codefest/src/route_paths.dart';
 
-
 @Component(
   selector: 'sections-container',
   styleUrls: ['sections_container.css'],

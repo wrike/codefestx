@@ -22,7 +22,7 @@
   // event ---
 
   .event__meta {
-    color: $font-color-secondary;
+    color: $fg-color-secondary;
     margin-bottom: 4px;
   }
 
@@ -53,8 +53,32 @@
     line-height: 20px; // todo
   }
 
-  .event__vote {
-    margin-top: 24px;
+  .event__vote::before {
+    content: '';
+    display: block;
+    margin: 27px 0 23px;
+    height: 1px;
+    opacity: 0.1;
+    border-radius: 8px;
+    background-color: $fg-color-primary;
+  }
+
+  .event__vote-title {
+    @include font-heading-3;
+    text-align: center;
+  }
+
+  .event__vote-description {
+    text-align: center;
+  }
+
+  .event__vote-button {
+    margin: 16px 0;
+  }
+
+  .event__vote-disabled-info {
+    text-align: center;
+    color: $fg-color-secondary;
   }
 
   .event__related {

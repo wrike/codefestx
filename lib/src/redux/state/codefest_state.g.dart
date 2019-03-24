@@ -14,7 +14,7 @@ class _$CodefestState extends CodefestState {
   @override
   final bool isReady;
   @override
-  final bool isUpdateAvailable;
+  final String releaseNote;
   @override
   final BuiltList<Lecture> lectures;
   @override
@@ -33,7 +33,7 @@ class _$CodefestState extends CodefestState {
       {this.isError,
       this.isLoaded,
       this.isReady,
-      this.isUpdateAvailable,
+      this.releaseNote,
       this.lectures,
       this.locations,
       this.sections,
@@ -49,8 +49,8 @@ class _$CodefestState extends CodefestState {
     if (isReady == null) {
       throw new BuiltValueNullFieldError('CodefestState', 'isReady');
     }
-    if (isUpdateAvailable == null) {
-      throw new BuiltValueNullFieldError('CodefestState', 'isUpdateAvailable');
+    if (releaseNote == null) {
+      throw new BuiltValueNullFieldError('CodefestState', 'releaseNote');
     }
     if (lectures == null) {
       throw new BuiltValueNullFieldError('CodefestState', 'lectures');
@@ -83,7 +83,7 @@ class _$CodefestState extends CodefestState {
         isError == other.isError &&
         isLoaded == other.isLoaded &&
         isReady == other.isReady &&
-        isUpdateAvailable == other.isUpdateAvailable &&
+        releaseNote == other.releaseNote &&
         lectures == other.lectures &&
         locations == other.locations &&
         sections == other.sections &&
@@ -103,7 +103,7 @@ class _$CodefestState extends CodefestState {
                                 $jc($jc(0, isError.hashCode),
                                     isLoaded.hashCode),
                                 isReady.hashCode),
-                            isUpdateAvailable.hashCode),
+                            releaseNote.hashCode),
                         lectures.hashCode),
                     locations.hashCode),
                 sections.hashCode),
@@ -117,7 +117,7 @@ class _$CodefestState extends CodefestState {
           ..add('isError', isError)
           ..add('isLoaded', isLoaded)
           ..add('isReady', isReady)
-          ..add('isUpdateAvailable', isUpdateAvailable)
+          ..add('releaseNote', releaseNote)
           ..add('lectures', lectures)
           ..add('locations', locations)
           ..add('sections', sections)
@@ -143,10 +143,9 @@ class CodefestStateBuilder
   bool get isReady => _$this._isReady;
   set isReady(bool isReady) => _$this._isReady = isReady;
 
-  bool _isUpdateAvailable;
-  bool get isUpdateAvailable => _$this._isUpdateAvailable;
-  set isUpdateAvailable(bool isUpdateAvailable) =>
-      _$this._isUpdateAvailable = isUpdateAvailable;
+  String _releaseNote;
+  String get releaseNote => _$this._releaseNote;
+  set releaseNote(String releaseNote) => _$this._releaseNote = releaseNote;
 
   ListBuilder<Lecture> _lectures;
   ListBuilder<Lecture> get lectures =>
@@ -180,7 +179,7 @@ class CodefestStateBuilder
       _isError = _$v.isError;
       _isLoaded = _$v.isLoaded;
       _isReady = _$v.isReady;
-      _isUpdateAvailable = _$v.isUpdateAvailable;
+      _releaseNote = _$v.releaseNote;
       _lectures = _$v.lectures?.toBuilder();
       _locations = _$v.locations?.toBuilder();
       _sections = _$v.sections?.toBuilder();
@@ -213,7 +212,7 @@ class CodefestStateBuilder
               isError: isError,
               isLoaded: isLoaded,
               isReady: isReady,
-              isUpdateAvailable: isUpdateAvailable,
+              releaseNote: releaseNote,
               lectures: lectures.build(),
               locations: locations.build(),
               sections: sections.build(),

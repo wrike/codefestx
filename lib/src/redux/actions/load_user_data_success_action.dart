@@ -1,10 +1,13 @@
-import 'package:codefest/src/models/user.dart';
 import 'package:meta/meta.dart';
 
 class LoadUserDataSuccessAction {
-  final User user;
+  final Iterable<String> favoriteLectureIds;
+  final Iterable<String> likedLectureIds;
+  final Iterable<String> selectedSectionIds;
 
   LoadUserDataSuccessAction({
-    @required this.user,
+    @required this.favoriteLectureIds,
+    @required this.selectedSectionIds,
+    this.likedLectureIds,
   });
 }
