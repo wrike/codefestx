@@ -42,9 +42,11 @@ class WelcomeContainerComponent extends StatefulComponent implements OnInit {
     this._router,
   ) : super(zone, cdr, storeFactory);
 
+  Iterable<Section> get customSections => _selectors.getCustomSections(state);
+
   bool get isReady => _selectors.isReady(state);
 
-  Iterable<Section> get sections => _selectors.getSections(state);
+  Iterable<Section> get mainSections => _selectors.getMainSections(state);
 
   @HostBinding('class.welcome')
   final bool isHostMarked = true;

@@ -10,7 +10,23 @@
     class="sections__grid">
 
     <cf-section
-      *ngFor="let section of sections"
+      *ngFor="let section of mainSections"
+      (change)="onSectionClick(section)"
+      [title]="section.title"
+      [isChecked]="isSectionSelected(section)">
+    </cf-section>
+  </div>
+
+  <h2
+    class="sections__group-title">
+    События
+  </h2>
+
+  <div
+    class="sections__grid">
+
+    <cf-section
+      *ngFor="let section of customSections"
       (change)="onSectionClick(section)"
       [title]="section.title"
       [isChecked]="isSectionSelected(section)">

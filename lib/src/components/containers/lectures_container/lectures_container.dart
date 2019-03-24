@@ -68,7 +68,7 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
 
   String get searchText => _selectors.getSearchText(state);
 
-  Iterable<Section> get sections => _selectors.getSelectedSections(state);
+  Iterable<Section> get sections => _selectors.getSelectedFilterSections(state);
 
   String endTime(Lecture lecture) => _selectors.getEndTimeText(lecture);
 
