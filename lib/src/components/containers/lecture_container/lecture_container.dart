@@ -54,7 +54,7 @@ class LectureContainerComponent extends StatefulComponent implements OnInit {
     });
   }
 
-  bool get lectureStarted => _selectors.lectureStarted(lecture);
+  bool get lectureStarted => true;//_selectors.lectureStarted(lecture);
 
   String get endTime => _selectors.getEndTime(lecture);
 
@@ -66,7 +66,7 @@ class LectureContainerComponent extends StatefulComponent implements OnInit {
 
   bool get isLikable => _selectors.isLikableLecture(lecture);
 
-  bool get isLiked => _selectors.isLikedLecture(state, lecture);
+  bool get isLiked => true;//_selectors.isLikedLecture(state, lecture);
 
   bool get isLoaded => _selectors.isLoaded(state);
 

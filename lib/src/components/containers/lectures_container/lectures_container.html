@@ -14,40 +14,41 @@
       (onFilter)="onFilter()">
     </layout-actions>
 
+
+    <!-- Tags -->
+    <div
+      pre-content
+      class="tags">
+
+      <button
+        cf-button
+        (click)="onShowAllClick()"
+        [class.button-primary]="isShowAllVisible"
+        class="tags__item button-tag">
+        Все
+      </button>
+
+      <button
+        cf-button
+        (click)="onShowFavoriteClick()"
+        [class.button-primary]="isFavoriteVisible"
+        class="tags__item button-tag">
+        Избранные
+      </button>
+
+      <button
+        *ngFor="let section of sections"
+        cf-button
+        (click)="onShowSectionClick(section)"
+        [class.button-primary]="isShowSectionVisible(section)"
+        class="tags__item button-tag">
+        {{ section.title }}
+      </button>
+    </div>
+
     <!-- Content -->
     <div
       content>
-
-      <!-- Tags -->
-      <div
-        class="tags">
-
-        <button
-          cf-button
-          (click)="onShowAllClick()"
-          [class.button-primary]="isShowAllVisible"
-          class="tags__item button-tag">
-          Все
-        </button>
-
-        <button
-          cf-button
-          (click)="onShowFavoriteClick()"
-          [class.button-primary]="isFavoriteVisible"
-          class="tags__item button-tag">
-          Избранные
-        </button>
-
-        <button
-          *ngFor="let section of sections"
-          cf-button
-          (click)="onShowSectionClick(section)"
-          [class.button-primary]="isShowSectionVisible(section)"
-          class="tags__item button-tag">
-          {{ section.title }}
-        </button>
-      </div>
-
       <!-- Schedule -->
       <div
         *ngIf="lectures.isEmpty"

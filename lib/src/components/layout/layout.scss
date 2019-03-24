@@ -5,7 +5,7 @@
 
   .layout__content {
     display: grid;
-    grid-template-rows: [header] auto [content] 1fr;
+    grid-template-rows: [header] auto [pre-content] auto [content] 1fr;
     height: 100%;
   }
 
