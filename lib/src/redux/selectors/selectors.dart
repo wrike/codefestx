@@ -42,12 +42,9 @@ class Selectors {
     );
   }
 
-  bool lectureStarted(Lecture lecture) => lecture.startTime.isBefore(DateTime.now());
+  DateTime getEndTime(Lecture lecture) => lecture.startTime.add(Duration(minutes: lecture.duration));
 
-  String getEndTime(Lecture lecture) {
-    final endTime = lecture.startTime.add(new Duration(minutes: lecture.duration));
-    return _getTime(endTime);
-  }
+  String getEndTimeText(Lecture lecture) => _getTimeText(getEndTime(lecture));
 
   Iterable<String> getFavoriteLectureIds(CodefestState state) => getUser(state).favoriteLectureIds;
 
@@ -68,8 +65,6 @@ class Selectors {
   Lecture getLecture(CodefestState state, String lectureId) =>
       getVisibleLectures(state).firstWhere((lecture) => lecture.id == lectureId, orElse: () => null);
 
-  bool isFavoriteLecture(CodefestState state, Lecture lecture) => getFavoriteLectureIds(state).contains(lecture.id);
-
   Iterable<Lecture> getLectures(CodefestState state) => state.lectures;
 
   Iterable<String> getLikedLectureIds(CodefestState state) => getUser(state).likedLectureIds;
@@ -82,13 +77,15 @@ class Selectors {
 
   Iterable<String> getSelectedSectionIds(CodefestState state) => getUser(state).selectedSectionIds;
 
-  String getStartTime(Lecture lecture) => _getTime(lecture.startTime);
+  String getStartTimeText(Lecture lecture) => _getTimeText(lecture.startTime);
 
   UserState getUser(CodefestState state) => state.user;
 
   bool isAuthorized(CodefestState state) => getUser(state).isAuthorized;
 
   bool isError(CodefestState state) => state.isError;
+
+  bool isFavoriteLecture(CodefestState state, Lecture lecture) => getFavoriteLectureIds(state).contains(lecture.id);
 
   bool isLikableLecture(Lecture lecture) => lecture.type == LectureType.lecture;
 
@@ -103,6 +100,8 @@ class Selectors {
   bool isSectionSelected(CodefestState state, String sectionId) => getSelectedSectionIds(state).contains(sectionId);
 
   bool isUpdateAvailable(CodefestState state) => state.releaseNote.isNotEmpty;
+
+  bool lectureStarted(Lecture lecture) => lecture.startTime.isBefore(DateTime.now());
 
   String releaseNote(CodefestState state) => state.releaseNote;
 
@@ -138,9 +137,10 @@ class Selectors {
   Iterable<Section> _getSelectedSections(Iterable<Section> sections, Iterable<String> sectionIds) =>
       sections.where((section) => sectionIds.contains(section.id));
 
-  String _getTime(DateTime date) => '${date.hour}:${_formatHours(date.minute.toString())}';
+  String _getTimeText(DateTime date) => '${date.hour}:${_formatHours(date.minute.toString())}';
 
-  Iterable<Lecture> _getVisibleLectures(Iterable<Lecture> lectures, Iterable<String> sectionIds, String searchText, FilterTypeEnum filterType) {
+  Iterable<Lecture> _getVisibleLectures(
+      Iterable<Lecture> lectures, Iterable<String> sectionIds, String searchText, FilterTypeEnum filterType) {
     var result = lectures;
 
     if (filterType == FilterTypeEnum.favorite) {

@@ -4,6 +4,7 @@ import 'dart:html';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:codefest/src/components/ui/button/button.dart';
+import 'package:codefest/src/components/ui/popularity_icon/popularity_icon.dart';
 
 @Component(
   selector: 'actions',
@@ -13,7 +14,8 @@ import 'package:codefest/src/components/ui/button/button.dart';
     NgIf,
     MaterialButtonComponent,
     MaterialIconComponent,
-    ButtonComponent
+    ButtonComponent,
+    PopularityIconComponent,
   ],
   preserveWhitespace: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -23,6 +25,9 @@ class ActionsComponent {
 
   @Input()
   bool isFavorite = false;
+
+  @Input()
+  int popularity = 0;
 
   @Output()
   Stream<bool> get onFavoriteChange => _onFavoriteChangeStreamController.stream;

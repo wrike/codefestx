@@ -120,7 +120,7 @@ class AppComponent implements OnDestroy, OnInit {
 
       if (_authStore.isNewUser) {
         _router.onRouteActivated.first.then((state) {
-          _router.navigateByUrl(RoutePaths.login.toUrl());
+          _router.navigateByUrl(RoutePaths.welcome.toUrl());
         });
       }
     }
