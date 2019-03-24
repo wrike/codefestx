@@ -8,8 +8,16 @@ part of 'auth.response.dart';
 
 AuthResponse _$AuthResponseFromJson(Map<String, dynamic> json) {
   return AuthResponse(
-      token: json['token'] as String, userName: json['userName'] as String);
+      token: json['token'] as String,
+      userName: json['userName'] as String,
+      userId: json['userId'] as String,
+      avatar: json['avatar'] as String);
 }
 
 Map<String, dynamic> _$AuthResponseToJson(AuthResponse instance) =>
-    <String, dynamic>{'token': instance.token, 'userName': instance.userName};
+    <String, dynamic>{
+      'token': instance.token,
+      'userName': instance.userName,
+      'userId': instance.userId,
+      'avatar': instance.avatar
+    };
