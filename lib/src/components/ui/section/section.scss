@@ -1,0 +1,49 @@
+@import "../../../../../web/assets/styles/variables";
+
+:host {
+  display: block;
+
+  .section__label {
+    display: block;
+    height: 56px; // todo
+    padding: 8px 32px 8px 8px; // todo
+    position: relative;
+    background-color: #ffffff; // todo
+    border-radius: 8px; // todo
+    box-shadow: 0 2px 23px 0 rgba(0, 0, 0, 0.06); // todo
+    font-weight: $font-weight-bold;
+  }
+
+  .section__input {
+    position: absolute;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+
+  .section__box {
+    width: 16px; // todo
+    height: 16px; // todo
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    border-radius: 50%;
+    background-color: #e0e0e2; // todo
+  }
+
+  .section__input:checked + .section__box {
+    background: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZmlsbD0ibm9uZSIgZD0iTS0xLTFoNTgydjQwMkgtMXoiLz48Zz48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTAgMThhMiAyIDAgMCAxLTEuNC0uNmwtNC00YTIgMiAwIDAgMSAwLTIuOGMuOC0uOCAyLjEtLjggMi44IDBsMi42IDIuNiA2LjYtNi42YTIgMiAwIDAgMSAyLjggMGMuOC44LjggMiAwIDIuOGwtOCA4YTIgMiAwIDAgMS0xLjQuNnoiLz48L2c+PC9zdmc+") no-repeat center center,
+                linear-gradient(to right, #33a7d8, #62d3ee); // todo
+    background-size: 12px auto, 100% auto;
+  }
+
+  .section__input:focus + .section__box {
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .16),
+                0 0 1px 0 rgba(0, 0, 0, .16); // todo
+  }
+
+  .section__input:disabled + .section_box,
+  .section__input:checked:disabled + .section__box {
+    opacity: .5; // todo
+  }
+}

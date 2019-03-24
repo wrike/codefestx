@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:angular/angular.dart';
 import 'package:codefest/src/models/section.dart';
+import 'package:codefest/src/components/ui/section/section.dart';
 
 @Component(
   selector: 'sections',
@@ -9,12 +10,16 @@ import 'package:codefest/src/models/section.dart';
   templateUrl: 'sections.html',
   directives: [
     NgFor,
+    SectionComponent
   ],
   providers: [],
   preserveWhitespace: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 )
 class SectionsComponent {
+  @HostBinding('class.sections')
+  final bool isHostMarked = true;
+
   @Input()
   Iterable<Section> sections = [];
 
