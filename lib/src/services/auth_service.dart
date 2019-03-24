@@ -16,8 +16,6 @@ class AuthService {
   static const routePathKey = 'routePath';
 
   final HttpProxy _http;
-  final PushService _push;
-  final AuthStore _authStore;
 
   Map<AuthType, String> _authUrls = {
     AuthType.VK: 'auth/vk/uri',
@@ -31,7 +29,7 @@ class AuthService {
     '{ghstate}': 'auth/github/callback',
   };
 
-  AuthService(this._http, this._push, this._authStore);
+  AuthService(this._http);
 
   void clearRoutePath() {
     window.localStorage.remove(routePathKey);
@@ -39,9 +37,6 @@ class AuthService {
 
   void init() {
     window.localStorage[initStorageKey] = initStorageValue;
-    if (_authStore.isAuth) {
-      _push.init(_authStore.userId);
-    }
   }
 
   void login(AuthType authType) async {
