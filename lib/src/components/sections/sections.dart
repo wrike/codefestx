@@ -10,7 +10,7 @@ import 'package:codefest/src/components/ui/section/section.dart';
   templateUrl: 'sections.html',
   directives: [
     NgFor,
-    SectionComponent
+    SectionComponent,
   ],
   providers: [],
   preserveWhitespace: true,
