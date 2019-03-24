@@ -54,7 +54,7 @@ class DataLoader {
     @required Iterable<String> sectionIds,
     @required Iterable<String> favoriteLectureIds,
   }) =>
-      _http.post(_userPath, {
+      _http.put(_userPath, {
         'sectionIds': sectionIds,
         'favoriteIds': favoriteLectureIds,
       });

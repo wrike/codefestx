@@ -129,9 +129,9 @@ class CodefestReducer {
         (b) => b
           ..user.replace(state.user.rebuild((b) {
             b
-              ..selectedSectionIds.replace(action.user.sectionIds)
-              ..likedLectureIds.replace(action.user.likedLecturesIds)
-              ..favoriteLectureIds.replace(action.user.favoriteLecturesIds);
+              ..favoriteLectureIds.replace(action.favoriteLectureIds)
+              ..selectedSectionIds.replace(action.selectedSectionIds)
+              ..likedLectureIds.replace(action.likedLectureIds ?? []);
           })),
       );
 
