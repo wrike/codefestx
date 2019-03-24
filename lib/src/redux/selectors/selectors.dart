@@ -44,7 +44,8 @@ class Selectors {
       _getFilterLectures,
     );
 
-    getVisibleLectures = createSelector5(
+    getVisibleLectures = createSelector6(
+      getLectures,
       getFilterLectures,
       getSelectedMainSectionIds,
       getSelectedCustomSectionIds,
@@ -133,7 +134,7 @@ class Selectors {
   String releaseNote(CodefestState state) => state.releaseNote;
 
   bool _fieldsContainsText(Iterable<String> fields, String text) =>
-      fields.any((field) => field?.toLowerCase()?.contains(text.toLowerCase()) ?? false);
+      fields.any((field) => field?.toLowerCase()?.contains(text) ?? false);
 
   String _formatHours(String hours) => hours.length == 1 ? '${hours}0' : hours;
 
@@ -182,29 +183,39 @@ class Selectors {
 
   String _getTimeText(DateTime date) => '${date.hour}:${_formatHours(date.minute.toString())}';
 
-  Iterable<Lecture> _getVisibleLectures(Iterable<Lecture> lectures, Iterable<String> mainSectionIds,
-      Iterable<String> customSectionIds, String searchText, FilterTypeEnum filterType) {
-    final sectionIds = []..addAll(mainSectionIds)..addAll(customSectionIds);
+  Iterable<Lecture> _getVisibleLectures(
+      Iterable<Lecture> allLectures,
+      Iterable<Lecture> filteredLectures,
+      Iterable<String> mainSectionIds,
+      Iterable<String> customSectionIds,
+      String searchText,
+      FilterTypeEnum filterType,
+  ) {
+    final sectionIds = []
+      ..addAll(mainSectionIds)
+      ..addAll(customSectionIds);
 
-    Iterable<Lecture> result = lectures;
+    Iterable<Lecture> result = filteredLectures;
 
     if (filterType == FilterTypeEnum.favorite) {
       return result;
     }
 
     if (mainSectionIds.isNotEmpty) {
-      result = result.where((lecture) => sectionIds.contains(lecture.section.id)).toList();
+      result = result
+          .where((lecture) => sectionIds.contains(lecture.section.id))
+          .toList();
     } else if (customSectionIds.isNotEmpty) {
       result = result
           .where((lecture) => !lecture.section.isCustom || customSectionIds.contains(lecture.section.id))
           .toList();
     }
 
-    if (searchText != null && searchText.isNotEmpty) {
-      result = result.where((lecture) {
+    if (searchText?.isNotEmpty ?? false) {
+      result = allLectures.where((lecture) {
         final fields = _getLectureSearchFields(lecture);
 
-        return _fieldsContainsText(fields, searchText);
+        return _fieldsContainsText(fields, searchText.toLowerCase());
       }).toList();
     }
 
