@@ -28,7 +28,7 @@ class PushOptions {
 
 
 class PushService {
-  void subscribe(String userId) {
+  void init(String userId) {
     print('PushService subscribe with $userId');
     final options = PushOptions(
         logLevel: 'info',
