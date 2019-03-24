@@ -24,8 +24,11 @@ class NewVersionPopupComponent {
     this._dispatcher,
   );
 
+  @Input()
+  String message = 'У новые крутые фичи!';
+
   void close() {
-    _dispatcher.dispatch(NewVersionAction(isAvailable: false));
+    _dispatcher.dispatch(NewVersionAction(releaseNote: ''));
   }
 
   void reload() {

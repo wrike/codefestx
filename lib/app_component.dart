@@ -100,6 +100,8 @@ class AppComponent implements OnDestroy, OnInit {
 
   bool get isUpdateAvailable => _selectors.isUpdateAvailable(state);
 
+  String get releaseNote => _selectors.releaseNote(state);
+
   CodefestState get state => _store.state;
 
   @override
@@ -125,7 +127,7 @@ class AppComponent implements OnDestroy, OnInit {
 
     _socketService.onEvent
         .where((event) => event.command == 'reload')
-        .listen((data) => _dispatcher.dispatch(NewVersionAction(isAvailable: true)));
+        .listen((event) => _dispatcher.dispatch(NewVersionAction(releaseNote: event.data)));
 
     _socketService.onEvent
         .where((event) => event.command == 'change-lectures')

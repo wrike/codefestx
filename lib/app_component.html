@@ -15,5 +15,6 @@
 </div>
 
 <new-version-popup
-  *ngIf="isUpdateAvailable">
+  *ngIf="isUpdateAvailable"
+  [message]="releaseNote">
 </new-version-popup>
