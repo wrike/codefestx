@@ -1,4 +1,5 @@
 import 'package:angular/angular.dart';
+import 'package:codefest/src/components/containers/rating_container/rating_empty_state/rating_empty_state.dart';
 import 'package:codefest/src/components/layout/layout.dart';
 import 'package:codefest/src/components/containers/stateful_component.dart';
 import 'package:codefest/src/models/lecture.dart';
@@ -12,8 +13,10 @@ import 'package:codefest/src/redux/services/store_factory.dart';
   styleUrls: ['rating_container.css'],
   templateUrl: 'rating_container.html',
   directives: [
+    NgIf,
     NgFor,
     LayoutComponent,
+    RatingEmptyStateComponent,
   ],
   preserveWhitespace: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -30,7 +33,7 @@ class RatingContainerComponent extends StatefulComponent implements OnInit {
     this._dispatcher,
   ) : super(zone, cdr, storeFactory);
 
-  Iterable<Lecture> get lectures => _selectors.getRatingLectures(state);
+  Iterable<Lecture> get lectures => _selectors.getRatingSortedLectures(state);
 
   @override
   void ngOnInit() {
