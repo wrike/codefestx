@@ -56,6 +56,8 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
     this._selectors,
   ) : super(zone, cdr, storeFactory);
 
+  dynamic trackByIdentity(int index, dynamic item) => item;
+
   List<List<List<Lecture>>> get groupedLectures => _selectors.getGroupedVisibleLectures(state);
 
   bool get isAllSelected => _selectors.getFilterType(state) == FilterTypeEnum.all;

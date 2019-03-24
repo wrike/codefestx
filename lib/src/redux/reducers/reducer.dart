@@ -115,7 +115,7 @@ class CodefestReducer {
                     duration: lecture.duration,
                     location: action.locations.firstWhere((location) => location.id == lecture.locationId),
                     section: action.sections.firstWhere((section) => section.id == lecture.sectionId),
-                    speakers: action.speakers.where((speaker) => lecture.speakerIds.contains(speaker.id)),
+                    speakers: action.speakers.where((speaker) => lecture.speakerIds.contains(speaker.id)).toList(),
                     isFavorite: lecture.isFavorite,
                     isLiked: lecture.isLiked,
                     likesCount: lecture.likesCount,
