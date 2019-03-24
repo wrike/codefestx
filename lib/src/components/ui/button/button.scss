@@ -8,7 +8,9 @@ $button-tag-height: 32px;
 $button-tag-padding-vertical: round(($button-tag-height - $font-line-box-main) / 2);
 
 :host {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   box-sizing: border-box;
   padding: $button-padding-vertical $button-padding-horizontal;
   margin: 0;
@@ -18,10 +20,11 @@ $button-tag-padding-vertical: round(($button-tag-height - $font-line-box-main) /
   background-color: #ffffff; // todo
   box-shadow: 0 2px 23px 0 rgba(0, 0, 0, 0.06); // todo
   outline: none;
+  vertical-align: top;
   font-family: $font-family-default;
   font-weight: $font-weight-bold;
-  font-size: $font-size-main;
-  line-height: $font-line-height-main;
+  font-size: $font-heading-3-size; // todo
+  line-height: $font-heading-3-line-height; // todo
   text-align: center;
   color: $font-color-main;
   cursor: pointer;
@@ -42,6 +45,15 @@ $button-tag-padding-vertical: round(($button-tag-height - $font-line-box-main) /
   &:disabled {
     opacity: .5;
     cursor: default;
+  }
+
+  // todo
+  ::ng-deep {
+
+    .button-icon {
+      display: block;
+      margin-right: 4px;
+    }
   }
 }
 
@@ -71,6 +83,8 @@ $button-tag-padding-vertical: round(($button-tag-height - $font-line-box-main) /
   border-color: transparent;
   border-radius: 4px; // todo
   box-shadow: 0 2px 23px 0 rgba(0, 0, 0, 0.06); // todo
+  font-size: $font-size-main;
+  line-height: $font-line-height-main;
 
   &:not(.button-primary) {
     color: $font-color-secondary;
@@ -89,7 +103,6 @@ $button-tag-padding-vertical: round(($button-tag-height - $font-line-box-main) /
   }
 }
 
-:host(.button-block) {
-  display: block;
+:host(.button-full-width) {
   width: 100%;
 }
