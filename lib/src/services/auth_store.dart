@@ -5,6 +5,7 @@ import 'package:codefest/src/services/auth_service.dart';
 class AuthStore {
   String get token => window.localStorage[AuthService.tokenStorageKey];
   String get userName => window.localStorage[AuthService.userNameStorageKey];
+  String get userId => window.localStorage[AuthService.userIdStorageKey];
   String get init => window.localStorage[AuthService.initStorageKey];
   String get routePath => window.localStorage[AuthService.routePathKey];
 
