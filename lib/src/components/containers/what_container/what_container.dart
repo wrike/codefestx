@@ -4,6 +4,7 @@ import 'package:codefest/src/components/containers/stateful_component.dart';
 import 'package:codefest/src/components/layout/layout.dart';
 import 'package:codefest/src/components/ui/tabs/tabs.dart';
 import 'package:codefest/src/redux/services/store_factory.dart';
+import 'package:codefest/src/services/releases_factory.dart';
 
 import 'what_routes.dart';
 
@@ -27,6 +28,8 @@ class WhatContainerComponent extends StatefulComponent {
   final Router _router;
 
   bool isAboutUsEnable = true;
+
+  int get releaseCount => ReleasesFactory.all.length;
 
   WhatContainerComponent(
     NgZone zone,
