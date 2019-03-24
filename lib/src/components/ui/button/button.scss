@@ -25,7 +25,7 @@ $button-tag-padding-vertical: round(($button-tag-height - $font-line-box-main) /
   font-size: $font-heading-3-size; // todo
   line-height: $font-heading-3-line-height; // todo
   text-align: center;
-  color: $font-color-main;
+  color: $fg-color-primary;
   cursor: pointer;
   @include user-select(none);
 
@@ -84,7 +84,7 @@ $button-tag-padding-vertical: round(($button-tag-height - $font-line-box-main) /
   line-height: $font-line-height-main;
 
   &:not(.button-primary) {
-    color: $font-color-secondary;
+    color: $fg-color-secondary;
   }
 
   &:hover {
@@ -105,7 +105,7 @@ $button-tag-padding-vertical: round(($button-tag-height - $font-line-box-main) /
   height: 32px;
   background: transparent;
   box-shadow: none;
-  color: $font-color-main;
+  color: $fg-color-primary;
   padding: 0;
 
   // todo
