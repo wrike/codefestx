@@ -2,6 +2,7 @@
 
 :host {
   display: flex;
+  flex-direction: column;
   height: 100%;
   padding: 24px; // todo
   position: relative;
@@ -12,8 +13,8 @@
     right: 24px;
   }
 
-  .login__section {
-    margin: auto;
+  .login__container {
+    margin: auto 0;
     text-align: center;
   }
 
@@ -25,7 +26,7 @@
     margin-top: 8px;
     font-size: $font-heading-3-size; // todo
     line-height: $font-heading-3-line-height; // todo
-    color: $fg-color-secondary;
+    color: $fg-color-secondary; // todo
   }
 
   .login__buttons {

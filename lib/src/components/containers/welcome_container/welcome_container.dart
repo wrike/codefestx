@@ -1,5 +1,6 @@
 import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
+import 'package:codefest/src/components/ui/button/button.dart';
 import 'package:codefest/src/components/containers/stateful_component.dart';
 import 'package:codefest/src/components/loader/loader.dart';
 import 'package:codefest/src/components/sections/sections.dart';
@@ -19,6 +20,7 @@ import 'package:codefest/src/route_paths.dart';
     NgFor,
     SectionsComponent,
     LoaderComponent,
+    ButtonComponent,
   ],
   providers: [],
   preserveWhitespace: true,
@@ -45,6 +47,9 @@ class WelcomeContainerComponent extends StatefulComponent implements OnInit {
   bool get isReady => _selectors.isReady(state);
 
   Iterable<Section> get mainSections => _selectors.getMainSections(state);
+
+  @HostBinding('class.welcome')
+  final bool isHostMarked = true;
 
   @override
   void ngOnInit() {
