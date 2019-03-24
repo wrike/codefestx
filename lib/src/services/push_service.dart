@@ -28,7 +28,8 @@ class PushOptions {
 
 
 class PushService {
-  void init(String userId) {
+  void subscribe(String userId) {
+    print('PushService subscribe with $userId');
     final options = PushOptions(
         logLevel: 'info',
         applicationCode: '7DA94-50B16',
