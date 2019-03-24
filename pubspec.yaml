@@ -1,8 +1,6 @@
 name: codefest
-description: A web app that uses AngularDart Components
+description: CodeFest X Application
 version: 1.0.0
-# homepage: https://www.example.com
-# author: podkorytov <email@example.com>
 
 environment:
   sdk: '>=2.2.0 <3.0.0'
@@ -21,6 +19,7 @@ dependencies:
   rxdart: ^0.20.0
   reselect: ^0.4.0
   socket_io_client: ^0.9.1
+  js: ^0.6.0
 
 dev_dependencies:
   angular_test: ^2.2.0

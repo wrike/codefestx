@@ -1,17 +1,33 @@
 <loader
   [isReady]="isReady">
 
-  Фильтр ({{ selectedSectionCount }})
+  <layout
+    *ngIf="isReady"
+    [title]="'Фильтр'">
 
-  <button
-    (click)="onClose()">
+    <div
+      actions>
 
-    X
-  </button>
+      <material-button
+        icon
+        (click)="onClose()">
 
-  <sections
-    [sections]="sections"
-    [selectedSectionIds]="selectedSectionIds"
-    (onSectionsChange)="onSectionsChange($event)">
-  </sections>
+        <material-icon
+          icon="close">
+        </material-icon>
+      </material-button>
+    </div>
+
+    <div
+      content>
+
+      {{ selectedSectionCount }}
+
+      <sections
+        [sections]="sections"
+        [selectedSectionIds]="selectedSectionIds"
+        (onSectionsChange)="onSectionsChange($event)">
+      </sections>
+    </div>
+  </layout>
 </loader>

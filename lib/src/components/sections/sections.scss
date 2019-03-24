@@ -1,11 +1,20 @@
-@import '../../styles/main';
+@import "../../../../web/assets/styles/variables.scss";
 
 :host {
-  button {
-    display: block;
+  display: block;
+
+  .sections__group + .sections__group {
+    margin-top: 24px;
   }
 
-  .selected {
-    background-color: $mat-blue;
+  .sections__group-title {
+    margin-bottom: 8px;
+    @include font-heading-3;
+  }
+
+  .sections__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 8px;
   }
 }

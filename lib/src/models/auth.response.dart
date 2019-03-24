@@ -7,10 +7,14 @@ part 'auth.response.g.dart';
 class AuthResponse {
   final String token;
   final String userName;
+  final String userId;
+  final String avatar;
 
   AuthResponse({
     @required this.token,
     this.userName,
+    this.userId,
+    this.avatar,
   });
 
   factory AuthResponse.fromJson(Map<String, dynamic> json) => _$AuthResponseFromJson(json);

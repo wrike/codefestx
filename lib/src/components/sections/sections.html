@@ -1,7 +1,19 @@
-<button
-  *ngFor="let section of sections"
-  (click)="onSectionClick(section)"
-  [class.selected]="isSectionSelected(section)">
+<section
+  class="sections__group">
 
- {{ section.title }}
-</button>
+  <h2
+    class="sections__group-title">
+    Title here
+  </h2>
+
+  <div
+    class="sections__grid">
+
+    <cf-section
+      *ngFor="let section of sections"
+      (change)="onSectionClick(section)"
+      [title]="section.title"
+      [isChecked]="isSectionSelected(section)">
+    </cf-section>
+  </div>
+</section>

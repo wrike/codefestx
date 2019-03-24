@@ -1,6 +1,8 @@
 import 'package:angular/angular.dart';
+import 'package:angular_components/angular_components.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:codefest/src/components/loader/loader.dart';
+import 'package:codefest/src/components/layout/layout.dart';
 import 'package:codefest/src/components/sections/sections.dart';
 import 'package:codefest/src/components/containers/stateful_component.dart';
 import 'package:codefest/src/models/section.dart';
@@ -11,14 +13,19 @@ import 'package:codefest/src/redux/services/dispatcher.dart';
 import 'package:codefest/src/redux/services/store_factory.dart';
 import 'package:codefest/src/route_paths.dart';
 
+
 @Component(
   selector: 'sections-container',
   styleUrls: ['sections_container.css'],
   templateUrl: 'sections_container.html',
   directives: [
+    NgIf,
     NgFor,
     SectionsComponent,
     LoaderComponent,
+    LayoutComponent,
+    MaterialButtonComponent,
+    MaterialIconComponent
   ],
   providers: [],
   preserveWhitespace: true,

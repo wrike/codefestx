@@ -3,11 +3,14 @@ import 'dart:html';
 import 'package:codefest/src/models/auth.response.dart';
 import 'package:codefest/src/models/auth_get_url.response.dart';
 import 'package:codefest/src/models/auth_type.enum.dart';
+import 'package:codefest/src/services/auth_store.dart';
 import 'package:codefest/src/services/http_proxy.dart';
+import 'package:codefest/src/services/push_service.dart';
 
 class AuthService {
   static const tokenStorageKey = 'token';
   static const userNameStorageKey = 'userName';
+  static const userIdStorageKey = 'userId';
   static const initStorageKey = 'init';
   static const initStorageValue = 'yes';
   static const routePathKey = 'routePath';
@@ -55,6 +58,7 @@ class AuthService {
     final authResponse = await _http.get<AuthResponse>(url, decoder: (j) => AuthResponse.fromJson(j));
     window.localStorage[tokenStorageKey] = authResponse.token;
     window.localStorage[userNameStorageKey] = authResponse.userName;
+    window.localStorage[userIdStorageKey] = authResponse.userId;
   }
 
   void setRoutePath(String path) {

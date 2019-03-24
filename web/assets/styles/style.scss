@@ -13,12 +13,20 @@ body {
   height: 100%;
 }
 
-body {
-  width: 600px;
-  height: 100%;
-  margin: 0 auto;
-  background-color: #ffffff; // todo
+html, body {
+  min-height: 100%;
+  background-color: $bgr-color;
   @include font-main;
+}
+
+@media(min-width: 600px) {
+  html {
+    background-color: #fff;
+  }
+  body {
+    width: 600px;
+    margin: 0 auto;
+  }
 }
 
 .visually-hidden {

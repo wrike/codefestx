@@ -20,6 +20,7 @@ import 'package:codefest/src/services/auth_service.dart';
 import 'package:codefest/src/services/auth_store.dart';
 import 'package:codefest/src/services/data_loader.dart';
 import 'package:codefest/src/services/http_proxy.dart';
+import 'package:codefest/src/services/push_service.dart';
 import 'package:codefest/src/services/sockets_service.dart';
 import 'package:codefest/src/services/storage_service.dart';
 import 'package:redux/redux.dart';
@@ -44,6 +45,7 @@ import 'package:redux/redux.dart';
     const ClassProvider<HttpProxy>(HttpProxy),
     const ClassProvider<AuthService>(AuthService),
     const ClassProvider<AuthStore>(AuthStore),
+    const ClassProvider<PushService>(PushService),
     const ClassProvider<SocketService>(SocketService),
     const ClassProvider<StorageService>(StorageService),
   ],
@@ -64,6 +66,7 @@ class AppComponent implements OnDestroy, OnInit {
   final SocketService _socketService;
   final AuthStore _authStore;
   final Router _router;
+  final PushService _pushService;
 
   final List<StreamSubscription> _subscriptions = [];
 
@@ -79,6 +82,7 @@ class AppComponent implements OnDestroy, OnInit {
     this._selectors,
     this._authStore,
     this._router,
+    this._pushService,
   ) {
     _zone.runOutsideAngular(() {
       _store = _storeFactory.getStore(_stateFactory.getInitialState());
@@ -108,6 +112,7 @@ class AppComponent implements OnDestroy, OnInit {
     if (_authStore.isAuth) {
       _dispatcher.dispatch(LoadUserDataAction());
       _dispatcher.dispatch(AuthorizeAction());
+      Future.delayed(const Duration(seconds: 5)).then((_) => _pushService.init(_authStore.userId));
     } else {
       _dispatcher.dispatch(LoadUserDataFromStorageAction());
 
