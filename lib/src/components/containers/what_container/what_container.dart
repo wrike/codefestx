@@ -1,7 +1,7 @@
 import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:codefest/src/components/layout/layout.dart';
-import 'package:codefest/src/components/ui/button/button.dart';
+import 'package:codefest/src/components/ui/tabs/tabs.dart';
 import 'what_routes.dart';
 
 @Component(
@@ -11,7 +11,7 @@ import 'what_routes.dart';
   directives: [
     LayoutComponent,
     RouterOutlet,
-    ButtonComponent
+    TabsComponent
   ],
   exports: [
     Routes, RoutePaths
