@@ -2,6 +2,7 @@ import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:codefest/src/components/containers/lectures_container/actions/actions.dart';
+import 'package:codefest/src/components/containers/lectures_container/favorite_empty_state/favorite_empty_state.dart';
 import 'package:codefest/src/components/containers/lectures_container/layout_actions/layout_actions.dart';
 import 'package:codefest/src/components/containers/stateful_component.dart';
 import 'package:codefest/src/components/layout/layout.dart';
@@ -34,6 +35,7 @@ import 'package:codefest/src/route_paths.dart';
     LayoutActionsComponent,
     LoaderComponent,
     ButtonComponent,
+    FavoriteEmptyStateComponent,
   ],
   preserveWhitespace: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -54,13 +56,13 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
     this._selectors,
   ) : super(zone, cdr, storeFactory);
 
-  bool get isFavoriteVisible => _selectors.getFilterType(state) == FilterTypeEnum.favorite;
+  bool get isAllSelected => _selectors.getFilterType(state) == FilterTypeEnum.all;
+
+  bool get isFavoriteSelected => _selectors.getFilterType(state) == FilterTypeEnum.favorite;
 
   bool get isReady => _selectors.isReady(state);
 
   bool get isSearchMode => _selectors.isSearchMode(state);
-
-  bool get isShowAllVisible => _selectors.getFilterType(state) == FilterTypeEnum.all;
 
   Iterable<Lecture> get lectures => _selectors.getVisibleLectures(state);
 
@@ -99,7 +101,7 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
     return _now.isAfter(lecture.startTime) && _now.isBefore(endTime);
   }
 
-  bool isShowSectionVisible(Section section) => _selectors.getFilterSectionId(state) == section.id;
+  bool isSectionSelected(Section section) => _selectors.getFilterSectionId(state) == section.id;
 
   bool isTimeVisible(Lecture next, int index) {
     final prev = index > 0 ? lectures.elementAt(index - 1) : null;
