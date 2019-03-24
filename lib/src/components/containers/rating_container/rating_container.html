@@ -9,5 +9,9 @@
 
       {{ lecture.title }}
     </div>
+
+    <rating-empty-state
+      *ngIf="lectures.isEmpty">
+    </rating-empty-state>
   </div>
 </layout>

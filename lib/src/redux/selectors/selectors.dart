@@ -12,7 +12,7 @@ class Selectors {
 
   Selector<CodefestState, Iterable<Lecture>> getFilterLectures;
 
-  Selector<CodefestState, Iterable<Lecture>> getRatingLectures;
+  Selector<CodefestState, Iterable<Lecture>> getRatingSortedLectures;
 
   Selectors() {
     getSelectedSections = createSelector2(
@@ -36,9 +36,9 @@ class Selectors {
       _getVisibleLectures,
     );
 
-    getRatingLectures = createSelector1(
+    getRatingSortedLectures = createSelector1(
       getLectures,
-      _getRatingLectures,
+      _getRatingSortedLectures,
     );
   }
 
@@ -128,8 +128,9 @@ class Selectors {
     ..addAll(lecture.speakers.expand((speaker) => [speaker.name, speaker.description, speaker.company]))
     ..addAll([lecture.location.title, lecture.location.description]);
 
-  Iterable<Lecture> _getRatingLectures(Iterable<Lecture> lectures) =>
-      lectures.toList()..sort((lecture1, lecture2) => lecture1.likesCount < lecture2.likesCount ? 1 : -1);
+  Iterable<Lecture> _getRatingSortedLectures(Iterable<Lecture> lectures) =>
+      lectures.where((lecture) => lecture.likesCount > 3).toList()
+        ..sort((lecture1, lecture2) => lecture1.likesCount < lecture2.likesCount ? 1 : -1);
 
   Iterable<Lecture> _getSectionLectures(Iterable<Lecture> lectures, String sectionId) =>
       lectures.where((lecture) => lecture.section.id == sectionId);
