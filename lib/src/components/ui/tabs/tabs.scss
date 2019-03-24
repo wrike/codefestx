@@ -1,0 +1,53 @@
+@import "../../../../../web/assets/styles/variables";
+
+:host {
+  display: flex;
+  align-items: center;
+  height: 48px;
+
+  // todo
+  ::ng-deep {
+
+    .tabs__button {
+      flex-grow: 1;
+      flex-basis: 0;
+      @include button-reset;
+      @include font-main;
+      display: flex;
+      align-items: center;
+      height: 100%;
+      color: #bcbec5; // todo
+      font-weight: $font-weight-bold;
+      cursor: pointer;
+    }
+
+    .tabs__button--active {
+      color: $font-color-main;
+
+      .tabs__button-text::after {
+        content: "";
+        display: block;
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background: #33a7d8; // todo
+        position: absolute;
+        bottom: -4px;
+        margin-left: auto;
+        margin-right: auto;
+        left: 0;
+        right: 0;
+      }
+    }
+
+    .tabs__button-text {
+      display: block;
+      position: relative;
+      margin: 0 auto;
+    }
+
+    .tabs__button-text-amount {
+      color: #e1e2e8;
+    }
+  }
+}
