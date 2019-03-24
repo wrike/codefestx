@@ -51,7 +51,10 @@ $button-tag-padding-vertical: round(($button-tag-height - $font-line-box-main) /
 
     .button-icon {
       display: block;
-      margin-right: 4px;
+
+      &:not(:last-child) {
+        margin-right: 4px;
+      }
     }
   }
 }
