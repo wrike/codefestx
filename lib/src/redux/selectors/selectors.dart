@@ -23,13 +23,13 @@ class Selectors {
   Selectors() {
     getSelectedMainSectionIds = createSelector2(
       getSelectedSectionIds,
-      getMainSections,
-      _getFilterSectionIds,
+      getSections,
+      _getFilterMainSectionIds,
     );
     getSelectedCustomSectionIds = createSelector2(
       getSelectedSectionIds,
-      getCustomSections,
-      _getFilterSectionIds,
+      getSections,
+      _getFilterCustomSectionIds,
     );
 
     getSelectedFilterSections = createSelector3(
@@ -159,8 +159,13 @@ class Selectors {
     }
   }
 
-  Iterable<String> _getFilterSectionIds(Iterable<String> selectedSectionIds, Iterable<Section> sections) {
-    final sectionIds = sections.map((section) => section.id);
+  Iterable<String> _getFilterMainSectionIds(Iterable<String> selectedSectionIds, Iterable<Section> sections) {
+    final sectionIds = sections.where((section) => !section.isCustom).map((section) => section.id);
+    return selectedSectionIds.where(sectionIds.contains).toList();
+  }
+
+  Iterable<String> _getFilterCustomSectionIds(Iterable<String> selectedSectionIds, Iterable<Section> sections) {
+    final sectionIds = sections.where((section) => section.isCustom).map((section) => section.id);
     return selectedSectionIds.where(sectionIds.contains).toList();
   }
 

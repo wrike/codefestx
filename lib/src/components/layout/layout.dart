@@ -6,6 +6,7 @@ import 'package:codefest/src/redux/selectors/selectors.dart';
 import 'package:codefest/src/redux/state/codefest_state.dart';
 import 'package:codefest/src/route_paths.dart';
 import 'package:codefest/src/services/auth_service.dart';
+import 'package:codefest/src/services/auth_store.dart';
 import 'package:gtag_analytics/gtag_analytics.dart';
 
 @Component(
@@ -38,6 +39,7 @@ import 'package:gtag_analytics/gtag_analytics.dart';
 class LayoutComponent implements OnInit {
   final Selectors _selectors;
   final Router _router;
+  final AuthStore _authStore;
   final AuthService _authService;
 
   final ga = GoogleAnalytics();
@@ -60,6 +62,7 @@ class LayoutComponent implements OnInit {
     this._router,
     this._selectors,
     this._authService,
+    this._authStore,
   );
 
   String get avatarPath => _selectors.getUserAvatarPath(state);
@@ -74,7 +77,7 @@ class LayoutComponent implements OnInit {
   void ngOnInit() {
     ga.sendPageView();
 
-    if (isAuthorized) {
+    if (_authStore.isAuth) {
       _menu.remove(RoutePaths.login);
     }
   }
