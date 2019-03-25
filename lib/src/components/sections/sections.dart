@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:angular/angular.dart';
-import 'package:codefest/src/models/section.dart';
 import 'package:codefest/src/components/ui/section/section.dart';
+import 'package:codefest/src/models/section.dart';
 
 @Component(
   selector: 'sections',
@@ -24,12 +24,17 @@ class SectionsComponent {
   Iterable<Section> mainSections = [];
 
   @Input()
-  Iterable<Section> customSections = [];
+  bool isCustomSectionMode = false;
 
   @Input()
   Iterable<String> selectedSectionIds = [];
 
   final _onSectionsChange = new StreamController<List<String>>.broadcast();
+
+  final _onCustomSectionModeChange = new StreamController<bool>.broadcast();
+
+  @Output()
+  Stream<bool> get onCustomSectionModeChange => _onCustomSectionModeChange.stream;
 
   @Output()
   Stream<List<String>> get onSectionsChange => _onSectionsChange.stream;
@@ -37,6 +42,10 @@ class SectionsComponent {
   int get selectedSectionCount => selectedSectionIds.length;
 
   bool isSectionSelected(Section section) => selectedSectionIds.contains(section.id);
+
+  void onCustomSectionModeClick() {
+    _onCustomSectionModeChange.add(!isCustomSectionMode);
+  }
 
   void onSectionClick(Section section) {
     final result = selectedSectionIds.toList();

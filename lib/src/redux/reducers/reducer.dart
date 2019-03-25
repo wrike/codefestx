@@ -37,7 +37,7 @@ class CodefestReducer {
   CodefestState getState(CodefestState state, Object action) => _reducer(state, action);
 
   CodefestState _onAuthorize(CodefestState state, AuthorizeAction action) => state.rebuild((b) {
-        final user = b.user.build().rebuild((b) {
+        final user = state.user.rebuild((b) {
           b.isAuthorized = true;
         });
 
@@ -78,8 +78,9 @@ class CodefestReducer {
 
   CodefestState _onChangeSelectedSections(CodefestState state, ChangeSelectedSectionsAction action) =>
       state.rebuild((b) {
-        final user = b.user.build().rebuild((b) {
+        final user = state.user.rebuild((b) {
           b.selectedSectionIds.replace(action.sectionIds);
+          b.isCustomSectionMode = action.isCustomSectionMode;
         });
 
         b.user.replace(user);
@@ -129,11 +130,12 @@ class CodefestReducer {
         (b) => b
           ..user.replace(state.user.rebuild((b) {
             b
-              ..displayName = action.displayName
-              ..avatarPath = action.avatarPath
               ..favoriteLectureIds.replace(action.favoriteLectureIds)
               ..selectedSectionIds.replace(action.selectedSectionIds)
-              ..likedLectureIds.replace(action.likedLectureIds ?? []);
+              ..likedLectureIds.replace(action.likedLectureIds ?? [])
+              ..displayName = action.displayName ?? ''
+              ..avatarPath = action.avatarPath ?? ''
+              ..isCustomSectionMode = action.isCustomSectionMode;
           })),
       );
 

@@ -6,6 +6,7 @@ class LoadUserDataSuccessAction {
   final Iterable<String> selectedSectionIds;
   final String displayName;
   final String avatarPath;
+  final bool isCustomSectionMode;
 
   LoadUserDataSuccessAction({
     @required this.favoriteLectureIds,
@@ -13,5 +14,6 @@ class LoadUserDataSuccessAction {
     this.likedLectureIds,
     this.displayName,
     this.avatarPath,
+    this.isCustomSectionMode,
   });
 }

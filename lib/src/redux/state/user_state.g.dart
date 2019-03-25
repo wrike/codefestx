@@ -9,6 +9,8 @@ part of 'user_state.dart';
 const FilterTypeEnum _$all = const FilterTypeEnum._('all');
 const FilterTypeEnum _$favorite = const FilterTypeEnum._('favorite');
 const FilterTypeEnum _$section = const FilterTypeEnum._('section');
+const FilterTypeEnum _$custom = const FilterTypeEnum._('custom');
+const FilterTypeEnum _$now = const FilterTypeEnum._('now');
 
 FilterTypeEnum _$valueOf(String name) {
   switch (name) {
@@ -18,6 +20,10 @@ FilterTypeEnum _$valueOf(String name) {
       return _$favorite;
     case 'section':
       return _$section;
+    case 'custom':
+      return _$custom;
+    case 'now':
+      return _$now;
     default:
       throw new ArgumentError(name);
   }
@@ -28,6 +34,8 @@ final BuiltSet<FilterTypeEnum> _$values =
   _$all,
   _$favorite,
   _$section,
+  _$custom,
+  _$now,
 ]);
 
 class _$UserState extends UserState {
@@ -43,6 +51,8 @@ class _$UserState extends UserState {
   final FilterTypeEnum filterType;
   @override
   final bool isAuthorized;
+  @override
+  final bool isCustomSectionMode;
   @override
   final bool isSearchMode;
   @override
@@ -62,6 +72,7 @@ class _$UserState extends UserState {
       this.filterSectionId,
       this.filterType,
       this.isAuthorized,
+      this.isCustomSectionMode,
       this.isSearchMode,
       this.likedLectureIds,
       this.searchText,
@@ -75,6 +86,9 @@ class _$UserState extends UserState {
     }
     if (isAuthorized == null) {
       throw new BuiltValueNullFieldError('UserState', 'isAuthorized');
+    }
+    if (isCustomSectionMode == null) {
+      throw new BuiltValueNullFieldError('UserState', 'isCustomSectionMode');
     }
     if (isSearchMode == null) {
       throw new BuiltValueNullFieldError('UserState', 'isSearchMode');
@@ -104,6 +118,7 @@ class _$UserState extends UserState {
         filterSectionId == other.filterSectionId &&
         filterType == other.filterType &&
         isAuthorized == other.isAuthorized &&
+        isCustomSectionMode == other.isCustomSectionMode &&
         isSearchMode == other.isSearchMode &&
         likedLectureIds == other.likedLectureIds &&
         searchText == other.searchText &&
@@ -120,12 +135,14 @@ class _$UserState extends UserState {
                         $jc(
                             $jc(
                                 $jc(
-                                    $jc($jc(0, avatarPath.hashCode),
-                                        displayName.hashCode),
-                                    favoriteLectureIds.hashCode),
-                                filterSectionId.hashCode),
-                            filterType.hashCode),
-                        isAuthorized.hashCode),
+                                    $jc(
+                                        $jc($jc(0, avatarPath.hashCode),
+                                            displayName.hashCode),
+                                        favoriteLectureIds.hashCode),
+                                    filterSectionId.hashCode),
+                                filterType.hashCode),
+                            isAuthorized.hashCode),
+                        isCustomSectionMode.hashCode),
                     isSearchMode.hashCode),
                 likedLectureIds.hashCode),
             searchText.hashCode),
@@ -141,6 +158,7 @@ class _$UserState extends UserState {
           ..add('filterSectionId', filterSectionId)
           ..add('filterType', filterType)
           ..add('isAuthorized', isAuthorized)
+          ..add('isCustomSectionMode', isCustomSectionMode)
           ..add('isSearchMode', isSearchMode)
           ..add('likedLectureIds', likedLectureIds)
           ..add('searchText', searchText)
@@ -179,6 +197,11 @@ class UserStateBuilder implements Builder<UserState, UserStateBuilder> {
   bool get isAuthorized => _$this._isAuthorized;
   set isAuthorized(bool isAuthorized) => _$this._isAuthorized = isAuthorized;
 
+  bool _isCustomSectionMode;
+  bool get isCustomSectionMode => _$this._isCustomSectionMode;
+  set isCustomSectionMode(bool isCustomSectionMode) =>
+      _$this._isCustomSectionMode = isCustomSectionMode;
+
   bool _isSearchMode;
   bool get isSearchMode => _$this._isSearchMode;
   set isSearchMode(bool isSearchMode) => _$this._isSearchMode = isSearchMode;
@@ -209,6 +232,7 @@ class UserStateBuilder implements Builder<UserState, UserStateBuilder> {
       _filterSectionId = _$v.filterSectionId;
       _filterType = _$v.filterType;
       _isAuthorized = _$v.isAuthorized;
+      _isCustomSectionMode = _$v.isCustomSectionMode;
       _isSearchMode = _$v.isSearchMode;
       _likedLectureIds = _$v.likedLectureIds?.toBuilder();
       _searchText = _$v.searchText;
@@ -243,6 +267,7 @@ class UserStateBuilder implements Builder<UserState, UserStateBuilder> {
               filterSectionId: filterSectionId,
               filterType: filterType,
               isAuthorized: isAuthorized,
+              isCustomSectionMode: isCustomSectionMode,
               isSearchMode: isSearchMode,
               likedLectureIds: likedLectureIds.build(),
               searchText: searchText,

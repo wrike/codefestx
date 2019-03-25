@@ -4,6 +4,7 @@ import 'dart:html';
 class StorageService {
   static const String _favoritesKey = 'favorites';
   static const String _sectionsKey = 'sections';
+  static const String _customSectionMode = 'customSectionMode';
 
   void addFavoriteLecture(String lectureId) => _addToList(_favoritesKey, lectureId);
 
@@ -11,6 +12,12 @@ class StorageService {
     _clear(_favoritesKey);
     _clear(_sectionsKey);
   }
+
+  void setCustomSectionMode(bool value) {
+    _set(_customSectionMode, value);
+  }
+
+  bool getCustomSectionMode() => _get(_customSectionMode);
 
   Iterable<String> getFavoriteLectures() {
     final result = <String>[];

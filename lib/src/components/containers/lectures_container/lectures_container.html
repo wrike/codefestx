@@ -44,7 +44,7 @@
           cf-button
           (click)="onShowAllClick()"
           class="button-tag">
-          Все
+          {{ filterTitle }}
         </button>
       </div>
 
@@ -57,12 +57,19 @@
       </button>
 
       <button
-        *ngFor="let section of sections"
         cf-button
-        (click)="onShowSectionClick(section)"
-        [class.button-primary]="isSectionSelected(section)"
+        (click)="onShowNowClick()"
+        [class.button-primary]="isNowSelected"
         class="tags__item button-tag">
-        {{ section.title }}
+        Идет сейчас
+      </button>
+
+      <button
+        cf-button
+        (click)="onShowCustomClick()"
+        [class.button-primary]="isCustomSelected"
+        class="tags__item button-tag">
+        Мероприятия
       </button>
     </nav>
 
@@ -79,19 +86,19 @@
         class="schedule">
 
         <section
-          *ngFor="let group1 of groupedLectures; let i = index"
+          *ngFor="let groupedTime of groupedLectures; let i = index"
           class="schedule__section-day">
 
           <div>
-            {{ getDay(group1[i]) }}
+            {{ getDay(groupedTime) }}
           </div>
 
           <section
-            *ngFor="let group2 of group1"
+            *ngFor="let lectures of groupedTime"
             class="schedule__section-time">
 
             <template
-              ngFor let-lecture [ngForOf]="group2" let-i="index">
+              ngFor let-lecture [ngForOf]="lectures" let-i="index">
 
               <div
                 class="schedule__event event">

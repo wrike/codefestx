@@ -30,10 +30,9 @@
     class="sections__grid">
 
     <cf-section
-      *ngFor="let section of customSections"
-      (change)="onSectionClick(section)"
-      [title]="section.title"
-      [isChecked]="isSectionSelected(section)">
+      (change)="onCustomSectionModeClick()"
+      [title]="'Показывать мероприятия'"
+      [isChecked]="isCustomSectionMode">
     </cf-section>
   </div>
 </section>

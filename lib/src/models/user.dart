@@ -10,6 +10,7 @@ class User {
   final Iterable<String> favoriteLecturesIds;
   final Iterable<String> sectionIds;
   final String avatar;
+  final bool isCustomSectionMode;
 
   User({
     @required this.displayName,
@@ -17,6 +18,7 @@ class User {
     @required this.favoriteLecturesIds,
     @required this.sectionIds,
     @required this.avatar,
+    @required this.isCustomSectionMode,
   });
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);

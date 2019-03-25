@@ -8,11 +8,13 @@ import 'package:reselect/reselect.dart';
 class Selectors {
   Selector<CodefestState, Iterable<Section>> getSelectedFilterSections;
 
+  Selector<CodefestState, Iterable<Section>> getSelectedSections;
+
   Selector<CodefestState, Iterable<Lecture>> getVisibleLectures;
 
   Selector<CodefestState, List<List<List<Lecture>>>> getGroupedVisibleLectures;
 
-  Selector<CodefestState, Iterable<Lecture>> getFilterLectures;
+  Selector<CodefestState, Iterable<Lecture>> getFilteredLectures;
 
   Selector<CodefestState, Iterable<Lecture>> getRatingSortedLectures;
 
@@ -26,6 +28,7 @@ class Selectors {
       getSections,
       _getFilterMainSectionIds,
     );
+
     getSelectedCustomSectionIds = createSelector2(
       getSelectedSectionIds,
       getSections,
@@ -39,19 +42,25 @@ class Selectors {
       _getSelectedFilterSections,
     );
 
-    getFilterLectures = createSelector3(
+    getSelectedSections = createSelector2(
+      getSections,
+      getSelectedSectionIds,
+      _getSelectedSections,
+    );
+
+    getFilteredLectures = createSelector3(
       getLectures,
       getUser,
       getFilterType,
-      _getFilterLectures,
+      _getFilteredLectures,
     );
 
     getVisibleLectures = createSelector6(
       getLectures,
-      getFilterLectures,
-      getSelectedMainSectionIds,
-      getSelectedCustomSectionIds,
+      getFilteredLectures,
+      getSelectedSectionIds,
       getSearchText,
+      getCustomSectionMode,
       getFilterType,
       _getVisibleLectures,
     );
@@ -66,6 +75,8 @@ class Selectors {
       _getRatingSortedLectures,
     );
   }
+
+  bool getCustomSectionMode(CodefestState state) => getUser(state).isCustomSectionMode;
 
   Iterable<Section> getCustomSections(CodefestState state) =>
       getSections(state).where((section) => section.isCustom).toList();
@@ -136,7 +147,7 @@ class Selectors {
 
   bool isUpdateAvailable(CodefestState state) => state.releaseNote.isNotEmpty;
 
-  bool lectureStarted(Lecture lecture) => lecture.startTime.isBefore(DateTime.now());
+  bool lectureStarted(Lecture lecture) => lecture.startTime.isBefore(DateTime.now().toUtc());
 
   String releaseNote(CodefestState state) => state.releaseNote;
 
@@ -145,15 +156,27 @@ class Selectors {
 
   String _formatHours(String hours) => hours.length == 1 ? '${hours}0' : hours;
 
+  Iterable<Lecture> _getCustomSectionLectures(Iterable<Lecture> lectures) =>
+      lectures.where((lecture) => lecture.section.isCustom).toList();
+
   Iterable<Lecture> _getFavoriteLectures(Iterable<Lecture> lectures, UserState user) =>
       lectures.where((lecture) => user.favoriteLectureIds.contains(lecture.id)).toList();
 
-  Iterable<Lecture> _getFilterLectures(Iterable<Lecture> lectures, UserState user, FilterTypeEnum filterType) {
+  Iterable<String> _getFilterCustomSectionIds(Iterable<String> selectedSectionIds, Iterable<Section> sections) {
+    final sectionIds = sections.where((section) => section.isCustom).map((section) => section.id);
+    return selectedSectionIds.where(sectionIds.contains).toList();
+  }
+
+  Iterable<Lecture> _getFilteredLectures(Iterable<Lecture> lectures, UserState user, FilterTypeEnum filterType) {
     switch (filterType) {
       case FilterTypeEnum.favorite:
         return _getFavoriteLectures(lectures, user);
       case FilterTypeEnum.section:
         return _getSectionLectures(lectures, user.filterSectionId);
+      case FilterTypeEnum.custom:
+        return _getCustomSectionLectures(lectures);
+      case FilterTypeEnum.now:
+        return _getNowLectures(lectures);
       default:
         return lectures;
     }
@@ -161,11 +184,6 @@ class Selectors {
 
   Iterable<String> _getFilterMainSectionIds(Iterable<String> selectedSectionIds, Iterable<Section> sections) {
     final sectionIds = sections.where((section) => !section.isCustom).map((section) => section.id);
-    return selectedSectionIds.where(sectionIds.contains).toList();
-  }
-
-  Iterable<String> _getFilterCustomSectionIds(Iterable<String> selectedSectionIds, Iterable<Section> sections) {
-    final sectionIds = sections.where((section) => section.isCustom).map((section) => section.id);
     return selectedSectionIds.where(sectionIds.contains).toList();
   }
 
@@ -182,6 +200,14 @@ class Selectors {
   Iterable<String> _getLectureSearchFields(Lecture lecture) => [lecture.title, lecture.description]
     ..addAll(lecture.speakers.expand((speaker) => [speaker.name, speaker.description, speaker.company]))
     ..addAll([lecture.location.title, lecture.location.description]);
+
+  Iterable<Lecture> _getNowLectures(Iterable<Lecture> lectures) {
+    final now = DateTime.now().toUtc();
+    return lectures.where((lecture) {
+      final endTime = getEndTime(lecture);
+      return now.isAfter(lecture.startTime) && now.isBefore(endTime);
+    }).toList();
+  }
 
   Iterable<Lecture> _getRatingSortedLectures(Iterable<Lecture> lectures) =>
       lectures.where((lecture) => lecture.likesCount > 3).toList()
@@ -203,45 +229,39 @@ class Selectors {
     return sections.where((section) => sectionIds.contains(section.id));
   }
 
-  String _getTimeText(DateTime date) => '${date.hour}:${_formatHours(date.minute.toString())}';
+  Iterable<Section> _getSelectedSections(Iterable<Section> sections, Iterable<String> sectionIds) =>
+      sections.where((section) => sectionIds.contains(section.id));
+
+  String _getTimeText(DateTime date) => '${date.hour + 7}:${_formatHours(date.minute.toString())}';
 
   Iterable<Lecture> _getVisibleLectures(
-      Iterable<Lecture> allLectures,
-      Iterable<Lecture> filteredLectures,
-      Iterable<String> mainSectionIds,
-      Iterable<String> customSectionIds,
-      String searchText,
-      FilterTypeEnum filterType,
+    Iterable<Lecture> allLectures,
+    Iterable<Lecture> filteredLectures,
+    Iterable<String> sectionIds,
+    String searchText,
+    bool isCustomSectionMode,
+    FilterTypeEnum filterType,
   ) {
-    final sectionIds = []
-      ..addAll(mainSectionIds)
-      ..addAll(customSectionIds);
-
-    Iterable<Lecture> result = filteredLectures;
-
-    if (filterType == FilterTypeEnum.favorite) {
-      return result;
-    }
-
-    if (mainSectionIds.isNotEmpty) {
-      result = result
-          .where((lecture) => sectionIds.contains(lecture.section.id))
-          .toList();
-    } else if (customSectionIds.isNotEmpty) {
-      result = result
-          .where((lecture) => !lecture.section.isCustom || customSectionIds.contains(lecture.section.id))
-          .toList();
-    }
-
     if (searchText?.isNotEmpty ?? false) {
-      result = allLectures.where((lecture) {
+      return allLectures.where((lecture) {
         final fields = _getLectureSearchFields(lecture);
-
         return _fieldsContainsText(fields, searchText.toLowerCase());
       }).toList();
     }
 
-    return result;
+    if (filterType != FilterTypeEnum.all) {
+      return filteredLectures.toList();
+    }
+
+    if (sectionIds.isEmpty) {
+      return allLectures
+          .where((lecture) => !lecture.section.isCustom || isCustomSectionMode && lecture.section.isCustom)
+          .toList();
+    }
+
+    return allLectures
+        .where((lecture) => sectionIds.contains(lecture.section.id) || isCustomSectionMode && lecture.section.isCustom)
+        .toList();
   }
 
   List<List<T>> _group<T>(List<T> list, Function expression) => list.isEmpty
