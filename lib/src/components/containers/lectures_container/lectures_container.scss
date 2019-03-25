@@ -1,0 +1,171 @@
+@import "../../../../../web/assets/styles/variables.scss";
+@import "../../../styles/common.scss";
+
+:host {
+
+  // tags ---
+
+  .tags {
+    display: flex;
+    flex-wrap: nowrap;
+    padding: 12px 0 12px 24px;
+    overflow-x: auto;
+    z-index: 0;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .tags__item {
+    flex-shrink: 0;
+
+    + .tags__item {
+      margin-left: 8px;
+    }
+  }
+  // --- end tags
+
+  .buttons-group {
+    display: flex;
+    border-radius: 4px; // todo
+    background: #ffffff;
+
+    .button {
+      border-radius: 0;
+      background: none;
+      color: $fg-color-secondary; // todo
+
+      &.button-icon-only {
+        width: 40px; // todo
+      }
+
+      + .button {
+        border-left: 1px solid; // todo
+        border-color: #e8e9e8; // todo
+      }
+    }
+
+    &.buttons-group--selected {
+      background-image: linear-gradient(to right, #33a7d8, #62d3ee); // todo
+      background-size: 103% auto; // todo
+      box-shadow: 0 2px 23px 0 rgba(0, 0, 0, 0.06); // todo
+      color: #ffffff; // todo
+
+      .button {
+        color: #ffffff; // todo
+
+        + .button {
+          border-color: #98d0e8; // todo
+        }
+      }
+    }
+  }
+
+  // schedule ---
+
+  .schedule {
+    margin-right: -16px;
+    padding-bottom: 24px;
+  }
+
+  .schedule__section-day + .schedule__section-day,
+  .schedule__section-time + .schedule__section-time {
+    margin-top: 8px;
+  }
+
+  .schedule__event + .schedule__event {
+    margin-top: 8px;
+  }
+  // --- end schedule
+
+  // event ---
+
+  .event {
+    display: flex;
+  }
+
+  .event__time {
+    flex-shrink: 0;
+    margin-right: 16px;
+    width: 5ch;
+    padding-top: 16px;
+    color: $fg-color-secondary;
+    position: relative;
+
+    &::before {
+      content: "";
+      display: block;
+      width: 2px;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: -22px;
+      background-image: repeating-radial-gradient(circle, #b9bac1 0px, #b9bac1 1px, transparent 1px, transparent 100%);
+      background-size: 2px 14px;
+      background-position-y: -10px;
+      background-position-x: 0px;
+      background-repeat: repeat-y;
+    }
+  }
+
+  .event__time-item {
+    display: block;
+
+    + .event__time-item {
+      margin-top: 4px;
+    }
+
+    &.event__time-item--start {
+      font-weight: $font-weight-bold;
+      position: relative;
+
+      &::before {
+        content: "";
+        display: block;
+        background: #94959b;
+        width: 16px;
+        height: 2px;
+        position: absolute;
+        top: 8px;
+        left: -22px;
+      }
+    }
+  }
+
+  .event__info {
+    flex-grow: 1;
+  }
+  // --- end event
+
+  // event card ---
+
+  .event-card {
+    padding: 16px 24px 16px 16px; // todo
+    position: relative; // for actions
+    border-radius: 6px; // todo
+    background-color: #ffffff; // todo
+    box-shadow: 0 2px 23px 0 rgba(0, 0, 0, 0.06); // todo
+    cursor: pointer;
+  }
+
+  .event-card__meta {
+    color: $fg-color-secondary;
+    margin-bottom: 4px;
+  }
+
+  .event-card__title {
+    @include font-heading-3;
+  }
+
+  .event-card__speakers {
+    margin-top: 8px;
+  }
+
+  .event-card__actions {
+    position: absolute;
+    right: 8px; // todo
+    bottom: 8px; // todo
+  }
+  // --- end event card
+
+  // info item (todo: replace in component)
+  @include info-item;
+}

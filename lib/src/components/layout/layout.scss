@@ -1,0 +1,25 @@
+@import "../../../../web/assets/styles/variables.scss";
+
+:host {
+  display: block;
+  height: 100%;
+  position: relative; // for drawer
+
+  .layout__content {
+    display: grid;
+    grid-template-rows: [header] auto [pre-content] auto [content] 1fr;
+    height: 100%;
+  }
+
+  .badge {
+    color: $fg-color-secondary
+  }
+
+  .content {
+    max-height: 100%;
+    padding: 0 24px;
+    overflow-y: auto;
+    z-index: 0;
+    -webkit-overflow-scrolling: touch;
+  }
+}

@@ -1,0 +1,67 @@
+<loader
+  [isReady]="isReady">
+
+  <div
+    class="welcome__content">
+
+    <button
+      (click)="onClose()"
+      class="welcome__skip-button">
+      Пропустить
+    </button>
+
+    <section
+      class="welcome__container">
+
+      <div
+        class="welcome__text">
+
+        <h1
+          class="welcome__title">
+          Let’s get started
+        </h1>
+
+        <p
+          class="welcome__description">
+
+          Давай выберем секции и события, которые тебе интересны.
+          &ngsp;
+          Ты всегда сможешь поменять их, нажав на кнопку фильтра
+          &ngsp;
+
+          <svg
+            class="welcome__description-icon"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="14" height="14" viewBox="0 0 24 24">
+            <path d="M5 6h14a1 1 0 0 1 0 2H5a1 1 0 1 1 0-2zm3 5h8a1 1 0 0 1 0 2H8a1 1 0 0 1 0-2zm3 5h2a1 1 0 0 1 0 2h-2a1 1 0 0 1 0-2z" fill-rule="evenodd"/>
+          </svg>
+        </p>
+      </div>
+
+      <sections
+        [mainSections]="mainSections"
+        [customSections]="customSections"
+        [selectedSectionIds]="selectedSectionIds"
+        (onSectionsChange)="onSectionsChange($event)"
+        class="welcome__sections">
+      </sections>
+
+      <div
+        *ngIf="hasSelection"
+        class="welcome__container-apply-button-gutter">
+      </div>
+    </section>
+
+    <div
+      *ngIf="hasSelection"
+      class="welcome__apply-button-container">
+
+      <button
+        cf-button
+        (click)="onApply()"
+        class="welcome__apply-button button-primary button-full-width">
+        Применить
+      </button>
+    </div>
+  </div>
+</loader>

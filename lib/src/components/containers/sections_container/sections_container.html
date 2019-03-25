@@ -1,0 +1,36 @@
+<loader
+  [isReady]="isReady">
+
+  <layout
+    *ngIf="isReady"
+    [title]="'Фильтр'"
+    [state]="state">
+
+    <div
+      actions>
+
+      <material-button
+        icon
+        (click)="onClose()">
+
+        <material-icon
+          icon="close">
+        </material-icon>
+      </material-button>
+    </div>
+
+    <span
+      badge>{{ selectedSectionCount }}</span>
+
+    <div
+      content>
+
+      <sections
+        [mainSections]="mainSections"
+        [customSections]="customSections"
+        [selectedSectionIds]="selectedSectionIds"
+        (onSectionsChange)="onSectionsChange($event)">
+      </sections>
+    </div>
+  </layout>
+</loader>

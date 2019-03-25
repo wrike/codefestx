@@ -1,0 +1,102 @@
+<!-- Drawer -->
+<material-drawer
+  temporary
+  #drawer="drawer"
+  [attr.overlay]="true">
+
+  <material-list
+    *deferredContent>
+
+    <div
+      group
+      class="mat-drawer-spacer">
+
+      <div
+        label>
+        Codefest X
+      </div>
+    </div>
+
+    <div
+      group>
+
+      <material-list-item
+        *ngFor="let item of RoutePaths.menu"
+        (click)="onMenuItemClick(item)">
+        {{ item.title }}
+      </material-list-item>
+
+      <div
+        *ngIf="isAuthorized">
+
+        <img [src]="avatarPath" alt="" width="50">
+
+        <div>{{ userName }}</div>
+
+        <div
+          (click)="onLogout()">
+          Выйти
+        </div>
+      </div>
+    </div>
+  </material-list>
+</material-drawer>
+
+<!-- Content -->
+<div
+  class="layout__content">
+
+  <!-- Header -->
+  <header
+    class="layout-header">
+
+    <div
+      class="material-header-row">
+
+      <material-button
+        icon
+        class="material-drawer-button"
+        (trigger)="drawer.toggle()">
+
+        <material-icon
+          icon="menu">
+        </material-icon>
+      </material-button>
+
+      <span
+        class="material-header-title">
+        {{ title }}
+        <span class="badge">
+          <ng-content
+            select="[badge]"
+          ></ng-content>
+        </span>
+      </span>
+
+      <div
+        class="material-spacer">
+      </div>
+
+      <nav
+        class="material-navigation">
+
+        <ng-content
+          select="[actions]"
+        ></ng-content>
+      </nav>
+    </div>
+  </header>
+
+  <ng-content
+    select="[pre-content]"
+  ></ng-content>
+
+  <!-- Content -->
+  <main
+    class="content">
+
+    <ng-content
+      select="[content]"
+    ></ng-content>
+  </main>
+</div>

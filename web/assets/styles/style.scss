@@ -1,0 +1,43 @@
+@import "normalize";
+@import "fonts";
+@import "variables";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+html, body {
+  min-height: 100%;
+  background-color: $bg-color;
+  @include font-main;
+}
+
+@media(min-width: 600px) {
+  html {
+    background-color: #fff;
+  }
+  body {
+    width: 600px;
+    margin: 0 auto;
+  }
+}
+
+.visually-hidden {
+  position: absolute;
+
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}

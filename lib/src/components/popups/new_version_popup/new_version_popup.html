@@ -1,0 +1,18 @@
+<popup
+	(onClose)="close()">
+
+	<h2>Отличные новости!</h2>
+
+	<div>{{ message }}</div>
+
+	<button
+			cf-button
+			(click)="reload()">
+		Получить
+	</button>
+
+	<button
+			cf-button>
+		Подробнее
+	</button>
+</popup>

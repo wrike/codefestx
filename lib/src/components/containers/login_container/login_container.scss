@@ -1,0 +1,44 @@
+@import "../../../../../web/assets/styles/variables.scss";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 24px; // todo
+  position: relative;
+
+  .login__close-button {
+    position: absolute;
+    top: 16px;
+    right: 24px;
+  }
+
+  .login__container {
+    margin: auto 0;
+    text-align: center;
+  }
+
+  .login__title {
+    @include font-heading-2;
+  }
+
+  .login__description {
+    margin-top: 8px;
+    font-size: $font-heading-3-size; // todo
+    line-height: $font-heading-3-line-height; // todo
+    color: $fg-color-secondary; // todo
+  }
+
+  .login__buttons {
+    margin-top: 24px;
+    display: flex;
+  }
+
+  .login__buttons-item {
+    flex-grow: 1;
+
+    + .login__buttons-item {
+      margin-left: 16px;
+    }
+  }
+}

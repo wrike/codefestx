@@ -1,0 +1,20 @@
+<router-outlet
+  [class.hidden]="isError"
+  [routes]="Routes.all">
+</router-outlet>
+
+<div
+  *ngIf="isError"
+  class="info">
+
+  <h2
+    *ngIf="isError"
+    class="error">
+    Что-то пошло не так, попробуй перезагрузить страницу :|
+  </h2>
+</div>
+
+<new-version-popup
+  *ngIf="isUpdateAvailable"
+  [message]="releaseNote">
+</new-version-popup>

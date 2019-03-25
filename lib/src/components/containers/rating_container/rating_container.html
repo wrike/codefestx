@@ -1,0 +1,18 @@
+<layout
+  [title]="'Рейтинг докладов'"
+  [state]="state">
+
+  <div
+    content>
+
+    <div
+      *ngFor="let lecture of lectures">
+
+      {{ lecture.title }}
+    </div>
+
+    <rating-empty-state
+      *ngIf="lectures.isEmpty">
+    </rating-empty-state>
+  </div>
+</layout>

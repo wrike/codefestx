@@ -1,0 +1,125 @@
+@import "../../../../../web/assets/styles/variables";
+
+$button-height: 48px;
+$button-padding-horizontal: 16px;
+$button-padding-vertical: round(($button-height - $font-line-box-main) / 2);
+
+$button-tag-height: 32px;
+$button-tag-padding-vertical: round(($button-tag-height - $font-line-box-main) / 2);
+
+:host {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: $button-padding-vertical $button-padding-horizontal;
+  margin: 0;
+  border: none;
+  border-radius: 8px; // todo
+  background-color: #ffffff; // todo
+  box-shadow: 0 2px 23px 0 rgba(0, 0, 0, 0.06); // todo
+  outline: none;
+  vertical-align: top;
+  font-family: $font-family-default;
+  font-weight: $font-weight-bold;
+  font-size: $font-heading-3-size; // todo
+  line-height: $font-heading-3-line-height; // todo
+  text-align: center;
+  color: $fg-color-primary;
+  cursor: pointer;
+  @include user-select(none);
+
+  &:hover {
+    // todo
+  }
+
+  &:active {
+    // todo
+  }
+
+  &:focus {
+    // todo
+  }
+
+  &:disabled {
+    opacity: .5;
+    cursor: default;
+  }
+
+  // todo
+  ::ng-deep {
+
+    .button-icon {
+      display: block;
+
+      &:not(:last-child) {
+        margin-right: 4px;
+      }
+    }
+  }
+}
+
+:host(.button-primary) {
+  background-image: linear-gradient(to right, #33a7d8, #62d3ee); // todo
+  background-size: 103% auto; // todo
+  box-shadow: 0 0 40px 0 rgba(51, 167, 216, 0.56); // todo
+  color: #ffffff; // todo
+
+  &:hover {
+    // todo
+  }
+
+  &:active {
+    // todo
+  }
+
+  &:focus {
+    // todo
+  }
+}
+
+:host(.button-tag) {
+  padding-top: $button-tag-padding-vertical;
+  padding-bottom: $button-tag-padding-vertical;
+  border-radius: 4px; // todo
+  box-shadow: 0 2px 23px 0 rgba(0, 0, 0, 0.06); // todo
+  font-size: $font-size-main;
+  line-height: $font-line-height-main;
+
+  &:not(.button-primary) {
+    color: $fg-color-secondary;
+  }
+
+  &:hover {
+    // todo
+  }
+
+  &:active {
+    // todo
+  }
+
+  &:focus {
+    // todo
+  }
+}
+
+:host(.button-icon-only) {
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  box-shadow: none;
+  color: $fg-color-primary;
+  padding: 0;
+
+  // todo
+  ::ng-deep {
+
+    .button-icon {
+      margin-right: 0;
+    }
+  }
+}
+
+:host(.button-full-width) {
+  width: 100%;
+}

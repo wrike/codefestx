@@ -1,0 +1,39 @@
+<section
+  class="sections__group">
+
+  <h2
+    class="sections__group-title">
+    Послушать
+  </h2>
+
+  <div
+    class="sections__grid">
+
+    <cf-section
+      *ngFor="let section of mainSections"
+      (change)="onSectionClick(section)"
+      [title]="section.title"
+      [isChecked]="isSectionSelected(section)">
+    </cf-section>
+  </div>
+</section>
+
+<section
+  class="sections__group">
+
+  <h2
+    class="sections__group-title">
+    Для общения
+  </h2>
+
+  <div
+    class="sections__grid">
+
+    <cf-section
+      *ngFor="let section of customSections"
+      (change)="onSectionClick(section)"
+      [title]="section.title"
+      [isChecked]="isSectionSelected(section)">
+    </cf-section>
+  </div>
+</section>

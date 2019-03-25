@@ -1,0 +1,6 @@
+.idea
+.git
+.dart_tool/
+.packages
+build/
+**/*.g.dart
