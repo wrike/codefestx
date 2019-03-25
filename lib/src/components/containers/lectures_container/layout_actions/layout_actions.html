@@ -5,6 +5,7 @@
     text-input
     [value]="searchText"
     [isAutoFocused]="true"
+    (change)="onSearchTextChange($event)"
     (keyup)="onSearchTextChange($event)"
     type="text"
     class="search">
