@@ -23,6 +23,9 @@ class LayoutActionsComponent {
   final _onSearchStreamController = new StreamController<String>.broadcast();
   final _onSearchModeChangeStreamController = new StreamController<bool>.broadcast();
 
+  @ViewChild('searchInput')
+  TextInput searchInput;
+
   @Input()
   bool isSearchMode = false;
 
@@ -45,7 +48,7 @@ class LayoutActionsComponent {
     _onSearchModeChangeStreamController.add(true);
   }
 
-  void onSearchTextChange(String text) {
-    _onSearchStreamController.add(text);
+  void onSearchTextChange() {
+    _onSearchStreamController.add(searchInput.nativeElement.value);
   }
 }

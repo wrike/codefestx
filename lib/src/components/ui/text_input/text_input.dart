@@ -3,7 +3,10 @@ import 'dart:html';
 
 import 'package:angular/angular.dart';
 
-@Component(selector: 'input[text-input]', template: '')
+@Component(
+  selector: 'input[text-input]',
+  template: '',
+)
 class TextInput implements AfterViewInit {
   final HtmlElement _hostElement;
   final NgZone _zone;
@@ -11,7 +14,10 @@ class TextInput implements AfterViewInit {
   @Input()
   bool isAutoFocused = false;
 
-  TextInput(this._hostElement, this._zone);
+  TextInput(
+    this._hostElement,
+    this._zone,
+  );
 
   InputElement get nativeElement => _hostElement as InputElement;
 
@@ -20,8 +26,8 @@ class TextInput implements AfterViewInit {
     _zone.runOutsideAngular(() {
       if (isAutoFocused) {
         _scheduleViewUpdate(() => nativeElement.focus());
-        _scheduleViewUpdate(
-            () => nativeElement.setSelectionRange(nativeElement.value.length, nativeElement.value.length));
+
+        _scheduleViewUpdate(() => nativeElement.setSelectionRange(nativeElement.value.length, nativeElement.value.length));
       }
     });
   }

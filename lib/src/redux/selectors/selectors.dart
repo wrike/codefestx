@@ -220,7 +220,10 @@ class Selectors {
       lectures.where((lecture) => lecture.section.id == sectionId);
 
   Iterable<Section> _getSelectedFilterSections(
-      Iterable<Section> sections, Iterable<String> mainSectionIds, Iterable<String> customSectionIds) {
+      Iterable<Section> sections,
+      Iterable<String> mainSectionIds,
+      Iterable<String> customSectionIds,
+  ) {
     if (mainSectionIds.isEmpty && customSectionIds.isEmpty) {
       return sections;
     } else if (mainSectionIds.isEmpty) {
