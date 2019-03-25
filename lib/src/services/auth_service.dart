@@ -3,6 +3,9 @@ import 'dart:html';
 import 'package:codefest/src/models/auth.response.dart';
 import 'package:codefest/src/models/auth_get_url.response.dart';
 import 'package:codefest/src/models/auth_type.enum.dart';
+import 'package:codefest/src/redux/actions/authorize_action.dart';
+import 'package:codefest/src/redux/actions/load_user_data_success_action.dart';
+import 'package:codefest/src/redux/services/dispatcher.dart';
 import 'package:codefest/src/services/http_proxy.dart';
 
 class AuthService {
@@ -13,6 +16,7 @@ class AuthService {
   static const initStorageValue = 'yes';
   static const routePathKey = 'routePath';
 
+  final Dispatcher _dispatcher;
   final HttpProxy _http;
 
   Map<AuthType, String> _authUrls = {
@@ -27,7 +31,7 @@ class AuthService {
     '{ghstate}': 'auth/github/callback',
   };
 
-  AuthService(this._http);
+  AuthService(this._http, this._dispatcher);
 
   void clearRoutePath() {
     window.localStorage.remove(routePathKey);
@@ -38,14 +42,14 @@ class AuthService {
   }
 
   void login(AuthType authType) async {
-    _clearToken();
+    _clearAuthData();
     final url = _authUrls[authType];
     final auth = await _http.get<AuthGetUrlResponse>(url, decoder: (j) => AuthGetUrlResponse.fromJson(j));
     window.location.href = auth.url;
   }
 
   void logout() {
-    _clearToken();
+    _clearAuthData();
     window.location.href = '/';
   }
 
@@ -57,13 +61,24 @@ class AuthService {
     window.localStorage[tokenStorageKey] = authResponse.token;
     window.localStorage[userNameStorageKey] = authResponse.userName;
     window.localStorage[userIdStorageKey] = authResponse.userId;
+    final action = LoadUserDataSuccessAction(
+      displayName: authResponse.userName,
+      avatarPath: authResponse.avatar,
+      favoriteLectureIds: authResponse.favoriteLecturesIds,
+      likedLectureIds: authResponse.likedLecturesIds,
+      selectedSectionIds: authResponse.sectionIds,
+    );
+    _dispatcher.dispatch(action);
+    _dispatcher.dispatch(AuthorizeAction());
   }
 
   void setRoutePath(String path) {
     window.localStorage[routePathKey] = path;
   }
 
-  void _clearToken() {
+  void _clearAuthData() {
     window.localStorage.remove(tokenStorageKey);
+    window.localStorage.remove(userIdStorageKey);
+    window.localStorage.remove(userNameStorageKey);
   }
 }
