@@ -197,9 +197,12 @@ class Selectors {
     });
   }
 
-  Iterable<String> _getLectureSearchFields(Lecture lecture) => [lecture.title, lecture.description]
+  Iterable<String> _getLectureFullSearchFields(Lecture lecture) => [lecture.title, lecture.description]
     ..addAll(lecture.speakers.expand((speaker) => [speaker.name, speaker.description, speaker.company]))
     ..addAll([lecture.location.title, lecture.location.description]);
+
+  Iterable<String> _getLectureShortSearchFields(Lecture lecture) =>
+      [lecture.title]..addAll(lecture.speakers.expand((speaker) => [speaker.name, speaker.company]));
 
   Iterable<Lecture> _getNowLectures(Iterable<Lecture> lectures) {
     final now = DateTime.now().toUtc();
@@ -243,10 +246,21 @@ class Selectors {
     FilterTypeEnum filterType,
   ) {
     if (searchText?.isNotEmpty ?? false) {
-      return allLectures.where((lecture) {
-        final fields = _getLectureSearchFields(lecture);
+      var result = allLectures.where((lecture) {
+        final fields = _getLectureShortSearchFields(lecture);
+
         return _fieldsContainsText(fields, searchText.toLowerCase());
       }).toList();
+
+      if (result.isEmpty) {
+        result = allLectures.where((lecture) {
+          final fields = _getLectureFullSearchFields(lecture);
+
+          return _fieldsContainsText(fields, searchText.toLowerCase());
+        }).toList();
+      }
+
+      return result;
     }
 
     if (filterType != FilterTypeEnum.all) {
