@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:html';
 
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
@@ -46,8 +45,7 @@ class LayoutActionsComponent {
     _onSearchModeChangeStreamController.add(true);
   }
 
-  void onSearchTextChange(KeyboardEvent event) {
-    InputElement element = event.target;
-    _onSearchStreamController.add(element.value);
+  void onSearchTextChange(String text) {
+    _onSearchStreamController.add(text);
   }
 }

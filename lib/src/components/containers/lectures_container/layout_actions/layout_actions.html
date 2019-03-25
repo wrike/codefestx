@@ -3,10 +3,11 @@
 
   <input
     text-input
+    #searchInput
     [value]="searchText"
     [isAutoFocused]="true"
-    (change)="onSearchTextChange($event)"
-    (keyup)="onSearchTextChange($event)"
+    (change)="onSearchTextChange(searchInput.value)"
+    (keyup)="onSearchTextChange(searchInput.value)"
     type="text"
     class="search">
 
