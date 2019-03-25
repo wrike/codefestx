@@ -7,6 +7,7 @@ import 'package:codefest/src/redux/actions/authorize_action.dart';
 import 'package:codefest/src/redux/actions/load_user_data_success_action.dart';
 import 'package:codefest/src/redux/services/dispatcher.dart';
 import 'package:codefest/src/services/http_proxy.dart';
+import 'package:codefest/src/services/push_service.dart';
 
 class AuthService {
   static const tokenStorageKey = 'token';
@@ -18,6 +19,7 @@ class AuthService {
 
   final Dispatcher _dispatcher;
   final HttpProxy _http;
+  final PushService _pushService;
 
   Map<AuthType, String> _authUrls = {
     AuthType.VK: 'auth/vk/uri',
@@ -31,7 +33,7 @@ class AuthService {
     '{ghstate}': 'auth/github/callback',
   };
 
-  AuthService(this._http, this._dispatcher);
+  AuthService(this._http, this._dispatcher, this._pushService);
 
   void clearRoutePath() {
     window.localStorage.remove(routePathKey);
@@ -70,6 +72,7 @@ class AuthService {
     );
     _dispatcher.dispatch(action);
     _dispatcher.dispatch(AuthorizeAction());
+   _pushService.init(authResponse.userId);
   }
 
   void setRoutePath(String path) {
