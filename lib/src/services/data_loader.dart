@@ -53,9 +53,11 @@ class DataLoader {
   Future<ApiResponse> updateUser({
     @required Iterable<String> sectionIds,
     @required Iterable<String> favoriteLectureIds,
+    @required bool isCustomSectionMode,
   }) =>
       _http.put(_userPath, {
         'sectionIds': sectionIds,
         'favoriteIds': favoriteLectureIds,
+        'isCustomSectionMode': isCustomSectionMode,
       });
 }

@@ -16,7 +16,8 @@ class StateFactory {
                 ..favoriteLectureIds.replace([])
                 ..isSearchMode = false
                 ..filterType = FilterTypeEnum.all
-                ..isAuthorized = false,
+                ..isAuthorized = false
+                ..isCustomSectionMode = true,
             ),
           ),
       );

@@ -35,6 +35,9 @@ class SectionsContainerComponent extends StatefulComponent implements OnInit {
   final Selectors _selectors;
   final Router _router;
 
+  Iterable<String> _sectionIds;
+  bool _isCustomSectionMode;
+
   SectionsContainerComponent(
     NgZone zone,
     ChangeDetectorRef cdr,
@@ -44,7 +47,7 @@ class SectionsContainerComponent extends StatefulComponent implements OnInit {
     this._router,
   ) : super(zone, cdr, storeFactory);
 
-  Iterable<Section> get customSections => _selectors.getCustomSections(state);
+  bool get isCustomSectionMode => _selectors.getCustomSectionMode(state);
 
   bool get isReady => _selectors.isReady(state);
 
@@ -56,6 +59,9 @@ class SectionsContainerComponent extends StatefulComponent implements OnInit {
 
   @override
   void ngOnInit() {
+    _sectionIds = selectedSectionIds;
+    _isCustomSectionMode = isCustomSectionMode;
+
     _dispatcher.dispatch(InitAction());
   }
 
@@ -63,7 +69,14 @@ class SectionsContainerComponent extends StatefulComponent implements OnInit {
     _router.navigate(RoutePaths.lectures.toUrl());
   }
 
+  void onCustomSectionModeChange(bool value) {
+    _isCustomSectionMode = value;
+    _dispatcher.dispatch(ChangeSelectedSectionsAction(sectionIds: _sectionIds, isCustomSectionMode: value));
+  }
+
   void onSectionsChange(Iterable<String> sectionIds) {
-    _dispatcher.dispatch(ChangeSelectedSectionsAction(sectionIds: sectionIds));
+    _sectionIds = sectionIds;
+    _dispatcher
+        .dispatch(ChangeSelectedSectionsAction(sectionIds: sectionIds, isCustomSectionMode: _isCustomSectionMode));
   }
 }

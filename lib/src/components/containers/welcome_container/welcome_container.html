@@ -40,9 +40,10 @@
 
       <sections
         [mainSections]="mainSections"
-        [customSections]="customSections"
+        [isCustomSectionMode]="isCustomSectionMode"
         [selectedSectionIds]="selectedSectionIds"
         (onSectionsChange)="onSectionsChange($event)"
+        (onCustomSectionModeChange)="onCustomSectionModeChange($event)"
         class="welcome__sections">
       </sections>
 

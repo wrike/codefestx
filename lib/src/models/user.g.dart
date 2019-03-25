@@ -14,7 +14,8 @@ User _$UserFromJson(Map<String, dynamic> json) {
       favoriteLecturesIds:
           (json['favoriteLecturesIds'] as List).map((e) => e as String),
       sectionIds: (json['sectionIds'] as List).map((e) => e as String),
-      avatar: json['avatar'] as String);
+      avatar: json['avatar'] as String,
+      isCustomSectionMode: json['isCustomSectionMode'] as bool);
 }
 
 Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
@@ -22,5 +23,6 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'likedLecturesIds': instance.likedLecturesIds.toList(),
       'favoriteLecturesIds': instance.favoriteLecturesIds.toList(),
       'sectionIds': instance.sectionIds.toList(),
-      'avatar': instance.avatar
+      'avatar': instance.avatar,
+      'isCustomSectionMode': instance.isCustomSectionMode
     };

@@ -56,13 +56,15 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
     this._selectors,
   ) : super(zone, cdr, storeFactory);
 
-  dynamic trackByIdentity(int index, dynamic item) => item;
-
   List<List<List<Lecture>>> get groupedLectures => _selectors.getGroupedVisibleLectures(state);
 
   bool get isAllSelected => _selectors.getFilterType(state) == FilterTypeEnum.all;
 
+  bool get isCustomSelected => _selectors.getFilterType(state) == FilterTypeEnum.custom;
+
   bool get isFavoriteSelected => _selectors.getFilterType(state) == FilterTypeEnum.favorite;
+
+  bool get isNowSelected => _selectors.getFilterType(state) == FilterTypeEnum.now;
 
   bool get isReady => _selectors.isReady(state);
 
@@ -72,20 +74,32 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
 
   String get searchText => _selectors.getSearchText(state);
 
-  Iterable<Section> get sections => _selectors.getSelectedFilterSections(state);
+  Iterable<Section> get sections => _selectors.getSelectedSections(state);
+
+  String get title => isSearchMode ? '' : 'Расписание';
 
   String endTime(Lecture lecture) => _selectors.getEndTimeText(lecture);
 
   String flag(Lecture lecture) => _selectors.getFlag(lecture);
 
-  String get title => isSearchMode ? '' : 'Расписание';
+  String get filterTitle {
+    if (sections.isEmpty) {
+      return 'Все';
+    } else if (sections.length == 1) {
+      return '1 секция';
+    } else if (sections.length > 1 && sections.length < 5) {
+      return '${sections.length} секции';
+    } else {
+      return '${sections.length} секций';
+    }
+  }
 
-  String getDay(Iterable<Lecture> list) {
-    if (list.isEmpty) {
+  String getDay(Iterable<Iterable<Lecture>> grouped) {
+    final lecture = grouped.isNotEmpty ? grouped.first.isNotEmpty ? grouped.first.first : null : null;
+
+    if (lecture == null) {
       return '';
     }
-
-    final lecture = list.elementAt(0);
 
     if (lecture.startTime.day == 30) {
       return '30 Марта';
@@ -93,7 +107,7 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
       return '31 Марта';
     }
 
-    return '';
+    return 'Вне времени';
   }
 
   bool isDayVisible(Lecture next, int index) {
@@ -153,8 +167,16 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
     _dispatcher.dispatch(FilterLecturesAction(filterType: FilterTypeEnum.all));
   }
 
+  void onShowCustomClick() {
+    _dispatcher.dispatch(FilterLecturesAction(filterType: FilterTypeEnum.custom));
+  }
+
   void onShowFavoriteClick() {
     _dispatcher.dispatch(FilterLecturesAction(filterType: FilterTypeEnum.favorite));
+  }
+
+  void onShowNowClick() {
+    _dispatcher.dispatch(FilterLecturesAction(filterType: FilterTypeEnum.now));
   }
 
   void onShowSectionClick(Section section) {
@@ -162,4 +184,6 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
   }
 
   String startTime(Lecture lecture) => _selectors.getStartTimeText(lecture);
+
+  dynamic trackByIdentity(int index, dynamic item) => item;
 }

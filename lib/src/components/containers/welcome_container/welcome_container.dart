@@ -1,9 +1,9 @@
 import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
-import 'package:codefest/src/components/ui/button/button.dart';
 import 'package:codefest/src/components/containers/stateful_component.dart';
 import 'package:codefest/src/components/loader/loader.dart';
 import 'package:codefest/src/components/sections/sections.dart';
+import 'package:codefest/src/components/ui/button/button.dart';
 import 'package:codefest/src/models/section.dart';
 import 'package:codefest/src/redux/actions/change_selected_sections_action.dart';
 import 'package:codefest/src/redux/actions/init_action.dart';
@@ -34,6 +34,11 @@ class WelcomeContainerComponent extends StatefulComponent implements OnInit {
 
   Iterable<String> selectedSectionIds = [];
 
+  bool isCustomSectionMode = true;
+
+  @HostBinding('class.welcome')
+  final bool isHostMarked = true;
+
   WelcomeContainerComponent(
     NgZone zone,
     ChangeDetectorRef cdr,
@@ -43,15 +48,11 @@ class WelcomeContainerComponent extends StatefulComponent implements OnInit {
     this._router,
   ) : super(zone, cdr, storeFactory);
 
-  Iterable<Section> get customSections => _selectors.getCustomSections(state);
+  bool get hasSelection => selectedSectionIds.isNotEmpty;
 
   bool get isReady => _selectors.isReady(state);
 
   Iterable<Section> get mainSections => _selectors.getMainSections(state);
-  bool get hasSelection => selectedSectionIds.isNotEmpty;
-
-  @HostBinding('class.welcome')
-  final bool isHostMarked = true;
 
   @override
   void ngOnInit() {
@@ -59,12 +60,20 @@ class WelcomeContainerComponent extends StatefulComponent implements OnInit {
   }
 
   void onApply() {
-    _dispatcher.dispatch(ChangeSelectedSectionsAction(sectionIds: selectedSectionIds));
+    _dispatcher.dispatch(ChangeSelectedSectionsAction(
+      sectionIds: selectedSectionIds,
+      isCustomSectionMode: isCustomSectionMode,
+    ));
+
     _navigateToLectures();
   }
 
   void onClose() {
     _navigateToLectures();
+  }
+
+  void onCustomSectionModeChange(bool value) {
+    isCustomSectionMode = value;
   }
 
   void onSectionsChange(Iterable<String> sectionIds) {

@@ -27,9 +27,10 @@
 
       <sections
         [mainSections]="mainSections"
-        [customSections]="customSections"
+        [isCustomSectionMode]="isCustomSectionMode"
         [selectedSectionIds]="selectedSectionIds"
-        (onSectionsChange)="onSectionsChange($event)">
+        (onSectionsChange)="onSectionsChange($event)"
+        (onCustomSectionModeChange)="onCustomSectionModeChange($event)">
       </sections>
     </div>
   </layout>

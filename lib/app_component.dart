@@ -3,9 +3,7 @@ import 'dart:async';
 import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:codefest/src/components/popups/new_version_popup/new_version_popup.dart';
-import 'package:codefest/src/redux/actions/authorize_action.dart';
 import 'package:codefest/src/redux/actions/load_user_data_action.dart';
-import 'package:codefest/src/redux/actions/load_user_data_from_storage_action.dart';
 import 'package:codefest/src/redux/actions/new_version_action.dart';
 import 'package:codefest/src/redux/effects/effects.dart';
 import 'package:codefest/src/redux/reducers/reducer.dart';
@@ -111,18 +109,14 @@ class AppComponent implements OnDestroy, OnInit {
 
   @override
   void ngOnInit() {
-    if (_authStore.isAuth) {
-      _dispatcher.dispatch(LoadUserDataAction());
-      _dispatcher.dispatch(AuthorizeAction());
-      Future.delayed(const Duration(seconds: 5)).then((_) => _pushService.init(_authStore.userId));
-    } else {
-      _dispatcher.dispatch(LoadUserDataFromStorageAction());
+    _dispatcher.dispatch(LoadUserDataAction());
 
-      if (_authStore.isNewUser) {
-        _router.onRouteActivated.first.then((state) {
-          _router.navigateByUrl(RoutePaths.welcome.toUrl());
-        });
-      }
+    if (_authStore.isAuth) {
+      Future.delayed(const Duration(seconds: 5)).then((_) => _pushService.init(_authStore.userId));
+    } else if (_authStore.isNewUser) {
+      _router.onRouteActivated.first.then((state) {
+        _router.navigateByUrl(RoutePaths.welcome.toUrl());
+      });
     }
 
     _socketService.onEvent
