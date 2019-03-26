@@ -79,8 +79,6 @@ $font-weight-bold: 600;
   border: none;
   background: transparent;
   box-shadow: none;
-  outline: none;
-  -webkit-tap-highlight-color: transparent; // gets rid of tap active state
 
   &::-moz-focus-inner {
     padding: 0;

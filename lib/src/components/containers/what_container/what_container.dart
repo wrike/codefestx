@@ -13,6 +13,7 @@ import 'what_routes.dart';
   styleUrls: ['what_container.css'],
   templateUrl: 'what_container.html',
   directives: [
+    NgIf,
     LayoutComponent,
     RouterOutlet,
     TabsComponent,

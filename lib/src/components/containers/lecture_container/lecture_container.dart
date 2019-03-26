@@ -2,6 +2,7 @@ import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:codefest/src/components/containers/stateful_component.dart';
 import 'package:codefest/src/components/layout/layout.dart';
+import 'package:codefest/src/components/layout/navigation_type.dart';
 import 'package:codefest/src/components/loader/loader.dart';
 import 'package:codefest/src/components/ui/button/button.dart';
 import 'package:codefest/src/components/ui/popularity_icon/popularity_icon.dart';
@@ -28,6 +29,9 @@ import 'package:codefest/src/route_paths.dart';
     ButtonComponent,
     TabsComponent,
     PopularityIconComponent,
+  ],
+  exports: [
+    NavigationType
   ],
   preserveWhitespace: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
