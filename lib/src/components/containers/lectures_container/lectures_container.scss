@@ -62,25 +62,90 @@
   // schedule ---
 
   .schedule {
-    margin-right: -16px;
-    padding: 8px 0 24px;
+    margin: 0 -24px;
+    padding: 8px 8px 24px 24px;
   }
 
-  .schedule__day-date {
-    display: block;
-    margin-bottom: 16px;
+  .schedule__section {
+    display: grid;
+  }
+
+  .schedule__header {
+    height: 44px;
+    margin: 0 -8px 0 -24px;
+    position: sticky;
+    top: -4px;
+    z-index: 1;
+    -webkit-backface-visibility: hidden;
+
+    &::before,
+    &::after {
+      content: "";
+      display: block;
+      height: 4px;
+      position: sticky;
+    }
+
+    &::before {
+      top: 36px;
+      box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .16),
+                  0 0 1px 0 rgba(0, 0, 0, .16);
+    }
+
+    &::after {
+      background-image: linear-gradient(#f2f3fa, rgba(242, 243, 250, .3));
+      top: 0;
+      z-index: 2;
+    }
+  }
+
+  .schedule__events + .schedule__events {
+    margin-top: 8px;
+  }
+
+  .schedule__header-date {
+    display: flex;
+    align-items: center;
+    background-color: #f2f3fa;
+    height: 40px;
+    padding: 0 24px;
+    position: sticky;
+    top: 0;
+    margin-top: -4px;
+    z-index: 3;
     @include font-heading-3;
-  }
 
-  .schedule__section-day + .schedule__section-day,
-  .schedule__section-time + .schedule__section-time {
-    margin-top: 8px;
-  }
-
-  .schedule__event + .schedule__event {
-    margin-top: 8px;
+    &::before {
+      content: "";
+      display: block;
+      background: #f2f3fa;
+      height: 4px;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: -4px;
+    }
   }
   // --- end schedule
+
+  .events {
+    display: grid;
+    grid-template-columns: [events__time] auto [events__list] 1fr;
+    grid-gap: 8px 16px;
+  }
+
+  .events__list {
+    display: grid;
+    grid-gap: 8px;
+  }
+
+  .events__time {
+    padding-top: 16px;
+  }
+
+  .events__list {
+
+  }
 
   // event ---
 
@@ -88,11 +153,15 @@
     display: flex;
   }
 
-  .event__time {
-    flex-shrink: 0;
-    margin-right: 16px;
+  .event__info {
+    flex-grow: 1;
+  }
+  // --- end event
+
+  // time ---
+
+  .time {
     width: 5ch;
-    padding-top: 16px;
     color: $fg-color-secondary;
     position: relative;
 
@@ -112,14 +181,15 @@
     }
   }
 
-  .event__time-item {
+  .time__container {
+    position: sticky;
+    top: 44px;
+  }
+
+  .time__item {
     display: block;
 
-    + .event__time-item {
-      margin-top: 4px;
-    }
-
-    &.event__time-item--start {
+    &.time__item--start {
       font-weight: $font-weight-bold;
       position: relative;
 
@@ -136,10 +206,10 @@
     }
   }
 
-  .event__info {
-    flex-grow: 1;
+  .time__item + .time__item {
+    margin-top: 4px;
   }
-  // --- end event
+  // --- end time
 
   // event card ---
 
