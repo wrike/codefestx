@@ -2,8 +2,10 @@
   [isReady]="isReady">
 
   <layout
-    [title]="title"
-    [state]="state">
+    [title]="'Расписание'"
+    [state]="state"
+    [titleHidden]="isSearchMode"
+    [navHidden]="isSearchMode">
 
     <!-- Actions -->
     <layout-actions
@@ -17,7 +19,7 @@
     <!-- Tags -->
     <nav
       pre-content
-      *ngIf="!isSearchMode"
+      *ngIf="showTags"
       class="tags">
 
       <!-- Buttons group -->
@@ -37,6 +39,8 @@
             class="button-icon">
             <path d="M5 6h14a1 1 0 0 1 0 2H5a1 1 0 1 1 0-2zm3 5h8a1 1 0 0 1 0 2H8a1 1 0 0 1 0-2zm3 5h2a1 1 0 0 1 0 2h-2a1 1 0 0 1 0-2z" fill-rule="evenodd"/>
           </svg>
+          
+          <span class="visually-hidden">Настроить фильтры</span>
         </button>
 
         <!-- All -->
@@ -44,7 +48,7 @@
           cf-button
           (click)="onShowAllClick()"
           class="button-tag">
-          {{ filterTitle }}
+          <span class="visually-hidden">Выбранное: </span> {{ filterTitle }}
         </button>
       </div>
 

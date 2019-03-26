@@ -1,5 +1,4 @@
 import 'package:angular/angular.dart';
-import 'package:angular_components/angular_components.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:codefest/src/components/containers/lectures_container/actions/actions.dart';
 import 'package:codefest/src/components/containers/lectures_container/favorite_empty_state/favorite_empty_state.dart';
@@ -28,8 +27,6 @@ import 'package:codefest/src/route_paths.dart';
   directives: [
     NgIf,
     NgFor,
-    MaterialButtonComponent,
-    MaterialIconComponent,
     LayoutComponent,
     ActionsComponent,
     LayoutActionsComponent,
@@ -76,7 +73,9 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
 
   Iterable<Section> get sections => _selectors.getSelectedSections(state);
 
-  String get title => isSearchMode ? '' : 'Расписание';
+  String get title => 'Расписание';
+
+  bool get showTags => !(isSearchMode && searchText != null && searchText.isNotEmpty);
 
   String endTime(Lecture lecture) => _selectors.getEndTimeText(lecture);
 
