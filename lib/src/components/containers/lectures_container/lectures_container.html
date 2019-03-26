@@ -98,16 +98,21 @@
           *ngFor="let groupedTime of groupedLectures; let i = index"
           class="schedule__section-day">
 
-          <div>
+          <!--  -->
+          <time
+            class="schedule__day-date">
             {{ getDay(groupedTime) }}
-          </div>
+          </time>
 
           <section
             *ngFor="let lectures of groupedTime"
             class="schedule__section-time">
 
             <template
-              ngFor let-lecture [ngForOf]="lectures" let-i="index">
+              ngFor
+              [ngForOf]="lectures"
+              let-lecture
+              let-i="index">
 
               <div
                 class="schedule__event event">
