@@ -128,18 +128,17 @@ class CodefestReducer {
           ),
       );
 
-  CodefestState _onLoadUserData(CodefestState state, LoadUserDataSuccessAction action) => state.rebuild(
+  CodefestState _onLoadUserData(CodefestState state, LoadUserDataSuccessAction action) =>
+      state.rebuild(
         (b) => b
-          ..user.replace(state.user.rebuild((b) {
-            b
+          ..user.replace(state.user.rebuild((u) => u
               ..favoriteLectureIds.replace(action.favoriteLectureIds)
               ..selectedSectionIds.replace(action.selectedSectionIds)
               ..likedLectureIds.replace(action.likedLectureIds ?? [])
               ..displayName = action.displayName ?? ''
               ..avatarPath = action.avatarPath ?? ''
-              ..isCustomSectionMode = action.isCustomSectionMode;
-          })),
-      );
+              ..isCustomSectionMode = action.isCustomSectionMode
+          )));
 
   CodefestState _onNewVersion(CodefestState state, NewVersionAction action) =>
       state.rebuild((b) => b.releaseNote = action.releaseNote);

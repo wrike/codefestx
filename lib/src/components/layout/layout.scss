@@ -5,21 +5,53 @@
   height: 100%;
   position: relative; // for drawer
 
-  .layout__content {
-    display: grid;
-    grid-template-rows: [header] auto [pre-content] auto [content] 1fr;
-    height: 100%;
-  }
+}
 
-  .badge {
-    color: $fg-color-secondary
-  }
+.layout__root {
+  display: grid;
+  grid-template-rows: [header] auto [pre-content] auto [content] 1fr;
+  height: 100%;
+}
 
-  .content {
-    max-height: 100%;
-    padding: 0 24px;
-    overflow-y: auto;
-    z-index: 0;
-    -webkit-overflow-scrolling: touch;
-  }
+.layout__header {
+  display: flex;
+  align-items: center;
+  position: relative;
+  height: 56px;
+  padding: 12px;
+}
+
+.layout__header-spacer {
+  flex-grow: 1;
+}
+
+.layout__actions {
+}
+
+.layout__title {
+  @include font-heading-2;
+  left: 50%;
+  right: -50%;
+  transform: translate(-50%);
+  padding: 0 48px;
+  position: absolute;
+  max-width: 100%;
+  pointer-events: none;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.layout__title-badge {
+  color: $fg-color-secondary;
+}
+
+.layout__content {
+  max-height: 100%;
+  padding: 0 24px;
+  overflow-y: auto;
+  z-index: 0;
+  -webkit-overflow-scrolling: touch;
 }
