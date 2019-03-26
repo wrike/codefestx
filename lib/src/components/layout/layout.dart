@@ -111,6 +111,8 @@ class LayoutComponent implements OnInit {
   }
 
   void goBack() {
-    _location.back();
+    _router.navigateByUrl(RoutePaths.lectures.toUrl());
+    // todo
+    // _location.back();
   }
 }
