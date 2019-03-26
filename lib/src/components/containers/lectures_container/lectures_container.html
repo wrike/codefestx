@@ -171,15 +171,15 @@
                     <div
                       class="info-item__media">
 
-                <span
-                  *ngFor="let speaker of lecture.speakers"
-                  class="info-item__media-container">
+                      <span
+                        *ngFor="let speaker of lecture.speakers"
+                        class="info-item__media-container">
 
-                  <img
-                    [src]="speaker.avatarPath"
-                    [alt]="speaker.name"
-                    class="info-item__media-image">
-                </span>
+                        <img
+                          [src]="speaker.avatarPath"
+                          [alt]="speaker.name"
+                          class="info-item__media-image">
+                      </span>
                     </div>
 
                     <!-- Details -->
@@ -208,20 +208,15 @@
                     </div>
                   </div>
 
-                  <ng-container
-                    *ngFor="let speaker of lecture.speakers; let i = index">
+                  <div
+                    class="event-card__actions">
 
-                    <div
-                      *ngIf="lecture.speakers.length == i + 1"
-                      class="event-card__actions">
-
-                      <actions
-                        [popularity]="lecture.likesCount"
-                        [isFavorite]="isFavoriteLecture(lecture)"
-                        (onFavoriteChange)="onFavoriteChange(lecture, $event)">
-                      </actions>
-                    </div>
-                  </ng-container>
+                    <actions
+                      [popularity]="lecture.likesCount"
+                      [isFavorite]="isFavoriteLecture(lecture)"
+                      (onFavoriteChange)="onFavoriteChange(lecture, $event)">
+                    </actions>
+                  </div>
                 </article>
               </div>
             </template>
