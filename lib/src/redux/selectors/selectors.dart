@@ -115,7 +115,7 @@ class Selectors {
   Iterable<Section> getMainSections(CodefestState state) =>
       getSections(state).where((section) => !section.isCustom).toList();
 
-  DateTime getNow() => DateTime(2019, 3, 30, 12).toUtc();
+  DateTime getNow() => DateTime.now().toUtc();
 
   String getSearchText(CodefestState state) => getUser(state).searchText;
 
