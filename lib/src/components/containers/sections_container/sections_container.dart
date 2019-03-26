@@ -1,10 +1,10 @@
 import 'package:angular/angular.dart';
-import 'package:angular_components/angular_components.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:codefest/src/components/containers/stateful_component.dart';
 import 'package:codefest/src/components/layout/layout.dart';
 import 'package:codefest/src/components/loader/loader.dart';
 import 'package:codefest/src/components/sections/sections.dart';
+import 'package:codefest/src/components/ui/button/button.dart';
 import 'package:codefest/src/models/section.dart';
 import 'package:codefest/src/redux/actions/change_selected_sections_action.dart';
 import 'package:codefest/src/redux/actions/init_action.dart';
@@ -12,6 +12,7 @@ import 'package:codefest/src/redux/selectors/selectors.dart';
 import 'package:codefest/src/redux/services/dispatcher.dart';
 import 'package:codefest/src/redux/services/store_factory.dart';
 import 'package:codefest/src/route_paths.dart';
+import 'package:collection/collection.dart' show SetEquality;
 
 @Component(
   selector: 'sections-container',
@@ -23,8 +24,7 @@ import 'package:codefest/src/route_paths.dart';
     SectionsComponent,
     LoaderComponent,
     LayoutComponent,
-    MaterialButtonComponent,
-    MaterialIconComponent
+    ButtonComponent,
   ],
   providers: [],
   preserveWhitespace: true,
@@ -35,8 +35,8 @@ class SectionsContainerComponent extends StatefulComponent implements OnInit {
   final Selectors _selectors;
   final Router _router;
 
-  Iterable<String> _sectionIds;
-  bool _isCustomSectionMode;
+  Iterable<String> selectedSectionIds;
+  bool isCustomSectionMode;
 
   SectionsContainerComponent(
     NgZone zone,
@@ -47,7 +47,7 @@ class SectionsContainerComponent extends StatefulComponent implements OnInit {
     this._router,
   ) : super(zone, cdr, storeFactory);
 
-  bool get isCustomSectionMode => _selectors.getCustomSectionMode(state);
+  bool get previousIsCustomSectionMode => _selectors.getCustomSectionMode(state);
 
   bool get isReady => _selectors.isReady(state);
 
@@ -55,28 +55,46 @@ class SectionsContainerComponent extends StatefulComponent implements OnInit {
 
   int get selectedSectionCount => _selectors.getSelectedSectionCount(state);
 
-  Iterable<String> get selectedSectionIds => _selectors.getSelectedSectionIds(state);
+  Iterable<String> get previousSelectedSectionIds => _selectors.getSelectedSectionIds(state);
+
+  Set<String> previousSelectedSectionIdsSet;
+
+  bool get changedSelection => !(
+    const SetEquality().equals(selectedSectionIds.toSet(), previousSelectedSectionIdsSet) && 
+    isCustomSectionMode ==previousIsCustomSectionMode
+  );
 
   @override
   void ngOnInit() {
-    _sectionIds = selectedSectionIds;
-    _isCustomSectionMode = isCustomSectionMode;
+    previousSelectedSectionIdsSet = previousSelectedSectionIds.toSet();
+    selectedSectionIds = previousSelectedSectionIds;
+    isCustomSectionMode = previousIsCustomSectionMode;
 
     _dispatcher.dispatch(InitAction());
   }
 
+  void onApply() {
+    _dispatcher.dispatch(ChangeSelectedSectionsAction(
+      sectionIds: selectedSectionIds.toList(),
+      isCustomSectionMode: isCustomSectionMode,
+    ));
+
+    _goBack();
+  }
+
   void onClose() {
-    _router.navigate(RoutePaths.lectures.toUrl());
+    _goBack();
   }
 
   void onCustomSectionModeChange(bool value) {
-    _isCustomSectionMode = value;
-    _dispatcher.dispatch(ChangeSelectedSectionsAction(sectionIds: _sectionIds, isCustomSectionMode: value));
+    isCustomSectionMode = value;
   }
 
   void onSectionsChange(Iterable<String> sectionIds) {
-    _sectionIds = sectionIds;
-    _dispatcher
-        .dispatch(ChangeSelectedSectionsAction(sectionIds: sectionIds, isCustomSectionMode: _isCustomSectionMode));
+    selectedSectionIds = sectionIds;
+  }
+
+  void _goBack() {
+    _router.navigateByUrl(RoutePaths.lectures.toUrl());
   }
 }
