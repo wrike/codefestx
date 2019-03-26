@@ -1,37 +1,56 @@
-<loader
-  [isReady]="isReady">
+<layout
+  *ngIf="isReady"
+  [title]="'Фильтр'"
+  [state]="state"
+  navHidden>
 
-  <layout
-    *ngIf="isReady"
-    [title]="'Фильтр'"
-    [state]="state">
+  <div
+    actions>
+
+    <button
+      cf-button
+      class="button-icon-only"
+      (click)="onClose()">
+
+      <svg
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+        <path fill="currentColor" fill-rule="evenodd" d="M13.233 12l5.508-5.501A.878.878 0 0 0 17.5 5.257l-5.5 5.51-5.5-5.51A.878.878 0 1 0 5.26 6.5l5.508 5.5-5.508 5.5a.875.875 0 0 0 0 1.242.874.874 0 0 0 1.241 0l5.5-5.509 5.5 5.51a.874.874 0 0 0 1.241 0 .875.875 0 0 0 0-1.242L13.233 12z"/>
+      </svg>
+
+      <span class="visually-hidden">Отменить</span>
+    </button>
+  </div>
+
+  <span
+    badge>{{ selectedSectionCount }}</span>
+
+  <div
+    content>
+
+    <sections
+      [mainSections]="mainSections"
+      [isCustomSectionMode]="isCustomSectionMode"
+      [selectedSectionIds]="selectedSectionIds"
+      (onSectionsChange)="onSectionsChange($event)"
+      (onCustomSectionModeChange)="onCustomSectionModeChange($event)">
+    </sections>
 
     <div
-      actions>
-
-      <material-button
-        icon
-        (click)="onClose()">
-
-        <material-icon
-          icon="close">
-        </material-icon>
-      </material-button>
+      *ngIf="changedSelection"
+      class="sections__container-apply-button-gutter">
     </div>
-
-    <span
-      badge>{{ selectedSectionCount }}</span>
 
     <div
-      content>
+      *ngIf="changedSelection"
+      class="sections__apply-button-container">
 
-      <sections
-        [mainSections]="mainSections"
-        [isCustomSectionMode]="isCustomSectionMode"
-        [selectedSectionIds]="selectedSectionIds"
-        (onSectionsChange)="onSectionsChange($event)"
-        (onCustomSectionModeChange)="onCustomSectionModeChange($event)">
-      </sections>
+      <button
+        cf-button
+        (click)="onApply()"
+        class="sections__apply-button button-primary button-full-width">
+        Применить
+      </button>
     </div>
-  </layout>
-</loader>
+  </div>
+</layout>

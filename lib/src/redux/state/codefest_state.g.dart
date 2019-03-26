@@ -14,11 +14,13 @@ class _$CodefestState extends CodefestState {
   @override
   final bool isReady;
   @override
-  final String releaseNote;
-  @override
   final BuiltList<Lecture> lectures;
   @override
   final BuiltList<Location> locations;
+  @override
+  final String releaseNote;
+  @override
+  final int scrollTop;
   @override
   final BuiltList<Section> sections;
   @override
@@ -33,9 +35,10 @@ class _$CodefestState extends CodefestState {
       {this.isError,
       this.isLoaded,
       this.isReady,
-      this.releaseNote,
       this.lectures,
       this.locations,
+      this.releaseNote,
+      this.scrollTop,
       this.sections,
       this.speakers,
       this.user})
@@ -49,14 +52,17 @@ class _$CodefestState extends CodefestState {
     if (isReady == null) {
       throw new BuiltValueNullFieldError('CodefestState', 'isReady');
     }
-    if (releaseNote == null) {
-      throw new BuiltValueNullFieldError('CodefestState', 'releaseNote');
-    }
     if (lectures == null) {
       throw new BuiltValueNullFieldError('CodefestState', 'lectures');
     }
     if (locations == null) {
       throw new BuiltValueNullFieldError('CodefestState', 'locations');
+    }
+    if (releaseNote == null) {
+      throw new BuiltValueNullFieldError('CodefestState', 'releaseNote');
+    }
+    if (scrollTop == null) {
+      throw new BuiltValueNullFieldError('CodefestState', 'scrollTop');
     }
     if (sections == null) {
       throw new BuiltValueNullFieldError('CodefestState', 'sections');
@@ -83,9 +89,10 @@ class _$CodefestState extends CodefestState {
         isError == other.isError &&
         isLoaded == other.isLoaded &&
         isReady == other.isReady &&
-        releaseNote == other.releaseNote &&
         lectures == other.lectures &&
         locations == other.locations &&
+        releaseNote == other.releaseNote &&
+        scrollTop == other.scrollTop &&
         sections == other.sections &&
         speakers == other.speakers &&
         user == other.user;
@@ -100,12 +107,14 @@ class _$CodefestState extends CodefestState {
                     $jc(
                         $jc(
                             $jc(
-                                $jc($jc(0, isError.hashCode),
-                                    isLoaded.hashCode),
-                                isReady.hashCode),
-                            releaseNote.hashCode),
-                        lectures.hashCode),
-                    locations.hashCode),
+                                $jc(
+                                    $jc($jc(0, isError.hashCode),
+                                        isLoaded.hashCode),
+                                    isReady.hashCode),
+                                lectures.hashCode),
+                            locations.hashCode),
+                        releaseNote.hashCode),
+                    scrollTop.hashCode),
                 sections.hashCode),
             speakers.hashCode),
         user.hashCode));
@@ -117,9 +126,10 @@ class _$CodefestState extends CodefestState {
           ..add('isError', isError)
           ..add('isLoaded', isLoaded)
           ..add('isReady', isReady)
-          ..add('releaseNote', releaseNote)
           ..add('lectures', lectures)
           ..add('locations', locations)
+          ..add('releaseNote', releaseNote)
+          ..add('scrollTop', scrollTop)
           ..add('sections', sections)
           ..add('speakers', speakers)
           ..add('user', user))
@@ -143,10 +153,6 @@ class CodefestStateBuilder
   bool get isReady => _$this._isReady;
   set isReady(bool isReady) => _$this._isReady = isReady;
 
-  String _releaseNote;
-  String get releaseNote => _$this._releaseNote;
-  set releaseNote(String releaseNote) => _$this._releaseNote = releaseNote;
-
   ListBuilder<Lecture> _lectures;
   ListBuilder<Lecture> get lectures =>
       _$this._lectures ??= new ListBuilder<Lecture>();
@@ -157,6 +163,14 @@ class CodefestStateBuilder
       _$this._locations ??= new ListBuilder<Location>();
   set locations(ListBuilder<Location> locations) =>
       _$this._locations = locations;
+
+  String _releaseNote;
+  String get releaseNote => _$this._releaseNote;
+  set releaseNote(String releaseNote) => _$this._releaseNote = releaseNote;
+
+  int _scrollTop;
+  int get scrollTop => _$this._scrollTop;
+  set scrollTop(int scrollTop) => _$this._scrollTop = scrollTop;
 
   ListBuilder<Section> _sections;
   ListBuilder<Section> get sections =>
@@ -179,9 +193,10 @@ class CodefestStateBuilder
       _isError = _$v.isError;
       _isLoaded = _$v.isLoaded;
       _isReady = _$v.isReady;
-      _releaseNote = _$v.releaseNote;
       _lectures = _$v.lectures?.toBuilder();
       _locations = _$v.locations?.toBuilder();
+      _releaseNote = _$v.releaseNote;
+      _scrollTop = _$v.scrollTop;
       _sections = _$v.sections?.toBuilder();
       _speakers = _$v.speakers?.toBuilder();
       _user = _$v.user?.toBuilder();
@@ -212,9 +227,10 @@ class CodefestStateBuilder
               isError: isError,
               isLoaded: isLoaded,
               isReady: isReady,
-              releaseNote: releaseNote,
               lectures: lectures.build(),
               locations: locations.build(),
+              releaseNote: releaseNote,
+              scrollTop: scrollTop,
               sections: sections.build(),
               speakers: speakers.build(),
               user: user.build());
@@ -225,6 +241,7 @@ class CodefestStateBuilder
         lectures.build();
         _$failedField = 'locations';
         locations.build();
+
         _$failedField = 'sections';
         sections.build();
         _$failedField = 'speakers';

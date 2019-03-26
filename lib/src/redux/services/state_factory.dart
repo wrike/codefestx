@@ -8,6 +8,7 @@ class StateFactory {
           ..isLoaded = false
           ..isError = false
           ..releaseNote = ''
+          ..scrollTop = 0
           ..user.replace(
             UserState(
               (b) => b

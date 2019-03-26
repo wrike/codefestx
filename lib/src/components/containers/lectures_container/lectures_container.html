@@ -2,8 +2,11 @@
   [isReady]="isReady">
 
   <layout
-    [title]="title"
-    [state]="state">
+    [title]="'Расписание'"
+    [isScroll]="true"
+    [state]="state"
+    [titleHidden]="isSearchMode"
+    [navHidden]="isSearchMode">
 
     <!-- actions -->
     <layout-actions
@@ -17,7 +20,7 @@
     <!-- tags -->
     <nav
       pre-content
-      *ngIf="!isSearchMode"
+      *ngIf="showTags"
       class="tags">
 
       <!-- Buttons group -->
@@ -37,6 +40,8 @@
             class="button-icon">
             <path d="M5 6h14a1 1 0 0 1 0 2H5a1 1 0 1 1 0-2zm3 5h8a1 1 0 0 1 0 2H8a1 1 0 0 1 0-2zm3 5h2a1 1 0 0 1 0 2h-2a1 1 0 0 1 0-2z" fill-rule="evenodd"/>
           </svg>
+
+          <span class="visually-hidden">Настроить фильтры</span>
         </button>
 
         <!-- All -->
@@ -44,7 +49,7 @@
           cf-button
           (click)="onShowAllClick()"
           class="button-tag">
-          {{ filterTitle }}
+          <span class="visually-hidden">Выбранное: </span> {{ filterTitle }}
         </button>
       </div>
 
@@ -57,20 +62,19 @@
       </button>
 
       <button
-        cf-button
-        *ngIf="false"
-        (click)="onShowNowClick()"
-        [class.button-primary]="isNowSelected"
-        class="tags__item button-tag">
-        Идет сейчас
+          cf-button
+          (click)="onShowCustomClick()"
+          [class.button-primary]="isCustomSelected"
+          class="tags__item button-tag">
+        Движухи
       </button>
 
       <button
         cf-button
-        (click)="onShowCustomClick()"
-        [class.button-primary]="isCustomSelected"
+        (click)="onShowNowClick()"
+        [class.button-primary]="isNowSelected"
         class="tags__item button-tag">
-        Движухи
+        Идет сейчас
       </button>
     </nav>
 
@@ -81,6 +85,10 @@
       <favorite-empty-state
         *ngIf="lectures.isEmpty && isFavoriteSelected">
       </favorite-empty-state>
+
+      <now-empty-state
+        *ngIf="lectures.isEmpty && isNowSelected">
+      </now-empty-state>
 
       <!-- schedule -->
       <div
@@ -119,8 +127,14 @@
                 <div
                   class="events__time time">
 
-                  <div
-                    class="time__container">
+                <div
+                  *ngIf="nearLectureId == lecture.id"
+                  id="currentTime">
+                </div>
+
+                <!-- Time -->
+                <div
+                  class="time__container">
 
                     <!-- start -->
                     <time
@@ -194,15 +208,15 @@
                       <div
                         class="info-item__media">
 
-                <span
-                  *ngFor="let speaker of lecture.speakers"
-                  class="info-item__media-container">
+                      <span
+                        *ngFor="let speaker of lecture.speakers"
+                        class="info-item__media-container">
 
-                  <img
-                    [src]="speaker.avatarPath"
-                    [alt]="speaker.name"
-                    class="info-item__media-image">
-                </span>
+                        <img
+                          [src]="speaker.avatarPath"
+                          [alt]="speaker.name"
+                          class="info-item__media-image">
+                      </span>
                       </div>
 
                       <!-- Details -->
@@ -231,21 +245,16 @@
                       </div>
                     </div>
 
-                    <ng-container
-                      *ngFor="let speaker of lecture.speakers; let i = index">
+                    <div
+                    class="event-card__actions">
 
-                      <div
-                        *ngIf="lecture.speakers.length == i + 1"
-                        class="event-card__actions">
-
-                        <actions
-                          [popularity]="lecture.likesCount"
-                          [isFavorite]="isFavoriteLecture(lecture)"
-                          (onFavoriteChange)="onFavoriteChange(lecture, $event)">
-                        </actions>
-                      </div>
-                    </ng-container>
-                  </article>
+                    <actions
+                      [popularity]="lecture.likesCount"
+                      [isFavorite]="isFavoriteLecture(lecture)"
+                      (onFavoriteChange)="onFavoriteChange(lecture, $event)">
+                    </actions>
+                  </div>
+                </article>
                 </div>
               </template>
             </div>

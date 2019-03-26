@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:angular/angular.dart';
-import 'package:angular_components/angular_components.dart';
+import 'package:codefest/src/components/ui/button/button.dart';
 import 'package:codefest/src/components/ui/text_input/text_input.dart';
 import 'package:stream_transform/stream_transform.dart';
 
@@ -10,9 +10,8 @@ import 'package:stream_transform/stream_transform.dart';
   templateUrl: 'layout_actions.html',
   styleUrls: ['layout_actions.css'],
   directives: [
+    ButtonComponent,
     NgIf,
-    MaterialButtonComponent,
-    MaterialIconComponent,
     TextInput,
   ],
   providers: [],
@@ -27,15 +26,14 @@ class LayoutActionsComponent {
   TextInput searchInput;
 
   @Input()
+  @HostBinding('class.search-mode')
   bool isSearchMode = false;
 
   @Input()
   String searchText = '';
 
   @Output()
-  Stream<String> get onSearch => _onSearchStreamController.stream
-      .transform(debounce(Duration(milliseconds: 300)))
-      .distinct();
+  Stream<String> get onSearch => _onSearchStreamController.stream;
 
   @Output()
   Stream<bool> get onSearchModeChange => _onSearchModeChangeStreamController.stream;
