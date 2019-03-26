@@ -57,19 +57,19 @@
       </button>
 
       <button
+          cf-button
+          (click)="onShowCustomClick()"
+          [class.button-primary]="isCustomSelected"
+          class="tags__item button-tag">
+        Движухи
+      </button>
+
+      <button
         cf-button
         (click)="onShowNowClick()"
         [class.button-primary]="isNowSelected"
         class="tags__item button-tag">
         Идет сейчас
-      </button>
-
-      <button
-        cf-button
-        (click)="onShowCustomClick()"
-        [class.button-primary]="isCustomSelected"
-        class="tags__item button-tag">
-        Движухи
       </button>
     </nav>
 
