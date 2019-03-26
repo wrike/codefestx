@@ -8,7 +8,7 @@
     [titleHidden]="isSearchMode"
     [navHidden]="isSearchMode">
 
-    <!-- Actions -->
+    <!-- actions -->
     <layout-actions
       actions
       [searchText]="searchText"
@@ -17,7 +17,7 @@
       (onSearchModeChange)="onSearchModeChange($event)">
     </layout-actions>
 
-    <!-- Tags -->
+    <!-- tags -->
     <nav
       pre-content
       *ngIf="showTags"
@@ -78,11 +78,10 @@
       </button>
     </nav>
 
-    <!-- Content -->
+    <!-- content -->
     <div
       content>
 
-      <!-- Schedule -->
       <favorite-empty-state
         *ngIf="lectures.isEmpty && isFavoriteSelected">
       </favorite-empty-state>
@@ -91,31 +90,42 @@
         *ngIf="lectures.isEmpty && isNowSelected">
       </now-empty-state>
 
+      <!-- schedule -->
       <div
         class="schedule">
 
+        <!-- day section -->
         <section
           *ngFor="let groupedTime of groupedLectures; let i = index"
-          class="schedule__section-day">
+          class="schedule__section">
 
-          <!--  -->
-          <time
-            class="schedule__day-date">
-            {{ getDay(groupedTime) }}
-          </time>
+          <!-- day title -->
+          <header
+            class="schedule__header">
 
-          <section
+            <time
+              class="schedule__header-date">
+              {{ getDay(groupedTime) }}
+            </time>
+          </header>
+
+          <!-- day events grouped by time -->
+          <div
             *ngFor="let lectures of groupedTime"
-            class="schedule__section-time">
+            class="schedule__events events">
 
+            <!-- time -->
             <template
               ngFor
               [ngForOf]="lectures"
               let-lecture
               let-i="index">
 
-              <div
-                class="schedule__event event">
+              <template
+                [ngIf]="i == 0">
+
+                <div
+                  class="events__time time">
 
                 <div
                   *ngIf="nearLectureId == lecture.id"
@@ -124,67 +134,79 @@
 
                 <!-- Time -->
                 <div
-                  class="event__time">
+                  class="time__container">
 
-                  <template
-                    [ngIf]="i == 0">
-
-                    <!-- Start -->
+                    <!-- start -->
                     <time
-                      class="event__time-item event__time-item--start"
+                      class="time__item time__item--start"
                       [class.right_now]="isRightNow(lecture)"
                       [class.finished]="isFinished(lecture)">
                       {{ startTime(lecture) }}
                     </time>
 
-                    <!-- End -->
+                    <!-- end -->
                     <time
-                      class="event__time-item">
+                      class="time__item">
                       {{ endTime(lecture) }}
                     </time>
-                  </template>
+                  </div>
                 </div>
+              </template>
+            </template>
 
-                <!-- Info (todo details)-->
-                <article
-                  (click)="onLectureSelect(lecture)"
-                  class="event__info event-card">
+            <!-- events -->
+            <div
+              class="events__list">
 
-                  <!-- Meta -->
-                  <div
-                    class="event-card__meta">
+              <template
+                ngFor
+                [ngForOf]="lectures"
+                let-lecture
+                let-i="index">
 
-                    <!-- Location -->
-                    <span
-                      class="event-card__meta-item">
+                <div
+                  class="schedule__event event">
+
+                  <!-- details -->
+                  <article
+                    (click)="onLectureSelect(lecture)"
+                    class="event__info event-card">
+
+                    <!-- meta -->
+                    <div
+                      class="event-card__meta">
+
+                      <!-- location -->
+                      <span
+                        class="event-card__meta-item">
                       {{ lecture.location.title }}
                     </span>
 
-                    &ngsp;•&ngsp;
+                      &ngsp;•&ngsp;
 
-                    <!-- Section -->
-                    <span
-                      class="event-card__meta-item"
-                      [style.color]="lecture.section.color">
+                      <!-- section -->
+                      <span
+                        class="event-card__meta-item"
+                        [style.color]="lecture.section.color">
                       {{ lecture.section.title }}
                     </span>
 
-                    <!--{{ flag(lecture) }}-->
-                  </div>
+                      <!--{{ flag(lecture) }}-->
+                    </div>
 
-                  <!-- Title -->
-                  <h1
-                    class="event-card__title">
-                    {{ lecture.title }}
-                  </h1>
+                    <!-- title -->
+                    <h1
+                      class="event-card__title">
+                      {{ lecture.title }}
+                    </h1>
 
-                  <!-- Speakers (todo: info item) -->
-                  <div
-                    class="event-card__speakers info-item">
-
-                    <!-- Media -->
+                    <!-- speakers (todo: info item) -->
                     <div
-                      class="info-item__media">
+                      class="event-card__speakers info-item">
+
+                      <!-- Media -->
+                      <div
+                        class="info-item__media">
 
                       <span
                         *ngFor="let speaker of lecture.speakers"
@@ -195,35 +217,35 @@
                           [alt]="speaker.name"
                           class="info-item__media-image">
                       </span>
+                      </div>
+
+                      <!-- Details -->
+                      <div
+                        class="info-item__details">
+
+                        <!-- Title -->
+                        <div
+                          class="info-item__title">
+
+                          <ng-container
+                            *ngFor="let speaker of lecture.speakers">
+                            {{ speaker.name }}
+                          </ng-container>
+                        </div>
+
+                        <!-- Subtitle -->
+                        <div
+                          class="info-item__subtitle">
+
+                          <ng-container
+                            *ngFor="let speaker of lecture.speakers">
+                            {{ speaker.company }}
+                          </ng-container>
+                        </div>
+                      </div>
                     </div>
 
-                    <!-- Details -->
                     <div
-                      class="info-item__details">
-
-                      <!-- Title -->
-                      <div
-                        class="info-item__title">
-
-                        <ng-container
-                          *ngFor="let speaker of lecture.speakers">
-                          {{ speaker.name }}
-                        </ng-container>
-                      </div>
-
-                      <!-- Subtitle -->
-                      <div
-                        class="info-item__subtitle">
-
-                        <ng-container
-                          *ngFor="let speaker of lecture.speakers">
-                          {{ speaker.company }}
-                        </ng-container>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div
                     class="event-card__actions">
 
                     <actions
@@ -233,9 +255,10 @@
                     </actions>
                   </div>
                 </article>
-              </div>
-            </template>
-          </section>
+                </div>
+              </template>
+            </div>
+          </div>
         </section>
       </div>
     </div>
