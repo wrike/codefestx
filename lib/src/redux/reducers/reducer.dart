@@ -112,7 +112,7 @@ class CodefestReducer {
                     type: lecture.type,
                     language: lecture.lang,
                     description: lecture.description,
-                    startTime: lecture.startTime,
+                    startTime: DateTime.fromMillisecondsSinceEpoch(lecture.startTime, isUtc: true),
                     duration: lecture.duration,
                     location: action.locations.firstWhere((location) => location.id == lecture.locationId),
                     section: action.sections.firstWhere((section) => section.id == lecture.sectionId),

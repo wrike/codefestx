@@ -21,7 +21,7 @@ class LectureData {
   @JsonKey(nullable: false)
   final String sectionId;
   @JsonKey(nullable: false)
-  final DateTime startTime;
+  final int startTime;
   @JsonKey(nullable: false)
   final int duration;
   @JsonKey(defaultValue: LanguageType.ru)

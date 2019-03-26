@@ -14,7 +14,7 @@ LectureData _$LectureDataFromJson(Map<String, dynamic> json) {
       description: json['description'] as String,
       locationId: json['locationId'] as String,
       sectionId: json['sectionId'] as String,
-      startTime: DateTime.parse(json['startTime'] as String),
+      startTime: json['startTime'] as int,
       duration: json['duration'] as int,
       lang: _$enumDecodeNullable(_$LanguageTypeEnumMap, json['lang']) ??
           LanguageType.ru,
@@ -35,7 +35,7 @@ Map<String, dynamic> _$LectureDataToJson(LectureData instance) =>
       'description': instance.description,
       'locationId': instance.locationId,
       'sectionId': instance.sectionId,
-      'startTime': instance.startTime.toIso8601String(),
+      'startTime': instance.startTime,
       'duration': instance.duration,
       'lang': _$LanguageTypeEnumMap[instance.lang],
       'isFavorite': instance.isFavorite,
