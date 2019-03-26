@@ -14,6 +14,7 @@
 }
 
 .layout__header {
+  grid-row: header;
   display: flex;
   align-items: center;
   position: relative;
@@ -23,9 +24,6 @@
 
 .layout__header-spacer {
   flex-grow: 1;
-}
-
-.layout__actions {
 }
 
 .layout__title {
@@ -49,6 +47,7 @@
 }
 
 .layout__content {
+  grid-row: content;
   max-height: 100%;
   padding: 0 24px;
   overflow-y: auto;

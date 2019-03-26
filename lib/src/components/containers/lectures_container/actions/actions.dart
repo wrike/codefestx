@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:html';
 
 import 'package:angular/angular.dart';
-import 'package:angular_components/angular_components.dart';
 import 'package:codefest/src/components/ui/button/button.dart';
 import 'package:codefest/src/components/ui/popularity_icon/popularity_icon.dart';
 
@@ -12,8 +11,6 @@ import 'package:codefest/src/components/ui/popularity_icon/popularity_icon.dart'
   templateUrl: 'actions.html',
   directives: [
     NgIf,
-    MaterialButtonComponent,
-    MaterialIconComponent,
     ButtonComponent,
     PopularityIconComponent,
   ],
