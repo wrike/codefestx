@@ -15,6 +15,7 @@ import 'package:codefest/src/redux/actions/change_lecture_favorite_action.dart';
 import 'package:codefest/src/redux/actions/change_search_mode_action.dart';
 import 'package:codefest/src/redux/actions/filter_lectures_action.dart';
 import 'package:codefest/src/redux/actions/init_action.dart';
+import 'package:codefest/src/redux/actions/scroll_to_current_time_action.dart';
 import 'package:codefest/src/redux/actions/search_lectures_action.dart';
 import 'package:codefest/src/redux/selectors/selectors.dart';
 import 'package:codefest/src/redux/services/dispatcher.dart';
@@ -46,8 +47,6 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
   final Dispatcher _dispatcher;
   final Router _router;
   final Selectors _selectors;
-
-  final _now = DateTime.now().toUtc();
 
   LecturesContainerComponent(
     NgZone zone,
@@ -86,6 +85,10 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
 
   Iterable<Lecture> get lectures => _selectors.getVisibleLectures(state);
 
+  String get nearLectureId => _selectors.getNearLectureId(state);
+
+  DateTime get now => _selectors.getNow();
+
   String get searchText => _selectors.getSearchText(state);
 
   Iterable<Section> get sections => _selectors.getSelectedSections(state);
@@ -121,12 +124,12 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
 
   bool isFinished(Lecture lecture) {
     final endTime = _selectors.getEndTime(lecture);
-    return _now.isAfter(endTime);
+    return now.isAfter(endTime);
   }
 
   bool isRightNow(Lecture lecture) {
     final endTime = _selectors.getEndTime(lecture);
-    return _now.isAfter(lecture.startTime) && _now.isBefore(endTime);
+    return now.isAfter(lecture.startTime) && now.isBefore(endTime);
   }
 
   bool isSectionSelected(Section section) => _selectors.getFilterSectionId(state) == section.id;
@@ -139,6 +142,10 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
   @override
   void ngOnInit() {
     _dispatcher.dispatch(InitAction());
+
+    if (state.isLoaded && state.scrollTop == 0) {
+      _dispatcher.dispatch(ScrollToCurrentTimeAction());
+    }
   }
 
   void onFavoriteChange(Lecture lecture, bool value) {
@@ -167,14 +174,17 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
 
   void onShowAllClick() {
     _dispatcher.dispatch(FilterLecturesAction(filterType: FilterTypeEnum.all));
+    _dispatcher.dispatch(ScrollToCurrentTimeAction());
   }
 
   void onShowCustomClick() {
     _dispatcher.dispatch(FilterLecturesAction(filterType: FilterTypeEnum.custom));
+    _dispatcher.dispatch(ScrollToCurrentTimeAction());
   }
 
   void onShowFavoriteClick() {
     _dispatcher.dispatch(FilterLecturesAction(filterType: FilterTypeEnum.favorite));
+    _dispatcher.dispatch(ScrollToCurrentTimeAction());
   }
 
   void onShowNowClick() {

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:html';
 
 import 'package:codefest/src/redux/actions/authorize_action.dart';
 import 'package:codefest/src/redux/actions/change_lecture_favorite_action.dart';
@@ -10,6 +11,9 @@ import 'package:codefest/src/redux/actions/load_data_start_action.dart';
 import 'package:codefest/src/redux/actions/load_data_success_action.dart';
 import 'package:codefest/src/redux/actions/load_user_data_action.dart';
 import 'package:codefest/src/redux/actions/load_user_data_success_action.dart';
+import 'package:codefest/src/redux/actions/on_scroll_action.dart';
+import 'package:codefest/src/redux/actions/scroll_to_current_time_action.dart';
+import 'package:codefest/src/redux/actions/set_scroll_top_action.dart';
 import 'package:codefest/src/redux/actions/update_user_data_action.dart';
 import 'package:codefest/src/redux/state/codefest_state.dart';
 import 'package:codefest/src/services/auth_store.dart';
@@ -38,6 +42,8 @@ class Effects {
       _onChangeLectureFavorite,
       _onChangeSelectedSections,
       _onUpdateUserData,
+      _onScroll,
+      _onScrollToCurrentTime,
     ];
 
     return combineEpics<CodefestState>(streams);
@@ -101,6 +107,8 @@ class Effects {
             sections: apiData[2],
             speakers: apiData[3],
           );
+
+          yield ScrollToCurrentTimeAction();
         } catch (e) {
           yield LoadDataErrorAction();
         }
@@ -136,6 +144,20 @@ class Effects {
         } catch (e) {
           yield LoadDataErrorAction();
         }
+      });
+
+  Stream<Object> _onScroll(Stream<Object> actions, EpicStore<CodefestState> store) => Observable(actions)
+          .ofType(const TypeToken<OnScrollAction>())
+          .debounce(Duration(seconds: 1))
+          .asyncExpand((action) async* {
+        yield SetScrollTopAction(scrollTop: action.scrollTop);
+      });
+
+  Stream<Object> _onScrollToCurrentTime(Stream<Object> actions, EpicStore<CodefestState> store) => Observable(actions)
+          .ofType(const TypeToken<ScrollToCurrentTimeAction>())
+          .delay(Duration(milliseconds: 0))
+          .asyncExpand((action) async* {
+        document.querySelector('#currentTime')?.scrollIntoView(ScrollAlignment.TOP);
       });
 
   Stream<Object> _onUpdateUserData(Stream<Object> actions, EpicStore<CodefestState> store) =>

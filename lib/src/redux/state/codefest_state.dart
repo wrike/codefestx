@@ -9,7 +9,6 @@ import 'package:codefest/src/redux/state/user_state.dart';
 part 'codefest_state.g.dart';
 
 abstract class CodefestState implements Built<CodefestState, CodefestStateBuilder> {
-
   factory CodefestState([void updates(CodefestStateBuilder b)]) = _$CodefestState;
 
   CodefestState._();
@@ -20,11 +19,13 @@ abstract class CodefestState implements Built<CodefestState, CodefestStateBuilde
 
   bool get isReady;
 
-  String get releaseNote;
-
   BuiltList<Lecture> get lectures;
 
   BuiltList<Location> get locations;
+
+  String get releaseNote;
+
+  int get scrollTop;
 
   BuiltList<Section> get sections;
 

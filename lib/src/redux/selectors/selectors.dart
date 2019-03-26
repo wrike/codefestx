@@ -22,6 +22,8 @@ class Selectors {
 
   Selector<CodefestState, Iterable<String>> getSelectedCustomSectionIds;
 
+  Selector<CodefestState, String> getNearLectureId;
+
   Selectors() {
     getSelectedMainSectionIds = createSelector2(
       getSelectedSectionIds,
@@ -74,6 +76,8 @@ class Selectors {
       getLectures,
       _getRatingSortedLectures,
     );
+
+    getNearLectureId = createSelector1(getVisibleLectures, _getNearLectureId);
   }
 
   bool getCustomSectionMode(CodefestState state) => getUser(state).isCustomSectionMode;
@@ -111,6 +115,8 @@ class Selectors {
   Iterable<Section> getMainSections(CodefestState state) =>
       getSections(state).where((section) => !section.isCustom).toList();
 
+  DateTime getNow() => DateTime(2019, 3, 30, 12).toUtc();
+
   String getSearchText(CodefestState state) => getUser(state).searchText;
 
   Iterable<Section> getSections(CodefestState state) => state.sections;
@@ -147,7 +153,7 @@ class Selectors {
 
   bool isUpdateAvailable(CodefestState state) => state.releaseNote.isNotEmpty;
 
-  bool lectureStarted(Lecture lecture) => lecture.startTime.isBefore(DateTime.now().toUtc());
+  bool lectureStarted(Lecture lecture) => lecture.startTime.isBefore(getNow());
 
   String releaseNote(CodefestState state) => state.releaseNote;
 
@@ -204,8 +210,27 @@ class Selectors {
   Iterable<String> _getLectureShortSearchFields(Lecture lecture) =>
       [lecture.title]..addAll(lecture.speakers.expand((speaker) => [speaker.name, speaker.company]));
 
+  String _getNearLectureId(Iterable<Lecture> lectures) {
+    var id;
+    var prev;
+
+    final now = getNow();
+
+    for (final lecture in lectures) {
+      final startTime = lecture.startTime;
+
+      if (now.isAfter(startTime) && startTime != prev) {
+        id = lecture.id;
+      }
+
+      prev = startTime;
+    }
+
+    return id;
+  }
+
   Iterable<Lecture> _getNowLectures(Iterable<Lecture> lectures) {
-    final now = DateTime.now().toUtc();
+    final now = getNow();
     return lectures.where((lecture) {
       final endTime = getEndTime(lecture);
       return now.isAfter(lecture.startTime) && now.isBefore(endTime);

@@ -1,8 +1,13 @@
+import 'dart:async';
+import 'dart:html';
+
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:codefest/src/menu_route_path.dart';
+import 'package:codefest/src/redux/actions/on_scroll_action.dart';
 import 'package:codefest/src/redux/selectors/selectors.dart';
+import 'package:codefest/src/redux/services/dispatcher.dart';
 import 'package:codefest/src/redux/state/codefest_state.dart';
 import 'package:codefest/src/route_paths.dart';
 import 'package:codefest/src/services/auth_service.dart';
@@ -41,8 +46,13 @@ class LayoutComponent implements OnInit {
   final Router _router;
   final AuthStore _authStore;
   final AuthService _authService;
+  final Dispatcher _dispatcher;
+  final ChangeDetectorRef _cdr;
 
   final ga = GoogleAnalytics();
+
+  @ViewChild('main')
+  Element mainElement;
 
   @HostBinding('class.layout')
   final bool isHostMarked = true;
@@ -51,6 +61,9 @@ class LayoutComponent implements OnInit {
 
   @Input()
   String title;
+
+  @Input()
+  bool isScroll = false;
 
   @Input()
   CodefestState state;
@@ -63,6 +76,8 @@ class LayoutComponent implements OnInit {
     this._selectors,
     this._authService,
     this._authStore,
+    this._dispatcher,
+    this._cdr,
   );
 
   String get avatarPath => _selectors.getUserAvatarPath(state);
@@ -80,6 +95,15 @@ class LayoutComponent implements OnInit {
     if (_authStore.isAuth) {
       _menu.remove(RoutePaths.login);
     }
+
+    if (isScroll) {
+      Timer(Duration.zero, () {
+        mainElement.scrollTo(0, state.scrollTop);
+        _cdr
+          ..markForCheck()
+          ..detectChanges();
+      });
+    }
   }
 
   void onLogout() {
@@ -89,5 +113,10 @@ class LayoutComponent implements OnInit {
   void onMenuItemClick(MenuRoutePath item) {
     _router.navigate(item.toUrl());
     drawerComponent.visible = false;
+  }
+
+  void onScroll(Event event) {
+    final element = event.target as Element;
+    _dispatcher.dispatch(OnScrollAction(scrollTop: element.scrollTop));
   }
 }

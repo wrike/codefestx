@@ -33,9 +33,7 @@ class LayoutActionsComponent {
   String searchText = '';
 
   @Output()
-  Stream<String> get onSearch => _onSearchStreamController.stream
-      .transform(debounce(Duration(milliseconds: 300)))
-      .distinct();
+  Stream<String> get onSearch => _onSearchStreamController.stream;
 
   @Output()
   Stream<bool> get onSearchModeChange => _onSearchModeChangeStreamController.stream;

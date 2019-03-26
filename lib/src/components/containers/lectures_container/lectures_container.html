@@ -3,6 +3,7 @@
 
   <layout
     [title]="title"
+    [isScroll]="true"
     [state]="state">
 
     <!-- Actions -->
@@ -106,6 +107,11 @@
 
               <div
                 class="schedule__event event">
+
+                <div
+                  *ngIf="nearLectureId == lecture.id"
+                  id="currentTime">
+                </div>
 
                 <!-- Time -->
                 <div
