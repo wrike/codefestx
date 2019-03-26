@@ -11,6 +11,7 @@ import 'package:codefest/src/redux/selectors/selectors.dart';
 import 'package:codefest/src/redux/services/dispatcher.dart';
 import 'package:codefest/src/redux/services/store_factory.dart';
 import 'package:codefest/src/route_paths.dart';
+import 'package:codefest/src/services/auth_service.dart';
 
 @Component(
   selector: 'welcome-container',
@@ -31,6 +32,7 @@ class WelcomeContainerComponent extends StatefulComponent implements OnInit {
   final Dispatcher _dispatcher;
   final Selectors _selectors;
   final Router _router;
+  final AuthService _authService;
 
   Iterable<String> selectedSectionIds = [];
 
@@ -46,6 +48,7 @@ class WelcomeContainerComponent extends StatefulComponent implements OnInit {
     this._dispatcher,
     this._selectors,
     this._router,
+    this._authService,
   ) : super(zone, cdr, storeFactory);
 
   bool get hasSelection => selectedSectionIds.isNotEmpty;
@@ -56,6 +59,7 @@ class WelcomeContainerComponent extends StatefulComponent implements OnInit {
 
   @override
   void ngOnInit() {
+    _authService.init();
     _dispatcher.dispatch(InitAction());
   }
 

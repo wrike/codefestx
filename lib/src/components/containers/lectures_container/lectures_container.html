@@ -58,7 +58,6 @@
 
       <button
         cf-button
-        *ngIf="false"
         (click)="onShowNowClick()"
         [class.button-primary]="isNowSelected"
         class="tags__item button-tag">
@@ -82,6 +81,10 @@
       <favorite-empty-state
         *ngIf="lectures.isEmpty && isFavoriteSelected">
       </favorite-empty-state>
+
+      <now-empty-state
+        *ngIf="lectures.isEmpty && isNowSelected">
+      </now-empty-state>
 
       <div
         class="schedule">

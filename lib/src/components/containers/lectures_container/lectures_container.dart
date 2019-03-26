@@ -4,6 +4,7 @@ import 'package:angular_router/angular_router.dart';
 import 'package:codefest/src/components/containers/lectures_container/actions/actions.dart';
 import 'package:codefest/src/components/containers/lectures_container/favorite_empty_state/favorite_empty_state.dart';
 import 'package:codefest/src/components/containers/lectures_container/layout_actions/layout_actions.dart';
+import 'package:codefest/src/components/containers/lectures_container/now_empty_state/now_empty_state.dart';
 import 'package:codefest/src/components/containers/stateful_component.dart';
 import 'package:codefest/src/components/layout/layout.dart';
 import 'package:codefest/src/components/loader/loader.dart';
@@ -36,6 +37,7 @@ import 'package:codefest/src/route_paths.dart';
     LoaderComponent,
     ButtonComponent,
     FavoriteEmptyStateComponent,
+    NowEmptyStateComponent,
   ],
   preserveWhitespace: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -55,6 +57,18 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
     this._router,
     this._selectors,
   ) : super(zone, cdr, storeFactory);
+
+  String get filterTitle {
+    if (sections.isEmpty) {
+      return 'Все';
+    } else if (sections.length == 1) {
+      return '1 секция';
+    } else if (sections.length > 1 && sections.length < 5) {
+      return '${sections.length} секции';
+    } else {
+      return '${sections.length} секций';
+    }
+  }
 
   List<List<List<Lecture>>> get groupedLectures => _selectors.getGroupedVisibleLectures(state);
 
@@ -81,18 +95,6 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
   String endTime(Lecture lecture) => _selectors.getEndTimeText(lecture);
 
   String flag(Lecture lecture) => _selectors.getFlag(lecture);
-
-  String get filterTitle {
-    if (sections.isEmpty) {
-      return 'Все';
-    } else if (sections.length == 1) {
-      return '1 секция';
-    } else if (sections.length > 1 && sections.length < 5) {
-      return '${sections.length} секции';
-    } else {
-      return '${sections.length} секций';
-    }
-  }
 
   String getDay(Iterable<Iterable<Lecture>> grouped) {
     final lecture = grouped.isNotEmpty ? grouped.first.isNotEmpty ? grouped.first.first : null : null;

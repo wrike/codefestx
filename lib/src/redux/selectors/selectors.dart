@@ -102,7 +102,7 @@ class Selectors {
   String getFlag(Lecture lecture) => lecture.language == LanguageType.en ? '🇬🇧󠁧󠁢󠁥󠁮󠁧󠁿' : '🇷🇺';
 
   Lecture getLecture(CodefestState state, String lectureId) =>
-      getVisibleLectures(state).firstWhere((lecture) => lecture.id == lectureId, orElse: () => null);
+      getLectures(state).firstWhere((lecture) => lecture.id == lectureId, orElse: () => null);
 
   Iterable<Lecture> getLectures(CodefestState state) => state.lectures;
 
@@ -220,9 +220,9 @@ class Selectors {
       lectures.where((lecture) => lecture.section.id == sectionId);
 
   Iterable<Section> _getSelectedFilterSections(
-      Iterable<Section> sections,
-      Iterable<String> mainSectionIds,
-      Iterable<String> customSectionIds,
+    Iterable<Section> sections,
+    Iterable<String> mainSectionIds,
+    Iterable<String> customSectionIds,
   ) {
     if (mainSectionIds.isEmpty && customSectionIds.isEmpty) {
       return sections;
