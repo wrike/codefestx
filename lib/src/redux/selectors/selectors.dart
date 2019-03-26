@@ -22,6 +22,8 @@ class Selectors {
 
   Selector<CodefestState, Iterable<String>> getSelectedCustomSectionIds;
 
+  Selector<CodefestState, String> getNearLectureId;
+
   Selectors() {
     getSelectedMainSectionIds = createSelector2(
       getSelectedSectionIds,
@@ -74,6 +76,8 @@ class Selectors {
       getLectures,
       _getRatingSortedLectures,
     );
+
+    getNearLectureId = createSelector1(getVisibleLectures, _getNearLectureId);
   }
 
   bool getCustomSectionMode(CodefestState state) => getUser(state).isCustomSectionMode;
@@ -102,7 +106,7 @@ class Selectors {
   String getFlag(Lecture lecture) => lecture.language == LanguageType.en ? '🇬🇧󠁧󠁢󠁥󠁮󠁧󠁿' : '🇷🇺';
 
   Lecture getLecture(CodefestState state, String lectureId) =>
-      getVisibleLectures(state).firstWhere((lecture) => lecture.id == lectureId, orElse: () => null);
+      getLectures(state).firstWhere((lecture) => lecture.id == lectureId, orElse: () => null);
 
   Iterable<Lecture> getLectures(CodefestState state) => state.lectures;
 
@@ -110,6 +114,8 @@ class Selectors {
 
   Iterable<Section> getMainSections(CodefestState state) =>
       getSections(state).where((section) => !section.isCustom).toList();
+
+  DateTime getNow() => DateTime.now().toUtc();
 
   String getSearchText(CodefestState state) => getUser(state).searchText;
 
@@ -147,7 +153,7 @@ class Selectors {
 
   bool isUpdateAvailable(CodefestState state) => state.releaseNote.isNotEmpty;
 
-  bool lectureStarted(Lecture lecture) => lecture.startTime.isBefore(DateTime.now().toUtc());
+  bool lectureStarted(Lecture lecture) => lecture.startTime.isBefore(getNow());
 
   String releaseNote(CodefestState state) => state.releaseNote;
 
@@ -204,8 +210,27 @@ class Selectors {
   Iterable<String> _getLectureShortSearchFields(Lecture lecture) =>
       [lecture.title]..addAll(lecture.speakers.expand((speaker) => [speaker.name, speaker.company]));
 
+  String _getNearLectureId(Iterable<Lecture> lectures) {
+    var id;
+    var prev;
+
+    final now = getNow();
+
+    for (final lecture in lectures) {
+      final startTime = lecture.startTime;
+
+      if (now.isAfter(startTime) && startTime != prev) {
+        id = lecture.id;
+      }
+
+      prev = startTime;
+    }
+
+    return id;
+  }
+
   Iterable<Lecture> _getNowLectures(Iterable<Lecture> lectures) {
-    final now = DateTime.now().toUtc();
+    final now = getNow();
     return lectures.where((lecture) {
       final endTime = getEndTime(lecture);
       return now.isAfter(lecture.startTime) && now.isBefore(endTime);
@@ -220,9 +245,9 @@ class Selectors {
       lectures.where((lecture) => lecture.section.id == sectionId);
 
   Iterable<Section> _getSelectedFilterSections(
-      Iterable<Section> sections,
-      Iterable<String> mainSectionIds,
-      Iterable<String> customSectionIds,
+    Iterable<Section> sections,
+    Iterable<String> mainSectionIds,
+    Iterable<String> customSectionIds,
   ) {
     if (mainSectionIds.isEmpty && customSectionIds.isEmpty) {
       return sections;

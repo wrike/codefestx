@@ -2,10 +2,13 @@
   [isReady]="isReady">
 
   <layout
-    [title]="title"
-    [state]="state">
+    [title]="'Расписание'"
+    [isScroll]="true"
+    [state]="state"
+    [titleHidden]="isSearchMode"
+    [navHidden]="isSearchMode">
 
-    <!-- Actions -->
+    <!-- actions -->
     <layout-actions
       actions
       [searchText]="searchText"
@@ -14,10 +17,10 @@
       (onSearchModeChange)="onSearchModeChange($event)">
     </layout-actions>
 
-    <!-- Tags -->
+    <!-- tags -->
     <nav
       pre-content
-      *ngIf="!isSearchMode"
+      *ngIf="showTags"
       class="tags">
 
       <!-- Buttons group -->
@@ -37,6 +40,8 @@
             class="button-icon">
             <path d="M5 6h14a1 1 0 0 1 0 2H5a1 1 0 1 1 0-2zm3 5h8a1 1 0 0 1 0 2H8a1 1 0 0 1 0-2zm3 5h2a1 1 0 0 1 0 2h-2a1 1 0 0 1 0-2z" fill-rule="evenodd"/>
           </svg>
+
+          <span class="visually-hidden">Настроить фильтры</span>
         </button>
 
         <!-- All -->
@@ -44,7 +49,7 @@
           cf-button
           (click)="onShowAllClick()"
           class="button-tag">
-          {{ filterTitle }}
+          <span class="visually-hidden">Выбранное: </span> {{ filterTitle }}
         </button>
       </div>
 
@@ -57,172 +62,203 @@
       </button>
 
       <button
+          cf-button
+          (click)="onShowCustomClick()"
+          [class.button-primary]="isCustomSelected"
+          class="tags__item button-tag">
+        Движухи
+      </button>
+
+      <button
         cf-button
-        *ngIf="false"
         (click)="onShowNowClick()"
         [class.button-primary]="isNowSelected"
         class="tags__item button-tag">
         Идет сейчас
       </button>
-
-      <button
-        cf-button
-        (click)="onShowCustomClick()"
-        [class.button-primary]="isCustomSelected"
-        class="tags__item button-tag">
-        Движухи
-      </button>
     </nav>
 
-    <!-- Content -->
+    <!-- content -->
     <div
       content>
 
-      <!-- Schedule -->
       <favorite-empty-state
         *ngIf="lectures.isEmpty && isFavoriteSelected">
       </favorite-empty-state>
 
+      <now-empty-state
+        *ngIf="lectures.isEmpty && isNowSelected">
+      </now-empty-state>
+
+      <!-- schedule -->
       <div
         class="schedule">
 
+        <!-- day section -->
         <section
           *ngFor="let groupedTime of groupedLectures; let i = index"
-          class="schedule__section-day">
+          class="schedule__section">
 
-          <div>
-            {{ getDay(groupedTime) }}
-          </div>
+          <!-- day title -->
+          <header
+            class="schedule__header">
 
-          <section
+            <time
+              class="schedule__header-date">
+              {{ getDay(groupedTime) }}
+            </time>
+          </header>
+
+          <!-- day events grouped by time -->
+          <div
             *ngFor="let lectures of groupedTime"
-            class="schedule__section-time">
+            class="schedule__events events">
 
+            <!-- time -->
             <template
-              ngFor let-lecture [ngForOf]="lectures" let-i="index">
+              ngFor
+              [ngForOf]="lectures"
+              let-lecture
+              let-i="index">
 
-              <div
-                class="schedule__event event">
+              <template
+                [ngIf]="i == 0">
+
+                <div
+                  class="events__time time">
+
+                <div
+                  *ngIf="nearLectureId == lecture.id"
+                  id="currentTime">
+                </div>
 
                 <!-- Time -->
                 <div
-                  class="event__time">
+                  class="time__container">
 
-                  <template
-                    [ngIf]="i == 0">
-
-                    <!-- Start -->
+                    <!-- start -->
                     <time
-                      class="event__time-item event__time-item--start"
+                      class="time__item time__item--start"
                       [class.right_now]="isRightNow(lecture)"
                       [class.finished]="isFinished(lecture)">
                       {{ startTime(lecture) }}
                     </time>
 
-                    <!-- End -->
+                    <!-- end -->
                     <time
-                      class="event__time-item">
+                      class="time__item">
                       {{ endTime(lecture) }}
                     </time>
-                  </template>
+                  </div>
                 </div>
+              </template>
+            </template>
 
-                <!-- Info (todo details)-->
-                <article
-                  (click)="onLectureSelect(lecture)"
-                  class="event__info event-card">
+            <!-- events -->
+            <div
+              class="events__list">
 
-                  <!-- Meta -->
-                  <div
-                    class="event-card__meta">
+              <template
+                ngFor
+                [ngForOf]="lectures"
+                let-lecture
+                let-i="index">
 
-                    <!-- Location -->
-                    <span
-                      class="event-card__meta-item">
+                <div
+                  class="schedule__event event">
+
+                  <!-- details -->
+                  <article
+                    (click)="onLectureSelect(lecture)"
+                    class="event__info event-card">
+
+                    <!-- meta -->
+                    <div
+                      class="event-card__meta">
+
+                      <!-- location -->
+                      <span
+                        class="event-card__meta-item">
                       {{ lecture.location.title }}
                     </span>
 
-                    &ngsp;•&ngsp;
+                      &ngsp;•&ngsp;
 
-                    <!-- Section -->
-                    <span
-                      class="event-card__meta-item"
-                      [style.color]="lecture.section.color">
+                      <!-- section -->
+                      <span
+                        class="event-card__meta-item"
+                        [style.color]="lecture.section.color">
                       {{ lecture.section.title }}
                     </span>
 
-                    <!--{{ flag(lecture) }}-->
-                  </div>
-
-                  <!-- Title -->
-                  <h1
-                    class="event-card__title">
-                    {{ lecture.title }}
-                  </h1>
-
-                  <!-- Speakers (todo: info item) -->
-                  <div
-                    class="event-card__speakers info-item">
-
-                    <!-- Media -->
-                    <div
-                      class="info-item__media">
-
-                <span
-                  *ngFor="let speaker of lecture.speakers"
-                  class="info-item__media-container">
-
-                  <img
-                    [src]="speaker.avatarPath"
-                    [alt]="speaker.name"
-                    class="info-item__media-image">
-                </span>
+                      <!--{{ flag(lecture) }}-->
                     </div>
 
-                    <!-- Details -->
+                    <!-- title -->
+                    <h1
+                      class="event-card__title">
+                      {{ lecture.title }}
+                    </h1>
+
+                    <!-- speakers (todo: info item) -->
                     <div
-                      class="info-item__details">
+                      class="event-card__speakers info-item">
 
-                      <!-- Title -->
+                      <!-- Media -->
                       <div
-                        class="info-item__title">
+                        class="info-item__media">
 
-                        <ng-container
-                          *ngFor="let speaker of lecture.speakers">
-                          {{ speaker.name }}
-                        </ng-container>
+                      <span
+                        *ngFor="let speaker of lecture.speakers"
+                        class="info-item__media-container">
+
+                        <img
+                          [src]="speaker.avatarPath"
+                          [alt]="speaker.name"
+                          class="info-item__media-image">
+                      </span>
                       </div>
 
-                      <!-- Subtitle -->
+                      <!-- Details -->
                       <div
-                        class="info-item__subtitle">
+                        class="info-item__details">
 
-                        <ng-container
-                          *ngFor="let speaker of lecture.speakers">
-                          {{ speaker.company }}
-                        </ng-container>
+                        <!-- Title -->
+                        <div
+                          class="info-item__title">
+
+                          <ng-container
+                            *ngFor="let speaker of lecture.speakers">
+                            {{ speaker.name }}
+                          </ng-container>
+                        </div>
+
+                        <!-- Subtitle -->
+                        <div
+                          class="info-item__subtitle">
+
+                          <ng-container
+                            *ngFor="let speaker of lecture.speakers">
+                            {{ speaker.company }}
+                          </ng-container>
+                        </div>
                       </div>
                     </div>
-                  </div>
-
-                  <ng-container
-                    *ngFor="let speaker of lecture.speakers; let i = index">
 
                     <div
-                      *ngIf="lecture.speakers.length == i + 1"
-                      class="event-card__actions">
+                    class="event-card__actions">
 
-                      <actions
-                        [popularity]="lecture.likesCount"
-                        [isFavorite]="isFavoriteLecture(lecture)"
-                        (onFavoriteChange)="onFavoriteChange(lecture, $event)">
-                      </actions>
-                    </div>
-                  </ng-container>
+                    <actions
+                      [popularity]="lecture.likesCount"
+                      [isFavorite]="isFavoriteLecture(lecture)"
+                      (onFavoriteChange)="onFavoriteChange(lecture, $event)">
+                    </actions>
+                  </div>
                 </article>
-              </div>
-            </template>
-          </section>
+                </div>
+              </template>
+            </div>
+          </div>
         </section>
       </div>
     </div>
