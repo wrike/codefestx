@@ -1,6 +1,7 @@
 import 'package:codefest/src/models/_types.dart';
 import 'package:codefest/src/models/lecture.dart';
 import 'package:codefest/src/models/section.dart';
+import 'package:codefest/src/models/talk_post.dart';
 import 'package:codefest/src/redux/state/codefest_state.dart';
 import 'package:codefest/src/redux/state/user_state.dart';
 import 'package:reselect/reselect.dart';
@@ -323,4 +324,6 @@ class Selectors {
 
           return prev;
         }).toList();
+
+  List<TalkPost> getPosts(CodefestState state) => state.talkPosts.toList(growable: false);
 }

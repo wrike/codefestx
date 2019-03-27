@@ -4,6 +4,7 @@ import 'package:codefest/src/models/lecture.dart';
 import 'package:codefest/src/models/location.dart';
 import 'package:codefest/src/models/section.dart';
 import 'package:codefest/src/models/speaker.dart';
+import 'package:codefest/src/models/talk_post.dart';
 import 'package:codefest/src/redux/state/user_state.dart';
 
 part 'codefest_state.g.dart';
@@ -30,6 +31,8 @@ abstract class CodefestState implements Built<CodefestState, CodefestStateBuilde
   BuiltList<Section> get sections;
 
   BuiltList<Speaker> get speakers;
+
+  BuiltList<TalkPost> get talkPosts;
 
   UserState get user;
 }

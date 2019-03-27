@@ -1,0 +1,27 @@
+<div class="message">
+    <img [src]="post.avatar" />
+    <div class="message_container">
+        <div class="message_top">
+            <div class="message_top-author"> {{ post.authorName }} </div>
+            <div class="message_top-date"> {{ getTime()}} </div>
+        </div>
+        <div class="message_text">
+            <div class="message_reply" *ngIf="replyBlockShown">
+                <div class="message_reply-author"> {{ post.replyName }} </div>
+                <div class="message_reply-text"> {{ post.replyText }} </div>
+            </div>
+            {{ post.text }}
+        </div>
+        <div class="message_actions">
+            <div
+                    class="action_btn"
+                    (click)="onPostReply()"
+                    *ngIf="canReply">Ответить</div>
+
+            <div
+                    class="action_btn"
+                    (click)="onPostDelete()"
+                    *ngIf="canDelete">Удалить</div>
+        </div>
+    </div>
+</div>

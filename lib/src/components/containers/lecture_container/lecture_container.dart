@@ -1,6 +1,7 @@
 import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:codefest/src/components/containers/lecture_info/lecture_info.dart';
+import 'package:codefest/src/components/containers/lecture_talk/lecture_talk.dart';
 import 'package:codefest/src/components/containers/stateful_component.dart';
 import 'package:codefest/src/components/layout/layout.dart';
 import 'package:codefest/src/components/layout/navigation_type.dart';
@@ -9,9 +10,11 @@ import 'package:codefest/src/components/ui/button/button.dart';
 import 'package:codefest/src/components/ui/popularity_icon/popularity_icon.dart';
 import 'package:codefest/src/components/ui/tabs/tabs.dart';
 import 'package:codefest/src/models/lecture.dart';
+import 'package:codefest/src/models/talk_post.dart';
 import 'package:codefest/src/redux/actions/change_lecture_favorite_action.dart';
 import 'package:codefest/src/redux/actions/change_lecture_like_action.dart';
 import 'package:codefest/src/redux/actions/init_action.dart';
+import 'package:codefest/src/redux/actions/load_talks_action.dart';
 import 'package:codefest/src/redux/selectors/selectors.dart';
 import 'package:codefest/src/redux/services/dispatcher.dart';
 import 'package:codefest/src/redux/services/store_factory.dart';
@@ -25,12 +28,14 @@ import 'package:codefest/src/route_paths.dart';
   directives: [
     NgIf,
     NgFor,
+    NgClass,
     LayoutComponent,
     LoaderComponent,
     ButtonComponent,
     TabsComponent,
     PopularityIconComponent,
     LectureInfoComponent,
+    LectureTalkComponent,
   ],
   exports: [
     NavigationType
@@ -44,7 +49,7 @@ class LectureContainerComponent extends StatefulComponent implements OnInit {
   final Router _router;
 
   bool _isActivated = false;
-
+  bool isInfoMode = true;
   Map<String, String> _parameters = {};
 
   LectureContainerComponent(
@@ -62,19 +67,11 @@ class LectureContainerComponent extends StatefulComponent implements OnInit {
     });
   }
 
-  bool get lectureStarted => _selectors.lectureStarted(lecture);
-
-  String get endTime => _selectors.getEndTimeText(lecture);
-
   bool get isAuthorized => _selectors.isAuthorized(state);
 
   bool get isFavorite => _selectors.isFavoriteLecture(state, lecture);
 
   bool get isLectureAvailable => lecture != null;
-
-  bool get isLikable => _selectors.isLikableLecture(lecture);
-
-  bool get isLiked => _selectors.isLikedLecture(state, lecture);
 
   bool get isLoaded => _selectors.isLoaded(state);
 
@@ -82,7 +79,7 @@ class LectureContainerComponent extends StatefulComponent implements OnInit {
 
   Lecture get lecture => _selectors.getLecture(state, _parameters[idParam]);
 
-  String get startTime => _selectors.getStartTimeText(lecture);
+  List<TalkPost> get posts => _selectors.getPosts(state);
 
   @override
   void ngOnInit() {
@@ -93,12 +90,8 @@ class LectureContainerComponent extends StatefulComponent implements OnInit {
     _dispatcher.dispatch(ChangeLectureFavoriteAction(lectureId: lecture.id, isFavorite: !isFavorite));
   }
 
-  void onLikeClick() {
-    if (!isAuthorized) {
-      _router.navigateByUrl(RoutePaths.login.toUrl());
-    } else if (lectureStarted) {
-      _dispatcher.dispatch(ChangeLectureLikeAction(lectureId: lecture.id, isLiked: !isLiked));
-    }
+  void changeTab(bool newModeIsInfo) {
+    isInfoMode = newModeIsInfo;
   }
 
   @override
@@ -108,9 +101,10 @@ class LectureContainerComponent extends StatefulComponent implements OnInit {
 
   void _onRouteActivated(RouterState state) {
     _isActivated = true;
+    isInfoMode = true;
     _parameters = state.parameters;
     _processAvailability();
-
+    _dispatcher.dispatch(LoadTalksAction(lecture.id));
     detectChanges();
   }
 

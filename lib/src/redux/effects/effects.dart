@@ -5,12 +5,16 @@ import 'package:codefest/src/redux/actions/authorize_action.dart';
 import 'package:codefest/src/redux/actions/change_lecture_favorite_action.dart';
 import 'package:codefest/src/redux/actions/change_lecture_like_action.dart';
 import 'package:codefest/src/redux/actions/change_selected_sections_action.dart';
+import 'package:codefest/src/redux/actions/create_post_action.dart';
+import 'package:codefest/src/redux/actions/delete_post_action.dart';
 import 'package:codefest/src/redux/actions/init_action.dart';
 import 'package:codefest/src/redux/actions/load_data_error_action.dart';
 import 'package:codefest/src/redux/actions/load_data_start_action.dart';
 import 'package:codefest/src/redux/actions/load_data_success_action.dart';
+import 'package:codefest/src/redux/actions/load_talks_action.dart';
 import 'package:codefest/src/redux/actions/load_user_data_action.dart';
 import 'package:codefest/src/redux/actions/load_user_data_success_action.dart';
+import 'package:codefest/src/redux/actions/loaded_talks_action.dart';
 import 'package:codefest/src/redux/actions/on_scroll_action.dart';
 import 'package:codefest/src/redux/actions/scroll_to_current_time_action.dart';
 import 'package:codefest/src/redux/actions/set_scroll_top_action.dart';
@@ -19,6 +23,7 @@ import 'package:codefest/src/redux/state/codefest_state.dart';
 import 'package:codefest/src/services/auth_store.dart';
 import 'package:codefest/src/services/data_loader.dart';
 import 'package:codefest/src/services/storage_service.dart';
+import 'package:codefest/src/services/talks_service.dart';
 import 'package:redux_epics/redux_epics.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -26,8 +31,10 @@ class Effects {
   final DataLoader _dataLoader;
   final AuthStore _authStore;
   final StorageService _storageService;
+  final TalksService _talkService;
 
   Effects(
+    this._talkService,
     this._dataLoader,
     this._storageService,
     this._authStore,
@@ -44,10 +51,31 @@ class Effects {
       _onUpdateUserData,
       _onScroll,
       _onScrollToCurrentTime,
+      _onLoadLectureTalks,
+      _onCreateNewPost,
+      _onDeletePost,
     ];
 
     return combineEpics<CodefestState>(streams);
   }
+
+  Stream<Object> _onDeletePost(Stream<Object> actions, EpicStore<CodefestState> store) =>
+      Observable(actions).ofType(const TypeToken<DeletePostAction>()).asyncExpand((action) async* {
+        await _talkService.deletePost(action.postId);
+        yield LoadTalksAction(action.lectureId);
+      });
+
+  Stream<Object> _onCreateNewPost(Stream<Object> actions, EpicStore<CodefestState> store) =>
+      Observable(actions).ofType(const TypeToken<CreatePostAction>()).asyncExpand((action) async* {
+        await _talkService.createPost(action.lectureId, action.text, action.replyTo);
+        yield LoadTalksAction(action.lectureId);
+      });
+
+  Stream<Object> _onLoadLectureTalks(Stream<Object> actions, EpicStore<CodefestState> store) =>
+      Observable(actions).ofType(const TypeToken<LoadTalksAction>()).asyncExpand((action) async* {
+        final talks = await _talkService.getPosts(action.lectureId);
+        yield LoadedTalksAction(talks.toList(growable: false));
+      });
 
   Stream<Object> _onChangeLectureFavorite(Stream<Object> actions, EpicStore<CodefestState> store) =>
       Observable(actions).ofType(const TypeToken<ChangeLectureFavoriteAction>()).asyncExpand((action) async* {

@@ -1,0 +1,4 @@
+<div>
+    <input #input [(ngModel)]="newPostText" type="text">
+    <button (click)="send()" [disabled]="!isAllowToSend">Отправить</button>
+</div>

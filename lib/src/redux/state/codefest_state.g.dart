@@ -26,6 +26,8 @@ class _$CodefestState extends CodefestState {
   @override
   final BuiltList<Speaker> speakers;
   @override
+  final BuiltList<TalkPost> talkPosts;
+  @override
   final UserState user;
 
   factory _$CodefestState([void updates(CodefestStateBuilder b)]) =>
@@ -41,6 +43,7 @@ class _$CodefestState extends CodefestState {
       this.scrollTop,
       this.sections,
       this.speakers,
+      this.talkPosts,
       this.user})
       : super._() {
     if (isError == null) {
@@ -70,6 +73,9 @@ class _$CodefestState extends CodefestState {
     if (speakers == null) {
       throw new BuiltValueNullFieldError('CodefestState', 'speakers');
     }
+    if (talkPosts == null) {
+      throw new BuiltValueNullFieldError('CodefestState', 'talkPosts');
+    }
     if (user == null) {
       throw new BuiltValueNullFieldError('CodefestState', 'user');
     }
@@ -95,6 +101,7 @@ class _$CodefestState extends CodefestState {
         scrollTop == other.scrollTop &&
         sections == other.sections &&
         speakers == other.speakers &&
+        talkPosts == other.talkPosts &&
         user == other.user;
   }
 
@@ -108,15 +115,17 @@ class _$CodefestState extends CodefestState {
                         $jc(
                             $jc(
                                 $jc(
-                                    $jc($jc(0, isError.hashCode),
-                                        isLoaded.hashCode),
-                                    isReady.hashCode),
-                                lectures.hashCode),
-                            locations.hashCode),
-                        releaseNote.hashCode),
-                    scrollTop.hashCode),
-                sections.hashCode),
-            speakers.hashCode),
+                                    $jc(
+                                        $jc($jc(0, isError.hashCode),
+                                            isLoaded.hashCode),
+                                        isReady.hashCode),
+                                    lectures.hashCode),
+                                locations.hashCode),
+                            releaseNote.hashCode),
+                        scrollTop.hashCode),
+                    sections.hashCode),
+                speakers.hashCode),
+            talkPosts.hashCode),
         user.hashCode));
   }
 
@@ -132,6 +141,7 @@ class _$CodefestState extends CodefestState {
           ..add('scrollTop', scrollTop)
           ..add('sections', sections)
           ..add('speakers', speakers)
+          ..add('talkPosts', talkPosts)
           ..add('user', user))
         .toString();
   }
@@ -182,6 +192,12 @@ class CodefestStateBuilder
       _$this._speakers ??= new ListBuilder<Speaker>();
   set speakers(ListBuilder<Speaker> speakers) => _$this._speakers = speakers;
 
+  ListBuilder<TalkPost> _talkPosts;
+  ListBuilder<TalkPost> get talkPosts =>
+      _$this._talkPosts ??= new ListBuilder<TalkPost>();
+  set talkPosts(ListBuilder<TalkPost> talkPosts) =>
+      _$this._talkPosts = talkPosts;
+
   UserStateBuilder _user;
   UserStateBuilder get user => _$this._user ??= new UserStateBuilder();
   set user(UserStateBuilder user) => _$this._user = user;
@@ -199,6 +215,7 @@ class CodefestStateBuilder
       _scrollTop = _$v.scrollTop;
       _sections = _$v.sections?.toBuilder();
       _speakers = _$v.speakers?.toBuilder();
+      _talkPosts = _$v.talkPosts?.toBuilder();
       _user = _$v.user?.toBuilder();
       _$v = null;
     }
@@ -233,6 +250,7 @@ class CodefestStateBuilder
               scrollTop: scrollTop,
               sections: sections.build(),
               speakers: speakers.build(),
+              talkPosts: talkPosts.build(),
               user: user.build());
     } catch (_) {
       String _$failedField;
@@ -246,6 +264,8 @@ class CodefestStateBuilder
         sections.build();
         _$failedField = 'speakers';
         speakers.build();
+        _$failedField = 'talkPosts';
+        talkPosts.build();
         _$failedField = 'user';
         user.build();
       } catch (e) {

@@ -21,6 +21,7 @@ import 'package:codefest/src/services/http_proxy.dart';
 import 'package:codefest/src/services/push_service.dart';
 import 'package:codefest/src/services/sockets_service.dart';
 import 'package:codefest/src/services/storage_service.dart';
+import 'package:codefest/src/services/talks_service.dart';
 import 'package:redux/redux.dart';
 
 @Component(
@@ -40,6 +41,7 @@ import 'package:redux/redux.dart';
     const ClassProvider<Dispatcher>(Dispatcher),
     const ClassProvider<Selectors>(Selectors),
     const ClassProvider<DataLoader>(DataLoader),
+    const ClassProvider<TalksService>(TalksService),
     const ClassProvider<HttpProxy>(HttpProxy),
     const ClassProvider<AuthService>(AuthService),
     const ClassProvider<AuthStore>(AuthStore),

@@ -1,4 +1,5 @@
 import 'package:codefest/src/models/lecture.dart';
+import 'package:codefest/src/models/talk_post.dart';
 import 'package:codefest/src/redux/actions/authorize_action.dart';
 import 'package:codefest/src/redux/actions/change_lecture_favorite_action.dart';
 import 'package:codefest/src/redux/actions/change_lecture_like_action.dart';
@@ -8,7 +9,9 @@ import 'package:codefest/src/redux/actions/filter_lectures_action.dart';
 import 'package:codefest/src/redux/actions/load_data_error_action.dart';
 import 'package:codefest/src/redux/actions/load_data_start_action.dart';
 import 'package:codefest/src/redux/actions/load_data_success_action.dart';
+import 'package:codefest/src/redux/actions/load_talks_action.dart';
 import 'package:codefest/src/redux/actions/load_user_data_success_action.dart';
+import 'package:codefest/src/redux/actions/loaded_talks_action.dart';
 import 'package:codefest/src/redux/actions/new_version_action.dart';
 import 'package:codefest/src/redux/actions/search_lectures_action.dart';
 import 'package:codefest/src/redux/actions/set_scroll_top_action.dart';
@@ -33,6 +36,8 @@ class CodefestReducer {
       TypedReducer<CodefestState, ChangeLectureFavoriteAction>(_onChangeLectureFavorite),
       TypedReducer<CodefestState, NewVersionAction>(_onNewVersion),
       TypedReducer<CodefestState, SetScrollTopAction>(_setScrollTopAction),
+      TypedReducer<CodefestState, LoadTalksAction>(_resetTalkPosts),
+      TypedReducer<CodefestState, LoadedTalksAction>(_loadedTalkPosts),
     ]);
   }
 
@@ -152,4 +157,23 @@ class CodefestReducer {
   CodefestState _setScrollTopAction(CodefestState state, SetScrollTopAction action) => state.rebuild((b) {
         b.scrollTop = action.scrollTop;
       });
+
+  CodefestState _resetTalkPosts(CodefestState state, LoadTalksAction action) => state.rebuild((b) {
+      b.talkPosts.replace([]);
+  });
+
+  CodefestState _loadedTalkPosts(CodefestState state, LoadedTalksAction action) => state.rebuild((b) {
+    final posts = action.posts.map((p) {
+      if (p.replyId != null) {
+        final replyPost = action.posts.firstWhere((x) => x.id == p.replyId, orElse: () => null);
+        if (replyPost != null) {
+          p.replyText = replyPost.text;
+          p.replyName = replyPost.authorName;
+        }
+      }
+      return p;
+    });
+    b.talkPosts.replace(posts);
+  });
+
 }

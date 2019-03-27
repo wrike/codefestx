@@ -43,13 +43,14 @@
       class="event">
 
       <tabs
-        *ngIf="false"
         role="tablist"
         aria-orientation="horizontal">
 
         <button
           role="tab"
-          class="tabs__button tabs__button--active">
+          (click)="changeTab(true)"
+          [ngClass]="{'tabs__button--active': isInfoMode}"
+          class="tabs__button">
 
           <span
             class="tabs__button-text">
@@ -58,8 +59,9 @@
         </button>
 
         <button
-          disabled
           role="tab"
+          (click)="changeTab(false)"
+          [ngClass]="{'tabs__button--active': !isInfoMode}"
           class="tabs__button">
 
           <span
@@ -69,14 +71,16 @@
 
             <span
               class="tabs__button-text-amount">
-              (123)
+              ({{ posts.length }})
             </span>
           </span>
         </button>
       </tabs>
 
-      <!-- Event Info-->
-      <lecture-info [lecture]="lecture"></lecture-info>
+      <!-- Event Info -->
+      <lecture-info *ngIf="isInfoMode" [lecture]="lecture"></lecture-info>
+      <!-- Talks -->
+      <lecture-talk *ngIf="!isInfoMode" [lecture]="lecture" [posts]="posts"></lecture-talk>
     </div>
   </layout>
 </loader>

@@ -1,4 +1,6 @@
 import 'package:angular/angular.dart';
+import 'package:angular_components/angular_components.dart';
+import 'package:angular_forms/angular_forms.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:codefest/src/components/containers/stateful_component.dart';
 import 'package:codefest/src/components/layout/layout.dart';
@@ -7,64 +9,66 @@ import 'package:codefest/src/components/loader/loader.dart';
 import 'package:codefest/src/components/ui/button/button.dart';
 import 'package:codefest/src/components/ui/popularity_icon/popularity_icon.dart';
 import 'package:codefest/src/components/ui/tabs/tabs.dart';
+import 'package:codefest/src/components/ui/talk_post/talk_post_component.dart';
+import 'package:codefest/src/components/ui/talk_post_input/talk_post_input_component.dart';
 import 'package:codefest/src/models/lecture.dart';
+import 'package:codefest/src/models/talk_post.dart';
 import 'package:codefest/src/redux/actions/change_lecture_favorite_action.dart';
 import 'package:codefest/src/redux/actions/change_lecture_like_action.dart';
+import 'package:codefest/src/redux/actions/create_post_action.dart';
+import 'package:codefest/src/redux/actions/delete_post_action.dart';
 import 'package:codefest/src/redux/actions/init_action.dart';
 import 'package:codefest/src/redux/selectors/selectors.dart';
 import 'package:codefest/src/redux/services/dispatcher.dart';
 import 'package:codefest/src/redux/services/store_factory.dart';
 import 'package:codefest/src/route_paths.dart';
+import 'package:codefest/src/services/auth_store.dart';
 
 @Component(
-  selector: 'lecture-info',
-  styleUrls: ['lecture_info.css'],
-  templateUrl: 'lecture_info.html',
+  selector: 'lecture-talk',
+  styleUrls: ['lecture_talk.css'],
+  templateUrl: 'lecture_talk.html',
   directives: [
     NgIf,
     NgFor,
     ButtonComponent,
-  ],
-  exports: [
-    NavigationType
+    TalkPostComponent,
+    TalkPostInputComponent,
   ],
   preserveWhitespace: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 )
-class LectureInfoComponent extends StatefulComponent {
+class LectureTalkComponent extends StatefulComponent {
   final Selectors _selectors;
   final Dispatcher _dispatcher;
-  final Router _router;
+  @ViewChild('input')
+  TalkPostInputComponent input;
 
   @Input()
   Lecture lecture;
+  @Input()
+  List<TalkPost> posts;
 
-  LectureInfoComponent(
+  LectureTalkComponent(
       NgZone zone,
       ChangeDetectorRef cdr,
       StoreFactory storeFactory,
-      this._router,
       this._selectors,
       this._dispatcher,
       ) : super(zone, cdr, storeFactory);
 
-  bool get lectureStarted => _selectors.lectureStarted(lecture);
+  String parentId;
 
-  String get endTime => _selectors.getEndTimeText(lecture);
+  void onSend(String newText) {
+    _dispatcher.dispatch(CreatePostAction(lecture.id, newText, parentId));
+  }
 
-  bool get isAuthorized => _selectors.isAuthorized(state);
+  void onPostDelete(String postId) {
+    _dispatcher.dispatch(DeletePostAction(postId, lecture.id));
+  }
 
-  bool get isLikable => _selectors.isLikableLecture(lecture);
-
-  bool get isLiked => _selectors.isLikedLecture(state, lecture);
-
-  String get startTime => _selectors.getStartTimeText(lecture);
-
-  void onLikeClick() {
-    if (!isAuthorized) {
-      _router.navigateByUrl(RoutePaths.login.toUrl());
-    } else if (lectureStarted) {
-      _dispatcher.dispatch(ChangeLectureLikeAction(lectureId: lecture.id, isLiked: !isLiked));
-    }
+  void onPostReply(String postId) {
+    parentId = postId;
+    input.focus();
   }
 }
