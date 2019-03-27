@@ -255,7 +255,9 @@ class Selectors {
       return sections.where((section) => !section.isCustom || customSectionIds.contains(section.id));
     }
 
-    final sectionIds = []..addAll(mainSectionIds)..addAll(customSectionIds);
+    final sectionIds = []
+      ..addAll(mainSectionIds)
+      ..addAll(customSectionIds);
 
     return sections.where((section) => sectionIds.contains(section.id));
   }
