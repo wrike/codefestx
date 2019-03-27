@@ -14,7 +14,9 @@
   </h2>
 </div>
 
-<new-version-popup
-  *ngIf="isUpdateAvailable"
-  [message]="releaseNote">
-</new-version-popup>
+<div class="popups" aria-live="polite">
+  <new-version-popup
+    *ngIf="isUpdateAvailable"
+    [message]="releaseNote">
+  </new-version-popup>
+</div>
