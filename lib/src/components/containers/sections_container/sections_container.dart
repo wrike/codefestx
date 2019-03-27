@@ -38,6 +38,8 @@ class SectionsContainerComponent extends StatefulComponent implements OnInit {
   Iterable<String> selectedSectionIds;
   bool isCustomSectionMode;
 
+  Set<String> previousSelectedSectionIdsSet;
+
   SectionsContainerComponent(
     NgZone zone,
     ChangeDetectorRef cdr,
@@ -47,22 +49,20 @@ class SectionsContainerComponent extends StatefulComponent implements OnInit {
     this._router,
   ) : super(zone, cdr, storeFactory);
 
-  bool get previousIsCustomSectionMode => _selectors.getCustomSectionMode(state);
+  bool get changedSelection => !(
+    const SetEquality().equals(selectedSectionIds.toSet(), previousSelectedSectionIdsSet) &&
+    isCustomSectionMode == previousIsCustomSectionMode
+  );
 
   bool get isReady => _selectors.isReady(state);
 
   Iterable<Section> get mainSections => _selectors.getMainSections(state);
 
-  int get selectedSectionCount => _selectors.getSelectedSectionCount(state);
+  bool get previousIsCustomSectionMode => _selectors.getCustomSectionMode(state);
 
   Iterable<String> get previousSelectedSectionIds => _selectors.getSelectedSectionIds(state);
 
-  Set<String> previousSelectedSectionIdsSet;
-
-  bool get changedSelection => !(
-    const SetEquality().equals(selectedSectionIds.toSet(), previousSelectedSectionIdsSet) && 
-    isCustomSectionMode ==previousIsCustomSectionMode
-  );
+  String get selectedSectionCount => selectedSectionIds.isNotEmpty ? selectedSectionIds.length.toString() : '';
 
   @override
   void ngOnInit() {
