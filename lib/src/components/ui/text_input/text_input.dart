@@ -33,7 +33,7 @@ class TextInput implements AfterViewInit {
   }
 
   void _scheduleViewUpdate(void Function() callback) {
-    new Timer(Duration.zero, () {
+    Timer(Duration.zero, () {
       callback();
     });
   }

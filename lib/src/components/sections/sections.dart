@@ -29,9 +29,9 @@ class SectionsComponent {
   @Input()
   Iterable<String> selectedSectionIds = [];
 
-  final _onSectionsChange = new StreamController<List<String>>.broadcast();
+  final _onSectionsChange = StreamController<List<String>>.broadcast();
 
-  final _onCustomSectionModeChange = new StreamController<bool>.broadcast();
+  final _onCustomSectionModeChange = StreamController<bool>.broadcast();
 
   @Output()
   Stream<bool> get onCustomSectionModeChange => _onCustomSectionModeChange.stream;

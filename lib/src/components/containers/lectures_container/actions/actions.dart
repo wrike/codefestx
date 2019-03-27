@@ -18,7 +18,7 @@ import 'package:codefest/src/components/ui/popularity_icon/popularity_icon.dart'
   changeDetection: ChangeDetectionStrategy.OnPush,
 )
 class ActionsComponent {
-  final _onFavoriteChangeStreamController = new StreamController<bool>.broadcast();
+  final _onFavoriteChangeStreamController = StreamController<bool>.broadcast();
 
   @Input()
   bool isFavorite = false;

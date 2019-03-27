@@ -17,7 +17,7 @@ class StoreFactory {
 
   Store<CodefestState> getStore([CodefestState initialState]) {
     if (_store == null) {
-      _store = new Store(
+      _store = Store(
         _reducer.getState,
         initialState: initialState,
         middleware: [

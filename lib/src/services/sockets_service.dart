@@ -4,7 +4,7 @@ import 'package:codefest/src/services/http_proxy.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class SocketService {
-  final _eventController = new StreamController<SocketMessage>.broadcast();
+  final _eventController = StreamController<SocketMessage>.broadcast();
 
   Stream<SocketMessage> get onEvent => _eventController.stream;
 
@@ -23,7 +23,5 @@ class SocketMessage {
 
   SocketMessage._(this.command, this.data);
 
-  factory SocketMessage(List<dynamic> message) {
-    return new SocketMessage._(message[0], message[1]);
-  }
+  factory SocketMessage(List<dynamic> message) => SocketMessage._(message[0], message[1]);
 }
