@@ -159,7 +159,10 @@ class CodefestReducer {
       });
 
   CodefestState _resetTalkPosts(CodefestState state, LoadTalksAction action) => state.rebuild((b) {
-      b.talkPosts.replace([]);
+      if (state.currentLecture != action.lectureId) {
+        b.talkPosts.replace([]);
+      }
+      b.currentLecture = action.lectureId;
   });
 
   CodefestState _loadedTalkPosts(CodefestState state, LoadedTalksAction action) => state.rebuild((b) {

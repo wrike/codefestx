@@ -35,4 +35,7 @@ abstract class CodefestState implements Built<CodefestState, CodefestStateBuilde
   BuiltList<TalkPost> get talkPosts;
 
   UserState get user;
+
+  @nullable
+  String get currentLecture;
 }

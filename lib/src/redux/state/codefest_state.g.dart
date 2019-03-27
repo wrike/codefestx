@@ -29,6 +29,8 @@ class _$CodefestState extends CodefestState {
   final BuiltList<TalkPost> talkPosts;
   @override
   final UserState user;
+  @override
+  final String currentLecture;
 
   factory _$CodefestState([void updates(CodefestStateBuilder b)]) =>
       (new CodefestStateBuilder()..update(updates)).build();
@@ -44,7 +46,8 @@ class _$CodefestState extends CodefestState {
       this.sections,
       this.speakers,
       this.talkPosts,
-      this.user})
+      this.user,
+      this.currentLecture})
       : super._() {
     if (isError == null) {
       throw new BuiltValueNullFieldError('CodefestState', 'isError');
@@ -102,7 +105,8 @@ class _$CodefestState extends CodefestState {
         sections == other.sections &&
         speakers == other.speakers &&
         talkPosts == other.talkPosts &&
-        user == other.user;
+        user == other.user &&
+        currentLecture == other.currentLecture;
   }
 
   @override
@@ -116,17 +120,19 @@ class _$CodefestState extends CodefestState {
                             $jc(
                                 $jc(
                                     $jc(
-                                        $jc($jc(0, isError.hashCode),
-                                            isLoaded.hashCode),
-                                        isReady.hashCode),
-                                    lectures.hashCode),
-                                locations.hashCode),
-                            releaseNote.hashCode),
-                        scrollTop.hashCode),
-                    sections.hashCode),
-                speakers.hashCode),
-            talkPosts.hashCode),
-        user.hashCode));
+                                        $jc(
+                                            $jc($jc(0, isError.hashCode),
+                                                isLoaded.hashCode),
+                                            isReady.hashCode),
+                                        lectures.hashCode),
+                                    locations.hashCode),
+                                releaseNote.hashCode),
+                            scrollTop.hashCode),
+                        sections.hashCode),
+                    speakers.hashCode),
+                talkPosts.hashCode),
+            user.hashCode),
+        currentLecture.hashCode));
   }
 
   @override
@@ -142,7 +148,8 @@ class _$CodefestState extends CodefestState {
           ..add('sections', sections)
           ..add('speakers', speakers)
           ..add('talkPosts', talkPosts)
-          ..add('user', user))
+          ..add('user', user)
+          ..add('currentLecture', currentLecture))
         .toString();
   }
 }
@@ -202,6 +209,11 @@ class CodefestStateBuilder
   UserStateBuilder get user => _$this._user ??= new UserStateBuilder();
   set user(UserStateBuilder user) => _$this._user = user;
 
+  String _currentLecture;
+  String get currentLecture => _$this._currentLecture;
+  set currentLecture(String currentLecture) =>
+      _$this._currentLecture = currentLecture;
+
   CodefestStateBuilder();
 
   CodefestStateBuilder get _$this {
@@ -217,6 +229,7 @@ class CodefestStateBuilder
       _speakers = _$v.speakers?.toBuilder();
       _talkPosts = _$v.talkPosts?.toBuilder();
       _user = _$v.user?.toBuilder();
+      _currentLecture = _$v.currentLecture;
       _$v = null;
     }
     return this;
@@ -251,7 +264,8 @@ class CodefestStateBuilder
               sections: sections.build(),
               speakers: speakers.build(),
               talkPosts: talkPosts.build(),
-              user: user.build());
+              user: user.build(),
+              currentLecture: currentLecture);
     } catch (_) {
       String _$failedField;
       try {
