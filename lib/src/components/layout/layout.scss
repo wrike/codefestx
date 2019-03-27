@@ -30,8 +30,9 @@
     padding: 20px 16px;
     color: $fg-color-secondary;
     
-    a:link {
-      color: #33a7d8;
+    a:link,
+    a:visited {
+      color: $link-color;
       text-decoration: none;
     }
   }
