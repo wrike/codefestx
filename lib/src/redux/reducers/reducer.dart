@@ -1,10 +1,12 @@
 import 'package:codefest/src/models/lecture.dart';
 import 'package:codefest/src/models/talk_post.dart';
+import 'package:codefest/src/redux/actions/add_post_action.dart';
 import 'package:codefest/src/redux/actions/authorize_action.dart';
 import 'package:codefest/src/redux/actions/change_lecture_favorite_action.dart';
 import 'package:codefest/src/redux/actions/change_lecture_like_action.dart';
 import 'package:codefest/src/redux/actions/change_search_mode_action.dart';
 import 'package:codefest/src/redux/actions/change_selected_sections_action.dart';
+import 'package:codefest/src/redux/actions/deleted_post_action.dart';
 import 'package:codefest/src/redux/actions/filter_lectures_action.dart';
 import 'package:codefest/src/redux/actions/load_data_error_action.dart';
 import 'package:codefest/src/redux/actions/load_data_start_action.dart';
@@ -38,6 +40,8 @@ class CodefestReducer {
       TypedReducer<CodefestState, SetScrollTopAction>(_setScrollTopAction),
       TypedReducer<CodefestState, LoadTalksAction>(_resetTalkPosts),
       TypedReducer<CodefestState, LoadedTalksAction>(_loadedTalkPosts),
+      TypedReducer<CodefestState, AddPostAction>(_addPost),
+      TypedReducer<CodefestState, DeletedPostAction>(_removePost),
     ]);
   }
 
@@ -165,21 +169,44 @@ class CodefestReducer {
       b.currentLecture = action.lectureId;
   });
 
+  TalkPost _formatPost(TalkPost post, List<TalkPost> allPosts) {
+    if (post.replyId != null) {
+      final replyPost = allPosts.firstWhere((x) => x.id == post.replyId, orElse: () => null);
+      if (replyPost != null) {
+        post.replyText = replyPost.text;
+        post.replyName = replyPost.authorName;
+      } else {
+        post.replyName = 'Неизвестный автор';
+        post.replyText = 'Пост удален :(';
+      }
+    }
+    return post;
+  }
+
   CodefestState _loadedTalkPosts(CodefestState state, LoadedTalksAction action) => state.rebuild((b) {
     final posts = action.posts.map((p) {
-      if (p.replyId != null) {
-        final replyPost = action.posts.firstWhere((x) => x.id == p.replyId, orElse: () => null);
-        if (replyPost != null) {
-          p.replyText = replyPost.text;
-          p.replyName = replyPost.authorName;
-        } else {
-          p.replyName = 'Неизвестный автор';
-          p.replyText = 'Пост удален :(';
-        }
-      }
-      return p;
+      return _formatPost(p, action.posts);
     });
     b.talkPosts.replace(posts);
   });
+
+  CodefestState _addPost(CodefestState state, AddPostAction action) => state.rebuild((b) {
+    if (state.currentLecture == action.post.lectureId && !state.talkPosts.any((p) => p.id == action.post.id)) {
+      final post = _formatPost(action.post, state.talkPosts.toList(growable: false));
+      b.talkPosts.add(post);
+    }
+  });
+
+  CodefestState _removePost(CodefestState state, DeletedPostAction action) => state.rebuild((b) {
+    final isHasPost = state.talkPosts.any((p) => p.id == action.postId);
+    if (isHasPost) {
+      final newPosts = state.talkPosts.where((p) => p.id != action.postId).toList(growable: false);
+      final filteredPosts = newPosts.map((p) {
+        return _formatPost(p, newPosts);
+      });
+      b.talkPosts.replace(filteredPosts);
+    }
+  });
+
 
 }

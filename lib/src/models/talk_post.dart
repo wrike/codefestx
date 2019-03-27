@@ -12,6 +12,7 @@ class TalkPost {
   final int date;
   final String avatar;
   final String replyId;
+  final String lectureId;
   String replyName;
   String replyText;
 
@@ -23,6 +24,7 @@ class TalkPost {
     @required this.date,
     @required this.avatar,
     @required this.replyId,
+    @required this.lectureId,
   });
 
   factory TalkPost.fromJson(Map<String, dynamic> json) => _$TalkPostFromJson(json);

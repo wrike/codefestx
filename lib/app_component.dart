@@ -1,8 +1,12 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:codefest/src/components/popups/new_version_popup/new_version_popup.dart';
+import 'package:codefest/src/models/talk_post.dart';
+import 'package:codefest/src/redux/actions/add_post_action.dart';
+import 'package:codefest/src/redux/actions/deleted_post_action.dart';
 import 'package:codefest/src/redux/actions/load_user_data_action.dart';
 import 'package:codefest/src/redux/actions/new_version_action.dart';
 import 'package:codefest/src/redux/effects/effects.dart';
@@ -124,6 +128,18 @@ class AppComponent implements OnDestroy, OnInit {
     _socketService.onEvent
         .where((event) => event.command == 'reload')
         .listen((event) => _dispatcher.dispatch(NewVersionAction(releaseNote: event.data)));
+
+    _socketService.onEvent
+        .where((event) => event.command == 'post-added')
+        .listen((event) {
+          final data = json.decode(event.data);
+          final post = TalkPost.fromJson(data);
+          _dispatcher.dispatch(AddPostAction(post));
+    });
+
+    _socketService.onEvent
+        .where((event) => event.command == 'post-removed')
+        .listen((event) => _dispatcher.dispatch(DeletedPostAction(event.data)));
 
     _socketService.onEvent
         .where((event) => event.command == 'change-lectures')

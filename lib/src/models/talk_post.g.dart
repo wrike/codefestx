@@ -14,7 +14,8 @@ TalkPost _$TalkPostFromJson(Map<String, dynamic> json) {
       authorName: json['authorName'] as String,
       date: json['date'] as int,
       avatar: json['avatar'] as String,
-      replyId: json['replyId'] as String)
+      replyId: json['replyId'] as String,
+      lectureId: json['lectureId'] as String)
     ..replyName = json['replyName'] as String
     ..replyText = json['replyText'] as String;
 }
@@ -27,6 +28,7 @@ Map<String, dynamic> _$TalkPostToJson(TalkPost instance) => <String, dynamic>{
       'date': instance.date,
       'avatar': instance.avatar,
       'replyId': instance.replyId,
+      'lectureId': instance.lectureId,
       'replyName': instance.replyName,
       'replyText': instance.replyText
     };

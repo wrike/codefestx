@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:angular/angular.dart';
+import 'package:codefest/src/components/containers/stateful_component.dart';
 import 'package:codefest/src/models/talk_post.dart';
+import 'package:codefest/src/redux/services/store_factory.dart';
 import 'package:codefest/src/services/auth_store.dart';
 import 'package:intl/intl.dart';
 
@@ -15,7 +17,8 @@ import 'package:intl/intl.dart';
   ],
   preserveWhitespace: false,
 )
-class TalkPostComponent {
+class TalkPostComponent extends StatefulComponent{
+  final dateFormat = DateFormat("dd MMM HH:mm");
   bool get replyBlockShown => post.replyId != null;
   final _onDelete = new StreamController<String>();
   final _onReply = new StreamController<String>();
@@ -28,12 +31,16 @@ class TalkPostComponent {
   TalkPost post;
   final AuthStore _authStore;
 
-  TalkPostComponent(this._authStore);
+  TalkPostComponent(
+      this._authStore,
+      NgZone zone,
+      ChangeDetectorRef cdr,
+      StoreFactory storeFactory,
+  ) : super(zone, cdr, storeFactory);
 
   String getTime() {
     final date = DateTime.fromMillisecondsSinceEpoch(post.date, isUtc: false);
-    final format = DateFormat("dd MMM HH:mm");
-    return format.format(date);
+    return dateFormat.format(date);
   }
 
   void onPostDelete() {

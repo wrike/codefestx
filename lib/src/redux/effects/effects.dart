@@ -62,13 +62,11 @@ class Effects {
   Stream<Object> _onDeletePost(Stream<Object> actions, EpicStore<CodefestState> store) =>
       Observable(actions).ofType(const TypeToken<DeletePostAction>()).asyncExpand((action) async* {
         await _talkService.deletePost(action.postId);
-        yield LoadTalksAction(action.lectureId);
       });
 
   Stream<Object> _onCreateNewPost(Stream<Object> actions, EpicStore<CodefestState> store) =>
       Observable(actions).ofType(const TypeToken<CreatePostAction>()).asyncExpand((action) async* {
         await _talkService.createPost(action.lectureId, action.text, action.replyTo);
-        yield LoadTalksAction(action.lectureId);
       });
 
   Stream<Object> _onLoadLectureTalks(Stream<Object> actions, EpicStore<CodefestState> store) =>
