@@ -1,3 +1,4 @@
+@import 'package:angular_components/app_layout/mixins';
 @import "../../../../web/assets/styles/variables.scss";
 
 :host {
@@ -5,52 +6,118 @@
   height: 100%;
   position: relative; // for drawer
 
-}
+  // drawer ---
 
-.layout__root {
-  display: grid;
-  grid-template-rows: [header] auto [pre-content] auto [content] 1fr;
-  height: 100%;
-}
+  .drawer {
+    @include mat-drawer-width(320px);
+    @include mat-temporary-drawer-width(320px);
+  }
 
-.layout__header {
-  grid-row: header;
-  display: flex;
-  align-items: center;
-  position: relative;
-  height: 56px;
-  padding: 12px;
-}
+  .drawer__header {
+    padding: 20px 32px 32px;
+  }
 
-.layout__header-spacer {
-  flex-grow: 1;
-}
+  ::ng-deep {
 
-.layout__title {
-  @include font-heading-2;
-  left: 50%;
-  right: -50%;
-  transform: translate(-50%);
-  padding: 0 48px;
-  position: absolute;
-  max-width: 100%;
-  pointer-events: none;
-  height: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
+    .drawer[overlay].mat-drawer-expanded {
+      background-color: rgba(242, 243, 250, 0.8);
+    }
 
-.layout__title-badge {
-  color: $fg-color-secondary;
-}
+    .drawer.mat-drawer-expanded > .drawer-content.drawer-content {
+      border-radius: 0 8px 8px;
+      box-shadow: none;
+    }
+  }
+  // --- end drawer
 
-.layout__content {
-  grid-row: content;
-  max-height: 100%;
-  padding: 0 24px;
-  overflow-y: auto;
-  z-index: 0;
-  -webkit-overflow-scrolling: touch;
+  // nav ---
+
+  .nav {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .nav__item {
+    color: $font-color-secondary;
+    @include font-heading-3;
+
+    &.nav__item--active {
+      color: $font-color-main;
+
+      .nav__link::before {
+        content: "";
+        display: block;
+        width: 4px;
+        height: 4px;
+        background-color: $link-color;
+        border-radius: 50%;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        margin-left: -12px;
+      }
+    }
+  }
+
+  .nav__link {
+    padding: 24px 32px;
+    display: block;
+    color: inherit;
+    text-decoration: none;
+    position: relative;
+  }
+  // --- end nav
+
+  .layout__root {
+    height: 100%;
+  }
+
+  .layout__container {
+    display: grid;
+    grid-template-rows: [header] auto [pre-content] auto [content] 1fr;
+    height: 100%;
+  }
+
+  .layout__header {
+    grid-row: header;
+    display: flex;
+    align-items: center;
+    position: relative;
+    height: 56px;
+    padding: 12px;
+  }
+
+  .layout__header-spacer {
+    flex-grow: 1;
+  }
+
+  .layout__title {
+    @include font-heading-2;
+    left: 50%;
+    right: -50%;
+    transform: translate(-50%);
+    padding: 0 48px;
+    position: absolute;
+    max-width: 100%;
+    pointer-events: none;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .layout__title-badge {
+    color: $fg-color-secondary;
+  }
+
+  .layout__content {
+    grid-row: content;
+    max-height: 100%;
+    padding: 0 24px;
+    overflow-y: auto;
+    z-index: 0;
+    -webkit-overflow-scrolling: touch;
+  }
 }
