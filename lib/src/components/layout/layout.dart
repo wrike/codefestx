@@ -110,10 +110,6 @@ class LayoutComponent implements OnInit, OnDestroy {
     // _location.back();
   }
 
-  void push() {
-    _dispatcher.dispatch(NewVersionAction(releaseNote: 'Пуш вуш'));
-  }
-
   bool isActive(RoutePath item) => item.path == currentPath?.path;
 
   @override
