@@ -6,7 +6,7 @@ import 'package:codefest/src/models/speaker.dart';
   templateUrl: 'event_card.html',
   styleUrls: const ['event_card.css'],
   directives: [
-    NgIf
+    NgIf,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   preserveWhitespace: false,
