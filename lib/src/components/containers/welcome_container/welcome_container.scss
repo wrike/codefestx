@@ -17,10 +17,6 @@
     position: absolute;
     top: 16px;
     right: 24px;
-    @include button-reset;
-    @include font-main;
-    color: $link-color;
-    cursor: pointer;
   }
 
   .welcome__content {
