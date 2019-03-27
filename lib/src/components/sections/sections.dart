@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:angular/angular.dart';
 import 'package:codefest/src/components/ui/section/section.dart';
+import 'package:codefest/src/components/ui/toggle/toggle.dart';
 import 'package:codefest/src/models/section.dart';
 
 @Component(
@@ -11,6 +12,7 @@ import 'package:codefest/src/models/section.dart';
   directives: [
     NgFor,
     SectionComponent,
+    ToggleComponent,
   ],
   providers: [],
   preserveWhitespace: true,
