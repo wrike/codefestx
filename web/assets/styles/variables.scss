@@ -73,6 +73,11 @@ $font-weight-bold: 600;
   user-select: $selection;
 }
 
+@mixin sticky {
+  position: sticky;
+  position: -webkit-sticky;
+}
+
 // Button reset
 @mixin button-reset {
   padding: 0;
