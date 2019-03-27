@@ -1,3 +1,19 @@
-:host {
+@import "../../../../../web/assets/styles/variables.scss";
 
+:host {
+  border-radius: 8px;
+  min-height: 72px;
+  background: white;
+  display: grid;
+  margin: 8px;
+  grid-template-columns: [media] 64px [content] auto [controls] 40px;
+  box-shadow: 0 2px 40px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px 0;
+  align-items: start;
+  grid-auto-flow: column;
+}
+
+.close {
+  color: $fg-color-secondary;
+  grid-area: 1 / controls / 100;
 }

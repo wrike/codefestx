@@ -1,0 +1,38 @@
+@import "../../../../../web/assets/styles/variables.scss";
+
+.icon {
+    grid-area: 1 / media / 100;
+    flex-shrink: 0;
+    border-radius: 50%;
+    overflow: hidden;
+    justify-self: start;
+    align-self: start;
+    margin: 0 0 0 16px;
+
+    // todo icon
+    display: flex;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    
+    // todo icon-light
+    border-color: transparent;
+    background-color: $bg-color-icon;
+    background-origin: border-box;
+    color: $link-color;
+}
+.title {
+    @include font-title;
+}
+.description {
+    @include font-main;
+    color: $fg-color-secondary;
+}
+.actions {
+    display: flex;
+}
+
+[link-button] + [link-button] {
+    margin-left: 16px;
+}

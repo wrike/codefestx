@@ -1,0 +1,8 @@
+@import "../../../../../web/assets/styles/variables.scss";
+
+:host {
+    @include button-reset;
+    @include font-main;
+    color: $link-color;
+    cursor: pointer;
+}

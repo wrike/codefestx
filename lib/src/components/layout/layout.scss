@@ -11,6 +11,7 @@
   .drawer {
     @include mat-drawer-width(320px);
     @include mat-temporary-drawer-width(320px);
+    -webkit-tap-highlight-color: transparent;
   }
 
   .drawer__header {
@@ -29,8 +30,9 @@
     padding: 20px 16px;
     color: $fg-color-secondary;
     
-    a:link {
-      color: #33a7d8;
+    a:link,
+    a:visited {
+      color: $link-color;
       text-decoration: none;
     }
   }
@@ -58,11 +60,11 @@
   }
 
   .nav__item {
-    color: $font-color-secondary;
+    color: $fg-color-secondary;
     @include font-heading-3;
 
     &.nav__item--active {
-      color: $font-color-main;
+      color: $fg-color-primary;
 
       .nav__link::before {
         content: "";
