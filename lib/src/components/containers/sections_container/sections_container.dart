@@ -4,15 +4,15 @@ import 'package:codefest/src/components/containers/stateful_component.dart';
 import 'package:codefest/src/components/layout/layout.dart';
 import 'package:codefest/src/components/loader/loader.dart';
 import 'package:codefest/src/components/sections/sections.dart';
+import 'package:codefest/src/components/sections/sections_change_event.dart';
 import 'package:codefest/src/components/ui/button/button.dart';
 import 'package:codefest/src/models/section.dart';
-import 'package:codefest/src/redux/actions/change_selected_sections_action.dart';
-import 'package:codefest/src/redux/actions/init_action.dart';
+import 'package:codefest/src/redux/actions/effects/init_action.dart';
+import 'package:codefest/src/redux/actions/effects/update_selected_sections_action.dart';
 import 'package:codefest/src/redux/selectors/selectors.dart';
 import 'package:codefest/src/redux/services/dispatcher.dart';
 import 'package:codefest/src/redux/services/store_factory.dart';
 import 'package:codefest/src/route_paths.dart';
-import 'package:collection/collection.dart' show SetEquality;
 
 @Component(
   selector: 'sections-container',
@@ -35,10 +35,11 @@ class SectionsContainerComponent extends StatefulComponent implements OnInit {
   final Selectors _selectors;
   final Router _router;
 
-  Iterable<String> selectedSectionIds;
-  bool isCustomSectionMode;
+  Iterable<String> _selectedSectionIds = [];
 
-  Set<String> previousSelectedSectionIdsSet;
+  bool _isCustomSectionMode = true;
+
+  bool hasSelection = false;
 
   SectionsContainerComponent(
     NgZone zone,
@@ -49,34 +50,25 @@ class SectionsContainerComponent extends StatefulComponent implements OnInit {
     this._router,
   ) : super(zone, cdr, storeFactory);
 
-  bool get changedSelection => !(
-    const SetEquality().equals(selectedSectionIds.toSet(), previousSelectedSectionIdsSet) &&
-    isCustomSectionMode == previousIsCustomSectionMode
-  );
+  bool get isCustomSectionMode => _selectors.getCustomSectionMode(state);
 
   bool get isReady => _selectors.isReady(state);
 
   Iterable<Section> get mainSections => _selectors.getMainSections(state);
 
-  bool get previousIsCustomSectionMode => _selectors.getCustomSectionMode(state);
-
-  Iterable<String> get previousSelectedSectionIds => _selectors.getSelectedSectionIds(state);
-
   String get selectedSectionCount => selectedSectionIds.isNotEmpty ? selectedSectionIds.length.toString() : '';
+
+  Iterable<String> get selectedSectionIds => _selectors.getSelectedSectionIds(state);
 
   @override
   void ngOnInit() {
-    previousSelectedSectionIdsSet = previousSelectedSectionIds.toSet();
-    selectedSectionIds = previousSelectedSectionIds;
-    isCustomSectionMode = previousIsCustomSectionMode;
-
     _dispatcher.dispatch(InitAction());
   }
 
   void onApply() {
-    _dispatcher.dispatch(ChangeSelectedSectionsAction(
-      sectionIds: selectedSectionIds.toList(),
-      isCustomSectionMode: isCustomSectionMode,
+    _dispatcher.dispatch(UpdateSelectedSectionsAction(
+      sectionIds: _selectedSectionIds,
+      isCustomSectionMode: _isCustomSectionMode,
     ));
 
     _goBack();
@@ -86,12 +78,13 @@ class SectionsContainerComponent extends StatefulComponent implements OnInit {
     _goBack();
   }
 
-  void onCustomSectionModeChange(bool value) {
-    isCustomSectionMode = value;
+  void onSectionsChange(SectionsChangeEvent event) {
+    _selectedSectionIds = event.sectionIds;
+    _isCustomSectionMode = event.isCustomSectionMode;
   }
 
-  void onSectionsChange(Iterable<String> sectionIds) {
-    selectedSectionIds = sectionIds;
+  void onShowApply(bool value) {
+    hasSelection = value;
   }
 
   void _goBack() {

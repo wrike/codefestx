@@ -1,10 +1,10 @@
 import 'package:meta/meta.dart';
 
-class ChangeLectureFavoriteAction {
+class SetLectureFavoriteAction {
   final String lectureId;
   final bool isFavorite;
 
-  ChangeLectureFavoriteAction({
+  SetLectureFavoriteAction({
     @required this.lectureId,
     @required this.isFavorite,
   });

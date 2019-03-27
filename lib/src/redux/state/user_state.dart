@@ -6,7 +6,6 @@ part 'user_state.g.dart';
 class FilterTypeEnum extends EnumClass {
   static const FilterTypeEnum all = _$all;
   static const FilterTypeEnum favorite = _$favorite;
-  static const FilterTypeEnum section = _$section;
   static const FilterTypeEnum custom = _$custom;
   static const FilterTypeEnum now = _$now;
 
@@ -29,9 +28,6 @@ abstract class UserState implements Built<UserState, UserStateBuilder> {
   String get displayName;
 
   BuiltList<String> get favoriteLectureIds;
-
-  @nullable
-  String get filterSectionId;
 
   FilterTypeEnum get filterType;
 

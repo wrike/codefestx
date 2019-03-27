@@ -32,17 +32,17 @@
       [mainSections]="mainSections"
       [isCustomSectionMode]="isCustomSectionMode"
       [selectedSectionIds]="selectedSectionIds"
-      (onSectionsChange)="onSectionsChange($event)"
-      (onCustomSectionModeChange)="onCustomSectionModeChange($event)">
+      (onChange)="onSectionsChange($event)"
+      (onShowApply)="onShowApply($event)">
     </sections>
 
     <div
-      *ngIf="changedSelection"
+      *ngIf="hasSelection"
       class="sections__container-apply-button-gutter">
     </div>
 
     <div
-      *ngIf="changedSelection"
+      *ngIf="hasSelection"
       class="sections__apply-button-container">
 
       <button

@@ -1,20 +1,8 @@
 import 'dart:async';
 import 'dart:html';
 
-import 'package:codefest/src/redux/actions/authorize_action.dart';
-import 'package:codefest/src/redux/actions/change_lecture_favorite_action.dart';
-import 'package:codefest/src/redux/actions/change_lecture_like_action.dart';
-import 'package:codefest/src/redux/actions/change_selected_sections_action.dart';
-import 'package:codefest/src/redux/actions/init_action.dart';
-import 'package:codefest/src/redux/actions/load_data_error_action.dart';
-import 'package:codefest/src/redux/actions/load_data_start_action.dart';
-import 'package:codefest/src/redux/actions/load_data_success_action.dart';
-import 'package:codefest/src/redux/actions/load_user_data_action.dart';
-import 'package:codefest/src/redux/actions/load_user_data_success_action.dart';
-import 'package:codefest/src/redux/actions/on_scroll_action.dart';
-import 'package:codefest/src/redux/actions/scroll_to_current_time_action.dart';
-import 'package:codefest/src/redux/actions/set_scroll_top_action.dart';
-import 'package:codefest/src/redux/actions/update_user_data_action.dart';
+import 'package:codefest/src/redux/actions/actions.dart';
+import 'package:codefest/src/redux/actions/effects/actions.dart';
 import 'package:codefest/src/redux/state/codefest_state.dart';
 import 'package:codefest/src/services/auth_store.dart';
 import 'package:codefest/src/services/data_loader.dart';
@@ -38,10 +26,10 @@ class Effects {
       _onInit,
       _onLoadData,
       _onLoadUserData,
-      _onChangeLectureLike,
-      _onChangeLectureFavorite,
-      _onChangeSelectedSections,
-      _onUpdateUserData,
+      _onUpdateLectureLike,
+      _onUpdateLectureFavorite,
+      _onUpdateSelectedSections,
+      _onSyncUserData,
       _onScroll,
       _onScrollToCurrentTime,
     ];
@@ -49,50 +37,17 @@ class Effects {
     return combineEpics<CodefestState>(streams);
   }
 
-  Stream<Object> _onChangeLectureFavorite(Stream<Object> actions, EpicStore<CodefestState> store) =>
-      Observable(actions).ofType(const TypeToken<ChangeLectureFavoriteAction>()).asyncExpand((action) async* {
-        if (store.state.user.isAuthorized) {
-          await _dataLoader.updateLectureFavorite(lectureId: action.lectureId, value: action.isFavorite);
-        } else {
-          if (action.isFavorite) {
-            _storageService.addFavoriteLecture(action.lectureId);
-          } else {
-            _storageService.removeFavoriteLecture(action.lectureId);
-          }
-        }
-      });
-
-  Stream<Object> _onChangeLectureLike(Stream<Object> actions, EpicStore<CodefestState> store) =>
-      Observable(actions).ofType(const TypeToken<ChangeLectureLikeAction>()).asyncExpand((action) async* {
-        await _dataLoader.updateLectureLike(lectureId: action.lectureId, value: action.isLiked);
-      });
-
-  Stream<Object> _onChangeSelectedSections(Stream<Object> actions, EpicStore<CodefestState> store) =>
-      Observable(actions).ofType(const TypeToken<ChangeSelectedSectionsAction>()).asyncExpand((action) async* {
-        final user = store.state.user;
-        final sectionIds = action.sectionIds.toList();
-
-        if (user.isAuthorized) {
-          await _dataLoader.updateUser(
-            sectionIds: sectionIds,
-            favoriteLectureIds: user.favoriteLectureIds.toList(),
-            isCustomSectionMode: action.isCustomSectionMode,
-          );
-        } else {
-          _storageService.setSections(sectionIds);
-          _storageService.setCustomSectionMode(action.isCustomSectionMode);
-        }
-      });
-
   Stream<Object> _onInit(Stream<Object> actions, EpicStore<CodefestState> store) =>
       Observable(actions).ofType(const TypeToken<InitAction>()).asyncExpand((action) async* {
         if (!store.state.isLoaded || action.isReload) {
-          yield LoadDataStartAction();
+          yield LoadDataAction();
         }
       });
 
   Stream<Object> _onLoadData(Stream<Object> actions, EpicStore<CodefestState> store) =>
-      Observable(actions).ofType(const TypeToken<LoadDataStartAction>()).asyncExpand((_) async* {
+      Observable(actions).ofType(const TypeToken<LoadDataAction>()).asyncExpand((_) async* {
+        yield LoadDataStartAction();
+
         try {
           final apiData = await Future.wait([
             _dataLoader.getLectures(),
@@ -101,15 +56,17 @@ class Effects {
             _dataLoader.getSpeakers(),
           ]);
 
-          yield LoadDataSuccessAction(
+          yield SetDataAction(
             lectures: apiData[0],
             locations: apiData[1],
             sections: apiData[2],
             speakers: apiData[3],
           );
 
+          yield LoadDataSuccessAction();
           yield ScrollToCurrentTimeAction();
         } catch (e) {
+          print(e);
           yield LoadDataErrorAction();
         }
       });
@@ -122,7 +79,7 @@ class Effects {
 
             yield AuthorizeAction();
 
-            yield LoadUserDataSuccessAction(
+            yield SetUserDataAction(
               favoriteLectureIds: data.favoriteLecturesIds,
               likedLectureIds: data.likedLecturesIds,
               selectedSectionIds: data.sectionIds,
@@ -135,7 +92,7 @@ class Effects {
             final favoriteLectureIds = _storageService.getFavoriteLectures();
             final isCustomSectionMode = _storageService.getCustomSectionMode() ?? true;
 
-            yield LoadUserDataSuccessAction(
+            yield SetUserDataAction(
               favoriteLectureIds: favoriteLectureIds,
               selectedSectionIds: sectionIds,
               isCustomSectionMode: isCustomSectionMode,
@@ -146,24 +103,22 @@ class Effects {
         }
       });
 
-  Stream<Object> _onScroll(Stream<Object> actions, EpicStore<CodefestState> store) =>
-      Observable(actions)
+  Stream<Object> _onScroll(Stream<Object> actions, EpicStore<CodefestState> store) => Observable(actions)
           .ofType(const TypeToken<OnScrollAction>())
           .debounce(Duration(seconds: 1))
           .asyncExpand((action) async* {
-            yield SetScrollTopAction(scrollTop: action.scrollTop);
-          });
+        yield SetScrollTopAction(scrollTop: action.scrollTop);
+      });
 
-  Stream<Object> _onScrollToCurrentTime(Stream<Object> actions, EpicStore<CodefestState> store) =>
-      Observable(actions)
+  Stream<Object> _onScrollToCurrentTime(Stream<Object> actions, EpicStore<CodefestState> store) => Observable(actions)
           .ofType(const TypeToken<ScrollToCurrentTimeAction>())
           .delay(Duration(milliseconds: 0))
           .asyncExpand((action) async* {
-            document.querySelector('#currentTime')?.scrollIntoView(ScrollAlignment.TOP);
-          });
+        document.querySelector('#currentTime')?.scrollIntoView(ScrollAlignment.TOP);
+      });
 
-  Stream<Object> _onUpdateUserData(Stream<Object> actions, EpicStore<CodefestState> store) =>
-      Observable(actions).ofType(const TypeToken<UpdateUserDataAction>()).asyncExpand((action) async* {
+  Stream<Object> _onSyncUserData(Stream<Object> actions, EpicStore<CodefestState> store) =>
+      Observable(actions).ofType(const TypeToken<SyncUserDataAction>()).asyncExpand((action) async* {
         try {
           final data = await _dataLoader.getUser();
 
@@ -189,7 +144,7 @@ class Effects {
             _storageService.clearSectionsAndFavorites();
           }
 
-          yield LoadUserDataSuccessAction(
+          yield SetUserDataAction(
             favoriteLectureIds: favoriteLectureIds,
             selectedSectionIds: sectionIds,
             likedLectureIds: data.likedLecturesIds,
@@ -199,6 +154,46 @@ class Effects {
           );
         } catch (e) {
           yield LoadDataErrorAction();
+        }
+      });
+
+  Stream<Object> _onUpdateLectureFavorite(Stream<Object> actions, EpicStore<CodefestState> store) =>
+      Observable(actions).ofType(const TypeToken<UpdateLectureFavoriteAction>()).asyncExpand((action) async* {
+        yield SetLectureFavoriteAction(lectureId: action.lectureId, isFavorite: action.isFavorite);
+
+        if (store.state.user.isAuthorized) {
+          await _dataLoader.updateLectureFavorite(lectureId: action.lectureId, value: action.isFavorite);
+        } else {
+          if (action.isFavorite) {
+            _storageService.addFavoriteLecture(action.lectureId);
+          } else {
+            _storageService.removeFavoriteLecture(action.lectureId);
+          }
+        }
+      });
+
+  Stream<Object> _onUpdateLectureLike(Stream<Object> actions, EpicStore<CodefestState> store) =>
+      Observable(actions).ofType(const TypeToken<UpdateLectureLikeAction>()).asyncExpand((action) async* {
+        yield SetLectureLikeAction(lectureId: action.lectureId, isLiked: action.isLiked);
+        await _dataLoader.updateLectureLike(lectureId: action.lectureId, value: action.isLiked);
+      });
+
+  Stream<Object> _onUpdateSelectedSections(Stream<Object> actions, EpicStore<CodefestState> store) =>
+      Observable(actions).ofType(const TypeToken<UpdateSelectedSectionsAction>()).asyncExpand((action) async* {
+        yield SetSelectedSectionsAction(sectionIds: action.sectionIds, isCustomSectionMode: action.isCustomSectionMode);
+
+        final user = store.state.user;
+        final sectionIds = action.sectionIds;
+
+        if (user.isAuthorized) {
+          await _dataLoader.updateUser(
+            sectionIds: sectionIds.toList(),
+            favoriteLectureIds: user.favoriteLectureIds.toList(),
+            isCustomSectionMode: action.isCustomSectionMode,
+          );
+        } else {
+          _storageService.setSections(sectionIds.toList());
+          _storageService.setCustomSectionMode(action.isCustomSectionMode);
         }
       });
 }

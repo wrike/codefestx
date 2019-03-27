@@ -8,9 +8,9 @@ import 'package:codefest/src/components/ui/button/button.dart';
 import 'package:codefest/src/components/ui/popularity_icon/popularity_icon.dart';
 import 'package:codefest/src/components/ui/tabs/tabs.dart';
 import 'package:codefest/src/models/lecture.dart';
-import 'package:codefest/src/redux/actions/change_lecture_favorite_action.dart';
-import 'package:codefest/src/redux/actions/change_lecture_like_action.dart';
-import 'package:codefest/src/redux/actions/init_action.dart';
+import 'package:codefest/src/redux/actions/effects/init_action.dart';
+import 'package:codefest/src/redux/actions/effects/update_lecture_favorite_action.dart';
+import 'package:codefest/src/redux/actions/effects/update_lecture_like_action.dart';
 import 'package:codefest/src/redux/selectors/selectors.dart';
 import 'package:codefest/src/redux/services/dispatcher.dart';
 import 'package:codefest/src/redux/services/store_factory.dart';
@@ -30,9 +30,7 @@ import 'package:codefest/src/route_paths.dart';
     TabsComponent,
     PopularityIconComponent,
   ],
-  exports: [
-    NavigationType
-  ],
+  exports: [NavigationType],
   preserveWhitespace: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 )
@@ -60,7 +58,7 @@ class LectureContainerComponent extends StatefulComponent implements OnInit {
     });
   }
 
-  bool get lectureStarted => _selectors.lectureStarted(lecture);
+  String get title => !lecture.section.isCustom ? 'Доклад' : 'Событие';
 
   String get endTime => _selectors.getEndTimeText(lecture);
 
@@ -69,6 +67,8 @@ class LectureContainerComponent extends StatefulComponent implements OnInit {
   bool get isFavorite => _selectors.isFavoriteLecture(state, lecture);
 
   bool get isLectureAvailable => lecture != null;
+
+  bool get isLectureStarted => _selectors.isLectureStarted(lecture);
 
   bool get isLikable => _selectors.isLikableLecture(lecture);
 
@@ -88,14 +88,14 @@ class LectureContainerComponent extends StatefulComponent implements OnInit {
   }
 
   void onFavoriteClick() {
-    _dispatcher.dispatch(ChangeLectureFavoriteAction(lectureId: lecture.id, isFavorite: !isFavorite));
+    _dispatcher.dispatch(UpdateLectureFavoriteAction(lectureId: lecture.id, isFavorite: !isFavorite));
   }
 
   void onLikeClick() {
     if (!isAuthorized) {
       _router.navigateByUrl(RoutePaths.login.toUrl());
-    } else if (lectureStarted) {
-      _dispatcher.dispatch(ChangeLectureLikeAction(lectureId: lecture.id, isLiked: !isLiked));
+    } else if (isLectureStarted) {
+      _dispatcher.dispatch(UpdateLectureLikeAction(lectureId: lecture.id, isLiked: !isLiked));
     }
   }
 

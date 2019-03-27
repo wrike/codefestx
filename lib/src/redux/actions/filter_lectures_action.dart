@@ -3,10 +3,8 @@ import 'package:meta/meta.dart';
 
 class FilterLecturesAction {
   final FilterTypeEnum filterType;
-  final String filterSectionId;
 
   FilterLecturesAction({
     @required this.filterType,
-    this.filterSectionId,
   });
 }

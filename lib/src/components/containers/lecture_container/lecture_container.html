@@ -3,7 +3,7 @@
 
   <layout
     *ngIf="isReady"
-    [title]="'Доклад'"
+    [title]="title"
     [state]="state"
     [navType]="NavigationType.back">
 
@@ -215,7 +215,7 @@
         </p>
         <button
           cf-button
-          [disabled]="!lectureStarted"
+          [disabled]="!isLectureStarted"
           (click)="onLikeClick()"
           class="event__vote-button button-full-width"
           [class.button-primary]="!isLiked">
@@ -247,7 +247,7 @@
         </button>
 
         <p
-          *ngIf="!lectureStarted"
+          *ngIf="!isLectureStarted"
           class="event__vote-disabled-info">
           Голосование будет доступно через 10 мин после начала доклада для&nbsp;авторизованных пользователей
         </p>

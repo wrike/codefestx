@@ -4,7 +4,7 @@ import 'package:codefest/src/models/auth.response.dart';
 import 'package:codefest/src/models/auth_get_url.response.dart';
 import 'package:codefest/src/models/auth_type.enum.dart';
 import 'package:codefest/src/redux/actions/authorize_action.dart';
-import 'package:codefest/src/redux/actions/load_user_data_success_action.dart';
+import 'package:codefest/src/redux/actions/set_user_data_action.dart';
 import 'package:codefest/src/redux/services/dispatcher.dart';
 import 'package:codefest/src/services/http_proxy.dart';
 import 'package:codefest/src/services/push_service.dart';
@@ -63,7 +63,7 @@ class AuthService {
     window.localStorage[tokenStorageKey] = authResponse.token;
     window.localStorage[userNameStorageKey] = authResponse.userName;
     window.localStorage[userIdStorageKey] = authResponse.userId;
-    final action = LoadUserDataSuccessAction(
+    final action = SetUserDataAction(
       displayName: authResponse.userName,
       avatarPath: authResponse.avatar,
       favoriteLectureIds: authResponse.favoriteLecturesIds,

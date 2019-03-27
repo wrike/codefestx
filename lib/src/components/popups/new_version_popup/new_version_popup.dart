@@ -22,12 +22,12 @@ import 'package:codefest/src/redux/services/dispatcher.dart';
 class NewVersionPopupComponent {
   final Dispatcher _dispatcher;
 
+  @Input()
+  String message = 'У нас новые крутые фичи!';
+
   NewVersionPopupComponent(
     this._dispatcher,
   );
-
-  @Input()
-  String message = 'У нас новые крутые фичи!';
 
   void close() {
     _dispatcher.dispatch(NewVersionAction(releaseNote: ''));
@@ -35,7 +35,7 @@ class NewVersionPopupComponent {
 
   void reload({bool showNotes = false}) {
     if (showNotes) {
-      // todo
+      window.location.href = '/what/is_new';
     } else {
       window.location.reload();
     }
