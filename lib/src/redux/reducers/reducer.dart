@@ -169,6 +169,9 @@ class CodefestReducer {
         if (replyPost != null) {
           p.replyText = replyPost.text;
           p.replyName = replyPost.authorName;
+        } else {
+          p.replyName = 'Неизвестный автор';
+          p.replyText = 'Пост удален :(';
         }
       }
       return p;
