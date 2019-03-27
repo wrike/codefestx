@@ -29,7 +29,7 @@
 
         <span
           class="tabs__button-text">
-          Релизы <span class="badge-count" *ngIf="!isAboutUsEnable">{{ releaseCount }}</span>
+          Релизы <span class="badge-count" [class.badge-count-hidden]="isAboutUsEnable">{{ releaseCount }}</span>
         </span>
       </button>
     </tabs>
