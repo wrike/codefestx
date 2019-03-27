@@ -25,7 +25,7 @@ class NewVersionPopupComponent {
   );
 
   @Input()
-  String message = 'У новые крутые фичи!';
+  String message = 'У нас новые крутые фичи!';
 
   void close() {
     _dispatcher.dispatch(NewVersionAction(releaseNote: ''));

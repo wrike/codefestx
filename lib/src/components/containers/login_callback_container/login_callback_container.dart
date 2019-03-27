@@ -48,6 +48,9 @@ class LoginCallbackContainerComponent implements OnInit {
         }
 
         _dispatcher.dispatch(UpdateUserDataAction());
+      } else {
+        await _router.navigateByUrl(_authStore.routePath);
+        _authService.clearRoutePath();
       }
     });
   }

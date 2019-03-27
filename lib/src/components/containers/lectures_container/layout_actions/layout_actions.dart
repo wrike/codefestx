@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:angular/angular.dart';
 import 'package:codefest/src/components/ui/button/button.dart';
 import 'package:codefest/src/components/ui/text_input/text_input.dart';
-import 'package:stream_transform/stream_transform.dart';
 
 @Component(
   selector: 'layout-actions',
@@ -19,8 +18,8 @@ import 'package:stream_transform/stream_transform.dart';
   changeDetection: ChangeDetectionStrategy.OnPush,
 )
 class LayoutActionsComponent {
-  final _onSearchStreamController = new StreamController<String>.broadcast();
-  final _onSearchModeChangeStreamController = new StreamController<bool>.broadcast();
+  final _onSearchStreamController = StreamController<String>.broadcast();
+  final _onSearchModeChangeStreamController = StreamController<bool>.broadcast();
 
   @ViewChild('searchInput')
   TextInput searchInput;

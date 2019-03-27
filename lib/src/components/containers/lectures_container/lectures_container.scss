@@ -63,6 +63,8 @@
   // schedule ---
 
   .schedule {
+    display: grid;
+    grid-row-gap: 24px;
     margin: 0 -24px;
     padding: 8px 8px 24px 24px;
   }
@@ -72,9 +74,9 @@
   }
 
   .schedule__header {
+    @include sticky;
     height: 44px;
     margin: 0 -8px 0 -24px;
-    position: sticky;
     top: -4px;
     z-index: 1;
     -webkit-backface-visibility: hidden;
@@ -84,7 +86,7 @@
       content: "";
       display: block;
       height: 4px;
-      position: sticky;
+      @include sticky;
     }
 
     &::before {
@@ -110,7 +112,7 @@
     background-color: #f2f3fa;
     height: 40px;
     padding: 0 24px;
-    position: sticky;
+    @include sticky;;
     top: 0;
     margin-top: -4px;
     z-index: 3;
@@ -183,8 +185,8 @@
   }
 
   .time__container {
-    position: sticky;
-    top: 44px;
+    @include sticky;;
+    top: 48px;
   }
 
   .time__item {

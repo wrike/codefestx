@@ -56,7 +56,7 @@ class WhatContainerComponent extends StatefulComponent {
         path = Routes.releaseNotes;
         break;
       default:
-        throw new Error();
+        throw Error();
     }
 
     _router.navigate('${RoutePaths.what.toUrl()}${path.toUrl()}');

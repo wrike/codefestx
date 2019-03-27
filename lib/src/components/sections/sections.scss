@@ -1,11 +1,8 @@
 @import "../../../../web/assets/styles/variables.scss";
 
 :host {
-  display: block;
-
-  .sections__group + .sections__group {
-    margin-top: 24px;
-  }
+  display: grid;
+  grid-gap: 24px;
 
   .sections__group-title {
     margin-bottom: 8px;
