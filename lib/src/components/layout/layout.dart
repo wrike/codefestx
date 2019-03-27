@@ -147,7 +147,7 @@ class LayoutComponent implements OnInit, OnDestroy {
   void _onRouteActivated(RouterState state) {
     final path = state.routePath;
     currentPath = path?.parent ?? path;
-    
+
     if (isScroll) {
       window.requestAnimationFrame((num time) {
         mainElement.scrollTo(0, this.state.scrollTop);
