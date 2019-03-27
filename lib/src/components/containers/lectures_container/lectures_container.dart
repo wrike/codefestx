@@ -80,6 +80,8 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
 
   bool get isReady => _selectors.isReady(state);
 
+  bool get isSearchEmptyStateVisible => lectures.isEmpty && isSearchMode && searchText != null && searchText.isNotEmpty;
+
   bool get isSearchMode => _selectors.isSearchMode(state);
 
   Iterable<Lecture> get lectures => _selectors.getVisibleLectures(state);
