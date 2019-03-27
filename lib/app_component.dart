@@ -5,6 +5,7 @@ import 'package:angular_router/angular_router.dart';
 import 'package:codefest/src/components/popups/new_version_popup/new_version_popup.dart';
 import 'package:codefest/src/redux/actions/load_user_data_action.dart';
 import 'package:codefest/src/redux/actions/new_version_action.dart';
+import 'package:codefest/src/redux/actions/start_lectures_check_action.dart';
 import 'package:codefest/src/redux/effects/effects.dart';
 import 'package:codefest/src/redux/reducers/reducer.dart';
 import 'package:codefest/src/redux/selectors/selectors.dart';
@@ -19,7 +20,6 @@ import 'package:codefest/src/services/auth_store.dart';
 import 'package:codefest/src/services/data_loader.dart';
 import 'package:codefest/src/services/http_proxy.dart';
 import 'package:codefest/src/services/push_service.dart';
-import 'package:codefest/src/services/schedule_checker.dart';
 import 'package:codefest/src/services/sockets_service.dart';
 import 'package:codefest/src/services/storage_service.dart';
 import 'package:redux/redux.dart';
@@ -47,7 +47,6 @@ import 'package:redux/redux.dart';
     const ClassProvider<PushService>(PushService),
     const ClassProvider<SocketService>(SocketService),
     const ClassProvider<StorageService>(StorageService),
-    const ClassProvider<ScheduleChecker>(ScheduleChecker),
   ],
   exports: [
     RoutePaths,
@@ -67,7 +66,6 @@ class AppComponent implements OnDestroy, OnInit {
   final AuthStore _authStore;
   final Router _router;
   final PushService _pushService;
-  final ScheduleChecker _scheduleChecker;
 
   final List<StreamSubscription> _subscriptions = [];
 
@@ -85,7 +83,6 @@ class AppComponent implements OnDestroy, OnInit {
     this._authStore,
     this._router,
     this._pushService,
-    this._scheduleChecker,
   ) {
     _zone.runOutsideAngular(() {
       _store = _storeFactory.getStore(_stateFactory.getInitialState());
@@ -125,7 +122,9 @@ class AppComponent implements OnDestroy, OnInit {
       });
     }
 
-    _syncSchedule = Timer.periodic(const Duration(seconds: 42), _scheduleChecker.run);
+    _syncSchedule = Timer.periodic(const Duration(seconds: 42), (_) {
+      _dispatcher.dispatch(StartLecturesCheckAction());
+    });
 
     _socketService.onEvent
         .where((event) => event.command == 'reload')

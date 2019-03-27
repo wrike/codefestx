@@ -108,7 +108,7 @@ class Selectors {
   Lecture getLecture(CodefestState state, String lectureId) =>
       getLectures(state).firstWhere((lecture) => lecture.id == lectureId, orElse: () => null);
 
-  Iterable<Lecture> getLectures(CodefestState state) => state.lectures;
+  Iterable<Lecture> getLectures(CodefestState state) => state.lectures.values;
 
   Iterable<String> getLikedLectureIds(CodefestState state) => getUser(state).likedLectureIds;
 

@@ -9,11 +9,13 @@ import 'package:codefest/src/redux/actions/init_action.dart';
 import 'package:codefest/src/redux/actions/load_data_error_action.dart';
 import 'package:codefest/src/redux/actions/load_data_start_action.dart';
 import 'package:codefest/src/redux/actions/load_data_success_action.dart';
+import 'package:codefest/src/redux/actions/load_lectures_data_action.dart';
 import 'package:codefest/src/redux/actions/load_user_data_action.dart';
 import 'package:codefest/src/redux/actions/load_user_data_success_action.dart';
 import 'package:codefest/src/redux/actions/on_scroll_action.dart';
 import 'package:codefest/src/redux/actions/scroll_to_current_time_action.dart';
 import 'package:codefest/src/redux/actions/set_scroll_top_action.dart';
+import 'package:codefest/src/redux/actions/start_lectures_check_action.dart';
 import 'package:codefest/src/redux/actions/update_user_data_action.dart';
 import 'package:codefest/src/redux/state/codefest_state.dart';
 import 'package:codefest/src/services/auth_store.dart';
@@ -44,6 +46,7 @@ class Effects {
       _onUpdateUserData,
       _onScroll,
       _onScrollToCurrentTime,
+      _onCheckLectures,
     ];
 
     return combineEpics<CodefestState>(streams);
@@ -200,5 +203,11 @@ class Effects {
         } catch (e) {
           yield LoadDataErrorAction();
         }
+      });
+
+  Stream<Object> _onCheckLectures(Stream<Object> actions, EpicStore<CodefestState> store) =>
+      Observable(actions).ofType(const TypeToken<StartLecturesCheckAction>()).asyncExpand((action) async* {
+        final newLectures = await _dataLoader.getLecturesLite();
+        yield LoadLecturesDataAction(lectures: newLectures);
       });
 }

@@ -12,6 +12,7 @@ class DataLoader {
   static const _locationsPath = 'locations';
   static const _sectionsPath = 'sections';
   static const _lecturesPath = 'lectures';
+  static const _lecturesLitePath = 'lectures?is_lite=true';
   static const _lecturesLikePath = '${_lecturesPath}/like';
   static const _lecturesFavoritePath = '${_lecturesPath}/favorite';
   static const _userPath = 'user';
@@ -22,6 +23,9 @@ class DataLoader {
 
   Future<Iterable<LectureData>> getLectures() =>
       _http.getList<LectureData>(_lecturesPath, (json) => LectureData.fromJson(json));
+
+  Future<Iterable<LectureData>> getLecturesLite() =>
+      _http.getList<LectureData>(_lecturesLitePath, (json) => LectureData.fromJson(json));
 
   Future<Iterable<Location>> getLocations() =>
       _http.getList<Location>(_locationsPath, (json) => Location.fromJson(json));

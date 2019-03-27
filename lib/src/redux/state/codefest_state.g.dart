@@ -14,7 +14,7 @@ class _$CodefestState extends CodefestState {
   @override
   final bool isReady;
   @override
-  final BuiltList<Lecture> lectures;
+  final BuiltMap<String, Lecture> lectures;
   @override
   final BuiltList<Location> locations;
   @override
@@ -153,10 +153,11 @@ class CodefestStateBuilder
   bool get isReady => _$this._isReady;
   set isReady(bool isReady) => _$this._isReady = isReady;
 
-  ListBuilder<Lecture> _lectures;
-  ListBuilder<Lecture> get lectures =>
-      _$this._lectures ??= new ListBuilder<Lecture>();
-  set lectures(ListBuilder<Lecture> lectures) => _$this._lectures = lectures;
+  MapBuilder<String, Lecture> _lectures;
+  MapBuilder<String, Lecture> get lectures =>
+      _$this._lectures ??= new MapBuilder<String, Lecture>();
+  set lectures(MapBuilder<String, Lecture> lectures) =>
+      _$this._lectures = lectures;
 
   ListBuilder<Location> _locations;
   ListBuilder<Location> get locations =>
