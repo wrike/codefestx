@@ -82,9 +82,9 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
 
   Iterable<Lecture> get lectures => _selectors.getVisibleLectures(state);
 
-  String get nearLectureId => _selectors.getNearLectureId(state);
+  String get nearLectureId => _selectors.getNearestLectureId(state);
 
-  DateTime get now => _selectors.getNow();
+  DateTime get now => _selectors.getDateNow();
 
   String get searchText => _selectors.getSearchText(state);
 
@@ -114,11 +114,6 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
     return 'Вне времени';
   }
 
-  bool isDayVisible(Lecture next, int index) {
-    final prev = index > 0 ? lectures.elementAt(index - 1) : null;
-    return prev == null || next.startTime.day != prev.startTime.day;
-  }
-
   bool isFavoriteLecture(Lecture lecture) => _selectors.isFavoriteLecture(state, lecture);
 
   bool isFinished(Lecture lecture) {
@@ -129,13 +124,6 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
   bool isRightNow(Lecture lecture) {
     final endTime = _selectors.getEndTime(lecture);
     return now.isAfter(lecture.startTime) && now.isBefore(endTime);
-  }
-
-  bool isSectionSelected(Section section) => _selectors.getFilterSectionId(state) == section.id;
-
-  bool isTimeVisible(Lecture next, int index) {
-    final prev = index > 0 ? lectures.elementAt(index - 1) : null;
-    return prev == null || next.startTime != prev.startTime || next.duration != prev.duration;
   }
 
   @override
@@ -188,10 +176,6 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
 
   void onShowNowClick() {
     _dispatcher.dispatch(FilterLecturesAction(filterType: FilterTypeEnum.now));
-  }
-
-  void onShowSectionClick(Section section) {
-    _dispatcher.dispatch(FilterLecturesAction(filterType: FilterTypeEnum.section, filterSectionId: section.id));
   }
 
   String startTime(Lecture lecture) => _selectors.getStartTimeText(lecture);

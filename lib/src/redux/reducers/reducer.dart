@@ -93,7 +93,6 @@ class CodefestReducer {
   CodefestState _onFilterLectures(CodefestState state, FilterLecturesAction action) => state.rebuild((b) {
         final user = state.user.rebuild((b) {
           b.filterType = action.filterType;
-          b.filterSectionId = action.filterSectionId;
         });
 
         b.user.replace(user);

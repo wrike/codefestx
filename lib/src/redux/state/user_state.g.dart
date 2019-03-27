@@ -8,7 +8,6 @@ part of 'user_state.dart';
 
 const FilterTypeEnum _$all = const FilterTypeEnum._('all');
 const FilterTypeEnum _$favorite = const FilterTypeEnum._('favorite');
-const FilterTypeEnum _$section = const FilterTypeEnum._('section');
 const FilterTypeEnum _$custom = const FilterTypeEnum._('custom');
 const FilterTypeEnum _$now = const FilterTypeEnum._('now');
 
@@ -18,8 +17,6 @@ FilterTypeEnum _$valueOf(String name) {
       return _$all;
     case 'favorite':
       return _$favorite;
-    case 'section':
-      return _$section;
     case 'custom':
       return _$custom;
     case 'now':
@@ -33,7 +30,6 @@ final BuiltSet<FilterTypeEnum> _$values =
     new BuiltSet<FilterTypeEnum>(const <FilterTypeEnum>[
   _$all,
   _$favorite,
-  _$section,
   _$custom,
   _$now,
 ]);
@@ -45,8 +41,6 @@ class _$UserState extends UserState {
   final String displayName;
   @override
   final BuiltList<String> favoriteLectureIds;
-  @override
-  final String filterSectionId;
   @override
   final FilterTypeEnum filterType;
   @override
@@ -69,7 +63,6 @@ class _$UserState extends UserState {
       {this.avatarPath,
       this.displayName,
       this.favoriteLectureIds,
-      this.filterSectionId,
       this.filterType,
       this.isAuthorized,
       this.isCustomSectionMode,
@@ -115,7 +108,6 @@ class _$UserState extends UserState {
         avatarPath == other.avatarPath &&
         displayName == other.displayName &&
         favoriteLectureIds == other.favoriteLectureIds &&
-        filterSectionId == other.filterSectionId &&
         filterType == other.filterType &&
         isAuthorized == other.isAuthorized &&
         isCustomSectionMode == other.isCustomSectionMode &&
@@ -135,11 +127,9 @@ class _$UserState extends UserState {
                         $jc(
                             $jc(
                                 $jc(
-                                    $jc(
-                                        $jc($jc(0, avatarPath.hashCode),
-                                            displayName.hashCode),
-                                        favoriteLectureIds.hashCode),
-                                    filterSectionId.hashCode),
+                                    $jc($jc(0, avatarPath.hashCode),
+                                        displayName.hashCode),
+                                    favoriteLectureIds.hashCode),
                                 filterType.hashCode),
                             isAuthorized.hashCode),
                         isCustomSectionMode.hashCode),
@@ -155,7 +145,6 @@ class _$UserState extends UserState {
           ..add('avatarPath', avatarPath)
           ..add('displayName', displayName)
           ..add('favoriteLectureIds', favoriteLectureIds)
-          ..add('filterSectionId', filterSectionId)
           ..add('filterType', filterType)
           ..add('isAuthorized', isAuthorized)
           ..add('isCustomSectionMode', isCustomSectionMode)
@@ -183,11 +172,6 @@ class UserStateBuilder implements Builder<UserState, UserStateBuilder> {
       _$this._favoriteLectureIds ??= new ListBuilder<String>();
   set favoriteLectureIds(ListBuilder<String> favoriteLectureIds) =>
       _$this._favoriteLectureIds = favoriteLectureIds;
-
-  String _filterSectionId;
-  String get filterSectionId => _$this._filterSectionId;
-  set filterSectionId(String filterSectionId) =>
-      _$this._filterSectionId = filterSectionId;
 
   FilterTypeEnum _filterType;
   FilterTypeEnum get filterType => _$this._filterType;
@@ -229,7 +213,6 @@ class UserStateBuilder implements Builder<UserState, UserStateBuilder> {
       _avatarPath = _$v.avatarPath;
       _displayName = _$v.displayName;
       _favoriteLectureIds = _$v.favoriteLectureIds?.toBuilder();
-      _filterSectionId = _$v.filterSectionId;
       _filterType = _$v.filterType;
       _isAuthorized = _$v.isAuthorized;
       _isCustomSectionMode = _$v.isCustomSectionMode;
@@ -264,7 +247,6 @@ class UserStateBuilder implements Builder<UserState, UserStateBuilder> {
               avatarPath: avatarPath,
               displayName: displayName,
               favoriteLectureIds: favoriteLectureIds.build(),
-              filterSectionId: filterSectionId,
               filterType: filterType,
               isAuthorized: isAuthorized,
               isCustomSectionMode: isCustomSectionMode,

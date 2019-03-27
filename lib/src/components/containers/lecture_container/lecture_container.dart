@@ -60,7 +60,7 @@ class LectureContainerComponent extends StatefulComponent implements OnInit {
     });
   }
 
-  bool get lectureStarted => _selectors.lectureStarted(lecture);
+  bool get isLectureStarted => _selectors.isLectureStarted(lecture);
 
   String get endTime => _selectors.getEndTimeText(lecture);
 
@@ -94,7 +94,7 @@ class LectureContainerComponent extends StatefulComponent implements OnInit {
   void onLikeClick() {
     if (!isAuthorized) {
       _router.navigateByUrl(RoutePaths.login.toUrl());
-    } else if (lectureStarted) {
+    } else if (isLectureStarted) {
       _dispatcher.dispatch(ChangeLectureLikeAction(lectureId: lecture.id, isLiked: !isLiked));
     }
   }
