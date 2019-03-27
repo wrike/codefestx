@@ -1,14 +1,14 @@
 import 'package:meta/meta.dart';
 
-class LoadUserDataSuccessAction {
+class SetUserDataAction {
   final Iterable<String> favoriteLectureIds;
-  final Iterable<String> likedLectureIds;
   final Iterable<String> selectedSectionIds;
+  final Iterable<String> likedLectureIds;
   final String displayName;
   final String avatarPath;
   final bool isCustomSectionMode;
 
-  LoadUserDataSuccessAction({
+  SetUserDataAction({
     @required this.favoriteLectureIds,
     @required this.selectedSectionIds,
     this.likedLectureIds,

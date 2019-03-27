@@ -1,4 +1,5 @@
 import 'package:codefest/src/redux/effects/effects.dart';
+//import 'package:codefest/src/redux/middleware/logging_middleware.dart';
 import 'package:codefest/src/redux/reducers/reducer.dart';
 import 'package:codefest/src/redux/state/codefest_state.dart';
 import 'package:redux/redux.dart';
@@ -21,6 +22,7 @@ class StoreFactory {
         _reducer.getState,
         initialState: initialState,
         middleware: [
+//          LoggingMiddleware(),
           EpicMiddleware(_effects.getEffects()),
         ],
         distinct: true,

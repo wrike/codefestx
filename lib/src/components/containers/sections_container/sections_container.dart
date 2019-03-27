@@ -6,8 +6,8 @@ import 'package:codefest/src/components/loader/loader.dart';
 import 'package:codefest/src/components/sections/sections.dart';
 import 'package:codefest/src/components/ui/button/button.dart';
 import 'package:codefest/src/models/section.dart';
-import 'package:codefest/src/redux/actions/change_selected_sections_action.dart';
-import 'package:codefest/src/redux/actions/init_action.dart';
+import 'package:codefest/src/redux/actions/effects/update_selected_sections_action.dart';
+import 'package:codefest/src/redux/actions/effects/init_action.dart';
 import 'package:codefest/src/redux/selectors/selectors.dart';
 import 'package:codefest/src/redux/services/dispatcher.dart';
 import 'package:codefest/src/redux/services/store_factory.dart';
@@ -74,7 +74,7 @@ class SectionsContainerComponent extends StatefulComponent implements OnInit {
   }
 
   void onApply() {
-    _dispatcher.dispatch(ChangeSelectedSectionsAction(
+    _dispatcher.dispatch(UpdateSelectedSectionsAction(
       sectionIds: selectedSectionIds.toList(),
       isCustomSectionMode: isCustomSectionMode,
     ));

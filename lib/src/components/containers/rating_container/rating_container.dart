@@ -3,7 +3,7 @@ import 'package:codefest/src/components/containers/rating_container/rating_empty
 import 'package:codefest/src/components/layout/layout.dart';
 import 'package:codefest/src/components/containers/stateful_component.dart';
 import 'package:codefest/src/models/lecture.dart';
-import 'package:codefest/src/redux/actions/init_action.dart';
+import 'package:codefest/src/redux/actions/effects/init_action.dart';
 import 'package:codefest/src/redux/selectors/selectors.dart';
 import 'package:codefest/src/redux/services/dispatcher.dart';
 import 'package:codefest/src/redux/services/store_factory.dart';

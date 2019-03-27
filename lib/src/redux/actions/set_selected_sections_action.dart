@@ -1,10 +1,10 @@
 import 'package:meta/meta.dart';
 
-class ChangeSelectedSectionsAction {
+class SetSelectedSectionsAction {
   final Iterable<String> sectionIds;
   final bool isCustomSectionMode;
 
-  ChangeSelectedSectionsAction({
+  SetSelectedSectionsAction({
     @required this.sectionIds,
     @required this.isCustomSectionMode,
   });

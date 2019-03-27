@@ -10,11 +10,11 @@ import 'package:codefest/src/components/loader/loader.dart';
 import 'package:codefest/src/components/ui/button/button.dart';
 import 'package:codefest/src/models/lecture.dart';
 import 'package:codefest/src/models/section.dart';
-import 'package:codefest/src/redux/actions/change_lecture_favorite_action.dart';
-import 'package:codefest/src/redux/actions/change_search_mode_action.dart';
+import 'package:codefest/src/redux/actions/set_search_mode_action.dart';
+import 'package:codefest/src/redux/actions/effects/init_action.dart';
+import 'package:codefest/src/redux/actions/effects/update_lecture_favorite_action.dart';
 import 'package:codefest/src/redux/actions/filter_lectures_action.dart';
-import 'package:codefest/src/redux/actions/init_action.dart';
-import 'package:codefest/src/redux/actions/scroll_to_current_time_action.dart';
+import 'package:codefest/src/redux/actions/effects/scroll_to_current_time_action.dart';
 import 'package:codefest/src/redux/actions/search_lectures_action.dart';
 import 'package:codefest/src/redux/selectors/selectors.dart';
 import 'package:codefest/src/redux/services/dispatcher.dart';
@@ -136,7 +136,7 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
   }
 
   void onFavoriteChange(Lecture lecture, bool value) {
-    _dispatcher.dispatch(ChangeLectureFavoriteAction(lectureId: lecture.id, isFavorite: value));
+    _dispatcher.dispatch(UpdateLectureFavoriteAction(lectureId: lecture.id, isFavorite: value));
   }
 
   void onFilter() {
@@ -156,7 +156,7 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
   }
 
   void onSearchModeChange(bool isSearchMode) {
-    _dispatcher.dispatch(ChangeSearchModeAction(isSearchMode: isSearchMode));
+    _dispatcher.dispatch(SetSearchModeAction(isSearchMode: isSearchMode));
   }
 
   void onShowAllClick() {

@@ -8,9 +8,9 @@ import 'package:codefest/src/components/ui/button/button.dart';
 import 'package:codefest/src/components/ui/popularity_icon/popularity_icon.dart';
 import 'package:codefest/src/components/ui/tabs/tabs.dart';
 import 'package:codefest/src/models/lecture.dart';
-import 'package:codefest/src/redux/actions/change_lecture_favorite_action.dart';
-import 'package:codefest/src/redux/actions/change_lecture_like_action.dart';
-import 'package:codefest/src/redux/actions/init_action.dart';
+import 'package:codefest/src/redux/actions/effects/init_action.dart';
+import 'package:codefest/src/redux/actions/effects/update_lecture_favorite_action.dart';
+import 'package:codefest/src/redux/actions/effects/update_lecture_like_action.dart';
 import 'package:codefest/src/redux/selectors/selectors.dart';
 import 'package:codefest/src/redux/services/dispatcher.dart';
 import 'package:codefest/src/redux/services/store_factory.dart';
@@ -88,14 +88,14 @@ class LectureContainerComponent extends StatefulComponent implements OnInit {
   }
 
   void onFavoriteClick() {
-    _dispatcher.dispatch(ChangeLectureFavoriteAction(lectureId: lecture.id, isFavorite: !isFavorite));
+    _dispatcher.dispatch(UpdateLectureFavoriteAction(lectureId: lecture.id, isFavorite: !isFavorite));
   }
 
   void onLikeClick() {
     if (!isAuthorized) {
       _router.navigateByUrl(RoutePaths.login.toUrl());
     } else if (isLectureStarted) {
-      _dispatcher.dispatch(ChangeLectureLikeAction(lectureId: lecture.id, isLiked: !isLiked));
+      _dispatcher.dispatch(UpdateLectureLikeAction(lectureId: lecture.id, isLiked: !isLiked));
     }
   }
 
