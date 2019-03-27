@@ -23,7 +23,7 @@
     }
 
     .tabs__button--active {
-      color: $font-color-main;
+      color: $fg-color-primary;
 
       .tabs__button-text::after {
         content: "";

@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:html';
 
 import 'package:angular/angular.dart';
-import 'package:angular_components/angular_components.dart';
+import 'package:angular_components/angular_components.dart' show MaterialTemporaryDrawerComponent;
 import 'package:angular_router/angular_router.dart';
 import 'package:codefest/src/components/layout/navigation_type.dart';
 import 'package:codefest/src/components/ui/button/button.dart';
@@ -19,7 +19,6 @@ import 'package:gtag_analytics/gtag_analytics.dart';
 @Component(
   selector: 'layout',
   styleUrls: [
-    'package:angular_components/app_layout/layout.scss.css',
     'layout.css',
   ],
   templateUrl: 'layout.html',
@@ -27,12 +26,7 @@ import 'package:gtag_analytics/gtag_analytics.dart';
     ButtonComponent,
     NgIf,
     NgFor,
-    DeferredContentDirective,
     MaterialTemporaryDrawerComponent,
-    MaterialToggleComponent,
-    MaterialListComponent,
-    MaterialListItemComponent,
-    MaterialIconComponent,
   ],
   providers: [],
   preserveWhitespace: false,
@@ -43,7 +37,6 @@ import 'package:gtag_analytics/gtag_analytics.dart';
 )
 class LayoutComponent implements OnInit, OnDestroy {
   final Router _router;
-  final Location _location;
   final Selectors _selectors;
   final AuthService _authService;
   final AuthStore _authStore;
@@ -87,7 +80,6 @@ class LayoutComponent implements OnInit, OnDestroy {
 
   LayoutComponent(
     this._router,
-    this._location,
     this._selectors,
     this._authService,
     this._authStore,
