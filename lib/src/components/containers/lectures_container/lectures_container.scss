@@ -112,7 +112,7 @@
     background-color: #f2f3fa;
     height: 40px;
     padding: 0 24px;
-    @include sticky;
+    @include sticky;;
     top: 0;
     margin-top: -4px;
     z-index: 3;
@@ -185,7 +185,7 @@
   }
 
   .time__container {
-    @include sticky;
+    @include sticky;;
     top: 48px;
   }
 
