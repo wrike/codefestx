@@ -29,7 +29,7 @@
     border-radius: 4px; // todo
     background: #ffffff;
 
-    .button {
+    [cf-button] {
       border-radius: 0;
       background: none;
       color: $fg-color-secondary; // todo
@@ -38,7 +38,7 @@
         width: 40px; // todo
       }
 
-      + .button {
+      + [cf-button] {
         border-left: 1px solid; // todo
         border-color: #e8e9e8; // todo
       }
@@ -50,10 +50,10 @@
       box-shadow: 0 2px 23px 0 rgba(0, 0, 0, 0.06); // todo
       color: #ffffff; // todo
 
-      .button {
+      [cf-button] {
         color: #ffffff; // todo
 
-        + .button {
+        + [cf-button] {
           border-color: #98d0e8; // todo
         }
       }

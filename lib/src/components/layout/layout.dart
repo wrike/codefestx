@@ -7,6 +7,7 @@ import 'package:angular_router/angular_router.dart';
 import 'package:codefest/src/components/layout/navigation_type.dart';
 import 'package:codefest/src/components/ui/button/button.dart';
 import 'package:codefest/src/menu_route_path.dart';
+import 'package:codefest/src/redux/actions/new_version_action.dart';
 import 'package:codefest/src/redux/actions/on_scroll_action.dart';
 import 'package:codefest/src/redux/selectors/selectors.dart';
 import 'package:codefest/src/redux/services/dispatcher.dart';
@@ -107,6 +108,10 @@ class LayoutComponent implements OnInit, OnDestroy {
     _router.navigateByUrl(RoutePaths.lectures.toUrl());
     // todo
     // _location.back();
+  }
+
+  void push() {
+    _dispatcher.dispatch(NewVersionAction(releaseNote: 'Пуш вуш'));
   }
 
   bool isActive(RoutePath item) => item.path == currentPath?.path;
