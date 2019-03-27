@@ -28,6 +28,11 @@
     align-items: center;
     padding: 20px 16px;
     color: $fg-color-secondary;
+    
+    a:link {
+      color: #33a7d8;
+      text-decoration: none;
+    }
   }
 
   ::ng-deep {

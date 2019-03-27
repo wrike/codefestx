@@ -9,6 +9,7 @@
   ::ng-deep {
 
     .tabs__button {
+      outline: none; // tabs, duh
       flex-grow: 1;
       flex-basis: 0;
       @include button-reset;
