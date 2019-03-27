@@ -14,7 +14,20 @@
   }
 
   .drawer__header {
+    flex-shrink: 0;
     padding: 20px 32px 32px;
+  }
+
+  .drawer__body {
+    flex-grow: 1;
+  }
+
+  .drawer__footer {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    padding: 20px 16px;
+    color: $fg-color-secondary;
   }
 
   ::ng-deep {
@@ -26,6 +39,7 @@
     .drawer.mat-drawer-expanded > .drawer-content.drawer-content {
       border-radius: 0 8px 8px;
       box-shadow: none;
+      overflow-y: auto;
     }
   }
   // --- end drawer
@@ -68,6 +82,36 @@
     position: relative;
   }
   // --- end nav
+
+  // user ---
+
+  .user {
+    display: flex;
+    align-items: center;
+    padding: 16px 32px;
+  }
+
+  .user__media {
+    flex-shrink: 0;
+    margin-right: 8px;
+  }
+
+  .user__image {
+    display: block;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  .user__section {
+    flex-grow: 1;
+  }
+
+  .user__logout-button {
+    @include button-reset;
+    color: $link-color;
+    cursor: pointer;
+  }
+  // --- end user
 
   .layout__root {
     height: 100%;
