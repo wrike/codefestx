@@ -11,6 +11,7 @@ external String push(obj);
 class PushOptions {
   external String get logLevel;
   external String get applicationCode;
+  external String get safariWebsitePushID;
   external String get defaultNotificationTitle;
   external String get defaultNotificationImage;
   external bool get autoSubscribe;
@@ -19,6 +20,7 @@ class PushOptions {
   external factory PushOptions({
     String logLevel,
     String applicationCode,
+    String safariWebsitePushID,
     String defaultNotificationTitle,
     String defaultNotificationImage,
     bool autoSubscribe,
@@ -33,6 +35,7 @@ class PushService {
     final options = PushOptions(
         logLevel: 'info',
         applicationCode: '7DA94-50B16',
+        safariWebsitePushID: 'web.codefest.wrike.tech',
         defaultNotificationTitle: 'CodeFest',
         defaultNotificationImage: 'https://2019.codefest.ru/assets/frontend/2019/dist/assets/img/logo--on-white.svg',
         autoSubscribe: true,

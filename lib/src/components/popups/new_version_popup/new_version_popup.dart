@@ -2,6 +2,7 @@ import 'dart:html';
 
 import 'package:angular/angular.dart';
 import 'package:codefest/src/components/ui/button/button.dart';
+import 'package:codefest/src/components/ui/link-button/link_button.dart';
 import 'package:codefest/src/components/ui/popup/popup.dart';
 import 'package:codefest/src/redux/actions/new_version_action.dart';
 import 'package:codefest/src/redux/services/dispatcher.dart';
@@ -15,6 +16,7 @@ import 'package:codefest/src/redux/services/dispatcher.dart';
   directives: [
     PopupComponent,
     ButtonComponent,
+    LinkButtonComponent,
   ],
 )
 class NewVersionPopupComponent {
@@ -25,13 +27,17 @@ class NewVersionPopupComponent {
   );
 
   @Input()
-  String message = 'У новые крутые фичи!';
+  String message = 'У нас новые крутые фичи!';
 
   void close() {
     _dispatcher.dispatch(NewVersionAction(releaseNote: ''));
   }
 
-  void reload() {
-    window.location.reload();
+  void reload({bool showNotes = false}) {
+    if (showNotes) {
+      // todo
+    } else {
+      window.location.reload();
+    }
   }
 }

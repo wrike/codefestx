@@ -2,11 +2,12 @@ import 'dart:async';
 import 'dart:html';
 
 import 'package:angular/angular.dart';
-import 'package:angular_components/angular_components.dart';
+import 'package:angular_components/angular_components.dart' show MaterialTemporaryDrawerComponent;
 import 'package:angular_router/angular_router.dart';
 import 'package:codefest/src/components/layout/navigation_type.dart';
 import 'package:codefest/src/components/ui/button/button.dart';
 import 'package:codefest/src/menu_route_path.dart';
+import 'package:codefest/src/redux/actions/new_version_action.dart';
 import 'package:codefest/src/redux/actions/on_scroll_action.dart';
 import 'package:codefest/src/redux/selectors/selectors.dart';
 import 'package:codefest/src/redux/services/dispatcher.dart';
@@ -19,7 +20,6 @@ import 'package:gtag_analytics/gtag_analytics.dart';
 @Component(
   selector: 'layout',
   styleUrls: [
-    'package:angular_components/app_layout/layout.scss.css',
     'layout.css',
   ],
   templateUrl: 'layout.html',
@@ -27,12 +27,7 @@ import 'package:gtag_analytics/gtag_analytics.dart';
     ButtonComponent,
     NgIf,
     NgFor,
-    DeferredContentDirective,
     MaterialTemporaryDrawerComponent,
-    MaterialToggleComponent,
-    MaterialListComponent,
-    MaterialListItemComponent,
-    MaterialIconComponent,
   ],
   providers: [],
   preserveWhitespace: false,
@@ -41,14 +36,15 @@ import 'package:gtag_analytics/gtag_analytics.dart';
     RoutePaths,
   ],
 )
-class LayoutComponent implements OnInit {
+class LayoutComponent implements OnInit, OnDestroy {
   final Router _router;
-  final Location _location;
   final Selectors _selectors;
   final AuthService _authService;
   final AuthStore _authStore;
   final Dispatcher _dispatcher;
   final ChangeDetectorRef _cdr;
+
+  final List<StreamSubscription> _subscriptions = [];
 
   final ga = GoogleAnalytics();
 
@@ -81,9 +77,10 @@ class LayoutComponent implements OnInit {
   @ViewChild('drawer')
   MaterialTemporaryDrawerComponent drawerComponent;
 
+  RoutePath currentPath;
+
   LayoutComponent(
     this._router,
-    this._location,
     this._selectors,
     this._authService,
     this._authStore,
@@ -95,17 +92,30 @@ class LayoutComponent implements OnInit {
 
   bool get isAuthorized => _selectors.isAuthorized(state);
 
-  bool get isTitleShown => !titleHidden;
+  bool get isBackShown => navHidden != true && navType == NavigationType.back;
 
   bool get isMenuShown => navHidden != true && navType == NavigationType.menu;
 
-  bool get isBackShown => navHidden != true && navType == NavigationType.back;
-
   bool get isSpacerShown => isMenuShown || isBackShown || isTitleShown;
+
+  bool get isTitleShown => !titleHidden;
 
   List<MenuRoutePath> get menu => _menu;
 
   String get userName => _selectors.getUserName(state);
+
+  void goBack() {
+    _router.navigateByUrl(RoutePaths.lectures.toUrl());
+    // todo
+    // _location.back();
+  }
+
+  bool isActive(RoutePath item) => item.path == currentPath?.path;
+
+  @override
+  void ngOnDestroy() {
+    _subscriptions.forEach(((subscription) => subscription.cancel()));
+  }
 
   @override
   void ngOnInit() {
@@ -123,6 +133,8 @@ class LayoutComponent implements OnInit {
           ..detectChanges();
       });
     }
+
+    _subscriptions.add(_router.onRouteActivated.listen(_onRouteActivated));
   }
 
   void onLogout() {
@@ -139,9 +151,11 @@ class LayoutComponent implements OnInit {
     _dispatcher.dispatch(OnScrollAction(scrollTop: element.scrollTop));
   }
 
-  void goBack() {
-    _router.navigateByUrl(RoutePaths.lectures.toUrl());
-    // todo
-    // _location.back();
+  void _onRouteActivated(RouterState state) {
+    final path = state.routePath;
+    currentPath = path?.parent ?? path;
+    _cdr
+      ..markForCheck()
+      ..detectChanges();
   }
 }

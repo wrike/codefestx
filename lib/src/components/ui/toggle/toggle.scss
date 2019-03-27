@@ -1,0 +1,119 @@
+@import "../../../../../web/assets/styles/variables";
+
+:host {
+  display: block;
+
+  .toggle__label {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    tap-highlight-color: transparent;
+    vertical-align: top;
+  }
+
+  .toggle__label .toggle__input {
+    opacity: 0;
+    position: absolute;
+  }
+
+  .toggle__label .toggle__input + .toggle__box {
+    position: relative;
+    display: inline-block;
+    font-size: 24px;
+    width: 1.65em;
+    height: 1em;
+    background: white;
+    box-shadow: inset 0 0 0 0.0625em #e9e9e9;
+    border-radius: 0.5em;
+    vertical-align: -0.15em;
+    transition: all 0.40s cubic-bezier(.17,.67,.43,.98);
+  }
+
+  .toggle__label:active .toggle__input + .toggle__box,
+  .toggle__label .toggle__input + .toggle__box:active {
+    box-shadow: inset 0 0 0 0.73em #e9e9e9;
+  }
+
+  .toggle__label .toggle__input + .toggle__box:after {
+    position: absolute;
+    display: block;
+    content: '';
+    width: 0.875em;
+    height: 0.875em;
+    border-radius: 0.4375em;
+    top: 0.0625em;
+    left: 0.0625em;
+    background: white;
+    box-shadow: inset 0 0 0 0.03em rgba(0,0,0,0.1),
+    0 0 0.05em rgba(0,0,0,0.05),
+    0 0.1em 0.2em rgba(0,0,0,0.2);
+    transition: all 0.25s ease-out;
+  }
+
+  .toggle__label:active .toggle__input + .toggle__box:after,
+  .toggle__label .toggle__input + .toggle__box:active:after {
+    width: 1.15em;
+  }
+
+  .toggle__label .toggle__input:checked + .toggle__box {
+    box-shadow: inset 0 0 0 0.73em #4cd964;
+  }
+
+  .toggle__label .toggle__input:checked + .toggle__box:after {
+    left: 0.7125em;
+  }
+
+  .toggle__label:active .toggle__input:checked + .toggle__box:after,
+  .toggle__label .toggle__input:checked + .toggle__box:active:after {
+    left: 0.4375em;
+  }
+
+  /* accessibility styles */
+  .toggle__label .toggle__input:focus + .toggle__box:after {
+    box-shadow: inset 0 0 0 0.03em rgba(0,0,0,0.15),
+    0 0 0.05em rgba(0,0,0,0.08),
+    0 0.1em 0.2em rgba(0,0,0,0.3);
+    background: #fff;
+  }
+
+  .toggle__label .toggle__input:focus + .toggle__box {
+    box-shadow: inset 0 0 0 0.0625em #dadada;
+  }
+
+  .toggle__label .toggle__input:focus:checked + .toggle__box {
+    box-shadow: inset 0 0 0 0.73em #33be4b;
+  }
+
+  /* reset accessibility style on hover */
+  .toggle__label:hover .toggle__input:focus + .toggle__box:after {
+    box-shadow: inset 0 0 0 0.03em rgba(0,0,0,0.1),
+    0 0 0.05em rgba(0,0,0,0.05),
+    0 0.1em 0.2em rgba(0,0,0,0.2);
+    background: #fff;
+  }
+
+  .toggle__label:hover .toggle__input:focus + .toggle__box {
+    box-shadow: inset 0 0 0 0.0625em #e9e9e9;
+  }
+
+  .toggle__label:hover .toggle__input:focus:checked + .toggle__box {
+    box-shadow: inset 0 0 0 0.73em #4cd964;
+  }
+}
+
+:host(.toggle-line) {
+
+  .toggle__label {
+    display: flex;
+  }
+
+  .toggle__label .toggle__input + .toggle__box {
+    margin-left: auto;
+  }
+}

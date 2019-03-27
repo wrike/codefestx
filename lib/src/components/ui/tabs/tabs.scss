@@ -9,6 +9,7 @@
   ::ng-deep {
 
     .tabs__button {
+      outline: none; // tabs, duh
       flex-grow: 1;
       flex-basis: 0;
       @include button-reset;
@@ -22,7 +23,7 @@
     }
 
     .tabs__button--active {
-      color: $font-color-main;
+      color: $fg-color-primary;
 
       .tabs__button-text::after {
         content: "";
@@ -30,7 +31,7 @@
         width: 4px;
         height: 4px;
         border-radius: 50%;
-        background: #33a7d8; // todo
+        background: $link-color; // todo
         position: absolute;
         bottom: -4px;
         margin-left: auto;
