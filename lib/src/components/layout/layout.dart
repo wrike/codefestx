@@ -7,7 +7,6 @@ import 'package:angular_router/angular_router.dart';
 import 'package:codefest/src/components/layout/navigation_type.dart';
 import 'package:codefest/src/components/ui/button/button.dart';
 import 'package:codefest/src/menu_route_path.dart';
-import 'package:codefest/src/redux/actions/new_version_action.dart';
 import 'package:codefest/src/redux/actions/effects/on_scroll_action.dart';
 import 'package:codefest/src/redux/selectors/selectors.dart';
 import 'package:codefest/src/redux/services/dispatcher.dart';

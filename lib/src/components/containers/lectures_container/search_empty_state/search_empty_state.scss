@@ -1,0 +1,28 @@
+@import '../../../../../../web/assets/styles/variables.scss';
+
+:host {
+  display: block;
+  text-align: center;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 100%;
+  transform: translate(-50%, -50%);
+  color: $fg-color-secondary;
+
+  padding: 0 24px;
+
+  .zero-state__icon {
+    margin-bottom: 8px;
+  }
+
+  .zero-state__title {
+    margin-bottom: 8px;
+    @include font-heading-2;
+  }
+
+  .zero-state__description {
+    margin-bottom: 8px;
+    @include font-paragraph-1;
+  }
+}

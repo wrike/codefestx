@@ -4,18 +4,19 @@ import 'package:codefest/src/components/containers/lectures_container/actions/ac
 import 'package:codefest/src/components/containers/lectures_container/favorite_empty_state/favorite_empty_state.dart';
 import 'package:codefest/src/components/containers/lectures_container/layout_actions/layout_actions.dart';
 import 'package:codefest/src/components/containers/lectures_container/now_empty_state/now_empty_state.dart';
+import 'package:codefest/src/components/containers/lectures_container/search_empty_state/search_empty_state.dart';
 import 'package:codefest/src/components/containers/stateful_component.dart';
 import 'package:codefest/src/components/layout/layout.dart';
 import 'package:codefest/src/components/loader/loader.dart';
 import 'package:codefest/src/components/ui/button/button.dart';
 import 'package:codefest/src/models/lecture.dart';
 import 'package:codefest/src/models/section.dart';
-import 'package:codefest/src/redux/actions/set_search_mode_action.dart';
 import 'package:codefest/src/redux/actions/effects/init_action.dart';
+import 'package:codefest/src/redux/actions/effects/scroll_to_current_time_action.dart';
 import 'package:codefest/src/redux/actions/effects/update_lecture_favorite_action.dart';
 import 'package:codefest/src/redux/actions/filter_lectures_action.dart';
-import 'package:codefest/src/redux/actions/effects/scroll_to_current_time_action.dart';
 import 'package:codefest/src/redux/actions/search_lectures_action.dart';
+import 'package:codefest/src/redux/actions/set_search_mode_action.dart';
 import 'package:codefest/src/redux/selectors/selectors.dart';
 import 'package:codefest/src/redux/services/dispatcher.dart';
 import 'package:codefest/src/redux/services/store_factory.dart';
@@ -36,6 +37,7 @@ import 'package:codefest/src/route_paths.dart';
     ButtonComponent,
     FavoriteEmptyStateComponent,
     NowEmptyStateComponent,
+    SearchEmptyStateComponent,
   ],
   preserveWhitespace: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -82,7 +84,7 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
 
   Iterable<Lecture> get lectures => _selectors.getVisibleLectures(state);
 
-  String get nearLectureId => _selectors.getNearestLectureId(state);
+  String get nearestLectureId => _selectors.getNearestLectureId(state);
 
   DateTime get now => _selectors.getDateNow();
 
@@ -90,9 +92,11 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
 
   Iterable<Section> get sections => _selectors.getSelectedSections(state);
 
+  bool get showTags => !(isSearchMode && searchText != null && searchText.isNotEmpty);
+
   String get title => 'Расписание';
 
-  bool get showTags => !(isSearchMode && searchText != null && searchText.isNotEmpty);
+  String currentTimeId(Lecture lecture) => isNearestLectureGroup(lecture) ? 'currentTime' : null;
 
   String endTime(Lecture lecture) => _selectors.getEndTimeText(lecture);
 
@@ -120,6 +124,8 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
     final endTime = _selectors.getEndTime(lecture);
     return now.isAfter(endTime);
   }
+
+  bool isNearestLectureGroup(lecture) => lecture.id == nearestLectureId;
 
   bool isRightNow(Lecture lecture) {
     final endTime = _selectors.getEndTime(lecture);

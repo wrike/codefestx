@@ -65,7 +65,7 @@ class Selectors {
     );
   }
 
-  DateTime currentTimeZoneDateNow() => DateTime.now().add(Duration(hours: 7)).toUtc();
+  DateTime getCurrentTimeZoneDate(DateTime date) => date.add(Duration(hours: 7));
 
   bool getCustomSectionMode(CodefestState state) => getUser(state).isCustomSectionMode;
 
@@ -213,7 +213,7 @@ class Selectors {
       sections.where((section) => sectionIds.contains(section.id) && !section.isCustom);
 
   String _getTimeText(DateTime date) {
-    final currentTimeZoneDate = date.add(Duration(days: 7));
+    final currentTimeZoneDate = getCurrentTimeZoneDate(date);
     return '${currentTimeZoneDate.hour}:${_formatMinutes(currentTimeZoneDate.minute.toString())}';
   }
 

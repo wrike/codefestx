@@ -30,9 +30,7 @@ import 'package:codefest/src/route_paths.dart';
     TabsComponent,
     PopularityIconComponent,
   ],
-  exports: [
-    NavigationType
-  ],
+  exports: [NavigationType],
   preserveWhitespace: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 )
@@ -60,7 +58,7 @@ class LectureContainerComponent extends StatefulComponent implements OnInit {
     });
   }
 
-  bool get isLectureStarted => _selectors.isLectureStarted(lecture);
+  String get title => !lecture.section.isCustom ? 'Доклад' : 'Событие';
 
   String get endTime => _selectors.getEndTimeText(lecture);
 
@@ -69,6 +67,8 @@ class LectureContainerComponent extends StatefulComponent implements OnInit {
   bool get isFavorite => _selectors.isFavoriteLecture(state, lecture);
 
   bool get isLectureAvailable => lecture != null;
+
+  bool get isLectureStarted => _selectors.isLectureStarted(lecture);
 
   bool get isLikable => _selectors.isLikableLecture(lecture);
 

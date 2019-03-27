@@ -62,10 +62,10 @@
       </button>
 
       <button
-          cf-button
-          (click)="onShowCustomClick()"
-          [class.button-primary]="isCustomSelected"
-          class="tags__item button-tag">
+        cf-button
+        (click)="onShowCustomClick()"
+        [class.button-primary]="isCustomSelected"
+        class="tags__item button-tag">
         События
       </button>
 
@@ -90,13 +90,17 @@
         *ngIf="lectures.isEmpty && isNowSelected">
       </now-empty-state>
 
+      <search-empty-state
+        *ngIf="lectures.isEmpty && isSearchMode && searchText.isNotEmpty">
+      </search-empty-state>
+
       <!-- schedule -->
       <div
         class="schedule">
 
         <!-- day section -->
         <section
-          *ngFor="let groupedTime of groupedLectures; let i = index"
+          *ngFor="let groupedByDay of groupedLectures; let i = index"
           class="schedule__section">
 
           <!-- day title -->
@@ -105,13 +109,13 @@
 
             <time
               class="schedule__header-date">
-              {{ getDay(groupedTime) }}
+              {{ getDay(groupedByDay) }}
             </time>
           </header>
 
           <!-- day events grouped by time -->
           <div
-            *ngFor="let lectures of groupedTime"
+            *ngFor="let lectures of groupedByDay"
             class="schedule__events events">
 
             <!-- time -->
@@ -125,16 +129,12 @@
                 [ngIf]="i == 0">
 
                 <div
+                  [attr.id]="currentTimeId(lecture)"
                   class="events__time time">
 
-                <div
-                  *ngIf="nearLectureId == lecture.id"
-                  id="currentTime">
-                </div>
-
-                <!-- Time -->
-                <div
-                  class="time__container">
+                  <!-- Time -->
+                  <div
+                    class="time__container">
 
                     <!-- start -->
                     <time
