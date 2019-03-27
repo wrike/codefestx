@@ -4,6 +4,7 @@ import 'package:codefest/src/components/containers/stateful_component.dart';
 import 'package:codefest/src/components/loader/loader.dart';
 import 'package:codefest/src/components/sections/sections.dart';
 import 'package:codefest/src/components/ui/button/button.dart';
+import 'package:codefest/src/components/ui/link-button/link_button.dart';
 import 'package:codefest/src/models/section.dart';
 import 'package:codefest/src/redux/actions/effects/update_selected_sections_action.dart';
 import 'package:codefest/src/redux/actions/effects/init_action.dart';
@@ -22,6 +23,7 @@ import 'package:codefest/src/services/auth_service.dart';
     NgIf,
     SectionsComponent,
     LoaderComponent,
+    LinkButtonComponent,
     ButtonComponent,
   ],
   providers: [],
