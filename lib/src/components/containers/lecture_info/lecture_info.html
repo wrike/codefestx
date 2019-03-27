@@ -1,0 +1,177 @@
+<!-- Event -->
+<article
+        class="event__article">
+
+    <!-- Meta -->
+    <div
+            class="event__meta">
+
+        <!-- Location -->
+        <span
+                class="event__meta-item">
+            {{ lecture.location.title }}
+          </span>
+
+        &ngsp;•&ngsp;
+
+        <!-- Section -->
+        <span
+                class="event__meta-item"
+                [style.color]="lecture.section.color">
+            {{ lecture.section.title }}
+          </span>
+    </div>
+
+    <!-- Title -->
+    <h2
+            class="event__title">
+        {{ lecture.title }}
+    </h2>
+
+    <!-- Info -->
+    <div
+            class="event__info">
+
+        <!-- Speakers -->
+        <div
+                *ngIf="!lecture.speakers.isEmpty"
+                class="event__info-item info-item">
+
+            <!-- Media -->
+            <div
+                    class="info-item__media">
+
+                <span
+                        *ngFor="let speaker of lecture.speakers"
+                        class="info-item__media-container">
+
+                  <img
+                          [src]="speaker.avatarPath"
+                          [alt]="speaker.name"
+                          class="info-item__media-image">
+                </span>
+            </div>
+
+            <!-- Details -->
+            <div
+                    class="info-item__details">
+
+                <!-- Title -->
+                <div
+                        class="info-item__title">
+
+                    <ng-container
+                            *ngFor="let speaker of lecture.speakers">
+                        {{ speaker.name }}
+                    </ng-container>
+                </div>
+
+                <!-- Subtitle -->
+                <div
+                        class="info-item__subtitle">
+
+                    <ng-container
+                            *ngFor="let speaker of lecture.speakers">
+                        {{ speaker.company }}
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+
+        <!-- Time -->
+        <div
+                class="event__info-item info-item">
+
+            <!-- Media -->
+            <div
+                    class="info-item__media">
+
+                <span
+                        class="info-item__media-container info-item__media-container--placeholder">
+
+                  <svg
+                          role="image"
+                          aria-label="Время проведения:"
+                          xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="24" height="24" viewBox="0 0 24 24"
+                          class="info-item__media-icon">
+                    <path d="M12 4a8 8 0 1 0 0 16 8 8 0 0 0 0-16zm0 14.4a6.4 6.4 0 1 1 0-12.8 6.4 6.4 0 0 1 0 12.8zm2.48-5.9l-1.68-.96V8a.8.8 0 1 0-1.6 0v4.1a.52.52 0 0 0 .04.16.71.71 0 0 0 .06.13.69.69 0 0 0 .08.13l.13.1.07.08 2.08 1.2a.8.8 0 0 0 .4.1.8.8 0 0 0 .4-1.5h.02z" fill-rule="evenodd"/>
+                  </svg>
+                </span>
+            </div>
+
+            <!-- Details -->
+            <div
+                    class="info-item__details">
+
+                <!-- Title -->
+                <div
+                        class="info-item__title">
+                    {{ startTime }}
+                </div>
+
+                <!-- Subtitle -->
+                <div
+                        class="info-item__subtitle">
+                    {{ endTime }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Description -->
+    <div
+            [innerHTML]="lecture.description"
+            class="event__description">
+    </div>
+</article>
+
+<section
+        *ngIf="isLikable"
+        class="event__vote">
+    <!-- Vote -->
+    <h3
+            class="event__vote-title">Понравился доклад? Голосуй!</h3>
+
+    <p
+            class="event__vote-description">
+        Wrike наградит лучшего докладчика
+    </p>
+    <button
+            cf-button
+            [disabled]="!lectureStarted"
+            (click)="onLikeClick()"
+            class="event__vote-button button-full-width"
+            [class.button-primary]="!isLiked">
+        <ng-container
+                *ngIf="!isLiked">
+
+            <svg
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="24" height="24" viewBox="0 0 24 24"
+                    class="button-icon">
+                <path d="M15.4 7H20l-7.08 7.06-2.3-2.29L15.41 7zm-6.8 4.04l3.67 3.67L9.97 17 4 11.04h4.6z" fill-rule="evenodd"/>
+            </svg>
+
+            Проголосовать
+        </ng-container>
+
+        <ng-container
+                *ngIf="isLiked">
+            <svg
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg" fill="green" width="24" height="24" viewBox="0 0 24 24"
+                    class="button-icon">
+                <path d="M15.4 7H20l-7.08 7.06-2.3-2.29L15.41 7zm-6.8 4.04l3.67 3.67L9.97 17 4 11.04h4.6z" fill-rule="evenodd"/>
+            </svg>
+
+            <span aria-hidden="true">Уже проголосовали</span>
+            <span class="visually-hidden">Отозвать голос</span>
+        </ng-container>
+    </button>
+
+    <p
+            *ngIf="!lectureStarted"
+            class="event__vote-disabled-info">
+        Голосование будет доступно через 10 мин после начала доклада для&nbsp;авторизованных пользователей
+    </p>
+</section>
