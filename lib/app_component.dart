@@ -17,6 +17,7 @@ import 'package:codefest/src/routes.dart';
 import 'package:codefest/src/services/auth_service.dart';
 import 'package:codefest/src/services/auth_store.dart';
 import 'package:codefest/src/services/data_loader.dart';
+import 'package:codefest/src/services/dom_service.dart';
 import 'package:codefest/src/services/http_proxy.dart';
 import 'package:codefest/src/services/push_service.dart';
 import 'package:codefest/src/services/sockets_service.dart';
@@ -46,6 +47,7 @@ import 'package:redux/redux.dart';
     const ClassProvider<PushService>(PushService),
     const ClassProvider<SocketService>(SocketService),
     const ClassProvider<StorageService>(StorageService),
+    const ClassProvider<DOMService>(DOMService),
   ],
   exports: [
     RoutePaths,

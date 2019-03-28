@@ -112,7 +112,7 @@
     background-color: #f2f3fa;
     height: 40px;
     padding: 0 24px;
-    @include sticky;;
+    @include sticky;
     top: 0;
     margin-top: -4px;
     z-index: 3;
@@ -121,7 +121,7 @@
     &::before {
       content: "";
       display: block;
-      background: #f2f3fa;
+      background: inherit;
       height: 4px;
       position: absolute;
       left: 0;
@@ -185,7 +185,7 @@
   }
 
   .time__container {
-    @include sticky;;
+    @include sticky;
     top: 48px;
   }
 
@@ -247,4 +247,14 @@
 
   // info item (todo: replace in component)
   @include info-item;
+}
+
+:host-context(html.event) {
+  .schedule__header-date {
+    background-color: #ffffff;
+  }
+
+  .schedule__header::after {
+    background-image: linear-gradient(#ffffff, rgba(255, 255, 255, .3));
+  }
 }
