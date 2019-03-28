@@ -1,14 +1,7 @@
 @import "../../../../../../web/assets/styles/variables.scss";
 
 :host {
-  .search-input {
-    @include font-heading-2;
-  }
-}
-
-:host(.search-mode) {
   display: flex;
-  width: 100%;
 
   .icon-container {
     width: 32px;
@@ -16,7 +9,35 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    pointer-events: none;
   }
+
+  .search-input {
+    @include font-heading-2;
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+  }
+}
+
+:host(:not(.search-mode)) {
+  width: 32px;
+  height: 32px;
+  position: relative;
+  cursor: pointer;
+
+  .search-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+  }
+}
+
+:host(.search-mode) {
+  width: 100%;
 
   .search {
     display: flex;
@@ -27,8 +48,6 @@
     margin-left: -32px;
     margin-right: -32px;
     flex-grow: 1;
-    background: transparent;
     padding: 0 36px;
-    border: none;
   }
 }
