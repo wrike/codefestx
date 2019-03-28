@@ -38,42 +38,43 @@
       </button>
     </div>
 
+    <tabs
+      pre-content
+      *ngIf="false"
+      role="tablist"
+      aria-orientation="horizontal">
+
+      <button
+        role="tab"
+        class="tabs__button tabs__button--active">
+
+        <span
+          class="tabs__button-text">
+          Инфо
+        </span>
+      </button>
+
+      <button
+        disabled
+        role="tab"
+        class="tabs__button">
+
+        <span
+          class="tabs__button-text">
+
+          Обсуждение&ngsp;
+
+          <span
+            class="tabs__button-text-amount">
+            (123)
+          </span>
+        </span>
+      </button>
+    </tabs>
+
     <div
       content
       class="event">
-
-      <tabs
-        *ngIf="false"
-        role="tablist"
-        aria-orientation="horizontal">
-
-        <button
-          role="tab"
-          class="tabs__button tabs__button--active">
-
-          <span
-            class="tabs__button-text">
-            Инфо
-          </span>
-        </button>
-
-        <button
-          disabled
-          role="tab"
-          class="tabs__button">
-
-          <span
-            class="tabs__button-text">
-
-            Обсуждение&ngsp;
-
-            <span
-              class="tabs__button-text-amount">
-              (123)
-            </span>
-          </span>
-        </button>
-      </tabs>
 
       <!-- Event -->
       <article

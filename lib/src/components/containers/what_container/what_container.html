@@ -2,37 +2,38 @@
   [title]="'Что происходит'"
   [state]="state">
 
+  <tabs
+    pre-content
+    role="tablist"
+    aria-orientation="horizontal">
+
+    <button
+      role="tab"
+      (click)="goto('about')"
+      [class.tabs__button--active]="isAboutUsEnable"
+      class="tabs__button">
+
+      <span
+        class="tabs__button-text">
+        О нас
+      </span>
+    </button>
+
+    <button
+      role="tab"
+      (click)="goto('release_notes')"
+      [class.tabs__button--active]="!isAboutUsEnable"
+      class="tabs__button">
+
+      <span
+        class="tabs__button-text">
+        Релизы <span class="badge-count" [class.badge-count-hidden]="isAboutUsEnable">{{ releaseCount }}</span>
+      </span>
+    </button>
+  </tabs>
+
   <div
     content>
-
-    <tabs
-      role="tablist"
-      aria-orientation="horizontal">
-
-      <button
-        role="tab"
-        (click)="goto('about')"
-        [class.tabs__button--active]="isAboutUsEnable"
-        class="tabs__button">
-
-        <span
-          class="tabs__button-text">
-          О нас
-        </span>
-      </button>
-
-      <button
-        role="tab"
-        (click)="goto('release_notes')"
-        [class.tabs__button--active]="!isAboutUsEnable"
-        class="tabs__button">
-
-        <span
-          class="tabs__button-text">
-          Релизы <span class="badge-count" [class.badge-count-hidden]="isAboutUsEnable">{{ releaseCount }}</span>
-        </span>
-      </button>
-    </tabs>
 
     <router-outlet
       [routes]="Routes.all">

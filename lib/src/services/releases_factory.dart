@@ -1,11 +1,14 @@
 import 'package:codefest/src/models/release.dart';
 
+const WRIKE_AVATAR = 'https://i.ibb.co/y6Fz3vM/wrike.png';
+const WRIKE_AUTHOR = 'Wrike dream team';
+
 class ReleasesFactory {
   static List<Release> get all => [
         Release(
           version: '1.0.0',
-          author: 'Wrike dream team',
-          avatar: 'https://cdn6.aptoide.com/imgs/3/6/7/367308a7915991b406a493b255f82323_icon.png?w=240',
+          author: WRIKE_AUTHOR,
+          avatar: WRIKE_AVATAR,
           title: 'MVP расписания для CodeFest X',
           description: '<h3>Что мы приготовили:</h3>'
               '<ul>'
