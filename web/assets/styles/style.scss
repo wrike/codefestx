@@ -15,8 +15,17 @@ body {
 
 html, body {
   min-height: 100%;
-  background-color: $bg-color;
+  background: none;
   @include font-main;
+}
+
+html {
+  background-color: $bg-color;
+  transition: background-color .3s ease-out;
+}
+
+html.event {
+  background-color: #ffffff;
 }
 
 @media(min-width: 600px) {
