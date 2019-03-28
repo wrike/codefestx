@@ -27,6 +27,7 @@ import 'package:gtag_analytics/gtag_analytics.dart';
     NgIf,
     NgFor,
     MaterialTemporaryDrawerComponent,
+    routerDirectives
   ],
   providers: [],
   preserveWhitespace: false,
@@ -36,6 +37,7 @@ import 'package:gtag_analytics/gtag_analytics.dart';
   ],
 )
 class LayoutComponent implements OnInit, OnDestroy {
+  final NgZone _zone;
   final Router _router;
   final Selectors _selectors;
   final AuthService _authService;
@@ -85,6 +87,7 @@ class LayoutComponent implements OnInit, OnDestroy {
     this._authStore,
     this._dispatcher,
     this._cdr,
+    this._zone,
   );
 
   String get avatarPath => _selectors.getUserAvatarPath(state);
@@ -124,15 +127,6 @@ class LayoutComponent implements OnInit, OnDestroy {
       _menu.remove(RoutePaths.login);
     }
 
-    if (isScroll) {
-      Timer(Duration.zero, () {
-        mainElement.scrollTo(0, state.scrollTop);
-        _cdr
-          ..markForCheck()
-          ..detectChanges();
-      });
-    }
-
     _subscriptions.add(_router.onRouteActivated.listen(_onRouteActivated));
   }
 
@@ -153,8 +147,18 @@ class LayoutComponent implements OnInit, OnDestroy {
   void _onRouteActivated(RouterState state) {
     final path = state.routePath;
     currentPath = path?.parent ?? path;
-    _cdr
-      ..markForCheck()
-      ..detectChanges();
+    
+    if (isScroll) {
+      window.requestAnimationFrame((num time) {
+        mainElement.scrollTo(0, this.state.scrollTop);
+        detectChanges();
+      });
+    } else {
+      detectChanges();
+    }
+  }
+
+  void detectChanges() {
+    _zone.run(_cdr.markForCheck);
   }
 }
