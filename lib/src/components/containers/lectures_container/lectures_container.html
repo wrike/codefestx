@@ -20,7 +20,7 @@
     <!-- tags -->
     <nav
       pre-content
-      *ngIf="showTags"
+      *ngIf="isFiltersVisible"
       class="tags">
 
       <!-- Buttons group -->
@@ -83,11 +83,11 @@
       content>
 
       <favorite-empty-state
-        *ngIf="lectures.isEmpty && isFavoriteSelected">
+        *ngIf="lectures.isEmpty && isFavoriteSelected && !isSearchEmptyStateVisible">
       </favorite-empty-state>
 
       <now-empty-state
-        *ngIf="lectures.isEmpty && isNowSelected">
+        *ngIf="isNowEmptyStateVisible">
       </now-empty-state>
 
       <search-empty-state
