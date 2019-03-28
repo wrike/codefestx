@@ -45,7 +45,11 @@ class LayoutActionsComponent {
     _onSearchModeChangeStreamController.add(true);
   }
 
-  void onSearchTextChange() {
-    _onSearchStreamController.add(searchInput.nativeElement.value);
+  Future<void> onSearchTextChange() async {
+    final value = searchInput.nativeElement.value;
+    if (!isSearchMode && value.isNotEmpty) {
+      onSearchModeEnable();
+    }
+    _onSearchStreamController.add(value);
   }
 }

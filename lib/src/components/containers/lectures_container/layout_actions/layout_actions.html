@@ -1,50 +1,34 @@
-<template
-  [ngIf]="isSearchMode">
-
-  <span class="icon-container">
-    <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      <path d="M19.7753415,18.6511397 L16.8091073,15.7066559 C19.1998553,12.7234815 18.8437142,8.39047218 15.9980061,5.83834968 C13.152298,3.28622717 8.80958103,3.40514968 6.10759115,6.10919233 C3.40560126,8.81323498 3.28676903,13.1592512 5.8369541,16.0071212 C8.38713917,18.8549913 12.7168591,19.211403 15.6977688,16.8188386 L18.6400174,19.7633225 C18.7901413,19.9147975 18.9944963,20 19.2076794,20 C19.4208626,20 19.6252176,19.9147975 19.7753415,19.7633225 C20.0748862,19.4531942 20.0748862,18.961268 19.7753415,18.6511397 Z M11.2124389,16.8188386 C8.12148427,16.8188386 5.61577048,14.3112212 5.61577048,11.2179183 C5.61577048,8.12461545 8.12148427,5.61699802 11.2124389,5.61699802 C14.3033935,5.61699802 16.8091073,8.12461545 16.8091073,11.2179183 C16.8091073,12.7033747 16.21946,14.1279907 15.1698811,15.1783671 C14.1203021,16.2287434 12.6967676,16.8188386 11.2124389,16.8188386 Z" fill="currentColor" fill-rule="nonzero" />
-    </svg>
-  </span>
-
-  <label class="search">
-    <span class="visually-hidden">Поиск по заголовку, спикеру, содержимому доклада</span>
-    <input
-      text-input
-      #searchInput
-      [value]="searchText"
-      [isAutoFocused]="true"
-      (input)="onSearchTextChange()"
-      type="text"
-      class="search-input">
-  </label>
-
-  <button
-    cf-button
-    class="button-icon-only"
-    (click)="onSearchModeDisable()">
-    
-    <svg
-      aria-hidden="true"
-      xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-      <path fill="currentColor" fill-rule="evenodd" d="M13.233 12l5.508-5.501A.878.878 0 0 0 17.5 5.257l-5.5 5.51-5.5-5.51A.878.878 0 1 0 5.26 6.5l5.508 5.5-5.508 5.5a.875.875 0 0 0 0 1.242.874.874 0 0 0 1.241 0l5.5-5.509 5.5 5.51a.874.874 0 0 0 1.241 0 .875.875 0 0 0 0-1.242L13.233 12z"/>
-    </svg>
-  
-    <span class="visually-hidden">Закончить поиск</span>
-  
-  </button>
-</template>
-
-<button
-  cf-button
-  class="button-icon-only"
-  *ngIf="!isSearchMode"
-  (click)="onSearchModeEnable()">
-    
+<span class="icon-container" aria-hidden="true">
   <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
     <path d="M19.7753415,18.6511397 L16.8091073,15.7066559 C19.1998553,12.7234815 18.8437142,8.39047218 15.9980061,5.83834968 C13.152298,3.28622717 8.80958103,3.40514968 6.10759115,6.10919233 C3.40560126,8.81323498 3.28676903,13.1592512 5.8369541,16.0071212 C8.38713917,18.8549913 12.7168591,19.211403 15.6977688,16.8188386 L18.6400174,19.7633225 C18.7901413,19.9147975 18.9944963,20 19.2076794,20 C19.4208626,20 19.6252176,19.9147975 19.7753415,19.7633225 C20.0748862,19.4531942 20.0748862,18.961268 19.7753415,18.6511397 Z M11.2124389,16.8188386 C8.12148427,16.8188386 5.61577048,14.3112212 5.61577048,11.2179183 C5.61577048,8.12461545 8.12148427,5.61699802 11.2124389,5.61699802 C14.3033935,5.61699802 16.8091073,8.12461545 16.8091073,11.2179183 C16.8091073,12.7033747 16.21946,14.1279907 15.1698811,15.1783671 C14.1203021,16.2287434 12.6967676,16.8188386 11.2124389,16.8188386 Z" fill="currentColor" fill-rule="nonzero" />
   </svg>
+</span>
 
-  <span class="visually-hidden">Искать</span>
+<label
+  class="search">
+  <span class="visually-hidden">Поиск по заголовку, спикеру, содержимому доклада</span>
+  <input
+    text-input
+    #searchInput
+    [value]="searchText"
+    [isAutoFocused]="true"
+    (click)="onSearchModeEnable()"
+    (input)="onSearchTextChange()"
+    type="text"
+    class="search-input">
+</label>
 
+<button
+  *ngIf="isSearchMode"
+  cf-button
+  class="button-icon-only"
+  (click)="onSearchModeDisable()">
+  
+  <svg
+    aria-hidden="true"
+    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+    <path fill="currentColor" fill-rule="evenodd" d="M13.233 12l5.508-5.501A.878.878 0 0 0 17.5 5.257l-5.5 5.51-5.5-5.51A.878.878 0 1 0 5.26 6.5l5.508 5.5-5.508 5.5a.875.875 0 0 0 0 1.242.874.874 0 0 0 1.241 0l5.5-5.509 5.5 5.51a.874.874 0 0 0 1.241 0 .875.875 0 0 0 0-1.242L13.233 12z"/>
+  </svg>
+
+  <span class="visually-hidden">Закончить поиск</span>
 </button>
