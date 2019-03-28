@@ -1,8 +1,11 @@
 import 'dart:async';
+import 'dart:html';
 
 import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:codefest/src/components/popups/new_version_popup/new_version_popup.dart';
+import 'package:codefest/src/components/ui/button/button.dart';
+import 'package:codefest/src/components/ui/empty_state/empty_state.dart';
 import 'package:codefest/src/redux/actions/effects/load_user_data_action.dart';
 import 'package:codefest/src/redux/actions/new_version_action.dart';
 import 'package:codefest/src/redux/effects/effects.dart';
@@ -31,7 +34,9 @@ import 'package:redux/redux.dart';
   directives: [
     NgIf,
     routerDirectives,
+    EmptyStateComponent,
     NewVersionPopupComponent,
+    ButtonComponent,
   ],
   providers: const <Object>[
     const ClassProvider<StoreFactory>(StoreFactory),
@@ -107,6 +112,10 @@ class AppComponent implements OnDestroy, OnInit {
   @override
   void ngOnDestroy() {
     _subscriptions.forEach((subscription) => subscription.cancel());
+  }
+  
+  void reload() {
+    window.location.href = '/';
   }
 
   @override

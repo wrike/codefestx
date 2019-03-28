@@ -26,6 +26,7 @@ $button-tag-padding-vertical: round(($button-tag-height - $font-line-box-main) /
   text-align: center;
   color: $fg-color-primary;
   cursor: pointer;
+  
   @include user-select(none);
 
   &:hover {
