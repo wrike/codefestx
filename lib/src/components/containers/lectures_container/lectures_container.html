@@ -143,12 +143,12 @@
       *ngIf="isFiltersVisible"
       class="tags">
 
-      <!-- Buttons group -->
+      <!-- buttons group -->
       <div
         [class.buttons-group--selected]="isAllSelected"
         class="tags__item buttons-group">
 
-        <!-- Filters -->
+        <!-- filters -->
         <button
           cf-button
           (click)="onFilter()"
@@ -167,7 +167,7 @@
           </span>
         </button>
 
-        <!-- All -->
+        <!-- all -->
         <button
           cf-button
           (click)="onShowAllClick()"
@@ -237,7 +237,7 @@
             class="schedule__header">
 
             <time
-              class="schedule__header-date">
+              class="schedule__date">
               {{ getDay(groupedByDay) }}
             </time>
           </header>
