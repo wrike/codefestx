@@ -62,16 +62,6 @@ class SectionsContainerComponent extends StatefulComponent implements OnInit {
 
   Iterable<String> get selectedSectionIds => _selectors.getSelectedSectionIds(state);
 
-  bool get isReady => _selectors.isReady(state);
-
-  Iterable<Section> get mainSections => _selectors.getMainSections(state);
-
-  bool get previousIsCustomSectionMode => _selectors.getCustomSectionMode(state);
-
-  Iterable<String> get previousSelectedSectionIds => _selectors.getSelectedSectionIds(state);
-
-  String get selectedSectionCount => selectedSectionIds.isNotEmpty ? selectedSectionIds.length.toString() : '';
-
   @override
   void ngOnInit() {
     _dispatcher.dispatch(InitAction());

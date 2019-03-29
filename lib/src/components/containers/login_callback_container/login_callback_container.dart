@@ -51,9 +51,6 @@ class LoginCallbackContainerComponent implements OnInit {
       } else {
         await _router.navigateByUrl(_authStore.routePath);
         _authService.clearRoutePath();
-      } else {
-        await _router.navigateByUrl(_authStore.routePath);
-        _authService.clearRoutePath();
       }
     });
   }
