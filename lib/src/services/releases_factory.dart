@@ -2,6 +2,13 @@ import 'package:codefest/src/models/release.dart';
 
 class ReleasesFactory {
   static List<Release> get all => [
+    Release(
+      version: '1.1.0',
+      author: 'Wrike dream team',
+      avatar: 'https://cdn6.aptoide.com/imgs/3/6/7/367308a7915991b406a493b255f82323_icon.png?w=240',
+      title: 'Обсуждения докладов для CodeFest X',
+      description: 'Добавили возможность обсуждения докладов!',
+    ),
         Release(
           version: '1.0.0',
           author: 'Wrike dream team',
