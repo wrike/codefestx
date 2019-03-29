@@ -41,6 +41,9 @@ import 'package:codefest/src/services/auth_store.dart';
 class LectureTalkComponent extends StatefulComponent {
   final Selectors _selectors;
   final Dispatcher _dispatcher;
+  @HostBinding('class.messages')
+  final bool isHostMarked = true;
+
   @ViewChild('input')
   TalkPostInputComponent input;
 

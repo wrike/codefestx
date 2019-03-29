@@ -62,6 +62,7 @@
           role="tab"
           (click)="changeTab(false)"
           [ngClass]="{'tabs__button--active': !isInfoMode}"
+
           class="tabs__button">
 
           <span
@@ -77,10 +78,20 @@
         </button>
       </tabs>
 
-      <!-- Event Info -->
-      <lecture-info *ngIf="isInfoMode" [lecture]="lecture"></lecture-info>
-      <!-- Talks -->
-      <lecture-talk *ngIf="!isInfoMode" [lecture]="lecture" [posts]="posts"></lecture-talk>
+      <!-- event info -->
+      <lecture-info
+        *ngIf="isInfoMode"
+        [lecture]="lecture"
+        class="event__info">
+      </lecture-info>
+
+      <!-- talks -->
+      <lecture-talk
+        *ngIf="!isInfoMode"
+        [lecture]="lecture"
+        [posts]="posts"
+        class="event__talk">
+      </lecture-talk>
     </div>
   </layout>
 </loader>

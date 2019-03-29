@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:html';
 import 'package:angular/angular.dart';
 import 'package:angular_forms/angular_forms.dart';
+import 'package:codefest/src/components/ui/button/button.dart';
 
 @Component(
   selector: 'talk-post-input',
@@ -12,6 +13,7 @@ import 'package:angular_forms/angular_forms.dart';
     NgIf,
     NgModel,
     formDirectives,
+    ButtonComponent,
   ],
   preserveWhitespace: false,
 )
@@ -19,7 +21,10 @@ class TalkPostInputComponent {
   bool get isAllowToSend => newPostText.length > 1 && newPostText.length <= 255;
   final _onSend = new StreamController<String>();
 
-  @ViewChild('input')
+  @HostBinding('class.message-send')
+  final bool isHostMarked = true;
+
+  @ViewChild('inputs')
   InputElement input;
 
   @Output()

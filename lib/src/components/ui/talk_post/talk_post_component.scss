@@ -1,92 +1,63 @@
 @import "../../../../../web/assets/styles/variables.scss";
 
-.message {
-  display: flex;
-  margin: 10px 0 0 10px;
-  min-height: 30px;
-  height: auto;
-  text-align: left;
+:host {
+  display: grid;
+  grid-template-columns: [avatar] auto [balloon] 1fr;
+  grid-column-gap: 8px;
 
-  .message_top {
-    display: flex;
-    justify-content: space-between;
-    & .message_top-author {
-      font-weight: 600;
-    }
-    & .message_top-date {
-      color: $font-color-secondary;
-    }
-  }
-
-  img {
+  .message__avatar {
     display: block;
-    order: 1;
-    margin: 0 10px 0 0;
-    height: 50px;
-    width: 50px;
     border-radius: 50%;
-    box-sizing: border-box;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
+    object-fit: cover;
   }
 
-  .message_container {
-    display: block;
-    flex: 1;
-    order: 2;
+  .message-balloon {
+    background: #ffffff;
+    padding: 16px 8px 8px;
+    border-radius: 0 8px 8px 8px;
+    box-shadow: 0 2px 23px 0 rgba(0, 0, 0, 0.06);
+    position: relative;
 
-    margin: 0;
-    width: auto;
-    padding: 8px 10px 8px 10px;
-    background: #fff;
-    word-wrap: break-word;
-    border-radius: 0 3px 3px 3px;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-
-    & .message_text {
-
-    }
-
-    &:before {
-      position: relative;
-      float: left;
-      content: '';
-      margin: -8px 0 0 -16px;
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -8px;
       width: 0;
       height: 0;
-      border-style: solid;
-      border-width: 0 8px 8px 0;
-      border-color: transparent #fff transparent transparent;
+      border-top: 8px solid #ffffff;
+      border-left: 8px solid transparent;
     }
   }
-  & .message_actions {
+
+  .message-balloon__header {
     display: flex;
+    justify-content: space-between;
+    margin-bottom: 4px;
   }
-  & .message_reply {
-    border-left: 3px solid #33a7d8;
+
+  .message-balloon__author {
+    font-weight: $font-weight-bold;
+  }
+
+  .message-balloon__date {
+    margin-left: auto;
+    color: $fg-color-secondary;
+  }
+
+  .message-balloon__actions {
+    display: flex;
+    margin-top: 4px;
+  }
+
+  .message-balloon__actions-button {
+    @include button-reset;
+    color: $link-color;
+    cursor: pointer;
+  }
+
+  .message-balloon__actions-button + .message-balloon__actions-button {
     margin-left: 16px;
-    padding-left: 8px;
-
-    & .message_reply-author {
-      font-weight: bold;
-      opacity: 0.3;
-    }
-
-    & .message_reply-text {
-      width: 300px;
-      opacity: 0.3;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
+    cursor: pointer;
   }
-}
-
-.action_btn {
-  color: #33a7d8;
-  margin: 5px 5px 0 5px;
-}
-
-.action_btn:hover {
-  cursor: pointer;
 }

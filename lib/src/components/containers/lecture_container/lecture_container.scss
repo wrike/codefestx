@@ -2,10 +2,25 @@
 @import "../../../styles/common.scss";
 
 :host {
+  display: block;
+  height: 100%;
+
+  .event {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .event__info,
+  .event__talk {
+    flex-grow: 1;
+    margin-top: 16px;
+  }
 
   // tabs ---
 
   .tabs {
+    flex-shrink: 0;
     display: flex;
     padding: 12px 0;
   }

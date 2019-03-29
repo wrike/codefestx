@@ -1,10 +1,13 @@
-<div>
-    <talk-post
-            *ngFor="let post of posts"
-            (onDelete)="onPostDelete($event)"
-            (onReply)="onPostReply($event)"
-            [post]="post">
-    </talk-post>
-</div>
+<talk-post
+  *ngFor="let post of posts"
+  (onDelete)="onPostDelete($event)"
+  (onReply)="onPostReply($event)"
+  [post]="post"
+  class="messages__item">
+</talk-post>
 
-<talk-post-input #input (onSend)="onSend($event)"></talk-post-input>
+<talk-post-input
+  #input
+  (onSend)="onSend($event)"
+  class="messages__container-input">
+</talk-post-input>
