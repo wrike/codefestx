@@ -222,7 +222,17 @@
     border-radius: 6px; // todo
     background-color: #ffffff; // todo
     box-shadow: 0 2px 23px 0 rgba(0, 0, 0, 0.06); // todo
+    position: relative;
     cursor: pointer;
+    overflow: hidden;
+  }
+
+  .event-card__figure {
+    display: block;
+    max-width: 190px;
+    position: absolute;
+    top: -20px;
+    right: -20px;
   }
 
   .event-card__meta {
