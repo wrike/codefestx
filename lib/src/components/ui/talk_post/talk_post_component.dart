@@ -19,7 +19,10 @@ import 'package:intl/intl.dart';
 )
 class TalkPostComponent extends StatefulComponent{
   final dateFormat = DateFormat("dd MMM HH:mm");
-  bool get replyBlockShown => post.replyId != null;
+  bool get replyBlockShown {
+    print(post.replyId);
+    return post.replyId != null;
+  }
   final _onDelete = new StreamController<String>();
   final _onReply = new StreamController<String>();
   @HostBinding('class.message')

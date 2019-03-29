@@ -63,8 +63,8 @@ class LectureTalkComponent extends StatefulComponent {
   String parentId;
 
   void onSend(String newText) {
-    parentId = null;
     _dispatcher.dispatch(CreatePostAction(lecture.id, newText, parentId));
+    parentId = null;
   }
 
   void onPostDelete(String postId) {

@@ -61,3 +61,21 @@
     cursor: pointer;
   }
 }
+
+.message_reply {
+  border-left: 3px solid #33a7d8;
+  margin: 5px 0px 5px 16px;
+  padding-left: 8px;
+  & .message_reply-author {
+    font-weight: bold;
+    opacity: 0.3;
+  }
+
+  & .message_reply-text {
+    width: 300px;
+    opacity: 0.3;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

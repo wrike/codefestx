@@ -24,7 +24,7 @@ class TalkPostInputComponent {
   @HostBinding('class.message-send')
   final bool isHostMarked = true;
 
-  @ViewChild('inputs')
+  @ViewChild('input')
   InputElement input;
 
   @Output()
