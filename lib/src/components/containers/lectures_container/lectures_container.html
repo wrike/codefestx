@@ -259,6 +259,8 @@
 
                 <div
                   [attr.id]="currentTimeId(lecture)"
+                  [class.time--right-now]="isRightNow(lecture)"
+                  [class.time--finished]="isFinished(lecture)"
                   class="events__time time">
 
                   <!-- time -->
@@ -267,9 +269,7 @@
 
                     <!-- start -->
                     <time
-                      class="time__item time__item--start"
-                      [class.right_now]="isRightNow(lecture)"
-                      [class.finished]="isFinished(lecture)">
+                      class="time__item time__item-start">
                       {{ startTime(lecture) }}
                     </time>
 
