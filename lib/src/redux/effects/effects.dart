@@ -1,9 +1,11 @@
 import 'dart:async';
 import 'dart:html';
 
+import 'package:codefest/src/models/user.dart';
 import 'package:codefest/src/redux/actions/actions.dart';
 import 'package:codefest/src/redux/actions/effects/actions.dart';
 import 'package:codefest/src/redux/state/codefest_state.dart';
+import 'package:codefest/src/services/auth_service.dart';
 import 'package:codefest/src/services/auth_store.dart';
 import 'package:codefest/src/services/data_loader.dart';
 import 'package:codefest/src/services/storage_service.dart';
@@ -14,11 +16,13 @@ class Effects {
   final DataLoader _dataLoader;
   final AuthStore _authStore;
   final StorageService _storageService;
+  final AuthService _authService;
 
   Effects(
     this._dataLoader,
     this._storageService,
     this._authStore,
+    this._authService,
   );
 
   Epic<CodefestState> getEffects() {
@@ -75,18 +79,25 @@ class Effects {
       Observable(actions).ofType(const TypeToken<LoadUserDataAction>()).asyncExpand((_) async* {
         try {
           if (_authStore.isAuth) {
-            final data = await _dataLoader.getUser();
+            User data;
+            try {
+              data = await _dataLoader.getUser();
+            } catch (e) {
+              _authService.logout();
+            }
 
-            yield AuthorizeAction();
+            if (data != null) {
+              yield AuthorizeAction();
 
-            yield SetUserDataAction(
-              favoriteLectureIds: data.favoriteLecturesIds,
-              likedLectureIds: data.likedLecturesIds,
-              selectedSectionIds: data.sectionIds,
-              displayName: data.displayName,
-              avatarPath: data.avatar,
-              isCustomSectionMode: data.isCustomSectionMode,
-            );
+              yield SetUserDataAction(
+                favoriteLectureIds: data.favoriteLecturesIds,
+                likedLectureIds: data.likedLecturesIds,
+                selectedSectionIds: data.sectionIds,
+                displayName: data.displayName,
+                avatarPath: data.avatar,
+                isCustomSectionMode: data.isCustomSectionMode,
+              );
+            }
           } else {
             final sectionIds = _storageService.getSections();
             final favoriteLectureIds = _storageService.getFavoriteLectures();
