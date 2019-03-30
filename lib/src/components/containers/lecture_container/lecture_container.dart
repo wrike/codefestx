@@ -91,6 +91,8 @@ class LectureContainerComponent extends StatefulComponent implements OnInit, OnD
 
   String get startTime => _selectors.getStartTimeText(lecture);
 
+  String get date => _selectors.getDateText(lecture);
+
   @override
   void ngOnInit() {
     _dispatcher.dispatch(InitAction());
