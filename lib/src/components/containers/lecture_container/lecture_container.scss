@@ -44,6 +44,25 @@
     margin-top: 24px;
     font-size: 14px; // todo
     line-height: 20px; // todo
+
+    ::ng-deep {
+
+      ul {
+        padding: 0;
+
+        li {
+          margin-left: 16px;
+        }
+
+        li + li {
+          margin-top: 16px;
+        }
+
+        p + p {
+          margin-top: 16px;
+        }
+      }
+    }
   }
 
   .event__vote::before {

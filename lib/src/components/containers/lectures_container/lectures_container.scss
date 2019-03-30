@@ -71,7 +71,7 @@
 
   .schedule__header {
     display: flex;
-    position: sticky;
+    @include sticky;
     top: 0;
     padding: 8px 0;
     z-index: 1;
