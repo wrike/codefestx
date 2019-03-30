@@ -1,4 +1,7 @@
 :host {
+  display: block;
+  margin-top: 16px;
+
   ::ng-deep .event {
     margin-right: -16px;
   }
