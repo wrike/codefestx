@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:html';
 
 import 'package:angular/angular.dart';
 import 'package:codefest/src/components/ui/button/button.dart';
@@ -28,7 +29,9 @@ class ActionsComponent {
   @Output()
   Stream<bool> get onFavoriteChange => _onFavoriteChangeStreamController.stream;
 
-  void onStarButtonClick() {
+  void onStarButtonClick(MouseEvent event) {
     _onFavoriteChangeStreamController.add(!isFavorite);
+
+    event.stopPropagation();
   }
 }
