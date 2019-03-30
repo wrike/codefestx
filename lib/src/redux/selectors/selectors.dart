@@ -101,6 +101,8 @@ class Selectors {
 
   String getStartTimeText(Lecture lecture) => _getTimeText(lecture.startTime);
 
+  String getDateText(Lecture lecture) => _getDateText(lecture.startTime);
+
   UserState getUser(CodefestState state) => state.user;
 
   String getUserAvatarPath(CodefestState state) => getUser(state).avatarPath;
@@ -218,6 +220,12 @@ class Selectors {
   String _getTimeText(DateTime date) {
     final currentTimeZoneDate = getCurrentTimeZoneDate(date);
     return '${currentTimeZoneDate.hour}:${_formatMinutes(currentTimeZoneDate.minute.toString())}';
+  }
+
+  String _getDateText(DateTime date) {
+    final currentTimeZoneDate = getCurrentTimeZoneDate(date);
+
+    return '${currentTimeZoneDate.day} марта';
   }
 
   Iterable<Lecture> _getVisibleLectures(
