@@ -22,7 +22,8 @@ Lecture _$LectureFromJson(Map<String, dynamic> json) {
       isFavorite: json['isFavorite'] as bool,
       isLiked: json['isLiked'] as bool,
       likesCount: json['likesCount'] as int,
-      favoritesCount: json['favoritesCount'] as int);
+      favoritesCount: json['favoritesCount'] as int,
+      figureNumber: json['figureNumber'] as int);
 }
 
 Map<String, dynamic> _$LectureToJson(Lecture instance) => <String, dynamic>{
@@ -39,7 +40,8 @@ Map<String, dynamic> _$LectureToJson(Lecture instance) => <String, dynamic>{
       'isFavorite': instance.isFavorite,
       'isLiked': instance.isLiked,
       'likesCount': instance.likesCount,
-      'favoritesCount': instance.favoritesCount
+      'favoritesCount': instance.favoritesCount,
+      'figureNumber': instance.figureNumber
     };
 
 T _$enumDecode<T>(Map<T, dynamic> enumValues, dynamic source) {

@@ -301,14 +301,17 @@
                     (click)="onLectureSelect(lecture)"
                     class="event__info event-card">
 
-                    <!-- event figure image -->
-                    <!--<svg-->
-                      <!--class="event-card__figure">-->
+                    <div
+                      *ngIf="isWrikeEvent(lecture)">
 
-                      <!--<use-->
-                        <!--xlink:href="#figure-0">-->
-                      <!--</use>-->
-                    <!--</svg>-->
+                      <svg
+                        class="event-card__figure">
+
+                        <use
+                          [attr.xlink:href]="getFigure(lecture.figureNumber)">
+                        </use>
+                      </svg>
+                    </div>
 
                     <!-- meta -->
                     <div

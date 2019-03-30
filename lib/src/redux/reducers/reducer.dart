@@ -27,6 +27,12 @@ class CodefestReducer {
 
   CodefestState getState(CodefestState state, Object action) => _reducer(state, action);
 
+  int _getFigureNumber(String id) {
+    final code = id.codeUnitAt(id.length - 1).toString();
+    final n = int.tryParse(code[code.length - 1]) ?? 0;
+    return (n * 1.5).floor();
+  }
+
   CodefestState _onAuthorize(CodefestState state, AuthorizeAction action) => state.rebuild((b) {
         final user = state.user.rebuild((b) {
           b.isAuthorized = true;
@@ -83,6 +89,7 @@ class CodefestReducer {
                     isLiked: lecture.isLiked,
                     likesCount: lecture.likesCount,
                     favoritesCount: lecture.favoritesCount,
+                    figureNumber: _getFigureNumber(lecture.id),
                   ),
             ),
           ),
