@@ -9,6 +9,7 @@ import 'package:codefest/src/components/containers/stateful_component.dart';
 import 'package:codefest/src/components/layout/layout.dart';
 import 'package:codefest/src/components/loader/loader.dart';
 import 'package:codefest/src/components/ui/button/button.dart';
+import 'package:codefest/src/models/_types.dart';
 import 'package:codefest/src/models/lecture.dart';
 import 'package:codefest/src/models/section.dart';
 import 'package:codefest/src/redux/actions/effects/init_action.dart';
@@ -69,25 +70,26 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
   }
 
   List<List<List<Lecture>>> get groupedLectures => _selectors.getGroupedVisibleLectures(state);
-  bool get isReady => _selectors.isReady(state);
-
-  bool get isFiltersVisible => !isSearchMode;
 
   bool get isAllSelected => _selectors.getFilterType(state) == FilterTypeEnum.all;
 
   bool get isCustomSelected => _selectors.getFilterType(state) == FilterTypeEnum.custom;
 
-  bool get isFavoriteSelected => _selectors.getFilterType(state) == FilterTypeEnum.favorite;
-
   bool get isFavoriteEmptyStateVisible => lectures.isEmpty && isFavoriteSelected && !isSearchMode;
 
-  bool get isNowSelected => _selectors.getFilterType(state) == FilterTypeEnum.now;
+  bool get isFavoriteSelected => _selectors.getFilterType(state) == FilterTypeEnum.favorite;
+
+  bool get isFiltersVisible => !isSearchMode;
 
   bool get isNowEmptyStateVisible => lectures.isEmpty && isNowSelected && !isSearchMode;
 
-  bool get isSearchMode => _selectors.isSearchMode(state);
-  
+  bool get isNowSelected => _selectors.getFilterType(state) == FilterTypeEnum.now;
+
+  bool get isReady => _selectors.isReady(state);
+
   bool get isSearchEmptyStateVisible => lectures.isEmpty && isSearchMode && searchText.isNotEmpty;
+
+  bool get isSearchMode => _selectors.isSearchMode(state);
 
   Iterable<Lecture> get lectures => _selectors.getVisibleLectures(state);
 
@@ -123,6 +125,8 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
     return 'Вне времени';
   }
 
+  String getFigure(int number) => '#figure-${number}';
+
   bool isFavoriteLecture(Lecture lecture) => _selectors.isFavoriteLecture(state, lecture);
 
   bool isFinished(Lecture lecture) {
@@ -136,6 +140,8 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
     final endTime = _selectors.getEndTime(lecture);
     return now.isAfter(lecture.startTime) && now.isBefore(endTime);
   }
+
+  bool isWrikeEvent(Lecture lecture) => lecture.type == LectureType.wrike;
 
   @override
   void ngOnInit() {
