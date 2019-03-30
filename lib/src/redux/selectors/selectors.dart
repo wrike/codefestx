@@ -39,10 +39,11 @@ class Selectors {
       _getFilteredLectures,
     );
 
-    getVisibleLectures = createSelector6(
+    getVisibleLectures = createSelector7(
       getLectures,
       getFilteredLectures,
       getSelectedSectionIds,
+      getSearchMode,
       getSearchText,
       getCustomSectionMode,
       getFilterType,
@@ -89,6 +90,8 @@ class Selectors {
   Iterable<Lecture> getLectures(CodefestState state) => state.lectures;
 
   Iterable<String> getLikedLectureIds(CodefestState state) => getUser(state).likedLectureIds;
+
+  bool getSearchMode(CodefestState state) => getUser(state).isSearchMode;
 
   String getSearchText(CodefestState state) => getUser(state).searchText;
 
@@ -221,11 +224,16 @@ class Selectors {
     Iterable<Lecture> allLectures,
     Iterable<Lecture> filteredLectures,
     Iterable<String> sectionIds,
+    bool isSearchMode,
     String searchText,
     bool isCustomSectionMode,
     FilterTypeEnum filterType,
   ) {
-    if (searchText?.isNotEmpty ?? false) {
+    if (isSearchMode) {
+      if (searchText == '') {
+        return const [];
+      }
+
       var result = allLectures.where((lecture) {
         final fields = _getLectureShortSearchFields(lecture);
         return _fieldsContainsText(fields, searchText.toLowerCase());

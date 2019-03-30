@@ -47,7 +47,7 @@
     &.buttons-group--selected {
       background-image: linear-gradient(to right, #33a7d8, #62d3ee); // todo
       background-size: 103% auto; // todo
-      box-shadow: 0 2px 23px 0 rgba(0, 0, 0, 0.06); // todo
+      box-shadow: 0 2px 13px 0 rgba(0, 0, 0, 0.04); // todo
       color: #ffffff; // todo
 
       [cf-button] {
@@ -66,40 +66,28 @@
     display: grid;
     grid-row-gap: 24px;
     margin: 0 -24px;
-    padding: 8px 8px 24px 24px;
+    padding: 0 8px 24px 24px;
+  }
+
+  .schedule__header {
+    display: flex;
+    position: sticky;
+    top: 0;
+    padding: 8px 0;
+    z-index: 1;
+  }
+
+  .schedule__date {
+    display: block;
+    padding: 0 4px;
+    margin: 0 auto;
+    border-radius: 16px;
+    background-color: $bg-color;
+    color: $fg-color-secondary;
   }
 
   .schedule__section {
     display: grid;
-  }
-
-  .schedule__header {
-    @include sticky;
-    height: 44px;
-    margin: 0 -8px 0 -24px;
-    top: -4px;
-    z-index: 1;
-    -webkit-backface-visibility: hidden;
-
-    &::before,
-    &::after {
-      content: "";
-      display: block;
-      height: 4px;
-      @include sticky;
-    }
-
-    &::before {
-      top: 36px;
-      box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .16),
-                  0 0 1px 0 rgba(0, 0, 0, .16);
-    }
-
-    &::after {
-      background-image: linear-gradient(#f2f3fa, rgba(242, 243, 250, .3));
-      top: 0;
-      z-index: 2;
-    }
   }
 
   .schedule__events + .schedule__events {
@@ -112,7 +100,7 @@
     background-color: #f2f3fa;
     height: 40px;
     padding: 0 24px;
-    @include sticky;;
+    @include sticky;
     top: 0;
     margin-top: -4px;
     z-index: 3;
@@ -121,7 +109,7 @@
     &::before {
       content: "";
       display: block;
-      background: #f2f3fa;
+      background: inherit;
       height: 4px;
       position: absolute;
       left: 0;
@@ -144,10 +132,6 @@
 
   .events__time {
     padding-top: 16px;
-  }
-
-  .events__list {
-
   }
 
   // event ---
@@ -176,36 +160,67 @@
       top: 0;
       bottom: 0;
       left: -22px;
-      background-image: repeating-radial-gradient(circle, #b9bac1 0px, #b9bac1 1px, transparent 1px, transparent 100%);
+      background-image: repeating-radial-gradient(circle, $fg-color-primary 0px, $fg-color-primary 1px, transparent 1px, transparent 100%);
       background-size: 2px 14px;
       background-position-y: -10px;
       background-position-x: 0px;
       background-repeat: repeat-y;
     }
+
+    &.time--right-now {
+
+      &::before {
+        background-image: repeating-radial-gradient(circle, $link-color 0px, $link-color 1px, transparent 1px, transparent 100%);
+      }
+
+      .time__item-start {
+        color: $link-color;
+
+        &::before {
+          background: $link-color;
+        }
+      }
+    }
+
+    &.time--finished {
+
+      &::before {
+        background-image: repeating-radial-gradient(circle, $fg-color-secondary 0px, $fg-color-secondary 1px, transparent 1px, transparent 100%);
+      }
+
+      .time__item-start {
+        color: $fg-color-secondary;
+
+        &::before {
+          background: $fg-color-secondary;
+        }
+      }
+    }
   }
 
   .time__container {
-    @include sticky;;
-    top: 48px;
+    @include sticky;
+    top: 0;
   }
 
   .time__item {
     display: block;
+  }
 
-    &.time__item--start {
-      font-weight: $font-weight-bold;
-      position: relative;
+  .time__item-start {
+    font-weight: $font-weight-bold;
+    color: $fg-color-primary;
+    position: relative;
 
-      &::before {
-        content: "";
-        display: block;
-        background: #94959b;
-        width: 16px;
-        height: 2px;
-        position: absolute;
-        top: 8px;
-        left: -22px;
-      }
+    &::before {
+      content: "";
+      display: block;
+      background: #94959b;
+      width: 16px;
+      height: 2px;
+      position: absolute;
+      top: 8px;
+      left: -22px;
     }
   }
 
@@ -222,7 +237,17 @@
     border-radius: 6px; // todo
     background-color: #ffffff; // todo
     box-shadow: 0 2px 23px 0 rgba(0, 0, 0, 0.06); // todo
+    position: relative;
     cursor: pointer;
+    overflow: hidden;
+  }
+
+  .event-card__figure {
+    display: block;
+    max-width: 190px;
+    position: absolute;
+    top: -20px;
+    right: -20px;
   }
 
   .event-card__meta {
@@ -247,4 +272,14 @@
 
   // info item (todo: replace in component)
   @include info-item;
+}
+
+:host-context(html.event) {
+  .schedule__header-date {
+    background-color: #ffffff;
+  }
+
+  .schedule__header::after {
+    background-image: linear-gradient(#ffffff, rgba(255, 255, 255, .3));
+  }
 }

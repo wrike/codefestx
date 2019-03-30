@@ -41,6 +41,8 @@ class SectionsContainerComponent extends StatefulComponent implements OnInit {
 
   bool hasSelection = false;
 
+  Set<String> previousSelectedSectionIdsSet;
+
   SectionsContainerComponent(
     NgZone zone,
     ChangeDetectorRef cdr,

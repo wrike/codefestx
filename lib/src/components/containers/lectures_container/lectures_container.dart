@@ -69,6 +69,9 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
   }
 
   List<List<List<Lecture>>> get groupedLectures => _selectors.getGroupedVisibleLectures(state);
+  bool get isReady => _selectors.isReady(state);
+
+  bool get isFiltersVisible => !isSearchMode;
 
   bool get isAllSelected => _selectors.getFilterType(state) == FilterTypeEnum.all;
 
@@ -76,13 +79,15 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
 
   bool get isFavoriteSelected => _selectors.getFilterType(state) == FilterTypeEnum.favorite;
 
+  bool get isFavoriteEmptyStateVisible => lectures.isEmpty && isFavoriteSelected && !isSearchMode;
+
   bool get isNowSelected => _selectors.getFilterType(state) == FilterTypeEnum.now;
 
-  bool get isReady => _selectors.isReady(state);
-
-  bool get isSearchEmptyStateVisible => lectures.isEmpty && isSearchMode && searchText != null && searchText.isNotEmpty;
+  bool get isNowEmptyStateVisible => lectures.isEmpty && isNowSelected && !isSearchMode;
 
   bool get isSearchMode => _selectors.isSearchMode(state);
+  
+  bool get isSearchEmptyStateVisible => lectures.isEmpty && isSearchMode && searchText.isNotEmpty;
 
   Iterable<Lecture> get lectures => _selectors.getVisibleLectures(state);
 
@@ -93,8 +98,6 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
   String get searchText => _selectors.getSearchText(state);
 
   Iterable<Section> get sections => _selectors.getSelectedSections(state);
-
-  bool get showTags => !(isSearchMode && searchText != null && searchText.isNotEmpty);
 
   String get title => 'Расписание';
 
@@ -112,9 +115,9 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
     }
 
     if (lecture.startTime.day == 30) {
-      return '30 Марта';
+      return '30 марта';
     } else if (lecture.startTime.day == 31) {
-      return '31 Марта';
+      return '31 марта';
     }
 
     return 'Вне времени';

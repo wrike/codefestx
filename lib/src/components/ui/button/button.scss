@@ -26,6 +26,7 @@ $button-tag-padding-vertical: round(($button-tag-height - $font-line-box-main) /
   text-align: center;
   color: $fg-color-primary;
   cursor: pointer;
+  
   @include user-select(none);
 
   &:hover {
@@ -81,7 +82,7 @@ $button-tag-padding-vertical: round(($button-tag-height - $font-line-box-main) /
   padding-top: $button-tag-padding-vertical;
   padding-bottom: $button-tag-padding-vertical;
   border-radius: 4px; // todo
-  box-shadow: 0 2px 23px 0 rgba(0, 0, 0, 0.06); // todo
+  box-shadow: 0 2px 13px 0 rgba(0, 0, 0, 0.04); // todo
   font-size: $font-size-main;
   line-height: $font-line-height-main;
 

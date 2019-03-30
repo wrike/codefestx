@@ -103,19 +103,21 @@ class Effects {
         }
       });
 
-  Stream<Object> _onScroll(Stream<Object> actions, EpicStore<CodefestState> store) => Observable(actions)
+  Stream<Object> _onScroll(Stream<Object> actions, EpicStore<CodefestState> store) =>
+      Observable(actions)
           .ofType(const TypeToken<OnScrollAction>())
           .debounce(Duration(seconds: 1))
           .asyncExpand((action) async* {
-        yield SetScrollTopAction(scrollTop: action.scrollTop);
-      });
+            yield SetScrollTopAction(scrollTop: action.scrollTop);
+          });
 
-  Stream<Object> _onScrollToCurrentTime(Stream<Object> actions, EpicStore<CodefestState> store) => Observable(actions)
+  Stream<Object> _onScrollToCurrentTime(Stream<Object> actions, EpicStore<CodefestState> store) =>
+      Observable(actions)
           .ofType(const TypeToken<ScrollToCurrentTimeAction>())
           .delay(Duration(milliseconds: 0))
           .asyncExpand((action) async* {
-        document.querySelector('#currentTime')?.scrollIntoView(ScrollAlignment.TOP);
-      });
+            document.querySelector('#currentTime')?.scrollIntoView(ScrollAlignment.TOP);
+          });
 
   Stream<Object> _onSyncUserData(Stream<Object> actions, EpicStore<CodefestState> store) =>
       Observable(actions).ofType(const TypeToken<SyncUserDataAction>()).asyncExpand((action) async* {

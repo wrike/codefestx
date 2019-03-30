@@ -1,18 +1,23 @@
 <router-outlet
-  [class.hidden]="isError"
+  *ngIf="!isError"
   [routes]="Routes.all">
 </router-outlet>
 
-<div
+<empty-state
   *ngIf="isError"
-  class="info">
-
-  <h2
-    *ngIf="isError"
-    class="error">
-    Что-то пошло не так, попробуй перезагрузить страницу :|
-  </h2>
-</div>
+  icon='<path fill="currentColor" d="M12 8a.8.8 0 0 0-.8.8V12a.8.8 0 1 0 1.6 0V8.8A.8.8 0 0 0 12 8zm.736 6.896a.608.608 0 0 0-.072-.144l-.096-.12a.8.8 0 0 0-.872-.168.92.92 0 0 0-.264.168.8.8 0 0 0-.168.872.72.72 0 0 0 .432.432.752.752 0 0 0 .608 0 .72.72 0 0 0 .432-.432.8.8 0 0 0 .064-.304 1.088 1.088 0 0 0 0-.16.512.512 0 0 0-.064-.144zM12 4a8 8 0 1 0 0 16 8 8 0 0 0 0-16zm0 14.4a6.4 6.4 0 1 1 0-12.8 6.4 6.4 0 0 1 0 12.8z"/>'
+  title="Упппс..."
+  message="Мы не&nbsp;понимаем, что происходит. Заходи на&nbsp;стенд Wrike, чтобы рассказать об&nbsp;этой ошибке"
+>
+  <button
+    cf-button
+    (click)="reload()"
+    style="margin-top: 48px;"
+    class="button button-primary button-full-width"
+  >
+    Перезагрузить
+  </button>
+</empty-state>
 
 <div class="popups" aria-live="polite">
   <new-version-popup

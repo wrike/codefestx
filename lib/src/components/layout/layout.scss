@@ -29,7 +29,7 @@
     align-items: center;
     padding: 20px 16px;
     color: $fg-color-secondary;
-    
+
     a:link,
     a:visited {
       color: $link-color;
@@ -60,13 +60,19 @@
   }
 
   .nav__item {
+    display: block;
+    position: relative;
+    padding: 24px 32px;
     color: $fg-color-secondary;
     @include font-heading-3;
+    text-decoration: none;
+    cursor: pointer;
 
     &.nav__item--active {
       color: $fg-color-primary;
+      cursor: default;
 
-      .nav__link::before {
+      &::before {
         content: "";
         display: block;
         width: 4px;
@@ -76,20 +82,41 @@
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        margin-left: -12px;
+        left: 20px;
       }
     }
   }
+  // --- end nav
 
-  .nav__link {
-    padding: 24px 32px;
+  // user ---
+
+  .user {
+    display: flex;
+    padding: 16px 32px;
+  }
+
+  .user__media {
+    flex-shrink: 0;
+    margin-right: 8px;
+  }
+
+  .user__image {
     display: block;
-    color: inherit;
-    text-decoration: none;
-    position: relative;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  .user__section {
+    flex-grow: 1;
     cursor: pointer;
   }
-  // --- end nav
+
+  .user__logout-button {
+    @include button-reset;
+    color: $link-color;
+    cursor: pointer;
+  }
+  // --- end user
 
   // user ---
 
