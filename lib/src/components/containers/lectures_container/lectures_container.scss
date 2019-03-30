@@ -245,10 +245,11 @@
 
   .event-card__figure {
     display: block;
-    max-width: 190px;
+    max-width: 110px;
     position: absolute;
-    top: -20px;
-    right: -20px;
+    top: -40px;
+    right: -12px;
+    pointer-events: none;
   }
 
   .event-card__meta {
@@ -257,6 +258,7 @@
   }
 
   .event-card__title {
+    position: relative;
     @include font-heading-3;
   }
 

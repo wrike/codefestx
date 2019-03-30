@@ -301,17 +301,15 @@
                     (click)="onLectureSelect(lecture)"
                     class="event__info event-card">
 
-                    <div
-                      *ngIf="isWrikeEvent(lecture)">
+                    <svg
+                      aria-hidden="true"
+                      *ngIf="isWrikeEvent(lecture)"
+                      class="event-card__figure">
 
-                      <svg
-                        class="event-card__figure">
-
-                        <use
-                          [attr.xlink:href]="getFigure(lecture.figureNumber)">
-                        </use>
-                      </svg>
-                    </div>
+                      <use
+                        [attr.xlink:href]="getFigure(lecture.figureNumber)">
+                      </use>
+                    </svg>
 
                     <!-- meta -->
                     <div
