@@ -71,7 +71,7 @@
 
   .schedule__header {
     display: flex;
-    position: sticky;
+    @include sticky;
     top: 0;
     padding: 8px 0;
     z-index: 1;
@@ -160,11 +160,41 @@
       top: 0;
       bottom: 0;
       left: -22px;
-      background-image: repeating-radial-gradient(circle, #b9bac1 0px, #b9bac1 1px, transparent 1px, transparent 100%);
+      background-image: repeating-radial-gradient(circle, $fg-color-primary 0px, $fg-color-primary 1px, transparent 1px, transparent 100%);
       background-size: 2px 14px;
       background-position-y: -10px;
       background-position-x: 0px;
       background-repeat: repeat-y;
+    }
+
+    &.time--right-now {
+
+      &::before {
+        background-image: repeating-radial-gradient(circle, $link-color 0px, $link-color 1px, transparent 1px, transparent 100%);
+      }
+
+      .time__item-start {
+        color: $link-color;
+
+        &::before {
+          background: $link-color;
+        }
+      }
+    }
+
+    &.time--finished {
+
+      &::before {
+        background-image: repeating-radial-gradient(circle, $fg-color-secondary 0px, $fg-color-secondary 1px, transparent 1px, transparent 100%);
+      }
+
+      .time__item-start {
+        color: $fg-color-secondary;
+
+        &::before {
+          background: $fg-color-secondary;
+        }
+      }
     }
   }
 
@@ -175,21 +205,23 @@
 
   .time__item {
     display: block;
+  }
 
-    &.time__item--start {
-      font-weight: $font-weight-bold;
-      position: relative;
+  .time__item-start {
+    font-weight: $font-weight-bold;
+    color: $fg-color-primary;
+    position: relative;
 
-      &::before {
-        content: "";
-        display: block;
-        background: #94959b;
-        width: 16px;
-        height: 2px;
-        position: absolute;
-        top: 8px;
-        left: -22px;
-      }
+    &::before {
+      content: "";
+      display: block;
+      background: #94959b;
+      width: 16px;
+      height: 2px;
+      position: absolute;
+      top: 8px;
+      left: -22px;
+      border-radius: 2px;
     }
   }
 
