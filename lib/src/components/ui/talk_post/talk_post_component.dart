@@ -59,5 +59,5 @@ class TalkPostComponent extends StatefulComponent{
 
   bool get canDelete => post.authorId == _authStore.userId;
 
-  bool get canReply => true;//!canDelete && _authStore.isAuth;
+  bool get canReply => _authStore.isAuth;
 }

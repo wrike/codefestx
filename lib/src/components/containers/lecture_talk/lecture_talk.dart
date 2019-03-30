@@ -2,6 +2,7 @@ import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:angular_forms/angular_forms.dart';
 import 'package:angular_router/angular_router.dart';
+import 'package:codefest/src/components/containers/lecture_talk/empty_state/talks_zero_state.dart';
 import 'package:codefest/src/components/containers/stateful_component.dart';
 import 'package:codefest/src/components/layout/layout.dart';
 import 'package:codefest/src/components/layout/navigation_type.dart';
@@ -34,16 +35,17 @@ import 'package:codefest/src/services/auth_store.dart';
     ButtonComponent,
     TalkPostComponent,
     TalkPostInputComponent,
+    TalksStateComponent,
   ],
   preserveWhitespace: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 )
 class LectureTalkComponent extends StatefulComponent {
-  final Selectors _selectors;
+  final AuthStore _authStore;
   final Dispatcher _dispatcher;
   @HostBinding('class.messages')
   final bool isHostMarked = true;
-
+  bool get canCreatePost => _authStore.isAuth;
   @ViewChild('input')
   TalkPostInputComponent input;
 
@@ -56,8 +58,7 @@ class LectureTalkComponent extends StatefulComponent {
       NgZone zone,
       ChangeDetectorRef cdr,
       StoreFactory storeFactory,
-      this._selectors,
-      this._dispatcher,
+      this._dispatcher, this._authStore,
       ) : super(zone, cdr, storeFactory);
 
   String parentId;
