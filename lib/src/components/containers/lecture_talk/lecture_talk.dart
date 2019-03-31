@@ -32,7 +32,6 @@ class LectureTalkComponent extends StatefulComponent {
   final Dispatcher _dispatcher;
   @HostBinding('class.messages')
   final bool isHostMarked = true;
-  bool get canCreatePost => _authStore.isAuth;
   @ViewChild('input')
   TalkPostInputComponent input;
 

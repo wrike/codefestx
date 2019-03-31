@@ -1,4 +1,18 @@
+
 <div
+  *ngIf="!canCreatePost"
+  class="message-login__container">
+  <button
+    cf-button
+    #loginButton
+    (click)="onLoginButtonClick()"
+    class="button-full-width">
+    Войти, чтобы оставлять комментарии 
+  </button>
+</div>
+
+<div
+  *ngIf="canCreatePost"
   class="message-send__container">
 
   <input

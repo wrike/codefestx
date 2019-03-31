@@ -1,18 +1,53 @@
-<layout
-  [title]="'Рейтинг докладов'"
-  [state]="state">
+<loader
+  [isReady]="isReady">
+  <layout
+    [title]="'Рейтинг докладов'"
+    [state]="state">
 
-  <div
-    content>
+    <div class="events__list"
+      content>
+      <event-card
+        *ngFor="let lecture of lectures"
+        class="rating_event"
+        [clickable]="true"
+        [standOut]="true"
+        [title]="lecture.title"
+        [speakers]="lecture.speakers"
+        (onClick)="onLectureSelect(lecture)">
+        <div
+          class="like-count"
+          side>
+          <svg
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="24" height="24" viewBox="0 0 24 24"
+            class="icon">
+            <path d="M15.4 7H20l-7.08 7.06-2.3-2.29L15.41 7zm-6.8 4.04l3.67 3.67L9.97 17 4 11.04h4.6z" fill-rule="evenodd"/>
+          </svg>
 
-    <div
-      *ngFor="let lecture of lectures">
+          {{ lecture.likesCount }}
+        </div>
+        <span meta>
 
-      {{ lecture.title }}
+          <!-- Location -->
+          <span
+            class="event__meta-item">
+            {{ lecture.location.title }}
+          </span>
+          
+          &ngsp;•&ngsp;
+
+          <!-- Section -->
+          <span
+            class="event__meta-item"
+            [style.color]="lecture.section.color">
+            {{ lecture.section.title }}
+          </span>
+        </span>
+      </event-card>
+
+      <rating-empty-state
+        *ngIf="lectures.isEmpty">
+      </rating-empty-state>
     </div>
-
-    <rating-empty-state
-      *ngIf="lectures.isEmpty">
-    </rating-empty-state>
-  </div>
-</layout>
+  </layout>
+</loader>

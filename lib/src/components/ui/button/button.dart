@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:angular/angular.dart';
 
 @Component(
@@ -8,6 +10,10 @@ import 'package:angular/angular.dart';
   preserveWhitespace: false,
 )
 class ButtonComponent {
+  final Element nativeElement;
+
   @HostBinding('class.button')
   final bool isHostMarked = true;
+
+  ButtonComponent(this.nativeElement);
 }

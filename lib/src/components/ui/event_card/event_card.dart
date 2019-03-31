@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:html';
+
 import 'package:angular/angular.dart';
 import 'package:codefest/src/models/speaker.dart';
 
@@ -6,12 +9,16 @@ import 'package:codefest/src/models/speaker.dart';
   templateUrl: 'event_card.html',
   styleUrls: const ['event_card.css'],
   directives: [
+    NgFor,
     NgIf,
+    NgIf
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   preserveWhitespace: false,
 )
 class EventCardComponent {
+  final _onClickStreamController = StreamController<MouseEvent>.broadcast();
+
   @Input()
   String title;
 
@@ -22,15 +29,29 @@ class EventCardComponent {
   String endTime;
 
   bool get hasEndTime => endTime != null;
+  bool get isTimeShown => false;
 
   @Input()
   String description;
 
   @Input()
-  Speaker speaker;
+  List<Speaker> speakers = const [];
 
-  void onClick() {}
+  @Input()
+  @HostBinding('class.stand-out')
+  bool standOut = false;
 
-  @HostBinding('class.event')
-  final bool isHostMarked = true;
+  @Input()
+  bool clickable = false;
+
+  @Output()
+  Stream<MouseEvent> get onClick => _onClickStreamController.stream;
+
+  bool get sameCompany => speakers.fold<Set<String>>(new Set(), (prev, next) =>
+    prev..add(next.company)
+  ).length == 1;
+
+  void onClickHandler(MouseEvent event) {
+    _onClickStreamController.add(event);
+  }
 }

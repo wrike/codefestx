@@ -42,6 +42,19 @@
       content
       class="event">
 
+      <div
+        *ngIf="isWrikeEvent"
+        class="event__hero">
+        <svg
+          class="wrike-event"
+          aria-hidden="true">
+
+          <use
+            [attr.xlink:href]="getFigure(lecture.figureNumber)">
+          </use>
+        </svg>
+      </div>
+
       <tabs
         role="tablist"
         aria-orientation="horizontal">
