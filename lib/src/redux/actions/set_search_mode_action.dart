@@ -1,9 +1,9 @@
 import 'package:meta/meta.dart';
 
-class ChangeSearchModeAction {
+class SetSearchModeAction {
   final bool isSearchMode;
 
-  ChangeSearchModeAction({
+  SetSearchModeAction({
     @required this.isSearchMode,
   });
 }

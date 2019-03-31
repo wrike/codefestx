@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:angular/angular.dart';
 
 @Component(
@@ -8,6 +10,8 @@ import 'package:angular/angular.dart';
   preserveWhitespace: false,
 )
 class ToggleComponent {
+  final _onChange = StreamController<bool>.broadcast();
+
   @HostBinding('class.toggle')
   final bool isHostMarked = true;
 
@@ -16,4 +20,11 @@ class ToggleComponent {
 
   @Input()
   String text;
+
+  @Output()
+  Stream get onChange => _onChange.stream;
+
+  void onToggle() {
+    _onChange.add(!isChecked);
+  }
 }

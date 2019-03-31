@@ -1,10 +1,10 @@
 import 'package:meta/meta.dart';
 
-class ChangeLectureLikeAction {
+class UpdateLectureLikeAction {
   final String lectureId;
   final bool isLiked;
 
-  ChangeLectureLikeAction({
+  UpdateLectureLikeAction({
     @required this.lectureId,
     @required this.isLiked,
   });

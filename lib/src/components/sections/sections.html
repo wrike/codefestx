@@ -26,15 +26,12 @@
     Для общения
   </h2>
 
-  <div
-    class="sections__grid">
-
-    <cf-section
-      (change)="onCustomSectionModeClick()"
-      [title]="'Показывать движухи'"
-      [isChecked]="isCustomSectionMode">
-    </cf-section>
-  </div>
+  <toggle
+    [text]="'Показывать все народные события'"
+    [isChecked]="isCustomSectionMode"
+    (onChange)="onCustomSectionModeClick()"
+    class="toggle-line">
+  </toggle>
 </section>
 
 <toggle

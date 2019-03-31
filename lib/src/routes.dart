@@ -13,6 +13,12 @@ import 'components/containers/what_container/what_container.template.dart' as wh
 import 'route_paths.dart';
 
 class Routes {
+  static final index = RouteDefinition.redirect(
+    path: '/',
+    redirectTo: lectures.toUrl(),
+    useAsDefault: true
+  );
+
   static final lecture = RouteDefinition(
     routePath: RoutePaths.lecture,
     component: lecture_template.LectureContainerComponentNgFactory,
@@ -21,7 +27,6 @@ class Routes {
   static final lectures = RouteDefinition(
     routePath: RoutePaths.lectures,
     component: lectures_template.LecturesContainerComponentNgFactory,
-    useAsDefault: true,
   );
 
   static final login = RouteDefinition(
@@ -67,6 +72,7 @@ class Routes {
   static final notFound = RouteDefinition.redirect(path: '.+', redirectTo: '404');
 
   static final all = <RouteDefinition>[
+    index,
     login,
     loginCallback,
     lecture,

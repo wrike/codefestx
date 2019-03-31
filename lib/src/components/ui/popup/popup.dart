@@ -1,11 +1,15 @@
 import 'dart:async';
 
 import 'package:angular/angular.dart';
+import 'package:codefest/src/components/ui/button/button.dart';
 
 @Component(
   selector: 'popup',
   templateUrl: 'popup.html',
   styleUrls: const ['popup.css'],
+  directives: [
+    ButtonComponent,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   preserveWhitespace: false,
 )

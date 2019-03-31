@@ -5,6 +5,7 @@
     class="welcome__content">
 
     <button
+      link-button
       (click)="onClose()"
       class="welcome__skip-button">
       Пропустить
@@ -42,8 +43,8 @@
         [mainSections]="mainSections"
         [isCustomSectionMode]="isCustomSectionMode"
         [selectedSectionIds]="selectedSectionIds"
-        (onSectionsChange)="onSectionsChange($event)"
-        (onCustomSectionModeChange)="onCustomSectionModeChange($event)"
+        (onChange)="onSectionsChange($event)"
+        (onShowApply)="onShowApply($event)"
         class="welcome__sections">
       </sections>
 

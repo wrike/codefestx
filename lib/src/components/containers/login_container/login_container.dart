@@ -17,7 +17,7 @@ import 'package:codefest/src/services/auth_store.dart';
   providers: <Object>[
     AuthService,
   ],
-  preserveWhitespace: true,
+  preserveWhitespace: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
   exports: [
     RoutePaths,

@@ -2,21 +2,17 @@ import 'package:codefest/src/models/lecture.dart';
 import 'package:codefest/src/models/talk_post.dart';
 import 'package:codefest/src/redux/actions/add_post_action.dart';
 import 'package:codefest/src/redux/actions/authorize_action.dart';
-import 'package:codefest/src/redux/actions/change_lecture_favorite_action.dart';
-import 'package:codefest/src/redux/actions/change_lecture_like_action.dart';
-import 'package:codefest/src/redux/actions/change_search_mode_action.dart';
-import 'package:codefest/src/redux/actions/change_selected_sections_action.dart';
 import 'package:codefest/src/redux/actions/deleted_post_action.dart';
 import 'package:codefest/src/redux/actions/filter_lectures_action.dart';
 import 'package:codefest/src/redux/actions/load_data_error_action.dart';
 import 'package:codefest/src/redux/actions/load_data_start_action.dart';
 import 'package:codefest/src/redux/actions/load_data_success_action.dart';
 import 'package:codefest/src/redux/actions/load_talks_action.dart';
-import 'package:codefest/src/redux/actions/load_user_data_success_action.dart';
 import 'package:codefest/src/redux/actions/loaded_talks_action.dart';
 import 'package:codefest/src/redux/actions/new_version_action.dart';
 import 'package:codefest/src/redux/actions/search_lectures_action.dart';
 import 'package:codefest/src/redux/actions/set_scroll_top_action.dart';
+import 'package:codefest/src/redux/actions/actions.dart';
 import 'package:codefest/src/redux/state/codefest_state.dart';
 import 'package:redux/redux.dart';
 
@@ -26,16 +22,17 @@ class CodefestReducer {
   CodefestReducer() {
     _reducer = combineReducers<CodefestState>([
       TypedReducer<CodefestState, LoadDataStartAction>(_onStartLoading),
-      TypedReducer<CodefestState, LoadDataSuccessAction>(_onLoadData),
-      TypedReducer<CodefestState, LoadUserDataSuccessAction>(_onLoadUserData),
-      TypedReducer<CodefestState, LoadDataErrorAction>(_onError),
+      TypedReducer<CodefestState, LoadDataSuccessAction>(_onLoadDataSuccess),
+      TypedReducer<CodefestState, LoadDataErrorAction>(_onLoadDataError),
+      TypedReducer<CodefestState, SetDataAction>(_onSetData),
+      TypedReducer<CodefestState, SetUserDataAction>(_onSetUserData),
       TypedReducer<CodefestState, AuthorizeAction>(_onAuthorize),
       TypedReducer<CodefestState, SearchLecturesAction>(_onSearchLectures),
-      TypedReducer<CodefestState, ChangeSelectedSectionsAction>(_onChangeSelectedSections),
+      TypedReducer<CodefestState, SetSelectedSectionsAction>(_onSetSelectedSections),
       TypedReducer<CodefestState, FilterLecturesAction>(_onFilterLectures),
-      TypedReducer<CodefestState, ChangeSearchModeAction>(_onChangeSearchMode),
-      TypedReducer<CodefestState, ChangeLectureLikeAction>(_onChangeLectureLike),
-      TypedReducer<CodefestState, ChangeLectureFavoriteAction>(_onChangeLectureFavorite),
+      TypedReducer<CodefestState, SetSearchModeAction>(_onSetSearchMode),
+      TypedReducer<CodefestState, SetLectureLikeAction>(_onSetLectureLike),
+      TypedReducer<CodefestState, SetLectureFavoriteAction>(_onSetLectureFavorite),
       TypedReducer<CodefestState, NewVersionAction>(_onNewVersion),
       TypedReducer<CodefestState, SetScrollTopAction>(_setScrollTopAction),
       TypedReducer<CodefestState, LoadTalksAction>(_resetTalkPosts),
@@ -47,6 +44,12 @@ class CodefestReducer {
 
   CodefestState getState(CodefestState state, Object action) => _reducer(state, action);
 
+  int _getFigureNumber(String id) {
+    final code = id.codeUnitAt(id.length - 1).toString();
+    final n = int.tryParse(code[code.length - 1]) ?? 0;
+    return (n * 1.5).floor();
+  }
+
   CodefestState _onAuthorize(CodefestState state, AuthorizeAction action) => state.rebuild((b) {
         final user = state.user.rebuild((b) {
           b.isAuthorized = true;
@@ -55,63 +58,34 @@ class CodefestReducer {
         b.user.replace(user);
       });
 
-  CodefestState _onChangeLectureFavorite(CodefestState state, ChangeLectureFavoriteAction action) => state.rebuild((b) {
-        b.user.replace(state.user.rebuild((b) {
-          if (action.isFavorite) {
-            b.favoriteLectureIds.add(action.lectureId);
-          } else {
-            b.favoriteLectureIds.remove(action.lectureId);
-          }
-        }));
-      });
-
-  CodefestState _onChangeLectureLike(CodefestState state, ChangeLectureLikeAction action) => state.rebuild((b) {
-        b.user.replace(state.user.rebuild((b) {
-          if (action.isLiked) {
-            b.likedLectureIds.add(action.lectureId);
-          } else {
-            b.likedLectureIds.remove(action.lectureId);
-          }
-        }));
-      });
-
-  CodefestState _onChangeSearchMode(CodefestState state, ChangeSearchModeAction action) => state.rebuild((b) {
-        final user = state.user.rebuild((b) {
-          b.isSearchMode = action.isSearchMode;
-
-          if (!action.isSearchMode) {
-            b.searchText = '';
-          }
-        });
-
-        b.user.replace(user);
-      });
-
-  CodefestState _onChangeSelectedSections(CodefestState state, ChangeSelectedSectionsAction action) =>
-      state.rebuild((b) {
-        final user = state.user.rebuild((b) {
-          b.selectedSectionIds.replace(action.sectionIds);
-          b.isCustomSectionMode = action.isCustomSectionMode;
-        });
-
-        b.user.replace(user);
-      });
-
-  CodefestState _onError(CodefestState state, LoadDataErrorAction action) => state.rebuild((b) => b.isError = true);
-
   CodefestState _onFilterLectures(CodefestState state, FilterLecturesAction action) => state.rebuild((b) {
         final user = state.user.rebuild((b) {
           b.filterType = action.filterType;
-          b.filterSectionId = action.filterSectionId;
         });
 
         b.user.replace(user);
       });
 
-  CodefestState _onLoadData(CodefestState state, LoadDataSuccessAction action) => state.rebuild(
+  CodefestState _onLoadDataError(CodefestState state, LoadDataErrorAction action) => state.rebuild(
+        (b) => b.isError = true,
+      );
+
+  CodefestState _onLoadDataSuccess(CodefestState state, LoadDataSuccessAction action) => state.rebuild(
         (b) => b
           ..isReady = true
-          ..isLoaded = true
+          ..isLoaded = true,
+      );
+
+  CodefestState _onNewVersion(CodefestState state, NewVersionAction action) => state.rebuild(
+        (b) => b.releaseNote = action.releaseNote,
+      );
+
+  CodefestState _onSearchLectures(CodefestState state, SearchLecturesAction action) => state.rebuild(
+        (b) => b.user.update((u) => u.searchText = action.searchText),
+      );
+
+  CodefestState _onSetData(CodefestState state, SetDataAction action) => state.rebuild(
+        (b) => b
           ..speakers.replace(action.speakers)
           ..locations.replace(action.locations)
           ..sections.replace(action.sections)
@@ -132,28 +106,61 @@ class CodefestReducer {
                     isLiked: lecture.isLiked,
                     likesCount: lecture.likesCount,
                     favoritesCount: lecture.favoritesCount,
+                    figureNumber: _getFigureNumber(lecture.id),
                   ),
             ),
           ),
       );
 
-  CodefestState _onLoadUserData(CodefestState state, LoadUserDataSuccessAction action) =>
-      state.rebuild(
-        (b) => b
-          ..user.replace(state.user.rebuild((u) => u
-              ..favoriteLectureIds.replace(action.favoriteLectureIds)
-              ..selectedSectionIds.replace(action.selectedSectionIds)
-              ..likedLectureIds.replace(action.likedLectureIds ?? [])
-              ..displayName = action.displayName ?? ''
-              ..avatarPath = action.avatarPath ?? ''
-              ..isCustomSectionMode = action.isCustomSectionMode
-          )));
+  CodefestState _onSetLectureFavorite(CodefestState state, SetLectureFavoriteAction action) => state.rebuild((b) {
+        b.user.replace(state.user.rebuild((b) {
+          if (action.isFavorite) {
+            b.favoriteLectureIds.add(action.lectureId);
+          } else {
+            b.favoriteLectureIds.remove(action.lectureId);
+          }
+        }));
+      });
 
-  CodefestState _onNewVersion(CodefestState state, NewVersionAction action) =>
-      state.rebuild((b) => b.releaseNote = action.releaseNote);
+  CodefestState _onSetLectureLike(CodefestState state, SetLectureLikeAction action) => state.rebuild((b) {
+        b.user.replace(state.user.rebuild((b) {
+          if (action.isLiked) {
+            b.likedLectureIds.add(action.lectureId);
+          } else {
+            b.likedLectureIds.remove(action.lectureId);
+          }
+        }));
+      });
 
-  CodefestState _onSearchLectures(CodefestState state, SearchLecturesAction action) =>
-      state.rebuild((b) => b.user.update((u) => u.searchText = action.searchText));
+  CodefestState _onSetSearchMode(CodefestState state, SetSearchModeAction action) => state.rebuild((b) {
+        final user = state.user.rebuild((b) {
+          b.isSearchMode = action.isSearchMode;
+
+          if (!action.isSearchMode) {
+            b.searchText = '';
+          }
+        });
+
+        b.user.replace(user);
+      });
+
+  CodefestState _onSetSelectedSections(CodefestState state, SetSelectedSectionsAction action) => state.rebuild((b) {
+        final user = state.user.rebuild((b) {
+          b.selectedSectionIds.replace(action.sectionIds);
+          b.isCustomSectionMode = action.isCustomSectionMode;
+        });
+
+        b.user.replace(user);
+      });
+
+  CodefestState _onSetUserData(CodefestState state, SetUserDataAction action) => state.rebuild((b) => b
+    ..user.replace(state.user.rebuild((u) => u
+      ..favoriteLectureIds.replace(action.favoriteLectureIds)
+      ..selectedSectionIds.replace(action.selectedSectionIds)
+      ..likedLectureIds.replace(action.likedLectureIds ?? state.user.likedLectureIds)
+      ..displayName = action.displayName ?? state.user.displayName
+      ..avatarPath = action.avatarPath ?? state.user.avatarPath
+      ..isCustomSectionMode = action.isCustomSectionMode ?? state.user.isCustomSectionMode)));
 
   CodefestState _onStartLoading(CodefestState state, LoadDataStartAction action) =>
       state.rebuild((b) => b.isReady = false);

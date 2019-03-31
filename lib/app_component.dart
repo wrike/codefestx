@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:html';
 
 import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
@@ -7,7 +8,9 @@ import 'package:codefest/src/components/popups/new_version_popup/new_version_pop
 import 'package:codefest/src/models/talk_post.dart';
 import 'package:codefest/src/redux/actions/add_post_action.dart';
 import 'package:codefest/src/redux/actions/deleted_post_action.dart';
-import 'package:codefest/src/redux/actions/load_user_data_action.dart';
+import 'package:codefest/src/components/ui/button/button.dart';
+import 'package:codefest/src/components/ui/empty_state/empty_state.dart';
+import 'package:codefest/src/redux/actions/effects/load_user_data_action.dart';
 import 'package:codefest/src/redux/actions/new_version_action.dart';
 import 'package:codefest/src/redux/effects/effects.dart';
 import 'package:codefest/src/redux/reducers/reducer.dart';
@@ -21,6 +24,7 @@ import 'package:codefest/src/routes.dart';
 import 'package:codefest/src/services/auth_service.dart';
 import 'package:codefest/src/services/auth_store.dart';
 import 'package:codefest/src/services/data_loader.dart';
+import 'package:codefest/src/services/dom_service.dart';
 import 'package:codefest/src/services/http_proxy.dart';
 import 'package:codefest/src/services/push_service.dart';
 import 'package:codefest/src/services/sockets_service.dart';
@@ -35,7 +39,9 @@ import 'package:redux/redux.dart';
   directives: [
     NgIf,
     routerDirectives,
+    EmptyStateComponent,
     NewVersionPopupComponent,
+    ButtonComponent,
   ],
   providers: const <Object>[
     const ClassProvider<StoreFactory>(StoreFactory),
@@ -52,6 +58,7 @@ import 'package:redux/redux.dart';
     const ClassProvider<PushService>(PushService),
     const ClassProvider<SocketService>(SocketService),
     const ClassProvider<StorageService>(StorageService),
+    const ClassProvider<DOMService>(DOMService),
   ],
   exports: [
     RoutePaths,
@@ -111,6 +118,10 @@ class AppComponent implements OnDestroy, OnInit {
   @override
   void ngOnDestroy() {
     _subscriptions.forEach((subscription) => subscription.cancel());
+  }
+
+  void reload() {
+    window.location.href = '/';
   }
 
   @override

@@ -3,10 +3,12 @@ import 'package:angular_router/angular_router.dart';
 import 'package:codefest/src/components/containers/stateful_component.dart';
 import 'package:codefest/src/components/loader/loader.dart';
 import 'package:codefest/src/components/sections/sections.dart';
+import 'package:codefest/src/components/sections/sections_change_event.dart';
 import 'package:codefest/src/components/ui/button/button.dart';
+import 'package:codefest/src/components/ui/link-button/link_button.dart';
 import 'package:codefest/src/models/section.dart';
-import 'package:codefest/src/redux/actions/change_selected_sections_action.dart';
-import 'package:codefest/src/redux/actions/init_action.dart';
+import 'package:codefest/src/redux/actions/effects/init_action.dart';
+import 'package:codefest/src/redux/actions/effects/update_selected_sections_action.dart';
 import 'package:codefest/src/redux/selectors/selectors.dart';
 import 'package:codefest/src/redux/services/dispatcher.dart';
 import 'package:codefest/src/redux/services/store_factory.dart';
@@ -22,6 +24,7 @@ import 'package:codefest/src/services/auth_service.dart';
     NgIf,
     SectionsComponent,
     LoaderComponent,
+    LinkButtonComponent,
     ButtonComponent,
   ],
   providers: [],
@@ -41,6 +44,8 @@ class WelcomeContainerComponent extends StatefulComponent implements OnInit {
   @HostBinding('class.welcome')
   final bool isHostMarked = true;
 
+  bool hasSelection = false;
+
   WelcomeContainerComponent(
     NgZone zone,
     ChangeDetectorRef cdr,
@@ -50,8 +55,6 @@ class WelcomeContainerComponent extends StatefulComponent implements OnInit {
     this._router,
     this._authService,
   ) : super(zone, cdr, storeFactory);
-
-  bool get hasSelection => selectedSectionIds.isNotEmpty;
 
   bool get isReady => _selectors.isReady(state);
 
@@ -64,7 +67,7 @@ class WelcomeContainerComponent extends StatefulComponent implements OnInit {
   }
 
   void onApply() {
-    _dispatcher.dispatch(ChangeSelectedSectionsAction(
+    _dispatcher.dispatch(UpdateSelectedSectionsAction(
       sectionIds: selectedSectionIds,
       isCustomSectionMode: isCustomSectionMode,
     ));
@@ -76,12 +79,13 @@ class WelcomeContainerComponent extends StatefulComponent implements OnInit {
     _navigateToLectures();
   }
 
-  void onCustomSectionModeChange(bool value) {
-    isCustomSectionMode = value;
+  void onSectionsChange(SectionsChangeEvent event) {
+    selectedSectionIds = event.sectionIds;
+    isCustomSectionMode = event.isCustomSectionMode;
   }
 
-  void onSectionsChange(Iterable<String> sectionIds) {
-    selectedSectionIds = sectionIds;
+  void onShowApply(bool value) {
+    hasSelection = value;
   }
 
   void _navigateToLectures() {

@@ -4,18 +4,20 @@ import 'package:codefest/src/components/containers/lectures_container/actions/ac
 import 'package:codefest/src/components/containers/lectures_container/favorite_empty_state/favorite_empty_state.dart';
 import 'package:codefest/src/components/containers/lectures_container/layout_actions/layout_actions.dart';
 import 'package:codefest/src/components/containers/lectures_container/now_empty_state/now_empty_state.dart';
+import 'package:codefest/src/components/containers/lectures_container/search_empty_state/search_empty_state.dart';
 import 'package:codefest/src/components/containers/stateful_component.dart';
 import 'package:codefest/src/components/layout/layout.dart';
 import 'package:codefest/src/components/loader/loader.dart';
 import 'package:codefest/src/components/ui/button/button.dart';
+import 'package:codefest/src/models/_types.dart';
 import 'package:codefest/src/models/lecture.dart';
 import 'package:codefest/src/models/section.dart';
-import 'package:codefest/src/redux/actions/change_lecture_favorite_action.dart';
-import 'package:codefest/src/redux/actions/change_search_mode_action.dart';
+import 'package:codefest/src/redux/actions/effects/init_action.dart';
+import 'package:codefest/src/redux/actions/effects/scroll_to_current_time_action.dart';
+import 'package:codefest/src/redux/actions/effects/update_lecture_favorite_action.dart';
 import 'package:codefest/src/redux/actions/filter_lectures_action.dart';
-import 'package:codefest/src/redux/actions/init_action.dart';
-import 'package:codefest/src/redux/actions/scroll_to_current_time_action.dart';
 import 'package:codefest/src/redux/actions/search_lectures_action.dart';
+import 'package:codefest/src/redux/actions/set_search_mode_action.dart';
 import 'package:codefest/src/redux/selectors/selectors.dart';
 import 'package:codefest/src/redux/services/dispatcher.dart';
 import 'package:codefest/src/redux/services/store_factory.dart';
@@ -36,6 +38,7 @@ import 'package:codefest/src/route_paths.dart';
     ButtonComponent,
     FavoriteEmptyStateComponent,
     NowEmptyStateComponent,
+    SearchEmptyStateComponent,
   ],
   preserveWhitespace: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -72,19 +75,27 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
 
   bool get isCustomSelected => _selectors.getFilterType(state) == FilterTypeEnum.custom;
 
+  bool get isFavoriteEmptyStateVisible => lectures.isEmpty && isFavoriteSelected && !isSearchMode;
+
   bool get isFavoriteSelected => _selectors.getFilterType(state) == FilterTypeEnum.favorite;
+
+  bool get isFiltersVisible => !isSearchMode;
+
+  bool get isNowEmptyStateVisible => lectures.isEmpty && isNowSelected && !isSearchMode;
 
   bool get isNowSelected => _selectors.getFilterType(state) == FilterTypeEnum.now;
 
   bool get isReady => _selectors.isReady(state);
 
+  bool get isSearchEmptyStateVisible => lectures.isEmpty && isSearchMode && searchText.isNotEmpty;
+
   bool get isSearchMode => _selectors.isSearchMode(state);
 
   Iterable<Lecture> get lectures => _selectors.getVisibleLectures(state);
 
-  String get nearLectureId => _selectors.getNearLectureId(state);
+  String get nearestLectureId => _selectors.getNearestLectureId(state);
 
-  DateTime get now => _selectors.getNow();
+  DateTime get now => _selectors.getDateNow();
 
   String get searchText => _selectors.getSearchText(state);
 
@@ -92,7 +103,7 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
 
   String get title => 'Расписание';
 
-  bool get showTags => !(isSearchMode && searchText != null && searchText.isNotEmpty);
+  String currentTimeId(Lecture lecture) => isNearestLectureGroup(lecture) ? 'currentTime' : null;
 
   String endTime(Lecture lecture) => _selectors.getEndTimeText(lecture);
 
@@ -106,18 +117,15 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
     }
 
     if (lecture.startTime.day == 30) {
-      return '30 Марта';
+      return '30 марта';
     } else if (lecture.startTime.day == 31) {
-      return '31 Марта';
+      return '31 марта';
     }
 
     return 'Вне времени';
   }
 
-  bool isDayVisible(Lecture next, int index) {
-    final prev = index > 0 ? lectures.elementAt(index - 1) : null;
-    return prev == null || next.startTime.day != prev.startTime.day;
-  }
+  String getFigure(int number) => '#figure-${number}';
 
   bool isFavoriteLecture(Lecture lecture) => _selectors.isFavoriteLecture(state, lecture);
 
@@ -126,17 +134,14 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
     return now.isAfter(endTime);
   }
 
+  bool isNearestLectureGroup(lecture) => lecture.id == nearestLectureId;
+
   bool isRightNow(Lecture lecture) {
     final endTime = _selectors.getEndTime(lecture);
     return now.isAfter(lecture.startTime) && now.isBefore(endTime);
   }
 
-  bool isSectionSelected(Section section) => _selectors.getFilterSectionId(state) == section.id;
-
-  bool isTimeVisible(Lecture next, int index) {
-    final prev = index > 0 ? lectures.elementAt(index - 1) : null;
-    return prev == null || next.startTime != prev.startTime || next.duration != prev.duration;
-  }
+  bool isWrikeEvent(Lecture lecture) => lecture.type == LectureType.wrike;
 
   @override
   void ngOnInit() {
@@ -148,7 +153,7 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
   }
 
   void onFavoriteChange(Lecture lecture, bool value) {
-    _dispatcher.dispatch(ChangeLectureFavoriteAction(lectureId: lecture.id, isFavorite: value));
+    _dispatcher.dispatch(UpdateLectureFavoriteAction(lectureId: lecture.id, isFavorite: value));
   }
 
   void onFilter() {
@@ -168,7 +173,7 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
   }
 
   void onSearchModeChange(bool isSearchMode) {
-    _dispatcher.dispatch(ChangeSearchModeAction(isSearchMode: isSearchMode));
+    _dispatcher.dispatch(SetSearchModeAction(isSearchMode: isSearchMode));
   }
 
   void onShowAllClick() {
@@ -188,10 +193,6 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
 
   void onShowNowClick() {
     _dispatcher.dispatch(FilterLecturesAction(filterType: FilterTypeEnum.now));
-  }
-
-  void onShowSectionClick(Section section) {
-    _dispatcher.dispatch(FilterLecturesAction(filterType: FilterTypeEnum.section, filterSectionId: section.id));
   }
 
   String startTime(Lecture lecture) => _selectors.getStartTimeText(lecture);

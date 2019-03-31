@@ -23,6 +23,7 @@ class Lecture {
   final bool isLiked;
   final int likesCount;
   final int favoritesCount;
+  final int figureNumber;
 
   Lecture({
     @required this.id,
@@ -39,6 +40,7 @@ class Lecture {
     @required this.isLiked,
     @required this.likesCount,
     @required this.favoritesCount,
+    @required this.figureNumber,
   });
 
   factory Lecture.fromJson(Map<String, dynamic> json) => _$LectureFromJson(json);

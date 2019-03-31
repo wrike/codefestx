@@ -31,6 +31,7 @@ class ActionsComponent {
 
   void onStarButtonClick(MouseEvent event) {
     _onFavoriteChangeStreamController.add(!isFavorite);
+
     event.stopPropagation();
   }
 }

@@ -1,6 +1,6 @@
 import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
-import 'package:codefest/src/redux/actions/update_user_data_action.dart';
+import 'package:codefest/src/redux/actions/effects/sync_user_data_action.dart';
 import 'package:codefest/src/redux/services/dispatcher.dart';
 import 'package:codefest/src/route_paths.dart';
 import 'package:codefest/src/routes.dart';
@@ -47,7 +47,7 @@ class LoginCallbackContainerComponent implements OnInit {
           await _router.navigateByUrl(RoutePaths.welcome.toUrl());
         }
 
-        _dispatcher.dispatch(UpdateUserDataAction());
+        _dispatcher.dispatch(SyncUserDataAction());
       } else {
         await _router.navigateByUrl(_authStore.routePath);
         _authService.clearRoutePath();

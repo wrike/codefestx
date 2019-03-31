@@ -2,25 +2,10 @@
 @import "../../../styles/common.scss";
 
 :host {
-  display: block;
-  height: 100%;
-
-  .event {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-  }
-
-  .event__info,
-  .event__talk {
-    flex-grow: 1;
-    margin-top: 16px;
-  }
 
   // tabs ---
 
   .tabs {
-    flex-shrink: 0;
     display: flex;
     padding: 12px 0;
   }
@@ -33,6 +18,89 @@
     }
   }
   // --- end tabs
+
+  // event ---
+
+  .event__meta {
+    color: $fg-color-secondary;
+    margin-bottom: 4px;
+  }
+
+  .event__title {
+    @include font-heading-1;
+  }
+
+  .event__info {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 24px;
+  }
+
+  .event__info-item + .event__info-item {
+    margin-left: 16px;
+  }
+
+  .event__description {
+    margin-top: 24px;
+    font-size: 14px; // todo
+    line-height: 20px; // todo
+
+    ::ng-deep {
+
+      ul {
+        padding: 0;
+
+        li {
+          margin-left: 16px;
+        }
+
+        li + li {
+          margin-top: 16px;
+        }
+      }
+
+      p + p {
+        margin-top: 16px;
+      }
+    }
+  }
+
+  .event__vote::before {
+    content: '';
+    display: block;
+    margin: 27px 0 23px;
+    height: 1px;
+    opacity: 0.1;
+    border-radius: 8px;
+    background-color: $fg-color-primary;
+  }
+
+  .event__vote-title {
+    @include font-heading-3;
+    text-align: center;
+  }
+
+  .event__vote-description {
+    text-align: center;
+  }
+
+  .event__vote-button {
+    margin: 16px 0;
+  }
+
+  .event__vote-disabled-info {
+    text-align: center;
+    color: $fg-color-secondary;
+  }
+
+  .event__related {
+    margin-top: 24px;
+  }
+
+  .event__related-title {
+    @include font-heading-3;
+  }
+  // --- end event
 
   // info item (todo: replace in component)
   @include info-item;
