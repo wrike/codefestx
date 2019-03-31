@@ -1,0 +1,25 @@
+@import "../../../../../web/assets/styles/variables.scss";
+
+:host {
+    .like-count {
+        flex-shrink: 0;
+        margin-left: -8px;
+        margin-right: 16px;
+        width: 5ch;
+        padding-top: 16px;
+        color: $fg-color-primary;
+        @include font-title;
+
+        .icon {
+            color: $fg-color-secondary;
+            vertical-align: top;
+            transform: translate(0, -3px);
+        }
+    }
+
+    .events__list {
+        display: grid;
+        grid-gap: 8px;
+        margin-top: 12px;
+    }
+}

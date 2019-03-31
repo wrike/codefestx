@@ -1,0 +1,12 @@
+<!-- Start -->
+<time
+    class="item item--start">
+    {{ startTime }}
+</time>
+
+<!-- End -->
+<time
+    *ngIf="hasEndTime"
+    class="item">
+    {{ endTime }}
+</time>
