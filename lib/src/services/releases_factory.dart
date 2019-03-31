@@ -5,6 +5,13 @@ const WRIKE_AUTHOR = 'Wrike dream team';
 
 class ReleasesFactory {
   static List<Release> get all => [
+    Release(
+      version: '1.1.0',
+      author: WRIKE_AUTHOR,
+      avatar: WRIKE_AVATAR,
+      title: 'Обсуждения докладов для CodeFest X',
+      description: 'Добавили возможность обсуждения докладов! Не смогли пообщаться со спикером в экспетной зоне - можете сделать это у нас.',
+    ),
         Release(
           version: '1.0.1',
           author: 'Алексей Дорохов',

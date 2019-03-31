@@ -1,0 +1,81 @@
+@import "../../../../../web/assets/styles/variables.scss";
+
+:host {
+  display: grid;
+  grid-template-columns: [avatar] auto [balloon] 1fr;
+  grid-column-gap: 8px;
+
+  .message__avatar {
+    display: block;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .message-balloon {
+    background: #ffffff;
+    padding: 16px 8px 8px;
+    border-radius: 0 8px 8px 8px;
+    box-shadow: 0 2px 23px 0 rgba(0, 0, 0, 0.06);
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -8px;
+      width: 0;
+      height: 0;
+      border-top: 8px solid #ffffff;
+      border-left: 8px solid transparent;
+    }
+  }
+
+  .message-balloon__header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4px;
+  }
+
+  .message-balloon__author {
+    font-weight: $font-weight-bold;
+  }
+
+  .message-balloon__date {
+    margin-left: auto;
+    color: $fg-color-secondary;
+  }
+
+  .message-balloon__actions {
+    display: flex;
+    margin-top: 4px;
+  }
+
+  .message-balloon__actions-button {
+    @include button-reset;
+    color: $link-color;
+    cursor: pointer;
+  }
+
+  .message-balloon__actions-button + .message-balloon__actions-button {
+    margin-left: 16px;
+    cursor: pointer;
+  }
+}
+
+.message_reply {
+  border-left: 3px solid #33a7d8;
+  margin: 5px 0px 5px 16px;
+  padding-left: 8px;
+  & .message_reply-author {
+    font-weight: bold;
+    opacity: 0.3;
+  }
+
+  & .message_reply-text {
+    width: 300px;
+    opacity: 0.3;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

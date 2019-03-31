@@ -1,9 +1,13 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:html';
 
 import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:codefest/src/components/popups/new_version_popup/new_version_popup.dart';
+import 'package:codefest/src/models/talk_post.dart';
+import 'package:codefest/src/redux/actions/add_post_action.dart';
+import 'package:codefest/src/redux/actions/deleted_post_action.dart';
 import 'package:codefest/src/components/ui/button/button.dart';
 import 'package:codefest/src/components/ui/empty_state/empty_state.dart';
 import 'package:codefest/src/redux/actions/effects/load_user_data_action.dart';
@@ -25,6 +29,7 @@ import 'package:codefest/src/services/http_proxy.dart';
 import 'package:codefest/src/services/push_service.dart';
 import 'package:codefest/src/services/sockets_service.dart';
 import 'package:codefest/src/services/storage_service.dart';
+import 'package:codefest/src/services/talks_service.dart';
 import 'package:redux/redux.dart';
 
 @Component(
@@ -46,6 +51,7 @@ import 'package:redux/redux.dart';
     const ClassProvider<Dispatcher>(Dispatcher),
     const ClassProvider<Selectors>(Selectors),
     const ClassProvider<DataLoader>(DataLoader),
+    const ClassProvider<TalksService>(TalksService),
     const ClassProvider<HttpProxy>(HttpProxy),
     const ClassProvider<AuthService>(AuthService),
     const ClassProvider<AuthStore>(AuthStore),
@@ -113,7 +119,7 @@ class AppComponent implements OnDestroy, OnInit {
   void ngOnDestroy() {
     _subscriptions.forEach((subscription) => subscription.cancel());
   }
-  
+
   void reload() {
     window.location.href = '/';
   }
@@ -133,6 +139,18 @@ class AppComponent implements OnDestroy, OnInit {
     _socketService.onEvent
         .where((event) => event.command == 'reload')
         .listen((event) => _dispatcher.dispatch(NewVersionAction(releaseNote: event.data)));
+
+    _socketService.onEvent
+        .where((event) => event.command == 'post-added')
+        .listen((event) {
+          final data = json.decode(event.data);
+          final post = TalkPost.fromJson(data);
+          _dispatcher.dispatch(AddPostAction(post));
+    });
+
+    _socketService.onEvent
+        .where((event) => event.command == 'post-removed')
+        .listen((event) => _dispatcher.dispatch(DeletedPostAction(event.data)));
 
     _socketService.onEvent
         .where((event) => event.command == 'change-lectures')

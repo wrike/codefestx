@@ -1,0 +1,32 @@
+@import "../../../../../web/assets/styles/variables.scss";
+
+:host {
+  display: block;
+
+  .message-send__container {
+    position: relative;
+  }
+
+  .message-send__input {
+    display: block;
+    border: none;
+    resize: none;
+    font-size: 12px;
+    line-height: 20px;
+    height: 48px;
+    margin: 0;
+    padding: 0 48px 0 24px;
+    color: #444;
+    background: #ffffff;
+    width: 100%;
+    position: relative;
+    box-shadow: 0 2px 23px 0 rgba(0, 0, 0, 0.06);
+  }
+
+  .message-send__button {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    transform: translateY(-50%);
+  }
+}

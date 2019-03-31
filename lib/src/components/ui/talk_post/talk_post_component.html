@@ -1,0 +1,61 @@
+<img
+  [src]="post.avatar"
+  width="40"
+  height="40"
+  class="message__avatar">
+
+<div
+  class="message-balloon">
+
+  <header
+    class="message-balloon__header">
+
+    <div
+      class="message-balloon__author">
+      {{ post.authorName }}
+    </div>
+
+    <div
+      class="message-balloon__date">
+      {{ getTime() }}
+    </div>
+  </header>
+
+  <div
+    class="message-balloon__text">
+    <div
+      *ngIf="replyBlockShown"
+      class="message_reply">
+
+      <div
+        class="message_reply-author">
+        {{ post.replyName }}
+      </div>
+
+      <div
+        class="message_reply-text">
+        {{ post.replyText }}
+      </div>
+    </div>
+
+    {{ post.text }}
+  </div>
+
+  <div
+    class="message-balloon__actions">
+
+    <button
+      *ngIf="canReply"
+      (click)="onPostReply()"
+      class="message-balloon__actions-button">
+      Ответить
+    </button>
+
+    <button
+      *ngIf="canDelete"
+      (click)="onPostDelete()"
+      class="message-balloon__actions-button">
+      Удалить
+    </button>
+  </div>
+</div>

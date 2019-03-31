@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:codefest/src/models/api_response.dart';
 import 'package:codefest/src/models/lecture_data.dart';
 import 'package:codefest/src/models/location.dart';
