@@ -1,3 +1,13 @@
+@import "../../../../../web/assets/styles/variables";
+
 :host {
   display: block;
+
+  .level-1 {
+    fill: $fg-color-secondary;
+  }
+
+  .level-2 {
+    fill: $fg-color-primary;
+  }
 }
