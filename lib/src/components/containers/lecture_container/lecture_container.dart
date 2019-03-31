@@ -73,6 +73,8 @@ class LectureContainerComponent extends StatefulComponent implements OnInit, OnD
 
   String get title => !lecture.section.isCustom ? 'Доклад' : 'Событие';
 
+  String getFigure(int number) => '#figure-${number}';
+
   String get endTime => _selectors.getEndTimeText(lecture);
 
   bool get isAuthorized => _selectors.isAuthorized(state);

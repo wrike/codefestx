@@ -21,6 +21,21 @@
 
   // event ---
 
+  .event__hero {
+    height: 176px;
+    margin-bottom: 24px;
+    position: relative;
+
+    svg {
+      display: block;
+      width: 176px;
+      position: absolute;
+      top: 0;
+      right: 0;
+      pointer-events: none;
+    }
+  }
+
   .event__meta {
     color: $fg-color-secondary;
     margin-bottom: 4px;
