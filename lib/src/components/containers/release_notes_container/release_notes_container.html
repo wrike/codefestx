@@ -1,8 +1,11 @@
-<template ngFor let-release [ngForOf]="releases">
-  <event-card
+<event-card  *ngFor="let release of releases"
+  [standOut]="true"
+  [startTime]="release.version"
+  [title]="release.title"
+  [description]="release.description"
+  [speakers]="createSpeakers(release)">
+  <event-time
     [startTime]="release.version"
-    [title]="release.title"
-    [description]="release.description"
-    [speaker]="createSpeaker(release)">
-  </event-card>
-</template>
+    side>
+  </event-time>
+</event-card>

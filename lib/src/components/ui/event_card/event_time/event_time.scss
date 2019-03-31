@@ -1,0 +1,53 @@
+@import "../../../../../../web/assets/styles/variables.scss";
+
+:host {
+    flex-shrink: 0;
+    margin-right: 16px;
+    width: 5ch;
+    padding-top: 16px;
+    color: $fg-color-secondary;
+    position: relative;
+
+    :empty {
+        display: none;
+    }
+
+    &::before {
+        content: "";
+        display: block;
+        width: 2px;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: -22px;
+        background-image: repeating-radial-gradient(circle, #b9bac1 0px, #b9bac1 1px, transparent 1px, transparent 100%);
+        background-size: 2px 14px;
+        background-position-y: -10px;
+        background-position-x: 0px;
+        background-repeat: repeat-y;
+    }
+
+    .item {
+        display: block;
+
+        + .item {
+            margin-top: 4px;
+        }
+
+        &.item--start {
+            font-weight: $font-weight-bold;
+            position: relative;
+
+            &::before {
+            content: "";
+            display: block;
+            background: #94959b;
+            width: 16px;
+            height: 2px;
+            position: absolute;
+            top: 8px;
+            left: -22px;
+            }
+        }
+    }
+}

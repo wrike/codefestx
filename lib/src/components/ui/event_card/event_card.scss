@@ -1,67 +1,31 @@
 @import "../../../../../web/assets/styles/variables.scss";
 @import "../../../styles/common.scss";
 
+:host(.stand-out) {
+  margin: 0 -24px;
+  padding: 0 8px 0px 24px;
+}
+
 :host {
   display: flex;
-
-  .event__time {
-    flex-shrink: 0;
-    margin-right: 16px;
-    width: 5ch;
-    padding-top: 16px;
-    color: $fg-color-secondary;
-    position: relative;
-
-    &::before {
-      content: "";
-      display: block;
-      width: 2px;
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: -22px;
-      background-image: repeating-radial-gradient(circle, #b9bac1 0px, #b9bac1 1px, transparent 1px, transparent 100%);
-      background-size: 2px 14px;
-      background-position-y: -10px;
-      background-position-x: 0px;
-      background-repeat: repeat-y;
-    }
-  }
-
-  .event__time-item {
-    display: block;
-
-    + .event__time-item {
-      margin-top: 4px;
-    }
-
-    &.event__time-item--start {
-      font-weight: $font-weight-bold;
-      position: relative;
-
-      &::before {
-        content: "";
-        display: block;
-        background: #94959b;
-        width: 16px;
-        height: 2px;
-        position: absolute;
-        top: 8px;
-        left: -22px;
-      }
-    }
-  }
-
+  
   .event-card {
     padding: 16px 24px 16px 16px; // todo
     position: relative; // for actions
     border-radius: 6px; // todo
     background-color: #ffffff; // todo
     box-shadow: 0 2px 23px 0 rgba(0, 0, 0, 0.06); // todo
+    flex-grow: 1;
+
+    &.event-card--clickable {
+      cursor: pointer;
+    }
   }
+
   .event-card__title {
     @include font-title;
   }
+
   .event-card__description {
     ::ng-deep h3 {
       @include font-main;

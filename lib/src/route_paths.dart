@@ -23,7 +23,7 @@ class RoutePaths {
 
   static final List<MenuRoutePath> _menu = [
     lectures,
-//    rating,
+    rating,
     map,
     what,
     login,

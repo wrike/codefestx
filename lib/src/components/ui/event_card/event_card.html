@@ -1,25 +1,13 @@
-
 <!-- host: event -->
 
-<!-- Time -->
-<div
-  class="event__time">
+<!-- Side -->
+<ng-content select="[side]"></ng-content>
 
-  <!-- Start -->
-  <time
-    class="event__time-item event__time-item--start">
-    {{ startTime }}
-  </time>
-
-  <!-- End -->
-  <time
-    *ngIf="hasEndTime"
-    class="event__time-item">
-    {{ endTime }}
-  </time>
-</div>
 <!-- Info (todo details)-->
-<article (click)="onClick()" class="event-card">
+<article
+  (click)="onClickHandler($event)"
+  class="event-card"
+  [class.event-card--clickable]="clickable">
 
   <!-- Meta -->
   <div class="event-card__meta">
@@ -36,34 +24,91 @@
     [innerHTML]="description">
   </div>
 
-  <!-- Speakers (todo: info item) -->
-  <div class="event-card__speakers info-item">
+  <!-- speakers (todo: info item) -->
+  <div
+    *ngIf="speakers.isNotEmpty"
+    class="event-card__speakers info-item">
 
-    <!-- Media -->
-    <div class="info-item__media">
-
-      <span class="info-item__media-container">
-
-        <img [src]="speaker.avatarPath" [alt]="speaker.name" class="info-item__media-image">
-
-      </span>
-    </div>
-
-    <!-- Details -->
-    <div class="info-item__details">
-
-      <!-- Title -->
-      <div class="info-item__title">
-
-        {{ speaker.name }}
-      </div>
-
-      <!-- Subtitle -->
+    <template [ngIf]="sameCompany">
+      <!-- media -->
       <div
-        class="info-item__subtitle">
+        class="info-item__media">
 
-        {{ speaker.company }}
+        <span
+          *ngFor="let speaker of speakers"
+          class="info-item__media-container">
+
+          <img
+            [src]="speaker.avatarPath"
+            [alt]="speaker.name"
+            class="info-item__media-image">
+        </span>
       </div>
-    </div>
+
+      <!-- details -->
+      <div
+        class="info-item__details">
+
+        <!-- title -->
+        <div
+          class="info-item__title">
+
+          <ng-container
+            *ngFor="let speaker of speakers">
+            {{ speaker.name }}
+          </ng-container>
+        </div>
+
+        <!-- Subtitle -->
+        <div
+          class="info-item__subtitle">
+
+          <ng-container
+            *ngFor="let speaker of speakers">
+            {{ speaker.company }}
+          </ng-container>
+        </div>
+      </div>
+    </template>
+
+    <template [ngIf]="!sameCompany">
+      <div
+        *ngFor="let speaker of speakers">
+        <div
+          class="info-item__media">
+
+          <span
+            class="info-item__media-container">
+            <img
+              [src]="speaker.avatarPath"
+              [alt]="speaker.name"
+              class="info-item__media-image">
+          </span>
+        </div>
+
+        <!-- details -->
+        <div
+          class="info-item__details">
+
+          <!-- title -->
+          <div
+            class="info-item__title">
+
+            {{ speaker.name }}
+          </div>
+
+          <!-- Subtitle -->
+          <div
+            class="info-item__subtitle">
+            {{ speaker.company }}
+          </div>
+        </div>
+      </div>
+    </template>
+  </div>
+
+  <div
+    class="event-card__actions">
+    <ng-content select="[actions]"></ng-content>
   </div>
 </article>

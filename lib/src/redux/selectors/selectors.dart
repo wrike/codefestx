@@ -162,16 +162,18 @@ class Selectors {
     }
   }
 
+  List<List<List<Lecture>>> _getGroupedByDay(List<List<Lecture>> lectures) {
+    return _groupBy(lectures, (last, next) {
+      return last.last.startTime.day == next.last.startTime.day;
+    });
+  }
+
   List<List<List<Lecture>>> _getGroupedVisibleLectures(Iterable<Lecture> lectures) {
     final groupedByTime = _groupBy(lectures.toList(), (last, next) {
       return last.startTime == next.startTime && last.duration == next.duration;
     });
 
-    final groupedByDay = _groupBy(groupedByTime, (last, next) {
-      return last.last.startTime.day == next.last.startTime.day;
-    });
-
-    return groupedByDay;
+    return _getGroupedByDay(groupedByTime);
   }
 
   Iterable<String> _getLectureFullSearchFields(Lecture lecture) => [lecture.title, lecture.description]
@@ -212,7 +214,7 @@ class Selectors {
   }
 
   Iterable<Lecture> _getRatingSortedLectures(Iterable<Lecture> lectures) =>
-      lectures.where((lecture) => lecture.likesCount > 3).toList()
+      lectures.where((lecture) => lecture.likesCount > 0).toList()
         ..sort((lecture1, lecture2) => lecture1.likesCount < lecture2.likesCount ? 1 : -1);
 
   Iterable<Section> _getSelectedSections(Iterable<Section> sections, Iterable<String> sectionIds) =>

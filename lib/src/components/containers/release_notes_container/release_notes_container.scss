@@ -1,12 +1,5 @@
 :host {
-  ::ng-deep .event {
-    margin-right: -16px;
-
-    article {
-      width: 100%;
-    }
-  }
-  ::ng-deep .event + .event {
-    margin-top: 8px;
-  }
+  display: grid;
+  grid-gap: 8px;
+  margin: 8px 0 16px;
 }
