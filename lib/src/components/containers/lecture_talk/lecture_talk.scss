@@ -17,3 +17,8 @@
     background-image: linear-gradient(to bottom, rgba(242, 243, 250, 0), #f2f3fa5e 24%, #f2f3fa);
   }
 }
+
+:host-context(html.event) 
+.messages__container-input {
+  background: none;
+}
