@@ -7,10 +7,10 @@ class ReleasesFactory {
   static List<Release> get all => [
     Release(
       version: '1.1.0',
-      author: 'Wrike dream team',
-      avatar: 'https://cdn6.aptoide.com/imgs/3/6/7/367308a7915991b406a493b255f82323_icon.png?w=240',
+      author: WRIKE_AUTHOR,
+      avatar: WRIKE_AVATAR,
       title: 'Обсуждения докладов для CodeFest X',
-      description: 'Добавили возможность обсуждения докладов!',
+      description: 'Добавили возможность обсуждения докладов! Не смогли пообщаться со спикером в экспетной зоне - можете сделать это у нас.',
     ),
         Release(
           version: '1.0.0',
