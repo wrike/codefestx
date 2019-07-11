@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:html';
+
 import 'package:angular/angular.dart';
 import 'package:angular_forms/angular_forms.dart';
 import 'package:angular_router/angular_router.dart';
@@ -25,7 +26,7 @@ class TalkPostInputComponent {
   final Router _router;
 
   bool get isAllowToSend => newPostText.length > 1 && newPostText.length <= 255;
-  final _onSend = new StreamController<String>();
+  final _onSend = StreamController<String>();
 
   @HostBinding('class.message-send')
   final bool isHostMarked = true;
@@ -53,8 +54,11 @@ class TalkPostInputComponent {
   }
 
   void focus() {
-    if (canCreatePost) input.focus();
-    else loginButton.nativeElement.focus();
+    if (canCreatePost) {
+      input.focus();
+    } else {
+      loginButton.nativeElement.focus();
+    }
   }
 
   void onLoginButtonClick() {

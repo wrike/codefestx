@@ -8,7 +8,7 @@ import 'package:http/http.dart';
 typedef T Decoder<T>(dynamic item);
 
 class HttpProxy {
-  static const host = const String.fromEnvironment('apiHost', defaultValue: 'https://api.codefest.wrike.tech');
+  static const host = String.fromEnvironment('apiHost', defaultValue: 'https://api.kickoff.wrike.tech');
 
   final Client _http;
   final AuthStore _authStore;

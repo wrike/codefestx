@@ -56,7 +56,7 @@ class _$UserState extends UserState {
   @override
   final BuiltList<String> selectedSectionIds;
 
-  factory _$UserState([void updates(UserStateBuilder b)]) =>
+  factory _$UserState([void Function(UserStateBuilder) updates]) =>
       (new UserStateBuilder()..update(updates)).build();
 
   _$UserState._(
@@ -95,7 +95,7 @@ class _$UserState extends UserState {
   }
 
   @override
-  UserState rebuild(void updates(UserStateBuilder b)) =>
+  UserState rebuild(void Function(UserStateBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -234,7 +234,7 @@ class UserStateBuilder implements Builder<UserState, UserStateBuilder> {
   }
 
   @override
-  void update(void updates(UserStateBuilder b)) {
+  void update(void Function(UserStateBuilder) updates) {
     if (updates != null) updates(this);
   }
 

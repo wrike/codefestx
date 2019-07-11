@@ -23,8 +23,8 @@ class TalkPostComponent extends StatefulComponent{
     print(post.replyId);
     return post.replyId != null;
   }
-  final _onDelete = new StreamController<String>();
-  final _onReply = new StreamController<String>();
+  final _onDelete = StreamController<String>();
+  final _onReply = StreamController<String>();
   @HostBinding('class.message')
   final bool isHostMarked = true;
 

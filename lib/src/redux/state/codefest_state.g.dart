@@ -32,7 +32,7 @@ class _$CodefestState extends CodefestState {
   @override
   final String currentLecture;
 
-  factory _$CodefestState([void updates(CodefestStateBuilder b)]) =>
+  factory _$CodefestState([void Function(CodefestStateBuilder) updates]) =>
       (new CodefestStateBuilder()..update(updates)).build();
 
   _$CodefestState._(
@@ -85,7 +85,7 @@ class _$CodefestState extends CodefestState {
   }
 
   @override
-  CodefestState rebuild(void updates(CodefestStateBuilder b)) =>
+  CodefestState rebuild(void Function(CodefestStateBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -244,7 +244,7 @@ class CodefestStateBuilder
   }
 
   @override
-  void update(void updates(CodefestStateBuilder b)) {
+  void update(void Function(CodefestStateBuilder) updates) {
     if (updates != null) updates(this);
   }
 

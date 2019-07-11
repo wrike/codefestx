@@ -13,7 +13,7 @@ class TalksService {
   Future<Iterable<TalkPost>> getPosts(String lectureId) => _http.getList<TalkPost>('$_talksPath/$lectureId', (json) => TalkPost.fromJson(json));
 
   Future<void> createPost(String lectureId, String text, String replyTo) async {
-    final params = new Map<String, String>();
+    final params = Map<String, String>();
     params['lectureId'] = lectureId;
     params['text'] = text;
     if (replyTo != null) {
