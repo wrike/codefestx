@@ -8,10 +8,10 @@ steps:
     args:
       - '-c'
       - |
-        [[ "$BRANCH_NAME" == "master" ]] && /builder/kubectl.bash set image deployment codefestx nginx-front=gcr.io/rndcloud-codefest-wrike-tech/codefestx:$REVISION_ID || echo "skipping . . ."
+        [[ "$BRANCH_NAME" == "master" ]] && /builder/kubectl.bash set image deployment kickoff nginx-front=gcr.io/rndcloud-codefest-wrike-tech/kickoff:$REVISION_ID || echo "skipping . . ."
     env:
     - 'CLOUDSDK_COMPUTE_ZONE=europe-west4-a'
     - 'CLOUDSDK_CONTAINER_CLUSTER=codefest'
 substitutions:
-  _IMAGE_NAME: 'gcr.io/rndcloud-codefest-wrike-tech/codefestx'
-images: ['gcr.io/rndcloud-codefest-wrike-tech/codefestx']
+  _IMAGE_NAME: 'gcr.io/rndcloud-codefest-wrike-tech/kickoff'
+images: ['gcr.io/rndcloud-codefest-wrike-tech/kickoff']
