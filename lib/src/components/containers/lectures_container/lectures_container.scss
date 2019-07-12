@@ -203,6 +203,11 @@
     top: 0;
   }
 
+  .time__placeholder {
+    @include sticky;
+    bottom: 0;
+  }
+
   .time__item {
     display: block;
   }
