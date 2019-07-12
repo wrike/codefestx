@@ -4,7 +4,7 @@ WORKDIR /app/
 ADD pubspec.* /app/
 RUN pub get
 RUN pub global activate webdev
-ENV PATH="${PATH}:/root/.pub-cache/bin"
+ENV PATH="${PATH}:/root/.pub-cache/bin:/${HOME}/.pub-cache/bin"
 ADD . /app/
 RUN webdev build --output /app/build/
 
