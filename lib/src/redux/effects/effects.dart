@@ -109,8 +109,10 @@ class Effects {
   Stream<Object> _onLoadUserData(Stream<Object> actions, EpicStore<CodefestState> store) =>
       Observable(actions).ofType(const TypeToken<LoadUserDataAction>()).asyncExpand((_) async* {
         try {
-          if (_authStore.isAuth) {
-            User data;
+          if (!_authStore.isAuth) {
+            await _authService.createUser();
+          }
+          User data;
             try {
               data = await _dataLoader.getUser();
             } catch (e) {
@@ -129,17 +131,6 @@ class Effects {
                 isCustomSectionMode: data.isCustomSectionMode,
               );
             }
-          } else {
-            final sectionIds = _storageService.getSections();
-            final favoriteLectureIds = _storageService.getFavoriteLectures();
-            final isCustomSectionMode = _storageService.getCustomSectionMode() ?? true;
-
-            yield SetUserDataAction(
-              favoriteLectureIds: favoriteLectureIds,
-              selectedSectionIds: sectionIds,
-              isCustomSectionMode: isCustomSectionMode,
-            );
-          }
         } catch (e) {
           yield LoadDataErrorAction();
         }

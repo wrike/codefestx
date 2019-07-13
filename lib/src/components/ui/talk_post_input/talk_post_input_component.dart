@@ -62,6 +62,6 @@ class TalkPostInputComponent {
   }
 
   void onLoginButtonClick() {
-    _router.navigateByUrl(RoutePaths.login.toUrl());
+   // _router.navigateByUrl(RoutePaths.login.toUrl());
   }
 }

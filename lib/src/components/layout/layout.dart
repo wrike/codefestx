@@ -123,9 +123,9 @@ class LayoutComponent implements OnInit, OnDestroy {
   void ngOnInit() {
     ga.sendPageView();
 
-    if (_authStore.isAuth) {
-      _menu.remove(RoutePaths.login);
-    }
+    // if (_authStore.isAuth) {
+    //   _menu.remove(RoutePaths.login);
+    // }
 
     _subscriptions.add(_router.onRouteActivated.listen(_onRouteActivated));
   }
