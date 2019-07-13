@@ -9,6 +9,7 @@ typedef T Decoder<T>(dynamic item);
 
 class HttpProxy {
   static const host = String.fromEnvironment('apiHost', defaultValue: 'https://api.kickoff.wrike.tech');
+  // static const host = String.fromEnvironment('apiHost', defaultValue: 'http://localhost:8088');
 
   final Client _http;
   final AuthStore _authStore;
@@ -33,7 +34,7 @@ class HttpProxy {
     return (_extractData(response) as List).map(decoder).toList();
   }
 
-  Future<ApiResponse> post(String path, Map<String, dynamic> data) async {
+  Future<ApiResponse> post(String path, [Map<String, dynamic> data]) async {
     final response = await _http.post(_fullPath(path), headers: _getHeaders(), body: _encodeData(data));
     return _toApiResponse(response);
   }
@@ -43,7 +44,7 @@ class HttpProxy {
     return _toApiResponse(response);
   }
 
-  dynamic _encodeData(Map<String, dynamic> data) => jsonEncode(data);
+  dynamic _encodeData(Map<String, dynamic> data) => data == null ? null : jsonEncode(data);
 
   dynamic _extractData(Response response) => json.decode(response.body);
 

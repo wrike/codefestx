@@ -29,15 +29,15 @@ class Routes {
     component: lectures_template.LecturesContainerComponentNgFactory,
   );
 
-  static final login = RouteDefinition(
-    routePath: RoutePaths.login,
-    component: login_template.LoginContainerComponentNgFactory,
-  );
+  // static final login = RouteDefinition(
+  //   routePath: RoutePaths.login,
+  //   component: login_template.LoginContainerComponentNgFactory,
+  // );
 
-  static final loginCallback = RouteDefinition(
-    routePath: RoutePaths.loginCallback,
-    component: login_callback_template.LoginCallbackContainerComponentNgFactory,
-  );
+  // static final loginCallback = RouteDefinition(
+  //   routePath: RoutePaths.loginCallback,
+  //   component: login_callback_template.LoginCallbackContainerComponentNgFactory,
+  // );
 
   static final what = RouteDefinition(
     routePath: RoutePaths.what,
@@ -73,8 +73,8 @@ class Routes {
 
   static final all = <RouteDefinition>[
     index,
-    login,
-    loginCallback,
+    // login,
+    // loginCallback,
     lecture,
     lectures,
     map,

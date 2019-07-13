@@ -116,12 +116,10 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
       return '';
     }
 
-    if (lecture.startTime.day == 30) {
-      return '30 марта';
-    } else if (lecture.startTime.day == 31) {
-      return '31 марта';
+    if (lecture.startTime.day == 19) {
+      return '19 июля';
     }
-
+    
     return 'Вне времени';
   }
 
