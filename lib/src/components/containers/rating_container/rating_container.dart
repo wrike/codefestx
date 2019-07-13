@@ -1,8 +1,8 @@
 import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:codefest/src/components/containers/rating_container/rating_empty_state/rating_empty_state.dart';
-import 'package:codefest/src/components/layout/layout.dart';
 import 'package:codefest/src/components/containers/stateful_component.dart';
+import 'package:codefest/src/components/layout/layout.dart';
 import 'package:codefest/src/components/loader/loader.dart';
 import 'package:codefest/src/components/ui/event_card/event_card.dart';
 import 'package:codefest/src/models/lecture.dart';
@@ -22,7 +22,7 @@ import 'package:codefest/src/route_paths.dart';
     LayoutComponent,
     LoaderComponent,
     RatingEmptyStateComponent,
-    EventCardComponent
+    EventCardComponent,
   ],
   preserveWhitespace: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
