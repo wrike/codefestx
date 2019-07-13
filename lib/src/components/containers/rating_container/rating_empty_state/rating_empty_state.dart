@@ -1,10 +1,12 @@
 import 'package:angular/angular.dart';
+import 'package:codefest/src/components/ui/empty_state/empty_state.dart';
 
 @Component(
   selector: 'rating-empty-state',
-  styleUrls: ['rating_empty_state.css'],
   templateUrl: 'rating_empty_state.html',
-  directives: [],
+  directives: [
+    EmptyStateComponent,
+  ],
   preserveWhitespace: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 )

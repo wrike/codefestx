@@ -5,7 +5,7 @@ import 'package:codefest/src/components/ui/empty_state/empty_state.dart';
   selector: 'now-empty-state',
   templateUrl: 'now_empty_state.html',
   directives: [
-    EmptyStateComponent
+    EmptyStateComponent,
   ],
   preserveWhitespace: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
