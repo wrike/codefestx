@@ -59,13 +59,13 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
 
   String get filterTitle {
     if (sections.isEmpty) {
-      return 'Все';
+      return 'All';
     } else if (sections.length == 1) {
-      return '1 секция';
+      return '1 section';
     } else if (sections.length > 1 && sections.length < 5) {
-      return '${sections.length} секции';
+      return '${sections.length} sections';
     } else {
-      return '${sections.length} секций';
+      return '${sections.length} sections';
     }
   }
 
@@ -101,13 +101,15 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
 
   Iterable<Section> get sections => _selectors.getSelectedSections(state);
 
-  String get title => 'Расписание';
+  String get title => 'Schedule';
 
   String currentTimeId(Lecture lecture) => isNearestLectureGroup(lecture) ? 'currentTime' : null;
 
   String endTime(Lecture lecture) => _selectors.getEndTimeText(lecture);
 
   String flag(Lecture lecture) => _selectors.getFlag(lecture);
+
+  String getLang(Lecture lecture) => lecture.language == LanguageType.en ? 'eng' : 'ru';
 
   String getDay(Iterable<Iterable<Lecture>> grouped) {
     final lecture = grouped.isNotEmpty ? grouped.first.isNotEmpty ? grouped.first.first : null : null;
@@ -116,13 +118,7 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
       return '';
     }
 
-    if (lecture.startTime.day == 30) {
-      return '30 марта';
-    } else if (lecture.startTime.day == 31) {
-      return '31 марта';
-    }
-
-    return 'Вне времени';
+    return '19 july';
   }
 
   String getFigure(int number) => '#figure-${number}';
