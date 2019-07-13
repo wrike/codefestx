@@ -57,22 +57,24 @@
     padding: 0;
     margin: 0;
     list-style: none;
+    text-align: center;
   }
 
-  .nav__item {
+  .nav__item-link {
     display: block;
     position: relative;
     padding: 24px 32px;
+    text-align: center;
     color: $fg-color-secondary;
     @include font-heading-3;
     text-decoration: none;
     cursor: pointer;
 
-    &.nav__item--active {
+    &.nav__item-link--active {
       color: $fg-color-primary;
       cursor: default;
 
-      &::before {
+      &::after {
         content: "";
         display: block;
         width: 4px;
@@ -80,9 +82,9 @@
         background-color: $link-color;
         border-radius: 50%;
         position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        left: 20px;
+        bottom: 15px;
+        left: 50%;
+        transform: translateX(-50%);
       }
     }
   }

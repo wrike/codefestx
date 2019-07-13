@@ -35,13 +35,14 @@
       <ul
         class="nav">
 
-        <!-- nav__item--active for active state -->
         <li
-          *ngFor="let item of RoutePaths.menu">
+          *ngFor="let item of RoutePaths.menu"
+          class="nav__item">
+
           <a
             [routerLink]="item.toUrl()"
-            [class.nav__item--active]="isActive(item)"
-            class="nav__item">
+            [class.nav__item-link--active]="isActive(item)"
+            class="nav__item-link">
             {{ item.title }}
           </a>
         </li>
