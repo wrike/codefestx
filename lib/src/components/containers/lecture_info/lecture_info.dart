@@ -42,8 +42,6 @@ class LectureInfoComponent extends StatefulComponent {
       this._dispatcher,
       ) : super(zone, cdr, storeFactory);
 
-  bool get lectureStarted => _selectors.isLectureStarted(lecture);
-
   String get endTime => _selectors.getEndTimeText(lecture);
 
   bool get isAuthorized => _selectors.isAuthorized(state);
@@ -60,8 +58,8 @@ class LectureInfoComponent extends StatefulComponent {
 
   void onLikeClick() {
     if (!isAuthorized) {
-      _router.navigateByUrl(RoutePaths.login.toUrl());
-    } else if (lectureStarted) {
+      //_router.navigateByUrl(RoutePaths.login.toUrl());
+    } else if (isLectureStarted) {
       _dispatcher.dispatch(UpdateLectureLikeAction(lectureId: lecture.id, isLiked: !isLiked));
     }
   }

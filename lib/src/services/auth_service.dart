@@ -22,6 +22,7 @@ class AuthService {
   final PushService _pushService;
 
   Map<AuthType, String> _authUrls = {
+    AuthType.Anonymous: 'auth/register',
     AuthType.VK: 'auth/vk/uri',
     AuthType.Facebook: 'auth/facebook/uri',
     AuthType.GitHub: 'auth/github/uri',
@@ -83,5 +84,14 @@ class AuthService {
     window.localStorage.remove(tokenStorageKey);
     window.localStorage.remove(userIdStorageKey);
     window.localStorage.remove(userNameStorageKey);
+  }
+
+  createUser() async {
+    final url = _authUrls[AuthType.Anonymous];
+    final auth = await _http.get<AuthResponse>(url, decoder: (j) => AuthResponse.fromJson(j));
+    window.localStorage[tokenStorageKey] = auth.token;
+    window.localStorage[userNameStorageKey] = auth.userName;
+    window.localStorage[userIdStorageKey] = auth.userId;
+
   }
 }

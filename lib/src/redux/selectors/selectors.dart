@@ -67,7 +67,7 @@ class Selectors {
     );
   }
 
-  DateTime getCurrentTimeZoneDate(DateTime date) => date.add(Duration(hours: 7));
+  DateTime getCurrentTimeZoneDate(DateTime date) => date.toLocal();
 
   bool getCustomSectionMode(CodefestState state) => getUser(state).isCustomSectionMode;
 
@@ -116,7 +116,10 @@ class Selectors {
 
   bool isFavoriteLecture(CodefestState state, Lecture lecture) => getFavoriteLectureIds(state).contains(lecture.id);
 
-  bool isLectureStarted(Lecture lecture) => lecture.startTime.isBefore(getDateNow().add(Duration(minutes: 10)));
+  bool isLectureStarted(Lecture lecture) {
+    final allowedDate = getDateNow().add(Duration(minutes: 10));
+    return lecture.startTime.isBefore(allowedDate);
+  }
 
   bool isLikableLecture(Lecture lecture) => lecture.type == LectureType.lecture;
 
@@ -228,7 +231,7 @@ class Selectors {
   String _getDateText(DateTime date) {
     final currentTimeZoneDate = getCurrentTimeZoneDate(date);
 
-    return '${currentTimeZoneDate.day} марта';
+    return '${currentTimeZoneDate.day} июля';
   }
 
   Iterable<Lecture> _getVisibleLectures(
