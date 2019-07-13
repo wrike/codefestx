@@ -2,6 +2,8 @@
 @import "../../../styles/common.scss";
 
 :host {
+  display: block;
+  height: 100%;
 
   // tags ---
 
@@ -243,7 +245,6 @@
     border-radius: 6px; // todo
     background-color: #ffffff; // todo
     box-shadow: 0 2px 23px 0 rgba(0, 0, 0, 0.06); // todo
-    position: relative;
     cursor: pointer;
     overflow: hidden;
   }
