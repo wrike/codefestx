@@ -275,6 +275,12 @@
     position: absolute;
     right: 8px; // todo
     bottom: 8px; // todo
+    display: flex;
+  }
+
+  .event-card__language {
+    padding: 6px;
+    font-weight: bold;
   }
   // --- end event card
 
