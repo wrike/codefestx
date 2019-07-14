@@ -9,9 +9,14 @@
   // drawer ---
 
   .drawer {
-    @include mat-drawer-width(320px);
-    @include mat-temporary-drawer-width(320px);
+    @include mat-drawer-width(270px);
+    @include mat-temporary-drawer-width(270px);
     -webkit-tap-highlight-color: transparent;
+
+    @media (min-width: 380px) {
+      @include mat-drawer-width(320px);
+      @include mat-temporary-drawer-width(320px);
+    }
   }
 
   .drawer__header {
