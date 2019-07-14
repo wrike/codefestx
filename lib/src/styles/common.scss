@@ -39,15 +39,20 @@
       margin: auto;
     }
 
+    .info-item__title {
+      word-wrap: break-word;
+    }
 
     .info-item__subtitle {
       color: $fg-color-secondary;
     }
 
     .info-item__details {
+      flex-grow: 1;
       display: flex;
       flex-direction: column;
       justify-content: center;
+      min-width: 0;
     }
   }
 }

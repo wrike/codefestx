@@ -10,11 +10,17 @@
   .tags {
     grid-row: pre-content;
     display: flex;
-    flex-wrap: nowrap;
-    padding: 12px 0 12px 24px;
     overflow-x: auto;
     z-index: 0;
     -webkit-overflow-scrolling: touch;
+  }
+
+  .tags__wrapper {
+    flex-shrink: 0;
+    flex-grow: 1;
+    display: flex;
+    flex-wrap: nowrap;
+    padding: 12px 8px 12px 24px;
   }
 
   .tags__item {
@@ -68,7 +74,7 @@
     display: grid;
     grid-row-gap: 24px;
     margin: 0 -24px;
-    padding: 0 8px 24px 24px;
+    padding: 0 8px 8px 24px;
   }
 
   .schedule__header {
@@ -94,6 +100,10 @@
 
   .schedule__events + .schedule__events {
     margin-top: 8px;
+  }
+
+  .schedule__event {
+    min-width: 0;
   }
 
   .schedule__header-date {
@@ -240,7 +250,7 @@
   // event card ---
 
   .event-card {
-    padding: 16px 24px 16px 16px; // todo
+    padding: 16px; // todo
     position: relative; // for actions
     border-radius: 6px; // todo
     background-color: #ffffff; // todo
@@ -273,10 +283,12 @@
   }
 
   .event-card__actions {
-    position: absolute;
-    right: 8px; // todo
-    bottom: 8px; // todo
+    flex-shrink: 0;
+    align-self: flex-end;
     display: flex;
+    margin-left: 8px;
+    margin-bottom: -6px;
+    margin-right: -12px;
   }
 
   .event-card__language {

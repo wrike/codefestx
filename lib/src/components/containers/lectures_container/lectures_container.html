@@ -23,68 +23,72 @@
       *ngIf="isFiltersVisible"
       class="tags">
 
-      <!-- buttons group -->
       <div
-        [class.buttons-group--selected]="isAllSelected"
-        class="tags__item buttons-group">
+        class="tags__wrapper">
 
-        <!-- filters -->
+        <!-- buttons group -->
+        <div
+          [class.buttons-group--selected]="isAllSelected"
+          class="tags__item buttons-group">
+
+          <!-- filters -->
+          <button
+            cf-button
+            (click)="onFilter()"
+            class="button-tag button-icon-only">
+
+            <svg
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="24" height="24" viewBox="0 0 24 24"
+              class="button-icon">
+              <path d="M5 6h14a1 1 0 0 1 0 2H5a1 1 0 1 1 0-2zm3 5h8a1 1 0 0 1 0 2H8a1 1 0 0 1 0-2zm3 5h2a1 1 0 0 1 0 2h-2a1 1 0 0 1 0-2z" fill-rule="evenodd"/>
+            </svg>
+
+            <span
+              class="visually-hidden">
+              Set up filters:
+            </span>
+          </button>
+
+          <!-- all -->
+          <button
+            cf-button
+            (click)="onShowAllClick()"
+            class="button-tag">
+
+            <span
+              class="visually-hidden">
+              Selected:
+            </span>
+
+            &ngsp;{{ filterTitle }}
+          </button>
+        </div>
+
         <button
           cf-button
-          (click)="onFilter()"
-          class="button-tag button-icon-only">
-
-          <svg
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="24" height="24" viewBox="0 0 24 24"
-            class="button-icon">
-            <path d="M5 6h14a1 1 0 0 1 0 2H5a1 1 0 1 1 0-2zm3 5h8a1 1 0 0 1 0 2H8a1 1 0 0 1 0-2zm3 5h2a1 1 0 0 1 0 2h-2a1 1 0 0 1 0-2z" fill-rule="evenodd"/>
-          </svg>
-
-          <span
-            class="visually-hidden">
-            Настроить фильтры
-          </span>
+          (click)="onShowFavoriteClick()"
+          [class.button-primary]="isFavoriteSelected"
+          class="tags__item button-tag">
+          Favorites
         </button>
 
-        <!-- all -->
-        <button
-          cf-button
-          (click)="onShowAllClick()"
-          class="button-tag">
-
-          <span
-            class="visually-hidden">
-            Выбранное:
-          </span>
-
-          &ngsp;{{ filterTitle }}
-        </button>
-      </div>
-
-      <button
-        cf-button
-        (click)="onShowFavoriteClick()"
-        [class.button-primary]="isFavoriteSelected"
-        class="tags__item button-tag">
-        Favorites
-      </button>
-
-      <!--<button-->
+        <!--<button-->
         <!--cf-button-->
         <!--(click)="onShowCustomClick()"-->
         <!--[class.button-primary]="isCustomSelected"-->
         <!--class="tags__item button-tag">-->
         <!--События-->
-      <!--</button>-->
+        <!--</button>-->
 
-      <button
-        cf-button
-        (click)="onShowNowClick()"
-        [class.button-primary]="isNowSelected"
-        class="tags__item button-tag">
-        Live
-      </button>
+        <button
+          cf-button
+          (click)="onShowNowClick()"
+          [class.button-primary]="isNowSelected"
+          class="tags__item button-tag">
+          Live
+        </button>
+      </div>
     </nav>
 
     <!-- content -->
@@ -247,6 +251,7 @@
                       <div
                         class="info-item__details">
 
+
                         <!-- title -->
                         <div
                           class="info-item__title">
@@ -267,21 +272,22 @@
                           </ng-container>
                         </div>
                       </div>
-                    </div>
 
-                    <div
-                      class="event-card__actions">
+                      <!-- actions -->
+                      <div
+                        class="event-card__actions">
 
-                      <span
-                        class="event-card__language">
-                        {{ getLang(lecture) }}
-                      </span>
+                        <span
+                          class="event-card__language">
+                          {{ getLang(lecture) }}
+                        </span>
 
-                      <actions
-                        [popularity]="lecture.favoritesCount"
-                        [isFavorite]="isFavoriteLecture(lecture)"
-                        (onFavoriteChange)="onFavoriteChange(lecture, $event)">
-                      </actions>
+                        <actions
+                          [popularity]="lecture.favoritesCount"
+                          [isFavorite]="isFavoriteLecture(lecture)"
+                          (onFavoriteChange)="onFavoriteChange(lecture, $event)">
+                        </actions>
+                      </div>
                     </div>
                   </article>
                 </div>
