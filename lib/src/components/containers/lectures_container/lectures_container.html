@@ -267,21 +267,22 @@
                           </ng-container>
                         </div>
                       </div>
-                    </div>
 
-                    <div
-                      class="event-card__actions">
+                      <!-- actions -->
+                      <div
+                        class="event-card__actions">
 
-                      <span
-                        class="event-card__language">
-                        {{ getLang(lecture) }}
-                      </span>
+                        <span
+                          class="event-card__language">
+                          {{ getLang(lecture) }}
+                        </span>
 
-                      <actions
-                        [popularity]="lecture.favoritesCount"
-                        [isFavorite]="isFavoriteLecture(lecture)"
-                        (onFavoriteChange)="onFavoriteChange(lecture, $event)">
-                      </actions>
+                        <actions
+                          [popularity]="lecture.favoritesCount"
+                          [isFavorite]="isFavoriteLecture(lecture)"
+                          (onFavoriteChange)="onFavoriteChange(lecture, $event)">
+                        </actions>
+                      </div>
                     </div>
                   </article>
                 </div>
