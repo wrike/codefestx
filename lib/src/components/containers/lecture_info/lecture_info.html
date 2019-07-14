@@ -130,11 +130,11 @@
             class="event__vote">
         <!-- Vote -->
         <h3
-                class="event__vote-title">Понравился доклад? Голосуй!</h3>
+                class="event__vote-title">Do you like the talk? Vote!</h3>
 
         <p
                 class="event__vote-description">
-            Wrike наградит лучшего докладчика
+            We will award the best speaker
         </p>
 
         <button
@@ -153,7 +153,7 @@
                     <path d="M15.4 7H20l-7.08 7.06-2.3-2.29L15.41 7zm-6.8 4.04l3.67 3.67L9.97 17 4 11.04h4.6z" fill-rule="evenodd"/>
                 </svg>
 
-                Проголосовать
+                Vote
             </ng-container>
 
             <ng-container
@@ -165,15 +165,15 @@
                     <path d="M15.4 7H20l-7.08 7.06-2.3-2.29L15.41 7zm-6.8 4.04l3.67 3.67L9.97 17 4 11.04h4.6z" fill-rule="evenodd"/>
                 </svg>
 
-                <span aria-hidden="true">Уже проголосовали</span>
-                <span class="visually-hidden">Отозвать голос</span>
+<!--                <span aria-hidden="true">Уже проголосовали</span>-->
+                <span class="visually-hidden">You voted</span>
             </ng-container>
         </button>
 
         <p
                 *ngIf="!isLectureStarted"
                 class="event__vote-disabled-info">
-            Голосование будет доступно через 10 мин после начала доклада
+            Voting will be available 5 minutes after the talk starts
         </p>
     </section>
 </div>
