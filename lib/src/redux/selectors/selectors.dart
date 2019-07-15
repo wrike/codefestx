@@ -40,10 +40,11 @@ class Selectors {
       _getFilteredLectures,
     );
 
-    getVisibleLectures = createSelector7(
+    getVisibleLectures = createSelector8(
       getLectures,
       getFilteredLectures,
       getSelectedSectionIds,
+      getSelectedLanguages,
       getSearchMode,
       getSearchText,
       getCustomSectionMode,
@@ -99,6 +100,8 @@ class Selectors {
   Iterable<Section> getSections(CodefestState state) => state.sections;
 
   Iterable<String> getSelectedSectionIds(CodefestState state) => getUser(state).selectedSectionIds;
+
+  Iterable<LanguageType> getSelectedLanguages(CodefestState state) => getUser(state).selectedLanguages;
 
   String getStartTimeText(Lecture lecture) => _getTimeText(lecture.startTime);
 
@@ -238,6 +241,7 @@ class Selectors {
     Iterable<Lecture> allLectures,
     Iterable<Lecture> filteredLectures,
     Iterable<String> sectionIds,
+    Iterable<LanguageType> languages,
     bool isSearchMode,
     String searchText,
     bool isCustomSectionMode,
@@ -269,11 +273,13 @@ class Selectors {
 
     if (sectionIds.isEmpty) {
       return allLectures
+          .where((lecture) => languages.isEmpty || languages.contains(lecture.language))
           .where((lecture) => !lecture.section.isCustom || isCustomSectionMode && lecture.section.isCustom)
           .toList();
     }
 
     return allLectures
+        .where((lecture) => languages.isEmpty || languages.contains(lecture.language))
         .where((lecture) => sectionIds.contains(lecture.section.id) || isCustomSectionMode && lecture.section.isCustom)
         .toList();
   }

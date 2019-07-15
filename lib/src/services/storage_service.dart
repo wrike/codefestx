@@ -1,9 +1,12 @@
 import 'dart:convert';
 import 'dart:html';
 
+import 'package:codefest/src/models/_types.dart';
+
 class StorageService {
   static const String _favoritesKey = 'favorites';
   static const String _sectionsKey = 'sections';
+  static const String _languagesKey = 'languages';
   static const String _customSectionMode = 'customSectionMode';
 
   void addFavoriteLecture(String lectureId) => _addToList(_favoritesKey, lectureId);
@@ -11,6 +14,7 @@ class StorageService {
   void clearSectionsAndFavorites() {
     _clear(_favoritesKey);
     _clear(_sectionsKey);
+    _clear(_languagesKey);
   }
 
   void setCustomSectionMode(bool value) {
@@ -44,6 +48,8 @@ class StorageService {
   void removeFavoriteLecture(String lectureId) => _removeFromList(_favoritesKey, lectureId);
 
   void setSections(Iterable<String> sectionIds) => _set(_sectionsKey, sectionIds);
+
+  void setLanguages(Iterable<LanguageType> languages) => _set(_languagesKey, languages);
 
   void _addToList(String key, dynamic value) {
     final data = Iterable.castFrom(_getList(key)).toList();

@@ -147,6 +147,7 @@ class CodefestReducer {
   CodefestState _onSetSelectedSections(CodefestState state, SetSelectedSectionsAction action) => state.rebuild((b) {
         final user = state.user.rebuild((b) {
           b.selectedSectionIds.replace(action.sectionIds);
+          b.selectedLanguages.replace(action.languages);
           b.isCustomSectionMode = action.isCustomSectionMode;
         });
 
