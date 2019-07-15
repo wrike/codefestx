@@ -3,7 +3,7 @@
 :host {
   display: grid;
   grid-template-columns: [avatar] auto [balloon] 1fr;
-  grid-column-gap: 8px;
+  grid-column-gap: 12px;
 
   .message__avatar {
     display: block;
@@ -17,6 +17,7 @@
     border-radius: 0 8px 8px 8px;
     box-shadow: 0 2px 23px 0 rgba(0, 0, 0, 0.06);
     position: relative;
+    min-width: 0;
 
     &::before {
       content: "";
@@ -32,22 +33,30 @@
 
   .message-balloon__header {
     display: flex;
-    justify-content: space-between;
     margin-bottom: 4px;
   }
 
   .message-balloon__author {
+    flex-grow: 1;
     font-weight: $font-weight-bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .message-balloon__date {
-    margin-left: auto;
+    flex-shrink: 0;
+    margin-left: 8px;
     color: $fg-color-secondary;
   }
 
   .message-balloon__actions {
     display: flex;
     margin-top: 4px;
+  }
+
+  .message-balloon__text {
+    word-wrap: break-word;
   }
 
   .message-balloon__actions-button {
