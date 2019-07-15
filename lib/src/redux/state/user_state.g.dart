@@ -55,6 +55,8 @@ class _$UserState extends UserState {
   final String searchText;
   @override
   final BuiltList<String> selectedSectionIds;
+  @override
+  final BuiltList<LanguageType> selectedLanguages;
 
   factory _$UserState([void Function(UserStateBuilder) updates]) =>
       (new UserStateBuilder()..update(updates)).build();
@@ -69,7 +71,8 @@ class _$UserState extends UserState {
       this.isSearchMode,
       this.likedLectureIds,
       this.searchText,
-      this.selectedSectionIds})
+      this.selectedSectionIds,
+      this.selectedLanguages})
       : super._() {
     if (favoriteLectureIds == null) {
       throw new BuiltValueNullFieldError('UserState', 'favoriteLectureIds');
@@ -91,6 +94,9 @@ class _$UserState extends UserState {
     }
     if (selectedSectionIds == null) {
       throw new BuiltValueNullFieldError('UserState', 'selectedSectionIds');
+    }
+    if (selectedLanguages == null) {
+      throw new BuiltValueNullFieldError('UserState', 'selectedLanguages');
     }
   }
 
@@ -114,7 +120,8 @@ class _$UserState extends UserState {
         isSearchMode == other.isSearchMode &&
         likedLectureIds == other.likedLectureIds &&
         searchText == other.searchText &&
-        selectedSectionIds == other.selectedSectionIds;
+        selectedSectionIds == other.selectedSectionIds &&
+        selectedLanguages == other.selectedLanguages;
   }
 
   @override
@@ -127,16 +134,18 @@ class _$UserState extends UserState {
                         $jc(
                             $jc(
                                 $jc(
-                                    $jc($jc(0, avatarPath.hashCode),
-                                        displayName.hashCode),
-                                    favoriteLectureIds.hashCode),
-                                filterType.hashCode),
-                            isAuthorized.hashCode),
-                        isCustomSectionMode.hashCode),
-                    isSearchMode.hashCode),
-                likedLectureIds.hashCode),
-            searchText.hashCode),
-        selectedSectionIds.hashCode));
+                                    $jc(
+                                        $jc($jc(0, avatarPath.hashCode),
+                                            displayName.hashCode),
+                                        favoriteLectureIds.hashCode),
+                                    filterType.hashCode),
+                                isAuthorized.hashCode),
+                            isCustomSectionMode.hashCode),
+                        isSearchMode.hashCode),
+                    likedLectureIds.hashCode),
+                searchText.hashCode),
+            selectedSectionIds.hashCode),
+        selectedLanguages.hashCode));
   }
 
   @override
@@ -151,7 +160,8 @@ class _$UserState extends UserState {
           ..add('isSearchMode', isSearchMode)
           ..add('likedLectureIds', likedLectureIds)
           ..add('searchText', searchText)
-          ..add('selectedSectionIds', selectedSectionIds))
+          ..add('selectedSectionIds', selectedSectionIds)
+          ..add('selectedLanguages', selectedLanguages))
         .toString();
   }
 }
@@ -206,6 +216,12 @@ class UserStateBuilder implements Builder<UserState, UserStateBuilder> {
   set selectedSectionIds(ListBuilder<String> selectedSectionIds) =>
       _$this._selectedSectionIds = selectedSectionIds;
 
+  ListBuilder<LanguageType> _selectedLanguages;
+  ListBuilder<LanguageType> get selectedLanguages =>
+      _$this._selectedLanguages ??= new ListBuilder<LanguageType>();
+  set selectedLanguages(ListBuilder<LanguageType> selectedLanguages) =>
+      _$this._selectedLanguages = selectedLanguages;
+
   UserStateBuilder();
 
   UserStateBuilder get _$this {
@@ -220,6 +236,7 @@ class UserStateBuilder implements Builder<UserState, UserStateBuilder> {
       _likedLectureIds = _$v.likedLectureIds?.toBuilder();
       _searchText = _$v.searchText;
       _selectedSectionIds = _$v.selectedSectionIds?.toBuilder();
+      _selectedLanguages = _$v.selectedLanguages?.toBuilder();
       _$v = null;
     }
     return this;
@@ -253,7 +270,8 @@ class UserStateBuilder implements Builder<UserState, UserStateBuilder> {
               isSearchMode: isSearchMode,
               likedLectureIds: likedLectureIds.build(),
               searchText: searchText,
-              selectedSectionIds: selectedSectionIds.build());
+              selectedSectionIds: selectedSectionIds.build(),
+              selectedLanguages: selectedLanguages.build());
     } catch (_) {
       String _$failedField;
       try {
@@ -265,6 +283,8 @@ class UserStateBuilder implements Builder<UserState, UserStateBuilder> {
 
         _$failedField = 'selectedSectionIds';
         selectedSectionIds.build();
+        _$failedField = 'selectedLanguages';
+        selectedLanguages.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'UserState', _$failedField, e.toString());

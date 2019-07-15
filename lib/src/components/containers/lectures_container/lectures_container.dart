@@ -118,7 +118,7 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
       return '';
     }
 
-    return '19 july';
+    return '19 July';
   }
 
   String getFigure(int number) => '#figure-${number}';

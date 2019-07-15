@@ -40,10 +40,11 @@ class Selectors {
       _getFilteredLectures,
     );
 
-    getVisibleLectures = createSelector7(
+    getVisibleLectures = createSelector8(
       getLectures,
       getFilteredLectures,
       getSelectedSectionIds,
+      getSelectedLanguages,
       getSearchMode,
       getSearchText,
       getCustomSectionMode,
@@ -100,6 +101,8 @@ class Selectors {
 
   Iterable<String> getSelectedSectionIds(CodefestState state) => getUser(state).selectedSectionIds;
 
+  Iterable<LanguageType> getSelectedLanguages(CodefestState state) => getUser(state).selectedLanguages;
+
   String getStartTimeText(Lecture lecture) => _getTimeText(lecture.startTime);
 
   String getDateText(Lecture lecture) => _getDateText(lecture.startTime);
@@ -140,7 +143,7 @@ class Selectors {
   bool _fieldsContainsText(Iterable<String> fields, String text) =>
       fields.any((field) => field?.toLowerCase()?.contains(text) ?? false);
 
-  String _formatMinutes(String minutes) => minutes.length == 1 ? '${minutes}0' : minutes;
+  String _formatMinutes(String minutes) => minutes.length == 1 ? '0${minutes}' : minutes;
 
   Iterable<Lecture> _getCustomSectionLectures(Iterable<Lecture> lectures) =>
       lectures.where((lecture) => lecture.section.isCustom).toList();
@@ -231,13 +234,14 @@ class Selectors {
   String _getDateText(DateTime date) {
     final currentTimeZoneDate = getCurrentTimeZoneDate(date);
 
-    return '${currentTimeZoneDate.day} july';
+    return '${currentTimeZoneDate.day} July';
   }
 
   Iterable<Lecture> _getVisibleLectures(
     Iterable<Lecture> allLectures,
     Iterable<Lecture> filteredLectures,
     Iterable<String> sectionIds,
+    Iterable<LanguageType> languages,
     bool isSearchMode,
     String searchText,
     bool isCustomSectionMode,
@@ -269,11 +273,13 @@ class Selectors {
 
     if (sectionIds.isEmpty) {
       return allLectures
+          .where((lecture) => languages.isEmpty || languages.contains(lecture.language))
           .where((lecture) => !lecture.section.isCustom || isCustomSectionMode && lecture.section.isCustom)
           .toList();
     }
 
     return allLectures
+        .where((lecture) => languages.isEmpty || languages.contains(lecture.language))
         .where((lecture) => sectionIds.contains(lecture.section.id) || isCustomSectionMode && lecture.section.isCustom)
         .toList();
   }

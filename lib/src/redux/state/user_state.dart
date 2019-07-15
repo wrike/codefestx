@@ -1,5 +1,6 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
+import 'package:codefest/src/models/_types.dart';
 
 part 'user_state.g.dart';
 
@@ -43,4 +44,6 @@ abstract class UserState implements Built<UserState, UserStateBuilder> {
   String get searchText;
 
   BuiltList<String> get selectedSectionIds;
+
+  BuiltList<LanguageType> get selectedLanguages;
 }

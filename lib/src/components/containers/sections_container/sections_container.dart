@@ -6,6 +6,7 @@ import 'package:codefest/src/components/loader/loader.dart';
 import 'package:codefest/src/components/sections/sections.dart';
 import 'package:codefest/src/components/sections/sections_change_event.dart';
 import 'package:codefest/src/components/ui/button/button.dart';
+import 'package:codefest/src/models/_types.dart';
 import 'package:codefest/src/models/section.dart';
 import 'package:codefest/src/redux/actions/effects/init_action.dart';
 import 'package:codefest/src/redux/actions/effects/update_selected_sections_action.dart';
@@ -37,6 +38,8 @@ class SectionsContainerComponent extends StatefulComponent implements OnInit {
 
   Iterable<String> _selectedSectionIds = [];
 
+  Iterable<LanguageType> _selectedLanguages = [];
+
   bool _isCustomSectionMode = true;
 
   bool hasSelection = false;
@@ -62,6 +65,8 @@ class SectionsContainerComponent extends StatefulComponent implements OnInit {
 
   Iterable<String> get selectedSectionIds => _selectors.getSelectedSectionIds(state);
 
+  Iterable<LanguageType> get selectedLanguages => _selectors.getSelectedLanguages(state);
+
   @override
   void ngOnInit() {
     _dispatcher.dispatch(InitAction());
@@ -71,6 +76,7 @@ class SectionsContainerComponent extends StatefulComponent implements OnInit {
     _dispatcher.dispatch(UpdateSelectedSectionsAction(
       sectionIds: _selectedSectionIds,
       isCustomSectionMode: _isCustomSectionMode,
+      languages: _selectedLanguages,
     ));
 
     _goBack();
@@ -83,6 +89,7 @@ class SectionsContainerComponent extends StatefulComponent implements OnInit {
   void onSectionsChange(SectionsChangeEvent event) {
     _selectedSectionIds = event.sectionIds;
     _isCustomSectionMode = event.isCustomSectionMode;
+    _selectedLanguages = event.languages;
   }
 
   void onShowApply(bool value) {

@@ -18,6 +18,31 @@
   </div>
 </section>
 
+<section
+  class="sections__group">
+
+  <h2
+    class="sections__group-title">
+    Language
+  </h2>
+
+  <div
+    class="sections__grid">
+
+    <cf-section
+      (change)="onLanguageClick(LanguageType.en)"
+      [title]="'English'"
+      [isChecked]="isLanguageSelected(LanguageType.en)">
+    </cf-section>
+
+    <cf-section
+      (change)="onLanguageClick(LanguageType.ru)"
+      [title]="'Russian'"
+      [isChecked]="isLanguageSelected(LanguageType.ru)">
+    </cf-section>
+  </div>
+</section>
+
 <!--<section-->
   <!--class="sections__group">-->
 

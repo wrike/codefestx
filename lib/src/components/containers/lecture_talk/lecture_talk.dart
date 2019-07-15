@@ -30,6 +30,7 @@ import 'package:codefest/src/services/auth_store.dart';
 class LectureTalkComponent extends StatefulComponent {
   final AuthStore _authStore;
   final Dispatcher _dispatcher;
+
   @HostBinding('class.messages')
   final bool isHostMarked = true;
   @ViewChild('input')
@@ -41,11 +42,16 @@ class LectureTalkComponent extends StatefulComponent {
   List<TalkPost> posts;
 
   LectureTalkComponent(
-      NgZone zone,
-      ChangeDetectorRef cdr,
-      StoreFactory storeFactory,
-      this._dispatcher, this._authStore,
-      ) : super(zone, cdr, storeFactory);
+    NgZone zone,
+    ChangeDetectorRef cdr,
+    StoreFactory storeFactory,
+    this._dispatcher,
+    this._authStore,
+  ) : super(
+          zone,
+          cdr,
+          storeFactory,
+        );
 
   String parentId;
 
