@@ -269,8 +269,16 @@
   }
 
   .event-card__meta {
+    display: flex;
     color: $fg-color-secondary;
     margin-bottom: 4px;
+  }
+
+  .event-card__meta-item--section {
+    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .event-card__title {
@@ -286,7 +294,6 @@
     flex-shrink: 0;
     align-self: flex-end;
     display: flex;
-    margin-left: 8px;
     margin-bottom: -6px;
     margin-right: -12px;
   }

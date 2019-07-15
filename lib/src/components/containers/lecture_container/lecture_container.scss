@@ -2,6 +2,8 @@
 @import "../../../styles/common.scss";
 
 :host {
+  display: block;
+  height: 100%;
 
   // tabs ---
 
@@ -20,6 +22,12 @@
   // --- end tabs
 
   // event ---
+
+  .event {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
 
   .event__hero {
     height: 176px;
@@ -122,4 +130,8 @@
 
   // related events ---
   // --- end related events
+
+  .event__talk {
+    flex-grow: 1;
+  }
 }

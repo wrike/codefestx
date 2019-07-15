@@ -117,14 +117,14 @@
           class="schedule__section">
 
           <!-- day title -->
-          <header
-            class="schedule__header">
+<!--          <header-->
+<!--            class="schedule__header">-->
 
-            <time
-              class="schedule__date">
-              {{ getDay(groupedByDay) }}
-            </time>
-          </header>
+<!--            <time-->
+<!--              class="schedule__date">-->
+<!--              {{ getDay(groupedByDay) }}-->
+<!--            </time>-->
+<!--          </header>-->
 
           <!-- day events grouped by time -->
           <div
@@ -213,7 +213,7 @@
 
                       <!-- section -->
                       <span
-                        class="event-card__meta-item"
+                        class="event-card__meta-item event-card__meta-item--section"
                         [style.color]="lecture.section.color">
                         {{ lecture.section.title }}
                       </span>
@@ -224,7 +224,7 @@
                     <!-- title -->
                     <h1
                       class="event-card__title">
-                      {{ lecture.title }}
+                      [{{ getLang(lecture) }}] {{ lecture.title }}
                     </h1>
 
                     <!-- speakers (todo: info item) -->
@@ -258,7 +258,7 @@
 
                           <ng-container
                             *ngFor="let speaker of lecture.speakers">
-                            {{ speaker.name }}
+                            <div>{{ speaker.name }}</div>
                           </ng-container>
                         </div>
 
@@ -266,27 +266,29 @@
                         <div
                           class="info-item__subtitle">
 
-                          <ng-container
-                            *ngFor="let speaker of lecture.speakers">
-                            {{ speaker.company }}
-                          </ng-container>
+                          <div class="info-item__subtitle-wrapper">
+                            <ng-container
+                              *ngFor="let speaker of lecture.speakers">
+                              <div>{{ speaker.company }}</div>
+                            </ng-container>
+                          </div>
+
+                          <!-- actions -->
+                          <div
+                            class="event-card__actions actions">
+
+                            <!-- <span
+                              class="event-card__language">
+                              {{ getLang(lecture) }}
+                            </span> -->
+
+                            <actions
+                              [popularity]="lecture.favoritesCount"
+                              [isFavorite]="isFavoriteLecture(lecture)"
+                              (onFavoriteChange)="onFavoriteChange(lecture, $event)">
+                            </actions>
+                          </div>
                         </div>
-                      </div>
-
-                      <!-- actions -->
-                      <div
-                        class="event-card__actions">
-
-                        <span
-                          class="event-card__language">
-                          {{ getLang(lecture) }}
-                        </span>
-
-                        <actions
-                          [popularity]="lecture.favoritesCount"
-                          [isFavorite]="isFavoriteLecture(lecture)"
-                          (onFavoriteChange)="onFavoriteChange(lecture, $event)">
-                        </actions>
                       </div>
                     </div>
                   </article>
