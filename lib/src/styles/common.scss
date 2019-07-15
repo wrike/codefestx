@@ -11,14 +11,16 @@
     .info-item__media-container {
       flex-shrink: 0;
       display: inline-flex;
-      width: 40px; // todo
-      height: 40px; // todo
+      width: 36px; // todo
+      height: 36px; // todo
       border-radius: 50%;
       overflow: hidden;
       vertical-align: top;
+      border: 2px solid transparent;
 
       + .info-item__media-container {
         margin-left: -8px; // todo
+        border-color: #fff;
       }
 
       &.info-item__media-container--placeholder {
@@ -44,7 +46,15 @@
     }
 
     .info-item__subtitle {
+      display: flex;
       color: $fg-color-secondary;
+      position: relative;
+    }
+
+    .info-item__subtitle-wrapper {
+      flex-grow: 1;
+      min-width: 0;
+      max-width: calc(100% - 52px);
     }
 
     .info-item__details {
@@ -53,6 +63,14 @@
       flex-direction: column;
       justify-content: center;
       min-width: 0;
+    }
+
+    .event-card__actions.actions {
+      display: flex;
+      position: absolute;
+      right: -12px;
+      bottom: -4px;
+      margin: 0;
     }
   }
 }

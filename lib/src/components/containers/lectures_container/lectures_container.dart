@@ -109,7 +109,7 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
 
   String flag(Lecture lecture) => _selectors.getFlag(lecture);
 
-  String getLang(Lecture lecture) => lecture.language == LanguageType.en ? 'eng' : 'ru';
+  String getLang(Lecture lecture) => lecture.language == LanguageType.en ? 'En' : 'Ru';
 
   String getDay(Iterable<Iterable<Lecture>> grouped) {
     final lecture = grouped.isNotEmpty ? grouped.first.isNotEmpty ? grouped.first.first : null : null;
