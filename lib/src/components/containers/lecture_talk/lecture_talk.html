@@ -1,4 +1,7 @@
-<talks-zero-state *ngIf="posts.length == 0"></talks-zero-state>
+<talks-zero-state
+  *ngIf="posts.length == 0">
+</talks-zero-state>
+
 <talk-post
   *ngFor="let post of posts"
   (onDelete)="onPostDelete($event)"

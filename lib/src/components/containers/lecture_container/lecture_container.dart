@@ -39,7 +39,9 @@ import 'package:codefest/src/services/dom_service.dart';
     LectureInfoComponent,
     LectureTalkComponent,
   ],
-  exports: [NavigationType],
+  exports: [
+    NavigationType,
+  ],
   preserveWhitespace: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 )
@@ -71,7 +73,7 @@ class LectureContainerComponent extends StatefulComponent implements OnInit, OnD
     });
   }
 
-  String get title => !lecture.section.isCustom ? 'Доклад' : 'Событие';
+  String get title => !lecture.section.isCustom ? 'Talk' : 'Event';
 
   String getFigure(int number) => '#figure-${number}';
 
@@ -84,7 +86,6 @@ class LectureContainerComponent extends StatefulComponent implements OnInit, OnD
   bool get isLectureAvailable => lecture != null;
 
   bool get isWrikeEvent => isLectureAvailable && lecture.type == LectureType.wrike;
-
 
   bool get isLikable => _selectors.isLikableLecture(lecture);
 

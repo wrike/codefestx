@@ -5,13 +5,14 @@ import 'package:angular/angular.dart';
 import 'package:angular_forms/angular_forms.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:codefest/src/components/ui/button/button.dart';
-import 'package:codefest/src/route_paths.dart';
 import 'package:codefest/src/services/auth_store.dart';
 
 @Component(
   selector: 'talk-post-input',
   templateUrl: 'talk_post_input_component.html',
-  styleUrls: const ['talk_post_input_component.css'],
+  styleUrls: [
+    'talk_post_input_component.css',
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   directives: [
     NgIf,
@@ -62,6 +63,6 @@ class TalkPostInputComponent {
   }
 
   void onLoginButtonClick() {
-   // _router.navigateByUrl(RoutePaths.login.toUrl());
+    // _router.navigateByUrl(RoutePaths.login.toUrl());
   }
 }

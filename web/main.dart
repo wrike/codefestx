@@ -16,7 +16,7 @@ import 'main.template.dart' as self;
 final InjectorFactory injector = self.injector$Injector;
 
 void main() {
-  Intl.defaultLocale = 'ru_RU';
+  Intl.defaultLocale = 'en_US';
   initializeDateFormatting(Intl.defaultLocale);
   runApp(ng.AppComponentNgFactory, createInjector: injector);
 }

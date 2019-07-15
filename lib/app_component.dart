@@ -132,7 +132,7 @@ class AppComponent implements OnDestroy, OnInit {
       Future.delayed(const Duration(seconds: 5)).then((_) => _pushService.init(_authStore.userId));
     } else if (_authStore.isNewUser) {
       _router.onRouteActivated.first.then((state) {
-        _router.navigateByUrl(RoutePaths.welcome.toUrl());
+        _router.navigateByUrl(RoutePaths.lectures.toUrl());
       });
     }
 
