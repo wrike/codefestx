@@ -215,7 +215,11 @@ class Effects {
 
   Stream<Object> _onUpdateSelectedSections(Stream<Object> actions, EpicStore<CodefestState> store) =>
       Observable(actions).ofType(const TypeToken<UpdateSelectedSectionsAction>()).asyncExpand((action) async* {
-        yield SetSelectedSectionsAction(sectionIds: action.sectionIds, isCustomSectionMode: action.isCustomSectionMode);
+        yield SetSelectedSectionsAction(
+          sectionIds: action.sectionIds,
+          isCustomSectionMode: action.isCustomSectionMode,
+          languages: action.languages,
+        );
 
         final user = store.state.user;
         final sectionIds = action.sectionIds;
@@ -229,6 +233,7 @@ class Effects {
         } else {
           _storageService.setSections(sectionIds.toList());
           _storageService.setCustomSectionMode(action.isCustomSectionMode);
+          _storageService.setLanguages(action.languages);
         }
       });
 }

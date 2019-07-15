@@ -5,6 +5,7 @@ import 'package:codefest/src/components/sections/sections_change_event.dart';
 import 'package:codefest/src/components/ui/button/button.dart';
 import 'package:codefest/src/components/ui/section/section.dart';
 import 'package:codefest/src/components/ui/toggle/toggle.dart';
+import 'package:codefest/src/models/_types.dart';
 import 'package:codefest/src/models/section.dart';
 import 'package:collection/collection.dart' show SetEquality;
 
@@ -20,6 +21,9 @@ import 'package:collection/collection.dart' show SetEquality;
     ButtonComponent,
   ],
   providers: [],
+  exports: [
+    LanguageType,
+  ],
   preserveWhitespace: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 )
@@ -35,6 +39,8 @@ class SectionsComponent {
 
   Iterable<String> _selectedSectionIds;
   List<String> _selectedSectionIdsCurrent;
+  Iterable<LanguageType> _selectedLanguages;
+  List<LanguageType> _selectedLanguagesCurrent;
 
   final _onChange = StreamController<SectionsChangeEvent>.broadcast();
 
@@ -66,11 +72,19 @@ class SectionsComponent {
     _selectedSectionIdsCurrent = value.toList();
   }
 
+  @Input()
+  set selectedLanguages(Iterable<LanguageType> value) {
+    _selectedLanguages = value;
+    _selectedLanguagesCurrent = value.toList();
+  }
+
   bool isSectionSelected(Section section) => selectedSectionIds.contains(section.id);
+
+  bool isLanguageSelected(LanguageType lang) => _selectedLanguages.contains(lang);
 
   void onCustomSectionModeClick() {
     _isCustomSectionModeCurrent = !isCustomSectionMode;
-    _onChange.add(SectionsChangeEvent(_isCustomSectionModeCurrent, _selectedSectionIdsCurrent));
+    _onChange.add(SectionsChangeEvent(_isCustomSectionModeCurrent, _selectedSectionIdsCurrent, _selectedLanguagesCurrent));
     selectionChange();
   }
 
@@ -80,14 +94,24 @@ class SectionsComponent {
     } else {
       _selectedSectionIdsCurrent.add(section.id);
     }
-    _onChange.add(SectionsChangeEvent(_isCustomSectionModeCurrent, _selectedSectionIdsCurrent));
+    _onChange.add(SectionsChangeEvent(_isCustomSectionModeCurrent, _selectedSectionIdsCurrent, _selectedLanguagesCurrent));
+    selectionChange();
+  }
+
+  void onLanguageClick(LanguageType lang) {
+    if (_selectedLanguagesCurrent.contains(lang)) {
+      _selectedLanguagesCurrent.remove(lang);
+    } else {
+      _selectedLanguagesCurrent.add(lang);
+    }
+    _onChange.add(SectionsChangeEvent(_isCustomSectionModeCurrent, _selectedSectionIdsCurrent, _selectedLanguagesCurrent));
     selectionChange();
   }
 
   void selectionChange() {
-    isSelectionChanged =
-        !(const SetEquality().equals(_selectedSectionIds.toSet(), _selectedSectionIdsCurrent.toSet()) &&
-            _isCustomSectionMode == _isCustomSectionModeCurrent);
+    isSelectionChanged = !(const SetEquality().equals(_selectedSectionIds.toSet(), _selectedSectionIdsCurrent.toSet())
+        && const SetEquality().equals(_selectedLanguages.toSet(), _selectedLanguagesCurrent.toSet())
+        && _isCustomSectionMode == _isCustomSectionModeCurrent);
 
     _onShowApply.add(isSelectionChanged);
   }
