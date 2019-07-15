@@ -143,7 +143,7 @@ class Selectors {
   bool _fieldsContainsText(Iterable<String> fields, String text) =>
       fields.any((field) => field?.toLowerCase()?.contains(text) ?? false);
 
-  String _formatMinutes(String minutes) => minutes.length == 1 ? '${minutes}0' : minutes;
+  String _formatMinutes(String minutes) => minutes.length == 1 ? '0${minutes}' : minutes;
 
   Iterable<Lecture> _getCustomSectionLectures(Iterable<Lecture> lectures) =>
       lectures.where((lecture) => lecture.section.isCustom).toList();
