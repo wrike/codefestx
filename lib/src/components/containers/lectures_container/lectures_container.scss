@@ -299,8 +299,11 @@
   }
 
   .event-card__language {
-    padding: 6px;
     font-weight: bold;
+    align-self: center;
+    line-height: 1;
+    position: relative;
+    top: 1px;
   }
   // --- end event card
 
