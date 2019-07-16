@@ -54,6 +54,7 @@ class LectureContainerComponent extends StatefulComponent implements OnInit, OnD
   final DOMService _dom;
 
   bool _isActivated = false;
+  bool _isTalksLoaded = false;
   bool isInfoMode = true;
   Map<String, String> _parameters = {};
 
@@ -122,9 +123,6 @@ class LectureContainerComponent extends StatefulComponent implements OnInit, OnD
     isInfoMode = true;
     _parameters = state.parameters;
     _processLectureState();
-    if (lecture != null) {
-      _dispatcher.dispatch(LoadTalksAction(lecture.id));
-    }
     detectChanges();
   }
 
@@ -136,6 +134,11 @@ class LectureContainerComponent extends StatefulComponent implements OnInit, OnD
     if (!isLectureAvailable) {
       _router.navigateByUrl(RoutePaths.empty.toUrl());
       return;
+    }
+
+    if (!_isTalksLoaded) {
+      _dispatcher.dispatch(LoadTalksAction(lecture.id));
+      _isTalksLoaded = true;
     }
 
     _dom.toggleDocumentClass(WRIKE_EVENT_CLASSNAME, isWrikeEvent);
