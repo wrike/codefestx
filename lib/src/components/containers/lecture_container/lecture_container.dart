@@ -118,11 +118,13 @@ class LectureContainerComponent extends StatefulComponent implements OnInit, OnD
   }
 
   void _onRouteActivated(RouterState state) {
-    _dispatcher.dispatch(LoadTalksAction(lecture.id));
     _isActivated = true;
     isInfoMode = true;
     _parameters = state.parameters;
     _processLectureState();
+    if (lecture != null) {
+      _dispatcher.dispatch(LoadTalksAction(lecture.id));
+    }
     detectChanges();
   }
 
