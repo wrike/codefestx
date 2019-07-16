@@ -184,8 +184,8 @@ class CodefestReducer {
         post.replyText = replyPost.text;
         post.replyName = replyPost.authorName;
       } else {
-        post.replyName = 'Неизвестный автор';
-        post.replyText = 'Пост удален :(';
+        post.replyName = 'Unknown author';
+        post.replyText = 'Post has been deleted :(';
       }
     }
     return post;
