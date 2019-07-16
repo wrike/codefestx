@@ -75,8 +75,8 @@
                             class="info-item__subtitle">
 
                         <ng-container
-                                *ngFor="let speaker of lecture.speakers">
-                            <div>{{ speaker.company }}</div>
+                                *ngIf="lecture.speakers.first != null">
+                            <div>{{ lecture.speakers.first.company }}</div>
                         </ng-container>
                     </div>
                 </div>
