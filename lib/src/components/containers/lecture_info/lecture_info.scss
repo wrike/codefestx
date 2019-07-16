@@ -21,6 +21,7 @@
 
   .event__info-item + .event__info-item {
     margin-left: 16px;
+    flex-shrink: 0;
   }
 
   .event__description {
@@ -72,7 +73,31 @@
   // related events ---
   // --- end related events
 
+  .info-item__media {
+    margin-right: 7px !important;
+
+    @media (min-width: 321px) {
+      font-size: 8px !important;
+    }
+  }
+
   .info-item__media-container {
+    width: 28px !important;
+    height: 28px !important;
     border-color: #f2f3fa !important;
+
+    @media (min-width: 3460px) {
+      width: 36px !important;
+      height: 36px !important;
+      font-size: 12px !important;
+    }
+  }
+
+  .info-item__details {
+    font-size: 10px !important;
+
+    @media (min-width: 340px) {
+      font-size: 12px !important;
+    }
   }
 }

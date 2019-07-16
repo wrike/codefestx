@@ -1,7 +1,7 @@
 <img
   [src]="post.avatar"
-  width="40"
-  height="40"
+  width="56"
+  height="56"
   class="message__avatar">
 
 <div
@@ -48,14 +48,14 @@
       *ngIf="canReply"
       (click)="onPostReply()"
       class="message-balloon__actions-button">
-      Ответить
+      Reply
     </button>
 
     <button
       *ngIf="canDelete"
       (click)="onPostDelete()"
       class="message-balloon__actions-button">
-      Удалить
+      Delete
     </button>
   </div>
 </div>
