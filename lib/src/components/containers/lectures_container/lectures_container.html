@@ -224,7 +224,7 @@
                     <!-- title -->
                     <h1
                       class="event-card__title">
-                      [{{ getLang(lecture) }}] {{ lecture.title }}
+                      {{ lecture.title }}
                     </h1>
 
                     <!-- speakers (todo: info item) -->
@@ -268,8 +268,8 @@
 
                           <div class="info-item__subtitle-wrapper">
                             <ng-container
-                              *ngFor="let speaker of lecture.speakers">
-                              <div>{{ speaker.company }}</div>
+                              *ngIf="lecture.speakers.first != null">
+                              <div>{{ lecture.speakers.first.company }}</div>
                             </ng-container>
                           </div>
 
@@ -277,10 +277,10 @@
                           <div
                             class="event-card__actions actions">
 
-                            <!-- <span
+                            <span
                               class="event-card__language">
                               {{ getLang(lecture) }}
-                            </span> -->
+                            </span>
 
                             <actions
                               [popularity]="lecture.favoritesCount"
