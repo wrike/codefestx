@@ -45,6 +45,8 @@ class TalkPostInputComponent {
 
   bool get canCreatePost => _authStore.isAuth;
 
+  String get userName => _authStore.userName;
+
   TalkPostInputComponent(this._authStore, this._router);
 
   void send() {
