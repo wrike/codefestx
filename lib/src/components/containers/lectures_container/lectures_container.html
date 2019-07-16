@@ -53,7 +53,7 @@
           <!-- all -->
           <button
             cf-button
-            (click)="filtersCount > 0 && isAllSelected ? onFilter() : onShowAllClick()"
+            (click)="isAllSelected ? onFilter() : onShowAllClick()"
             class="button-tag">
 
             <span

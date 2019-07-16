@@ -58,10 +58,10 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
   ) : super(zone, cdr, storeFactory);
 
   String get filterTitle {
-    if (filtersCount == 1) {
+    if (_filtersCount == 1) {
       return '1 filter';
-    } else if (filtersCount > 1) {
-      return '${filtersCount} filters';
+    } else if (_filtersCount > 1) {
+      return '${_filtersCount} filters';
     } else {
       return 'All';
     }
@@ -99,7 +99,7 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
 
   Iterable<Section> get sections => _selectors.getSelectedSections(state);
 
-  int get filtersCount => sections.length + _selectors.getSelectedLanguages(state).length;
+  int get _filtersCount => sections.length + _selectors.getSelectedLanguages(state).length;
 
   String get title => 'Schedule';
 
