@@ -16,6 +16,7 @@
   .event__info {
     display: flex;
     align-items: flex-start;
+    justify-content: space-between;
     margin-top: 24px;
   }
 
@@ -56,6 +57,7 @@
   .event__vote-disabled-info {
     text-align: center;
     color: $fg-color-secondary;
+    margin-bottom: 24px;
   }
 
   .event__related {
