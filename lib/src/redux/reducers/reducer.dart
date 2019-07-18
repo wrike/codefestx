@@ -1,5 +1,8 @@
+import 'dart:math';
+
 import 'package:codefest/src/models/lecture.dart';
 import 'package:codefest/src/models/talk_post.dart';
+import 'package:codefest/src/redux/actions/actions.dart';
 import 'package:codefest/src/redux/actions/add_post_action.dart';
 import 'package:codefest/src/redux/actions/authorize_action.dart';
 import 'package:codefest/src/redux/actions/deleted_post_action.dart';
@@ -12,7 +15,6 @@ import 'package:codefest/src/redux/actions/loaded_talks_action.dart';
 import 'package:codefest/src/redux/actions/new_version_action.dart';
 import 'package:codefest/src/redux/actions/search_lectures_action.dart';
 import 'package:codefest/src/redux/actions/set_scroll_top_action.dart';
-import 'package:codefest/src/redux/actions/actions.dart';
 import 'package:codefest/src/redux/state/codefest_state.dart';
 import 'package:redux/redux.dart';
 
@@ -86,6 +88,7 @@ class CodefestReducer {
 
   CodefestState _onSetData(CodefestState state, SetDataAction action) => state.rebuild(
         (b) => b
+          ..maxFavorites = action.lectures.map((l) => l.favoritesCount).reduce(max)
           ..speakers.replace(action.speakers)
           ..locations.replace(action.locations)
           ..sections.replace(action.sections)

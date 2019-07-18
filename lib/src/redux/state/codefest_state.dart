@@ -28,6 +28,8 @@ abstract class CodefestState implements Built<CodefestState, CodefestStateBuilde
 
   int get scrollTop;
 
+  int get maxFavorites;
+
   BuiltList<Section> get sections;
 
   BuiltList<Speaker> get speakers;

@@ -101,6 +101,8 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
 
   int get _filtersCount => sections.length + _selectors.getSelectedLanguages(state).length;
 
+  int get maxPopularity => state.maxFavorites;
+
   String get title => 'Schedule';
 
   String currentTimeId(Lecture lecture) => isNearestLectureGroup(lecture) ? 'currentTime' : null;

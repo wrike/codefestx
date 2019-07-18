@@ -9,6 +9,7 @@ class StateFactory {
           ..isError = false
           ..releaseNote = ''
           ..scrollTop = 0
+          ..maxFavorites = 10
           ..user.replace(
             UserState(
               (b) => b

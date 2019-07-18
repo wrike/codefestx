@@ -13,24 +13,30 @@ import 'package:codefest/src/components/ui/button/button.dart';
   changeDetection: ChangeDetectionStrategy.OnPush,
 )
 class PopularityIconComponent {
-  static const _lowCount = 2;
-  static const _middleCount = 5;
-  static const _maxCount = 10;
+  int get _lowCount => (maxPopularity / 4).round();
+
+  int get _middleCount => (maxPopularity / 2).round();
+
+  int get _maxCount => (maxPopularity * 3 / 4).round();
 
   @Input()
   int popularity = 0;
 
+  @Input()
+  int maxPopularity = 20;
+
   String get icon => level.toString();
 
   int get level {
-    if (popularity > _maxCount) {
-      return 3;
-    } else if (popularity > _middleCount) {
-      return 2;
-    } else if (popularity > _lowCount) {
-      return 1;
+    var out = 0;
+    if (popularity >= _maxCount) {
+      out = 3;
+    } else if (popularity >= _middleCount) {
+      out = 2;
+    } else if (popularity >= _lowCount) {
+      out = 1;
     }
 
-    return 0;
+    return out;
   }
 }

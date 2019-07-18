@@ -26,6 +26,9 @@ class ActionsComponent {
   @Input()
   int popularity = 0;
 
+  @Input()
+  int maxPopularity = 20;
+
   @Output()
   Stream<bool> get onFavoriteChange => _onFavoriteChangeStreamController.stream;
 

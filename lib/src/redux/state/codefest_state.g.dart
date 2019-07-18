@@ -22,6 +22,8 @@ class _$CodefestState extends CodefestState {
   @override
   final int scrollTop;
   @override
+  final int maxFavorites;
+  @override
   final BuiltList<Section> sections;
   @override
   final BuiltList<Speaker> speakers;
@@ -43,6 +45,7 @@ class _$CodefestState extends CodefestState {
       this.locations,
       this.releaseNote,
       this.scrollTop,
+      this.maxFavorites,
       this.sections,
       this.speakers,
       this.talkPosts,
@@ -69,6 +72,9 @@ class _$CodefestState extends CodefestState {
     }
     if (scrollTop == null) {
       throw new BuiltValueNullFieldError('CodefestState', 'scrollTop');
+    }
+    if (maxFavorites == null) {
+      throw new BuiltValueNullFieldError('CodefestState', 'maxFavorites');
     }
     if (sections == null) {
       throw new BuiltValueNullFieldError('CodefestState', 'sections');
@@ -102,6 +108,7 @@ class _$CodefestState extends CodefestState {
         locations == other.locations &&
         releaseNote == other.releaseNote &&
         scrollTop == other.scrollTop &&
+        maxFavorites == other.maxFavorites &&
         sections == other.sections &&
         speakers == other.speakers &&
         talkPosts == other.talkPosts &&
@@ -121,13 +128,15 @@ class _$CodefestState extends CodefestState {
                                 $jc(
                                     $jc(
                                         $jc(
-                                            $jc($jc(0, isError.hashCode),
-                                                isLoaded.hashCode),
-                                            isReady.hashCode),
-                                        lectures.hashCode),
-                                    locations.hashCode),
-                                releaseNote.hashCode),
-                            scrollTop.hashCode),
+                                            $jc(
+                                                $jc($jc(0, isError.hashCode),
+                                                    isLoaded.hashCode),
+                                                isReady.hashCode),
+                                            lectures.hashCode),
+                                        locations.hashCode),
+                                    releaseNote.hashCode),
+                                scrollTop.hashCode),
+                            maxFavorites.hashCode),
                         sections.hashCode),
                     speakers.hashCode),
                 talkPosts.hashCode),
@@ -145,6 +154,7 @@ class _$CodefestState extends CodefestState {
           ..add('locations', locations)
           ..add('releaseNote', releaseNote)
           ..add('scrollTop', scrollTop)
+          ..add('maxFavorites', maxFavorites)
           ..add('sections', sections)
           ..add('speakers', speakers)
           ..add('talkPosts', talkPosts)
@@ -189,6 +199,10 @@ class CodefestStateBuilder
   int get scrollTop => _$this._scrollTop;
   set scrollTop(int scrollTop) => _$this._scrollTop = scrollTop;
 
+  int _maxFavorites;
+  int get maxFavorites => _$this._maxFavorites;
+  set maxFavorites(int maxFavorites) => _$this._maxFavorites = maxFavorites;
+
   ListBuilder<Section> _sections;
   ListBuilder<Section> get sections =>
       _$this._sections ??= new ListBuilder<Section>();
@@ -225,6 +239,7 @@ class CodefestStateBuilder
       _locations = _$v.locations?.toBuilder();
       _releaseNote = _$v.releaseNote;
       _scrollTop = _$v.scrollTop;
+      _maxFavorites = _$v.maxFavorites;
       _sections = _$v.sections?.toBuilder();
       _speakers = _$v.speakers?.toBuilder();
       _talkPosts = _$v.talkPosts?.toBuilder();
@@ -261,6 +276,7 @@ class CodefestStateBuilder
               locations: locations.build(),
               releaseNote: releaseNote,
               scrollTop: scrollTop,
+              maxFavorites: maxFavorites,
               sections: sections.build(),
               speakers: speakers.build(),
               talkPosts: talkPosts.build(),

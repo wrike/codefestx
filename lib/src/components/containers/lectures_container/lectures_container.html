@@ -283,6 +283,7 @@
 
                             <actions
                               [popularity]="lecture.favoritesCount"
+                              [maxPopularity]="maxPopularity"
                               [isFavorite]="isFavoriteLecture(lecture)"
                               (onFavoriteChange)="onFavoriteChange(lecture, $event)">
                             </actions>
