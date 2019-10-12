@@ -10,19 +10,21 @@ import 'package:intl/intl.dart';
 @Component(
   selector: 'talk-post',
   templateUrl: 'talk_post_component.html',
-  styleUrls: const ['talk_post_component.css'],
+  styleUrls: ['talk_post_component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   directives: [
     NgIf,
   ],
   preserveWhitespace: false,
 )
-class TalkPostComponent extends StatefulComponent{
+class TalkPostComponent extends StatefulComponent {
   final dateFormat = DateFormat("dd MMM HH:mm");
+
   bool get replyBlockShown {
     print(post.replyId);
     return post.replyId != null;
   }
+
   final _onDelete = StreamController<String>();
   final _onReply = StreamController<String>();
   @HostBinding('class.message')
@@ -30,6 +32,7 @@ class TalkPostComponent extends StatefulComponent{
 
   @Output()
   Stream get onDelete => _onDelete.stream;
+
   @Output()
   Stream get onReply => _onReply.stream;
 
@@ -38,10 +41,10 @@ class TalkPostComponent extends StatefulComponent{
   final AuthStore _authStore;
 
   TalkPostComponent(
-      this._authStore,
-      NgZone zone,
-      ChangeDetectorRef cdr,
-      StoreFactory storeFactory,
+    this._authStore,
+    NgZone zone,
+    ChangeDetectorRef cdr,
+    StoreFactory storeFactory,
   ) : super(zone, cdr, storeFactory);
 
   String getTime() {

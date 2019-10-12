@@ -5,7 +5,7 @@ import 'package:angular/angular.dart';
 @Component(
   selector: 'toggle',
   templateUrl: 'toggle.html',
-  styleUrls: const ['toggle.css'],
+  styleUrls: ['toggle.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   preserveWhitespace: false,
 )

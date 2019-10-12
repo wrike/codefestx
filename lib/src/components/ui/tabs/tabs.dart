@@ -3,7 +3,7 @@ import 'package:angular/angular.dart';
 @Component(
   selector: 'tabs',
   templateUrl: 'tabs.html',
-  styleUrls: const ['tabs.css'],
+  styleUrls: ['tabs.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   preserveWhitespace: false,
 )

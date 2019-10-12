@@ -15,7 +15,7 @@ import 'package:codefest/src/route_paths.dart';
     LayoutComponent,
     EmptyStateComponent,
     ButtonComponent,
-    routerDirectives
+    routerDirectives,
   ],
   preserveWhitespace: true,
   changeDetection: ChangeDetectionStrategy.OnPush,

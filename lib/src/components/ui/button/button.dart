@@ -5,7 +5,7 @@ import 'package:angular/angular.dart';
 @Component(
   selector: 'button[cf-button]',
   templateUrl: 'button.html',
-  styleUrls: const ['button.css'],
+  styleUrls: ['button.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   preserveWhitespace: false,
 )

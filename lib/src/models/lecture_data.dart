@@ -12,7 +12,7 @@ class LectureData {
   final String title;
   @JsonKey(defaultValue: LectureType.lecture)
   final LectureType type;
-  @JsonKey(defaultValue: const <String>[])
+  @JsonKey(defaultValue: <String>[])
   final Iterable<String> speakerIds;
   @JsonKey(nullable: false)
   final String description;

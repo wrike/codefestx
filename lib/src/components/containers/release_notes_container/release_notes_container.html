@@ -1,9 +1,11 @@
-<event-card  *ngFor="let release of releases"
+<event-card
+  *ngFor="let release of releases"
   [standOut]="true"
   [startTime]="release.version"
   [title]="release.title"
   [description]="release.description"
   [speakers]="createSpeakers(release)">
+
   <event-time
     [startTime]="release.version"
     side>

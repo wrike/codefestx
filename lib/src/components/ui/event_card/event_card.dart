@@ -7,11 +7,10 @@ import 'package:codefest/src/models/speaker.dart';
 @Component(
   selector: 'event-card',
   templateUrl: 'event_card.html',
-  styleUrls: const ['event_card.css'],
+  styleUrls: ['event_card.css'],
   directives: [
     NgFor,
     NgIf,
-    NgIf
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   preserveWhitespace: false,
@@ -29,6 +28,7 @@ class EventCardComponent {
   String endTime;
 
   bool get hasEndTime => endTime != null;
+
   bool get isTimeShown => false;
 
   @Input()
@@ -47,9 +47,7 @@ class EventCardComponent {
   @Output()
   Stream<MouseEvent> get onClick => _onClickStreamController.stream;
 
-  bool get sameCompany => speakers.fold<Set<String>>(new Set(), (prev, next) =>
-    prev..add(next.company)
-  ).length == 1;
+  bool get sameCompany => speakers.fold<Set<String>>(Set(), (prev, next) => prev..add(next.company)).length == 1;
 
   void onClickHandler(MouseEvent event) {
     _onClickStreamController.add(event);

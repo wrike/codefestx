@@ -6,7 +6,7 @@ import 'package:codefest/src/components/ui/button/button.dart';
 @Component(
   selector: 'popup',
   templateUrl: 'popup.html',
-  styleUrls: const ['popup.css'],
+  styleUrls: ['popup.css'],
   directives: [
     ButtonComponent,
   ],

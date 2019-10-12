@@ -10,7 +10,7 @@ import 'package:codefest/src/redux/services/dispatcher.dart';
 @Component(
   selector: 'new-version-popup',
   templateUrl: 'new_version_popup.html',
-  styleUrls: const ['new_version_popup.css'],
+  styleUrls: ['new_version_popup.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   preserveWhitespace: false,
   directives: [

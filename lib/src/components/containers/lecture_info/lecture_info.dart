@@ -8,7 +8,6 @@ import 'package:codefest/src/redux/actions/effects/actions.dart';
 import 'package:codefest/src/redux/selectors/selectors.dart';
 import 'package:codefest/src/redux/services/dispatcher.dart';
 import 'package:codefest/src/redux/services/store_factory.dart';
-import 'package:codefest/src/route_paths.dart';
 
 @Component(
   selector: 'lecture-info',
@@ -20,7 +19,7 @@ import 'package:codefest/src/route_paths.dart';
     ButtonComponent,
   ],
   exports: [
-    NavigationType
+    NavigationType,
   ],
   preserveWhitespace: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -34,13 +33,13 @@ class LectureInfoComponent extends StatefulComponent {
   Lecture lecture;
 
   LectureInfoComponent(
-      NgZone zone,
-      ChangeDetectorRef cdr,
-      StoreFactory storeFactory,
-      this._router,
-      this._selectors,
-      this._dispatcher,
-      ) : super(zone, cdr, storeFactory);
+    NgZone zone,
+    ChangeDetectorRef cdr,
+    StoreFactory storeFactory,
+    this._router,
+    this._selectors,
+    this._dispatcher,
+  ) : super(zone, cdr, storeFactory);
 
   String get endTime => _selectors.getEndTimeText(lecture);
 

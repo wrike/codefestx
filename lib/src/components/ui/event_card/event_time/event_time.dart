@@ -3,11 +3,10 @@ import 'package:angular/angular.dart';
 @Component(
   selector: 'event-time',
   templateUrl: 'event_time.html',
-  styleUrls: const ['event_time.css'],
+  styleUrls: ['event_time.css'],
   directives: [
     NgFor,
     NgIf,
-    NgIf
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   preserveWhitespace: false,

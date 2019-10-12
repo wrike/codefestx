@@ -3,7 +3,7 @@ import 'package:angular/angular.dart';
 @Component(
   selector: 'cf-section',
   templateUrl: 'section.html',
-  styleUrls: const ['section.css'],
+  styleUrls: ['section.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   preserveWhitespace: false,
 )

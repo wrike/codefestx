@@ -3,7 +3,7 @@ import 'package:angular/angular.dart';
 @Component(
   selector: 'button[link-button]',
   template: '<ng-content></ng-content>',
-  styleUrls: const ['link_button.css'],
+  styleUrls: ['link_button.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   preserveWhitespace: false,
 )
