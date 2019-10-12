@@ -1,24 +1,28 @@
 import 'dart:async';
 import 'dart:html';
 
+import 'package:codefest/intl/messages_all.dart';
+import 'package:codefest/src/models/user.dart';
+import 'package:codefest/src/redux/actions/actions.dart';
 import 'package:codefest/src/redux/actions/authorize_action.dart';
 import 'package:codefest/src/redux/actions/create_post_action.dart';
 import 'package:codefest/src/redux/actions/delete_post_action.dart';
+import 'package:codefest/src/redux/actions/effects/actions.dart';
+import 'package:codefest/src/redux/actions/effects/change_locale_action.dart';
 import 'package:codefest/src/redux/actions/load_data_error_action.dart';
 import 'package:codefest/src/redux/actions/load_data_start_action.dart';
 import 'package:codefest/src/redux/actions/load_data_success_action.dart';
 import 'package:codefest/src/redux/actions/load_talks_action.dart';
 import 'package:codefest/src/redux/actions/loaded_talks_action.dart';
 import 'package:codefest/src/redux/actions/set_scroll_top_action.dart';
-import 'package:codefest/src/models/user.dart';
-import 'package:codefest/src/redux/actions/actions.dart';
-import 'package:codefest/src/redux/actions/effects/actions.dart';
 import 'package:codefest/src/redux/state/codefest_state.dart';
 import 'package:codefest/src/services/auth_service.dart';
 import 'package:codefest/src/services/auth_store.dart';
 import 'package:codefest/src/services/data_loader.dart';
 import 'package:codefest/src/services/storage_service.dart';
 import 'package:codefest/src/services/talks_service.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:intl/intl.dart';
 import 'package:redux_epics/redux_epics.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -51,6 +55,7 @@ class Effects {
       _onLoadLectureTalks,
       _onCreateNewPost,
       _onDeletePost,
+      _onLocaleChange,
     ];
 
     return combineEpics<CodefestState>(streams);
@@ -112,25 +117,26 @@ class Effects {
           if (!_authStore.isAuth) {
             await _authService.createUser();
           }
+
           User data;
-            try {
-              data = await _dataLoader.getUser();
-            } catch (e) {
-              _authService.logout();
-            }
+          try {
+            data = await _dataLoader.getUser();
+          } catch (e) {
+            _authService.logout();
+          }
 
-            if (data != null) {
-              yield AuthorizeAction();
+          if (data != null) {
+            yield AuthorizeAction();
 
-              yield SetUserDataAction(
-                favoriteLectureIds: data.favoriteLecturesIds,
-                likedLectureIds: data.likedLecturesIds,
-                selectedSectionIds: data.sectionIds,
-                displayName: data.displayName,
-                avatarPath: data.avatar,
-                isCustomSectionMode: data.isCustomSectionMode,
-              );
-            }
+            yield SetUserDataAction(
+              favoriteLectureIds: data.favoriteLecturesIds,
+              likedLectureIds: data.likedLecturesIds,
+              selectedSectionIds: data.sectionIds,
+              displayName: data.displayName,
+              avatarPath: data.avatar,
+              isCustomSectionMode: data.isCustomSectionMode,
+            );
+          }
         } catch (e) {
           yield LoadDataErrorAction();
         }
@@ -235,5 +241,12 @@ class Effects {
           _storageService.setCustomSectionMode(action.isCustomSectionMode);
           _storageService.setLanguages(action.languages);
         }
+      });
+
+  Stream<Object> _onLocaleChange(Stream<Object> actions, EpicStore<CodefestState> store) =>
+      Observable(actions).ofType(const TypeToken<ChangeLocaleAction>()).asyncExpand((action) async* {
+        Intl.defaultLocale = action.locale;
+        await initializeDateFormatting(Intl.defaultLocale);
+        await initializeMessages(Intl.defaultLocale);
       });
 }

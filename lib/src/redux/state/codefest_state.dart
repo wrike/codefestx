@@ -40,4 +40,6 @@ abstract class CodefestState implements Built<CodefestState, CodefestStateBuilde
 
   @nullable
   String get currentLecture;
+
+  String get locale;
 }

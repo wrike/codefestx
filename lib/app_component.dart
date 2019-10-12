@@ -5,11 +5,12 @@ import 'dart:html';
 import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:codefest/src/components/popups/new_version_popup/new_version_popup.dart';
+import 'package:codefest/src/components/ui/button/button.dart';
+import 'package:codefest/src/components/ui/empty_state/empty_state.dart';
 import 'package:codefest/src/models/talk_post.dart';
 import 'package:codefest/src/redux/actions/add_post_action.dart';
 import 'package:codefest/src/redux/actions/deleted_post_action.dart';
-import 'package:codefest/src/components/ui/button/button.dart';
-import 'package:codefest/src/components/ui/empty_state/empty_state.dart';
+import 'package:codefest/src/redux/actions/effects/change_locale_action.dart';
 import 'package:codefest/src/redux/actions/effects/load_user_data_action.dart';
 import 'package:codefest/src/redux/actions/new_version_action.dart';
 import 'package:codefest/src/redux/effects/effects.dart';
@@ -26,6 +27,7 @@ import 'package:codefest/src/services/auth_store.dart';
 import 'package:codefest/src/services/data_loader.dart';
 import 'package:codefest/src/services/dom_service.dart';
 import 'package:codefest/src/services/http_proxy.dart';
+import 'package:codefest/src/services/intl_service.dart';
 import 'package:codefest/src/services/push_service.dart';
 import 'package:codefest/src/services/sockets_service.dart';
 import 'package:codefest/src/services/storage_service.dart';
@@ -127,6 +129,7 @@ class AppComponent implements OnDestroy, OnInit {
   @override
   void ngOnInit() {
     _dispatcher.dispatch(LoadUserDataAction());
+    _dispatcher.dispatch(ChangeLocaleAction(locale: IntlService.ruLang));
 
     if (_authStore.isAuth) {
       Future.delayed(const Duration(seconds: 5)).then((_) => _pushService.init(_authStore.userId));
@@ -146,7 +149,7 @@ class AppComponent implements OnDestroy, OnInit {
           final data = json.decode(event.data);
           final post = TalkPost.fromJson(data);
           _dispatcher.dispatch(AddPostAction(post));
-    });
+        });
 
     _socketService.onEvent
         .where((event) => event.command == 'post-removed')

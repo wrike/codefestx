@@ -1,5 +1,6 @@
 import 'package:codefest/src/redux/state/codefest_state.dart';
 import 'package:codefest/src/redux/state/user_state.dart';
+import 'package:codefest/src/services/intl_service.dart';
 
 class StateFactory {
   CodefestState getInitialState() => CodefestState(
@@ -10,6 +11,7 @@ class StateFactory {
           ..releaseNote = ''
           ..scrollTop = 0
           ..maxFavorites = 10
+          ..locale = IntlService.ruLang
           ..user.replace(
             UserState(
               (b) => b

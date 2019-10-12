@@ -6,6 +6,7 @@ import 'package:codefest/src/redux/actions/actions.dart';
 import 'package:codefest/src/redux/actions/add_post_action.dart';
 import 'package:codefest/src/redux/actions/authorize_action.dart';
 import 'package:codefest/src/redux/actions/deleted_post_action.dart';
+import 'package:codefest/src/redux/actions/effects/change_locale_action.dart';
 import 'package:codefest/src/redux/actions/filter_lectures_action.dart';
 import 'package:codefest/src/redux/actions/load_data_error_action.dart';
 import 'package:codefest/src/redux/actions/load_data_start_action.dart';
@@ -41,6 +42,7 @@ class CodefestReducer {
       TypedReducer<CodefestState, LoadedTalksAction>(_loadedTalkPosts),
       TypedReducer<CodefestState, AddPostAction>(_addPost),
       TypedReducer<CodefestState, DeletedPostAction>(_removePost),
+      TypedReducer<CodefestState, ChangeLocaleAction>(_changeLocale),
     ]);
   }
 
@@ -95,22 +97,22 @@ class CodefestReducer {
           ..lectures.replace(
             action.lectures.map(
               (lecture) => Lecture(
-                    id: lecture.id,
-                    title: lecture.title,
-                    type: lecture.type,
-                    language: lecture.lang,
-                    description: lecture.description,
-                    startTime: DateTime.fromMillisecondsSinceEpoch(lecture.startTime, isUtc: true),
-                    duration: lecture.duration,
-                    location: action.locations.firstWhere((location) => location.id == lecture.locationId),
-                    section: action.sections.firstWhere((section) => section.id == lecture.sectionId),
-                    speakers: action.speakers.where((speaker) => lecture.speakerIds.contains(speaker.id)).toList(),
-                    isFavorite: lecture.isFavorite,
-                    isLiked: lecture.isLiked,
-                    likesCount: lecture.likesCount,
-                    favoritesCount: lecture.favoritesCount,
-                    figureNumber: _getFigureNumber(lecture.id),
-                  ),
+                id: lecture.id,
+                title: lecture.title,
+                type: lecture.type,
+                language: lecture.lang,
+                description: lecture.description,
+                startTime: DateTime.fromMillisecondsSinceEpoch(lecture.startTime, isUtc: true),
+                duration: lecture.duration,
+                location: action.locations.firstWhere((location) => location.id == lecture.locationId),
+                section: action.sections.firstWhere((section) => section.id == lecture.sectionId),
+                speakers: action.speakers.where((speaker) => lecture.speakerIds.contains(speaker.id)).toList(),
+                isFavorite: lecture.isFavorite,
+                isLiked: lecture.isLiked,
+                likesCount: lecture.likesCount,
+                favoritesCount: lecture.favoritesCount,
+                figureNumber: _getFigureNumber(lecture.id),
+              ),
             ),
           ),
       );
@@ -169,16 +171,15 @@ class CodefestReducer {
   CodefestState _onStartLoading(CodefestState state, LoadDataStartAction action) =>
       state.rebuild((b) => b.isReady = false);
 
-  CodefestState _setScrollTopAction(CodefestState state, SetScrollTopAction action) => state.rebuild((b) {
-        b.scrollTop = action.scrollTop;
-      });
+  CodefestState _setScrollTopAction(CodefestState state, SetScrollTopAction action) =>
+      state.rebuild((b) => b.scrollTop = action.scrollTop);
 
   CodefestState _resetTalkPosts(CodefestState state, LoadTalksAction action) => state.rebuild((b) {
-      if (state.currentLecture != action.lectureId) {
-        b.talkPosts.replace([]);
-      }
-      b.currentLecture = action.lectureId;
-  });
+        if (state.currentLecture != action.lectureId) {
+          b.talkPosts.replace([]);
+        }
+        b.currentLecture = action.lectureId;
+      });
 
   TalkPost _formatPost(TalkPost post, List<TalkPost> allPosts) {
     if (post.replyId != null) {
@@ -195,29 +196,30 @@ class CodefestReducer {
   }
 
   CodefestState _loadedTalkPosts(CodefestState state, LoadedTalksAction action) => state.rebuild((b) {
-    final posts = action.posts.map((p) {
-      return _formatPost(p, action.posts);
-    });
-    b.talkPosts.replace(posts);
-  });
+        final posts = action.posts.map((p) {
+          return _formatPost(p, action.posts);
+        });
+        b.talkPosts.replace(posts);
+      });
 
   CodefestState _addPost(CodefestState state, AddPostAction action) => state.rebuild((b) {
-    if (state.currentLecture == action.post.lectureId && !state.talkPosts.any((p) => p.id == action.post.id)) {
-      final post = _formatPost(action.post, state.talkPosts.toList(growable: false));
-      b.talkPosts.add(post);
-    }
-  });
+        if (state.currentLecture == action.post.lectureId && !state.talkPosts.any((p) => p.id == action.post.id)) {
+          final post = _formatPost(action.post, state.talkPosts.toList(growable: false));
+          b.talkPosts.add(post);
+        }
+      });
 
   CodefestState _removePost(CodefestState state, DeletedPostAction action) => state.rebuild((b) {
-    final isHasPost = state.talkPosts.any((p) => p.id == action.postId);
-    if (isHasPost) {
-      final newPosts = state.talkPosts.where((p) => p.id != action.postId).toList(growable: false);
-      final filteredPosts = newPosts.map((p) {
-        return _formatPost(p, newPosts);
+        final isHasPost = state.talkPosts.any((p) => p.id == action.postId);
+        if (isHasPost) {
+          final newPosts = state.talkPosts.where((p) => p.id != action.postId).toList(growable: false);
+          final filteredPosts = newPosts.map((p) {
+            return _formatPost(p, newPosts);
+          });
+          b.talkPosts.replace(filteredPosts);
+        }
       });
-      b.talkPosts.replace(filteredPosts);
-    }
-  });
 
-
+  CodefestState _changeLocale(CodefestState state, ChangeLocaleAction action) =>
+      state.rebuild((b) => b.locale = action.locale);
 }

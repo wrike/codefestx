@@ -1,5 +1,6 @@
 import 'package:angular/angular.dart';
 import 'package:codefest/src/components/ui/empty_state/empty_state.dart';
+import 'package:codefest/src/services/intl_service.dart';
 
 @Component(
   selector: 'rating-empty-state',
@@ -10,4 +11,6 @@ import 'package:codefest/src/components/ui/empty_state/empty_state.dart';
   preserveWhitespace: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 )
-class RatingEmptyStateComponent {}
+class RatingEmptyStateComponent {
+  final String title = IntlService.ratingEmptyTitle();
+}

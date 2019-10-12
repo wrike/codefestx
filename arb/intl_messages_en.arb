@@ -1,0 +1,10 @@
+{
+  "@@last_modified": "2019-10-12T22:13:32.573883",
+  "@@locale": "en_US",
+  "IntlService_ratingEmptyTitle": "No one voted yet",
+  "@IntlService_ratingEmptyTitle": {
+    "description": "No one voted yet",
+    "type": "text",
+    "placeholders": {}
+  }
+}

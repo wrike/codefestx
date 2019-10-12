@@ -7,6 +7,7 @@ import 'package:angular_router/angular_router.dart';
 import 'package:codefest/src/components/layout/navigation_type.dart';
 import 'package:codefest/src/components/ui/button/button.dart';
 import 'package:codefest/src/menu_route_path.dart';
+import 'package:codefest/src/redux/actions/effects/change_locale_action.dart';
 import 'package:codefest/src/redux/actions/effects/on_scroll_action.dart';
 import 'package:codefest/src/redux/selectors/selectors.dart';
 import 'package:codefest/src/redux/services/dispatcher.dart';
@@ -14,6 +15,7 @@ import 'package:codefest/src/redux/state/codefest_state.dart';
 import 'package:codefest/src/route_paths.dart';
 import 'package:codefest/src/services/auth_service.dart';
 import 'package:codefest/src/services/auth_store.dart';
+import 'package:codefest/src/services/intl_service.dart';
 import 'package:gtag_analytics/gtag_analytics.dart';
 
 @Component(
@@ -27,7 +29,7 @@ import 'package:gtag_analytics/gtag_analytics.dart';
     NgIf,
     NgFor,
     MaterialTemporaryDrawerComponent,
-    routerDirectives
+    routerDirectives,
   ],
   providers: [],
   preserveWhitespace: false,
@@ -79,6 +81,8 @@ class LayoutComponent implements OnInit, OnDestroy {
   MaterialTemporaryDrawerComponent drawerComponent;
 
   RoutePath currentPath;
+
+  String get language => state.locale == IntlService.ruLang ? 'Русский' : 'English';
 
   LayoutComponent(
     this._router,
@@ -160,5 +164,10 @@ class LayoutComponent implements OnInit, OnDestroy {
 
   void detectChanges() {
     _zone.run(_cdr.markForCheck);
+  }
+
+  void changeLanguage() {
+    _dispatcher.dispatch(ChangeLocaleAction(locale: state.locale == IntlService.ruLang ? IntlService.enLang : IntlService.ruLang));
+    detectChanges();
   }
 }

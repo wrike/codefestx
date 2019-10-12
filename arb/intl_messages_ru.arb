@@ -1,0 +1,9 @@
+{
+  "IntlService_ratingEmptyTitle": "Никто еще не голосовал",
+  "@@locale": "ru_RU",
+  "@IntlService_ratingEmptyTitle": {
+    "description": "No one voted yet",
+    "type": "text",
+    "placeholders": {}
+  }
+}

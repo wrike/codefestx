@@ -16,8 +16,10 @@ class EmptyStateComponent {
 
   @Input()
   String title;
+
   @Input()
   String message;
+
   @Input()
   String icon;
 

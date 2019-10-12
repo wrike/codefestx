@@ -33,6 +33,8 @@ class _$CodefestState extends CodefestState {
   final UserState user;
   @override
   final String currentLecture;
+  @override
+  final String locale;
 
   factory _$CodefestState([void Function(CodefestStateBuilder) updates]) =>
       (new CodefestStateBuilder()..update(updates)).build();
@@ -50,7 +52,8 @@ class _$CodefestState extends CodefestState {
       this.speakers,
       this.talkPosts,
       this.user,
-      this.currentLecture})
+      this.currentLecture,
+      this.locale})
       : super._() {
     if (isError == null) {
       throw new BuiltValueNullFieldError('CodefestState', 'isError');
@@ -88,6 +91,9 @@ class _$CodefestState extends CodefestState {
     if (user == null) {
       throw new BuiltValueNullFieldError('CodefestState', 'user');
     }
+    if (locale == null) {
+      throw new BuiltValueNullFieldError('CodefestState', 'locale');
+    }
   }
 
   @override
@@ -113,7 +119,8 @@ class _$CodefestState extends CodefestState {
         speakers == other.speakers &&
         talkPosts == other.talkPosts &&
         user == other.user &&
-        currentLecture == other.currentLecture;
+        currentLecture == other.currentLecture &&
+        locale == other.locale;
   }
 
   @override
@@ -129,19 +136,23 @@ class _$CodefestState extends CodefestState {
                                     $jc(
                                         $jc(
                                             $jc(
-                                                $jc($jc(0, isError.hashCode),
-                                                    isLoaded.hashCode),
-                                                isReady.hashCode),
-                                            lectures.hashCode),
-                                        locations.hashCode),
-                                    releaseNote.hashCode),
-                                scrollTop.hashCode),
-                            maxFavorites.hashCode),
-                        sections.hashCode),
-                    speakers.hashCode),
-                talkPosts.hashCode),
-            user.hashCode),
-        currentLecture.hashCode));
+                                                $jc(
+                                                    $jc(
+                                                        $jc(0,
+                                                            isError.hashCode),
+                                                        isLoaded.hashCode),
+                                                    isReady.hashCode),
+                                                lectures.hashCode),
+                                            locations.hashCode),
+                                        releaseNote.hashCode),
+                                    scrollTop.hashCode),
+                                maxFavorites.hashCode),
+                            sections.hashCode),
+                        speakers.hashCode),
+                    talkPosts.hashCode),
+                user.hashCode),
+            currentLecture.hashCode),
+        locale.hashCode));
   }
 
   @override
@@ -159,7 +170,8 @@ class _$CodefestState extends CodefestState {
           ..add('speakers', speakers)
           ..add('talkPosts', talkPosts)
           ..add('user', user)
-          ..add('currentLecture', currentLecture))
+          ..add('currentLecture', currentLecture)
+          ..add('locale', locale))
         .toString();
   }
 }
@@ -228,6 +240,10 @@ class CodefestStateBuilder
   set currentLecture(String currentLecture) =>
       _$this._currentLecture = currentLecture;
 
+  String _locale;
+  String get locale => _$this._locale;
+  set locale(String locale) => _$this._locale = locale;
+
   CodefestStateBuilder();
 
   CodefestStateBuilder get _$this {
@@ -245,6 +261,7 @@ class CodefestStateBuilder
       _talkPosts = _$v.talkPosts?.toBuilder();
       _user = _$v.user?.toBuilder();
       _currentLecture = _$v.currentLecture;
+      _locale = _$v.locale;
       _$v = null;
     }
     return this;
@@ -281,7 +298,8 @@ class CodefestStateBuilder
               speakers: speakers.build(),
               talkPosts: talkPosts.build(),
               user: user.build(),
-              currentLecture: currentLecture);
+              currentLecture: currentLecture,
+              locale: locale);
     } catch (_) {
       String _$failedField;
       try {

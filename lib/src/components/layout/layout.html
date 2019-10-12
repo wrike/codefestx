@@ -63,6 +63,17 @@
       </ul>
     </nav>
 
+    <div>
+      <div>
+        Язык:
+      </div>
+      <button
+        (click)="changeLanguage()"
+        class="user__logout-button">
+        {{ language }}
+      </button>
+    </div>
+
     <div
       *ngIf="false && isAuthorized"
       class="user">
