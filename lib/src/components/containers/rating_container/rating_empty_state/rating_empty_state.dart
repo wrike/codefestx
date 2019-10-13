@@ -13,4 +13,5 @@ import 'package:codefest/src/services/intl_service.dart';
 )
 class RatingEmptyStateComponent {
   final String title = IntlService.ratingEmptyTitle();
+  final String message = IntlService.ratingEmptyMessage();
 }

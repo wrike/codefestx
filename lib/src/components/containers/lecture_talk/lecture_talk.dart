@@ -22,7 +22,7 @@ import 'package:codefest/src/services/auth_store.dart';
     ButtonComponent,
     TalkPostComponent,
     TalkPostInputComponent,
-    TalksStateComponent,
+    TalksEmptyComponent,
   ],
   preserveWhitespace: true,
   changeDetection: ChangeDetectionStrategy.OnPush,

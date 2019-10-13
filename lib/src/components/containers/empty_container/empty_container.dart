@@ -6,6 +6,7 @@ import 'package:codefest/src/components/ui/button/button.dart';
 import 'package:codefest/src/components/ui/empty_state/empty_state.dart';
 import 'package:codefest/src/redux/services/store_factory.dart';
 import 'package:codefest/src/route_paths.dart';
+import 'package:codefest/src/services/intl_service.dart';
 
 @Component(
   selector: 'empty-container',
@@ -34,4 +35,8 @@ class EmptyContainerComponent extends StatefulComponent {
   void goToLectures() {
     _router.navigateByUrl(lecturesLink);
   }
+
+  final String title = IntlService.pageNotFoundEmptyTitle();
+  final String message = IntlService.pageNotFoundEmptyMessage();
+  final String button = IntlService.goToScheduleButton();
 }

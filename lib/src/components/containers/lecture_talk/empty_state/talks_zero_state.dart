@@ -1,5 +1,6 @@
 import 'package:angular/angular.dart';
 import 'package:codefest/src/components/ui/empty_state/empty_state.dart';
+import 'package:codefest/src/services/intl_service.dart';
 
 @Component(
   selector: 'talks-zero-state',
@@ -11,4 +12,7 @@ import 'package:codefest/src/components/ui/empty_state/empty_state.dart';
   preserveWhitespace: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 )
-class TalksStateComponent {}
+class TalksEmptyComponent {
+  final String title = IntlService.talksEmptyTitle();
+  final String message = IntlService.talksEmptyMessage();
+}

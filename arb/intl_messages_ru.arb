@@ -5,5 +5,89 @@
     "description": "No one voted yet",
     "type": "text",
     "placeholders": {}
+  },
+  "IntlService_ratingEmptyMessage": "Рейтинг будет показан здесь, когда кто-то проголосует",
+  "@IntlService_ratingEmptyMessage": {
+    "description": "The rating will be shown here once someone votes",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_somethingWrongEmptyTitle": "Упс ..",
+  "@IntlService_somethingWrongEmptyTitle": {
+    "description": "Ooops..",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_somethingWrongEmptyMessage": "Мы не&nbsp;понимаем, что происходит. Заходи на&nbsp;стенд Wrike, чтобы рассказать об&nbsp;этой ошибке",
+  "@IntlService_somethingWrongEmptyMessage": {
+    "description": "No one voted yet",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_pageNotFoundEmptyTitle": "Упс!",
+  "@IntlService_pageNotFoundEmptyTitle": {
+    "description": "Whoops!",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_pageNotFoundEmptyMessage": "404 - Страница не найдена",
+  "@IntlService_pageNotFoundEmptyMessage": {
+    "description": "404 - Page not found",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_talksEmptyTitle": "Есть что сказать?",
+  "@IntlService_talksEmptyTitle": {
+    "description": "Anything to say?",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_talksEmptyMessage": "Задавайте вопросы, оставляйте свои комментарии или аплодируйте своему любимому оратору.",
+  "@IntlService_talksEmptyMessage": {
+    "description": "Ask questions, leave your comments or give a big round of applause to your favorite speaker.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_favoriteEmptyTitle": "Пока ничего нет",
+  "@IntlService_favoriteEmptyTitle": {
+    "description": "Nothing yet",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_favoriteEmptyMessage": "Добавьте доклады в избранное, и они появятся здесь",
+  "@IntlService_favoriteEmptyMessage": {
+    "description": "Add the talks to your favourites and they will appear here",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_currentTalksEmptyTitle": "Сейчас ничего не происходит",
+  "@IntlService_currentTalksEmptyTitle": {
+    "description": "Nothing is happening now",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_currentTalksEmptyMessage": "Вернись сюда, когда будут доклады",
+  "@IntlService_currentTalksEmptyMessage": {
+    "description": "Come back here when the talk is live",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_searchEmptyTitle": "Нет результатов поиска",
+  "@IntlService_searchEmptyTitle": {
+    "description": "No results",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_searchEmptyMessage": "Попробуйте поискать что-нибудь еще",
+  "@IntlService_searchEmptyMessage": {
+    "description": "Try searching for something else",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_goToScheduleButton": "Перейти к расписанию",
+  "@IntlService_goToScheduleButton": {
+    "description": "Go to schedule",
+    "type": "text",
+    "placeholders": {}
   }
 }

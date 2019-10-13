@@ -159,4 +159,8 @@ class AppComponent implements OnDestroy, OnInit {
         .where((event) => event.command == 'change-lectures')
         .listen((data) => 0 /* todo показать нотификцию и загрузить стейт */);
   }
+
+  // I18n
+  final String errorTitle = IntlService.somethingWrongEmptyTitle();
+  final String errorMessage = IntlService.somethingWrongEmptyMessage();
 }

@@ -1,5 +1,6 @@
 import 'package:angular/angular.dart';
 import 'package:codefest/src/components/ui/empty_state/empty_state.dart';
+import 'package:codefest/src/services/intl_service.dart';
 
 @Component(
   selector: 'search-empty-state',
@@ -10,4 +11,7 @@ import 'package:codefest/src/components/ui/empty_state/empty_state.dart';
   preserveWhitespace: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 )
-class SearchEmptyStateComponent {}
+class SearchEmptyStateComponent {
+  final String title = IntlService.searchEmptyTitle();
+  final String message = IntlService.searchEmptyMessage();
+}

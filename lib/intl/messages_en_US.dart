@@ -20,6 +20,20 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
-    "IntlService_ratingEmptyTitle" : MessageLookupByLibrary.simpleMessage("No one voted yet")
+    "IntlService_currentTalksEmptyMessage" : MessageLookupByLibrary.simpleMessage("Come back here when the talk is live"),
+    "IntlService_currentTalksEmptyTitle" : MessageLookupByLibrary.simpleMessage("Nothing is happening now"),
+    "IntlService_favoriteEmptyMessage" : MessageLookupByLibrary.simpleMessage("Add the talks to your favourites and they will appear here"),
+    "IntlService_favoriteEmptyTitle" : MessageLookupByLibrary.simpleMessage("Nothing yet"),
+    "IntlService_goToScheduleButton" : MessageLookupByLibrary.simpleMessage("Go to schedule"),
+    "IntlService_pageNotFoundEmptyMessage" : MessageLookupByLibrary.simpleMessage("404 - Page not found"),
+    "IntlService_pageNotFoundEmptyTitle" : MessageLookupByLibrary.simpleMessage("Whoops!"),
+    "IntlService_ratingEmptyMessage" : MessageLookupByLibrary.simpleMessage("The rating will be shown here once someone votes"),
+    "IntlService_ratingEmptyTitle" : MessageLookupByLibrary.simpleMessage("No one voted yet"),
+    "IntlService_searchEmptyMessage" : MessageLookupByLibrary.simpleMessage("Try searching for something else"),
+    "IntlService_searchEmptyTitle" : MessageLookupByLibrary.simpleMessage("No results"),
+    "IntlService_somethingWrongEmptyMessage" : MessageLookupByLibrary.simpleMessage("Something went wrong :( Please tell us more"),
+    "IntlService_somethingWrongEmptyTitle" : MessageLookupByLibrary.simpleMessage("Ooops.."),
+    "IntlService_talksEmptyMessage" : MessageLookupByLibrary.simpleMessage("Ask questions, leave your comments or give a big round of applause to your favorite speaker."),
+    "IntlService_talksEmptyTitle" : MessageLookupByLibrary.simpleMessage("Anything to say?")
   };
 }

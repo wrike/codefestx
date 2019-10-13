@@ -1,9 +1,93 @@
 {
-  "@@last_modified": "2019-10-12T22:13:32.573883",
+  "@@last_modified": "2019-10-13T23:57:04.814827",
   "@@locale": "en_US",
   "IntlService_ratingEmptyTitle": "No one voted yet",
   "@IntlService_ratingEmptyTitle": {
     "description": "No one voted yet",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_ratingEmptyMessage": "The rating will be shown here once someone votes",
+  "@IntlService_ratingEmptyMessage": {
+    "description": "The rating will be shown here once someone votes",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_somethingWrongEmptyTitle": "Ooops..",
+  "@IntlService_somethingWrongEmptyTitle": {
+    "description": "Ooops..",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_somethingWrongEmptyMessage": "Something went wrong :( Please tell us more",
+  "@IntlService_somethingWrongEmptyMessage": {
+    "description": "No one voted yet",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_pageNotFoundEmptyTitle": "Whoops!",
+  "@IntlService_pageNotFoundEmptyTitle": {
+    "description": "Whoops!",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_pageNotFoundEmptyMessage": "404 - Page not found",
+  "@IntlService_pageNotFoundEmptyMessage": {
+    "description": "404 - Page not found",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_talksEmptyTitle": "Anything to say?",
+  "@IntlService_talksEmptyTitle": {
+    "description": "Anything to say?",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_talksEmptyMessage": "Ask questions, leave your comments or give a big round of applause to your favorite speaker.",
+  "@IntlService_talksEmptyMessage": {
+    "description": "Ask questions, leave your comments or give a big round of applause to your favorite speaker.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_favoriteEmptyTitle": "Nothing yet",
+  "@IntlService_favoriteEmptyTitle": {
+    "description": "Nothing yet",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_favoriteEmptyMessage": "Add the talks to your favourites and they will appear here",
+  "@IntlService_favoriteEmptyMessage": {
+    "description": "Add the talks to your favourites and they will appear here",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_currentTalksEmptyTitle": "Nothing is happening now",
+  "@IntlService_currentTalksEmptyTitle": {
+    "description": "Nothing is happening now",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_currentTalksEmptyMessage": "Come back here when the talk is live",
+  "@IntlService_currentTalksEmptyMessage": {
+    "description": "Come back here when the talk is live",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_searchEmptyTitle": "No results",
+  "@IntlService_searchEmptyTitle": {
+    "description": "No results",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_searchEmptyMessage": "Try searching for something else",
+  "@IntlService_searchEmptyMessage": {
+    "description": "Try searching for something else",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_goToScheduleButton": "Go to schedule",
+  "@IntlService_goToScheduleButton": {
+    "description": "Go to schedule",
     "type": "text",
     "placeholders": {}
   }
