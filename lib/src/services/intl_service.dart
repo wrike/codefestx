@@ -103,11 +103,40 @@ class IntlService {
         desc: 'Try searching for something else',
       );
 
+  /// Menu & Routes
+  static String scheduleRoute() => Intl.message(
+        'Schedule',
+        name: 'IntlService_scheduleRoute',
+        args: [],
+        desc: 'Schedule',
+      );
+
+  static String ratingRoute() => Intl.message(
+        'Rating',
+        name: 'IntlService_ratingRoute',
+        args: [],
+        desc: 'Rating',
+      );
+
+  static String mapRoute() => Intl.message(
+        'Map',
+        name: 'IntlService_mapRoute',
+        args: [],
+        desc: 'Map',
+      );
+
   /// Buttons
   static String goToScheduleButton() => Intl.message(
         'Go to schedule',
         name: 'IntlService_goToScheduleButton',
         args: [],
         desc: 'Go to schedule',
+      );
+
+  static String changeLanguageButton() => Intl.message(
+        'Перейти на русский',
+        name: 'IntlService_changeLanguageButton',
+        args: [],
+        desc: 'Switch to English',
       );
 }

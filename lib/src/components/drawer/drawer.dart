@@ -58,7 +58,7 @@ class DrawerComponent {
 
   bool get isAuthorized => _selectors.isAuthorized(state);
 
-  String get language => state.locale == IntlService.ruLang ? 'Русский' : 'English';
+  String get language => IntlService.changeLanguageButton();
 
   String get userName => _selectors.getUserName(state);
 

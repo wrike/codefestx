@@ -26,10 +26,14 @@ abstract class StatefulComponent implements OnDestroy {
       _subscriptions.addAll([
         _store.onChange.listen((state) {
           onStateChange(state);
-          detectChanges();
         }),
       ]);
     });
+  }
+
+  @Input()
+  set state(CodefestState val) {
+    detectChanges();
   }
 
   CodefestState get state => _store.state;
@@ -40,8 +44,9 @@ abstract class StatefulComponent implements OnDestroy {
     _zone.run(_cdr.markForCheck);
   }
 
-  void onStateChange(CodefestState state) {
+  void onStateChange(CodefestState s) {
     // call when state changed
+    state = s;
   }
 
   @override

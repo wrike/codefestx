@@ -12,7 +12,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "IntlService_somethingWrongEmptyTitle": "Упс ..",
+  "IntlService_somethingWrongEmptyTitle": "Упс ...",
   "@IntlService_somethingWrongEmptyTitle": {
     "description": "Ooops..",
     "type": "text",
@@ -84,9 +84,33 @@
     "type": "text",
     "placeholders": {}
   },
+  "IntlService_scheduleRoute": "Расписание",
+  "@IntlService_scheduleRoute": {
+    "description": "Schedule",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_ratingRoute": "Рейтинг",
+  "@IntlService_ratingRoute": {
+    "description": "Rating",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_mapRoute": "Карта",
+  "@IntlService_mapRoute": {
+    "description": "Map",
+    "type": "text",
+    "placeholders": {}
+  },
   "IntlService_goToScheduleButton": "Перейти к расписанию",
   "@IntlService_goToScheduleButton": {
     "description": "Go to schedule",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_changeLanguageButton": "Switch to English",
+  "@IntlService_changeLanguageButton": {
+    "description": "Switch to English",
     "type": "text",
     "placeholders": {}
   }

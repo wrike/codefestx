@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2019-10-13T23:57:04.814827",
+  "@@last_modified": "2019-11-04T18:22:47.340804",
   "@@locale": "en_US",
   "IntlService_ratingEmptyTitle": "No one voted yet",
   "@IntlService_ratingEmptyTitle": {
@@ -85,9 +85,33 @@
     "type": "text",
     "placeholders": {}
   },
+  "IntlService_scheduleRoute": "Schedule",
+  "@IntlService_scheduleRoute": {
+    "description": "Schedule",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_ratingRoute": "Rating",
+  "@IntlService_ratingRoute": {
+    "description": "Rating",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_mapRoute": "Map",
+  "@IntlService_mapRoute": {
+    "description": "Map",
+    "type": "text",
+    "placeholders": {}
+  },
   "IntlService_goToScheduleButton": "Go to schedule",
   "@IntlService_goToScheduleButton": {
     "description": "Go to schedule",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_changeLanguageButton": "Перейти на русский",
+  "@IntlService_changeLanguageButton": {
+    "description": "Switch to English",
     "type": "text",
     "placeholders": {}
   }

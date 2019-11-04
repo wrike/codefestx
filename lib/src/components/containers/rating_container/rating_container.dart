@@ -11,6 +11,7 @@ import 'package:codefest/src/redux/selectors/selectors.dart';
 import 'package:codefest/src/redux/services/dispatcher.dart';
 import 'package:codefest/src/redux/services/store_factory.dart';
 import 'package:codefest/src/route_paths.dart';
+import 'package:codefest/src/services/intl_service.dart';
 
 @Component(
   selector: 'rating-container',
@@ -50,6 +51,8 @@ class RatingContainerComponent extends StatefulComponent implements OnInit {
   }
 
   bool get isReady => _selectors.isReady(state);
+
+  String get title => IntlService.ratingRoute();
 
   void onLectureSelect(Lecture lecture) {
     final url = RoutePaths.lecture.toUrl(

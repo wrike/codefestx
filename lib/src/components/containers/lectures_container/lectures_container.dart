@@ -23,6 +23,7 @@ import 'package:codefest/src/redux/services/dispatcher.dart';
 import 'package:codefest/src/redux/services/store_factory.dart';
 import 'package:codefest/src/redux/state/user_state.dart';
 import 'package:codefest/src/route_paths.dart';
+import 'package:codefest/src/services/intl_service.dart';
 
 @Component(
   selector: 'lectures-container',
@@ -103,7 +104,7 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
 
   int get maxPopularity => state.maxFavorites;
 
-  String get title => 'Schedule';
+  String get title => IntlService.scheduleRoute();
 
   String currentTimeId(Lecture lecture) => isNearestLectureGroup(lecture) ? 'currentTime' : null;
 

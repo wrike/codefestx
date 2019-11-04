@@ -20,19 +20,23 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
+    "IntlService_changeLanguageButton" : MessageLookupByLibrary.simpleMessage("Switch to English"),
     "IntlService_currentTalksEmptyMessage" : MessageLookupByLibrary.simpleMessage("Вернись сюда, когда будут доклады"),
     "IntlService_currentTalksEmptyTitle" : MessageLookupByLibrary.simpleMessage("Сейчас ничего не происходит"),
     "IntlService_favoriteEmptyMessage" : MessageLookupByLibrary.simpleMessage("Добавьте доклады в избранное, и они появятся здесь"),
     "IntlService_favoriteEmptyTitle" : MessageLookupByLibrary.simpleMessage("Пока ничего нет"),
     "IntlService_goToScheduleButton" : MessageLookupByLibrary.simpleMessage("Перейти к расписанию"),
+    "IntlService_mapRoute" : MessageLookupByLibrary.simpleMessage("Карта"),
     "IntlService_pageNotFoundEmptyMessage" : MessageLookupByLibrary.simpleMessage("404 - Страница не найдена"),
     "IntlService_pageNotFoundEmptyTitle" : MessageLookupByLibrary.simpleMessage("Упс!"),
     "IntlService_ratingEmptyMessage" : MessageLookupByLibrary.simpleMessage("Рейтинг будет показан здесь, когда кто-то проголосует"),
     "IntlService_ratingEmptyTitle" : MessageLookupByLibrary.simpleMessage("Никто еще не голосовал"),
+    "IntlService_ratingRoute" : MessageLookupByLibrary.simpleMessage("Рейтинг"),
+    "IntlService_scheduleRoute" : MessageLookupByLibrary.simpleMessage("Расписание"),
     "IntlService_searchEmptyMessage" : MessageLookupByLibrary.simpleMessage("Попробуйте поискать что-нибудь еще"),
     "IntlService_searchEmptyTitle" : MessageLookupByLibrary.simpleMessage("Нет результатов поиска"),
     "IntlService_somethingWrongEmptyMessage" : MessageLookupByLibrary.simpleMessage("Мы не&nbsp;понимаем, что происходит. Заходи на&nbsp;стенд Wrike, чтобы рассказать об&nbsp;этой ошибке"),
-    "IntlService_somethingWrongEmptyTitle" : MessageLookupByLibrary.simpleMessage("Упс .."),
+    "IntlService_somethingWrongEmptyTitle" : MessageLookupByLibrary.simpleMessage("Упс ..."),
     "IntlService_talksEmptyMessage" : MessageLookupByLibrary.simpleMessage("Задавайте вопросы, оставляйте свои комментарии или аплодируйте своему любимому оратору."),
     "IntlService_talksEmptyTitle" : MessageLookupByLibrary.simpleMessage("Есть что сказать?")
   };
