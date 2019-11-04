@@ -34,7 +34,11 @@ class AuthService {
     '{ghstate}': 'auth/github/callback',
   };
 
-  AuthService(this._http, this._dispatcher, this._pushService);
+  AuthService(
+    this._http,
+    this._dispatcher,
+    this._pushService,
+  );
 
   void clearRoutePath() {
     window.localStorage.remove(routePathKey);
@@ -73,7 +77,7 @@ class AuthService {
     );
     _dispatcher.dispatch(action);
     _dispatcher.dispatch(AuthorizeAction());
-    _pushService.init(authResponse.userId);
+//    _pushService.init(authResponse.userId);
   }
 
   void setRoutePath(String path) {

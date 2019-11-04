@@ -132,7 +132,8 @@ class AppComponent implements OnDestroy, OnInit {
     _dispatcher.dispatch(ChangeLocaleAction(locale: IntlService.ruLang));
 
     if (_authStore.isAuth) {
-      Future.delayed(const Duration(seconds: 5)).then((_) => _pushService.init(_authStore.userId));
+      // Disable PushWoosh
+      //      Future.delayed(const Duration(seconds: 5)).then((_) => _pushService.init(_authStore.userId));
     } else if (_authStore.isNewUser) {
       _router.onRouteActivated.first.then((state) {
         _router.navigateByUrl(RoutePaths.lectures.toUrl());

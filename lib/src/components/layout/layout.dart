@@ -2,20 +2,16 @@ import 'dart:async';
 import 'dart:html';
 
 import 'package:angular/angular.dart';
-import 'package:angular_components/angular_components.dart' show MaterialTemporaryDrawerComponent;
 import 'package:angular_router/angular_router.dart';
+import 'package:codefest/src/components/drawer/drawer.dart';
 import 'package:codefest/src/components/layout/navigation_type.dart';
 import 'package:codefest/src/components/ui/button/button.dart';
 import 'package:codefest/src/menu_route_path.dart';
-import 'package:codefest/src/redux/actions/effects/change_locale_action.dart';
 import 'package:codefest/src/redux/actions/effects/on_scroll_action.dart';
-import 'package:codefest/src/redux/selectors/selectors.dart';
 import 'package:codefest/src/redux/services/dispatcher.dart';
 import 'package:codefest/src/redux/state/codefest_state.dart';
 import 'package:codefest/src/route_paths.dart';
-import 'package:codefest/src/services/auth_service.dart';
 import 'package:codefest/src/services/auth_store.dart';
-import 'package:codefest/src/services/intl_service.dart';
 import 'package:gtag_analytics/gtag_analytics.dart';
 
 @Component(
@@ -28,21 +24,16 @@ import 'package:gtag_analytics/gtag_analytics.dart';
     ButtonComponent,
     NgIf,
     NgFor,
-    MaterialTemporaryDrawerComponent,
     routerDirectives,
+    DrawerComponent,
   ],
   providers: [],
   preserveWhitespace: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  exports: [
-    RoutePaths,
-  ],
 )
 class LayoutComponent implements OnInit, OnDestroy {
   final NgZone _zone;
   final Router _router;
-  final Selectors _selectors;
-  final AuthService _authService;
   final AuthStore _authStore;
   final Dispatcher _dispatcher;
   final ChangeDetectorRef _cdr;
@@ -77,26 +68,15 @@ class LayoutComponent implements OnInit, OnDestroy {
   @Input()
   CodefestState state;
 
-  @ViewChild('drawer')
-  MaterialTemporaryDrawerComponent drawerComponent;
-
   RoutePath currentPath;
-
-  String get language => state.locale == IntlService.ruLang ? 'Русский' : 'English';
 
   LayoutComponent(
     this._router,
-    this._selectors,
-    this._authService,
     this._authStore,
     this._dispatcher,
     this._cdr,
     this._zone,
   );
-
-  String get avatarPath => _selectors.getUserAvatarPath(state);
-
-  bool get isAuthorized => _selectors.isAuthorized(state);
 
   bool get isBackShown => navHidden != true && navType == NavigationType.back;
 
@@ -108,15 +88,11 @@ class LayoutComponent implements OnInit, OnDestroy {
 
   List<MenuRoutePath> get menu => _menu;
 
-  String get userName => _selectors.getUserName(state);
-
   void goBack() {
     _router.navigateByUrl(RoutePaths.lectures.toUrl());
     // todo
     // _location.back();
   }
-
-  bool isActive(RoutePath item) => item.path == currentPath?.path;
 
   @override
   void ngOnDestroy() {
@@ -134,15 +110,6 @@ class LayoutComponent implements OnInit, OnDestroy {
     _subscriptions.add(_router.onRouteActivated.listen(_onRouteActivated));
   }
 
-  void onLogout() {
-    _authService.logout();
-  }
-
-  void onMenuItemClick(MenuRoutePath item) {
-    _router.navigate(item.toUrl());
-    drawerComponent.visible = false;
-  }
-
   void onScroll(Event event) {
     final element = event.target as Element;
     _dispatcher.dispatch(OnScrollAction(scrollTop: element.scrollTop));
@@ -155,19 +122,14 @@ class LayoutComponent implements OnInit, OnDestroy {
     if (isScroll) {
       window.requestAnimationFrame((num time) {
         mainElement.scrollTo(0, this.state.scrollTop);
-        detectChanges();
+        _detectChanges();
       });
     } else {
-      detectChanges();
+      _detectChanges();
     }
   }
 
-  void detectChanges() {
+  void _detectChanges() {
     _zone.run(_cdr.markForCheck);
-  }
-
-  void changeLanguage() {
-    _dispatcher.dispatch(ChangeLocaleAction(locale: state.locale == IntlService.ruLang ? IntlService.enLang : IntlService.ruLang));
-    detectChanges();
   }
 }
