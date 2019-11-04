@@ -73,7 +73,7 @@ class AuthService {
     );
     _dispatcher.dispatch(action);
     _dispatcher.dispatch(AuthorizeAction());
-   _pushService.init(authResponse.userId);
+    _pushService.init(authResponse.userId);
   }
 
   void setRoutePath(String path) {
@@ -92,6 +92,5 @@ class AuthService {
     window.localStorage[tokenStorageKey] = auth.token;
     window.localStorage[userNameStorageKey] = auth.userName;
     window.localStorage[userIdStorageKey] = auth.userId;
-
   }
 }
