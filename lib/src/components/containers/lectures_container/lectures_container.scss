@@ -299,11 +299,14 @@
   }
 
   .event-card__language {
-    font-weight: bold;
-    align-self: center;
-    line-height: 1;
     position: relative;
     top: 1px;
+    align-self: center;
+    display: inline-block;
+    font-weight: bold;
+    line-height: 1;
+    color: $fg-color-primary;
+    margin-right: 4px;
   }
   // --- end event card
 
