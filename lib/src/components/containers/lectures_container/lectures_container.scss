@@ -53,7 +53,7 @@
     }
 
     &.buttons-group--selected {
-      background-image: linear-gradient(to right, #33a7d8, #62d3ee); // todo
+      background-image: linear-gradient(to right, $dartup-color-secondary, $dartup-color-primary); // todo
       background-size: 103% auto; // todo
       box-shadow: 0 2px 13px 0 rgba(0, 0, 0, 0.04); // todo
       color: #ffffff; // todo
@@ -175,21 +175,21 @@
       background-image: repeating-radial-gradient(circle, $fg-color-primary 0px, $fg-color-primary 1px, transparent 1px, transparent 100%);
       background-size: 2px 14px;
       background-position-y: -10px;
-      background-position-x: 0px;
+      background-position-x: 0;
       background-repeat: repeat-y;
     }
 
     &.time--right-now {
 
       &::before {
-        background-image: repeating-radial-gradient(circle, $link-color 0px, $link-color 1px, transparent 1px, transparent 100%);
+        background-image: repeating-radial-gradient(circle, $dartup-color-primary 0px, $dartup-color-primary 1px, transparent 1px, transparent 100%);
       }
 
       .time__item-start {
-        color: $link-color;
+        color: $dartup-color-primary;
 
         &::before {
-          background: $link-color;
+          background: $dartup-color-primary;
         }
       }
     }
