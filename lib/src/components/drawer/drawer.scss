@@ -17,13 +17,7 @@
     }
   }
 
-  .drawer__header {
-    flex-shrink: 0;
-    padding: 48px 32px 0;
-    text-align: center;
-  }
-
-  .drawer__content {
+  .drawer__body {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
@@ -71,6 +65,19 @@
       border-radius: 0 8px 8px;
       box-shadow: none;
       overflow-y: auto;
+      background-image:
+        url("/assets/images/background/bg-figure-1.png"),
+        url("/assets/images/background/bg-figure-2.png"),
+        url("/assets/images/background/bg-figure-1.png");
+      background-repeat: no-repeat;
+      background-position:
+        left 10% top 5%,
+        right 5% top 20%,
+        right 20% bottom 15%;
+      background-size:
+        44px 45px,
+        35px 56px,
+        105px 62px;
     }
   }
   // --- end drawer
