@@ -27,6 +27,7 @@
 
   .drawer__nav {
     margin-top: 32px;
+    width: 100%;
   }
 
   .drawer__footer {
@@ -68,7 +69,7 @@
       background-image:
         url("/assets/images/background/bg-figure-1.png"),
         url("/assets/images/background/bg-figure-2.png"),
-        url("/assets/images/background/bg-figure-1.png");
+        url("/assets/images/background/bg-figure-3.png");
       background-repeat: no-repeat;
       background-position:
         left 10% top 5%,
@@ -110,7 +111,7 @@
         display: block;
         width: 4px;
         height: 4px;
-        background-color: $link-color;
+        background-color: $dartup-color-primary;
         border-radius: 50%;
         position: absolute;
         bottom: 15px;
