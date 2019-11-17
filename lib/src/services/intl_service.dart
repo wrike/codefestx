@@ -139,4 +139,33 @@ class IntlService {
         args: [],
         desc: 'Switch to English',
       );
+
+  /// Filters
+  static String allFilter() => Intl.message(
+        'All',
+        name: 'IntlService_allFilter',
+        args: [],
+        desc: 'All',
+      );
+
+  static String favoritesFilter() => Intl.message(
+        'Favorites',
+        name: 'IntlService_favoritesFilter',
+        args: [],
+        desc: 'Favorites',
+      );
+
+  static String customEventsFilter() => Intl.message(
+        'Events',
+        name: 'IntlService_customEventsFilter',
+        args: [],
+        desc: 'Events',
+      );
+
+  static String liveFilter() => Intl.message(
+        'Live',
+        name: 'IntlService_liveFilter',
+        args: [],
+        desc: 'Live',
+      );
 }

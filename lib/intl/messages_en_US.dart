@@ -20,12 +20,16 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
+    "IntlService_allFilter" : MessageLookupByLibrary.simpleMessage("All"),
     "IntlService_changeLanguageButton" : MessageLookupByLibrary.simpleMessage("Перейти на русский"),
     "IntlService_currentTalksEmptyMessage" : MessageLookupByLibrary.simpleMessage("Come back here when the talk is live"),
     "IntlService_currentTalksEmptyTitle" : MessageLookupByLibrary.simpleMessage("Nothing is happening now"),
+    "IntlService_customEventsFilter" : MessageLookupByLibrary.simpleMessage("Events"),
     "IntlService_favoriteEmptyMessage" : MessageLookupByLibrary.simpleMessage("Add the talks to your favourites and they will appear here"),
     "IntlService_favoriteEmptyTitle" : MessageLookupByLibrary.simpleMessage("Nothing yet"),
+    "IntlService_favoritesFilter" : MessageLookupByLibrary.simpleMessage("Favorites"),
     "IntlService_goToScheduleButton" : MessageLookupByLibrary.simpleMessage("Go to schedule"),
+    "IntlService_liveFilter" : MessageLookupByLibrary.simpleMessage("Live"),
     "IntlService_mapRoute" : MessageLookupByLibrary.simpleMessage("Map"),
     "IntlService_pageNotFoundEmptyMessage" : MessageLookupByLibrary.simpleMessage("404 - Page not found"),
     "IntlService_pageNotFoundEmptyTitle" : MessageLookupByLibrary.simpleMessage("Whoops!"),

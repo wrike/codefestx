@@ -18,77 +18,12 @@
     </layout-actions>
 
     <!-- tags -->
-    <nav
+    <filters
       pre-content
       *ngIf="isFiltersVisible"
+      [state]="state"
       class="tags">
-
-      <div
-        class="tags__wrapper">
-
-        <!-- buttons group -->
-        <div
-          [class.buttons-group--selected]="isAllSelected"
-          class="tags__item buttons-group">
-
-          <!-- filters -->
-          <button
-            cf-button
-            (click)="onFilter()"
-            class="button-tag button-icon-only">
-
-            <svg
-              aria-hidden="true"
-              width="16" height="14" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
-              <path d="M8.17 10a3 3 0 0 1 5.66 0H15a1 1 0 0 1 0 2h-1.17a3 3 0 0 1-5.66 0H1a1 1 0 0 1 0-2h7.17zm-6-8a3 3 0 0 1 5.66 0H15a1 1 0 0 1 0 2H7.83a3 3 0 0 1-5.66 0H1a1 1 0 1 1 0-2h1.17zM5 2a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm6 10a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" fill-rule="evenodd"/>
-            </svg>
-
-            <span
-              class="visually-hidden">
-              Set up filters:
-            </span>
-          </button>
-
-          <!-- all -->
-          <button
-            cf-button
-            (click)="isAllSelected ? onFilter() : onShowAllClick()"
-            class="button-tag">
-
-            <span
-              class="visually-hidden">
-              Selected:
-            </span>
-
-            &ngsp;{{ filterTitle }}
-          </button>
-        </div>
-
-        <button
-          cf-button
-          (click)="onShowFavoriteClick()"
-          [class.button-primary]="isFavoriteSelected"
-          class="tags__item button-tag">
-          Favorites
-        </button>
-
-        <!--<button-->
-        <!--cf-button-->
-        <!--(click)="onShowCustomClick()"-->
-        <!--[class.button-primary]="isCustomSelected"-->
-        <!--class="tags__item button-tag">-->
-        <!--События-->
-        <!--</button>-->
-
-        <button
-          cf-button
-          (click)="onShowNowClick()"
-          [class.button-primary]="isNowSelected"
-          class="tags__item button-tag">
-          Live
-        </button>
-      </div>
-    </nav>
+    </filters>
 
     <!-- content -->
     <div
