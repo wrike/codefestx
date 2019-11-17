@@ -47,8 +47,8 @@
     <button
       *ngIf="!isCustomFiltersAvailable"
       cf-button
-      (click)="onShowAllClick()"
-      [class.button-primary]="isAllSelected"
+      (click)="onAllClick()"
+      [class.button-primary]="isAll"
       class="tags__item button-tag">
       {{ allTitle }}
     </button>
@@ -78,6 +78,22 @@
       [class.button-primary]="isNowSelected"
       class="tags__item button-tag">
       {{ liveTitle }}
+    </button>
+
+    <button
+      cf-button
+      (click)="onDartClick()"
+      [class.button-primary]="isDartSelected"
+      class="tags__item button-tag">
+      Dart
+    </button>
+
+    <button
+      cf-button
+      (click)="onFlutterClick()"
+      [class.button-primary]="isFlutterSelected"
+      class="tags__item button-tag">
+      Flutter
     </button>
   </div>
 </nav>

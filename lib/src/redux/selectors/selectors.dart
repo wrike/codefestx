@@ -103,6 +103,8 @@ class Selectors {
 
   Iterable<LanguageType> getSelectedLanguages(CodefestState state) => getUser(state).selectedLanguages;
 
+  bool getIsNoFilters(CodefestState state) => getSelectedSectionIds(state).isEmpty && getSelectedLanguages(state).isEmpty;
+
   String getStartTimeText(Lecture lecture) => _getTimeText(lecture.startTime);
 
   String getDateText(Lecture lecture) => _getDateText(lecture.startTime);
@@ -182,12 +184,14 @@ class Selectors {
     return _getGroupedByDay(groupedByTime);
   }
 
-  Iterable<String> _getLectureFullSearchFields(Lecture lecture) => [lecture.title, lecture.description]
-    ..addAll(lecture.speakers.expand((speaker) => [speaker.name, speaker.description, speaker.company]))
-    ..addAll([lecture.location.title, lecture.location.description]);
+  Iterable<String> _getLectureFullSearchFields(Lecture lecture) =>
+      [lecture.title, lecture.description]
+        ..addAll(lecture.speakers.expand((speaker) => [speaker.name, speaker.description, speaker.company]))
+        ..addAll([lecture.location.title, lecture.location.description]);
 
   Iterable<String> _getLectureShortSearchFields(Lecture lecture) =>
-      [lecture.title]..addAll(lecture.speakers.expand((speaker) => [speaker.name, speaker.company]));
+      [lecture.title]
+        ..addAll(lecture.speakers.expand((speaker) => [speaker.name, speaker.company]));
 
   Iterable<Section> _getMainSections(Iterable<Section> sections) =>
       sections.where((section) => !section.isCustom).toList();

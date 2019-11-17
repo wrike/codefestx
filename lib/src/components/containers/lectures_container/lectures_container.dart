@@ -64,7 +64,7 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
 
   bool get isFavoriteSelected => _selectors.getFilterType(state) == FilterTypeEnum.favorite;
 
-  bool get isFiltersVisible => !isSearchMode;
+  bool get isFiltersVisible => _selectors.isLoaded(state) && !isSearchMode;
 
   bool get isNowEmptyStateVisible => lectures.isEmpty && isNowSelected && !isSearchMode;
 
@@ -103,7 +103,7 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
       return '';
     }
 
-    return '19 July';
+    return '23 November';
   }
 
   String getFigure(int number) => '#figure-${number}';

@@ -22,7 +22,7 @@ import 'package:codefest/src/services/intl_service.dart';
   preserveWhitespace: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 )
-class FiltersComponent {
+class FiltersComponent implements OnInit {
   final Selectors _selectors;
   final Router _router;
   final Dispatcher _dispatcher;
@@ -48,13 +48,29 @@ class FiltersComponent {
     this._dispatcher,
   );
 
+  @override
+  void ngOnInit() {
+    _dartSectionId = state.sections.firstWhere((s) => s.title == 'Dart')?.id;
+    _flutterSectionId = state.sections.firstWhere((s) => s.title == 'Flutter')?.id;
+  }
+
+  String _dartSectionId = '';
+
+  String _flutterSectionId = '';
+
   bool get isAllSelected => _selectors.getFilterType(state) == FilterTypeEnum.all;
+
+  bool get isAll => _selectors.getFilterType(state) == FilterTypeEnum.all && _selectors.getIsNoFilters(state);
 
   bool get isFavoriteSelected => _selectors.getFilterType(state) == FilterTypeEnum.favorite;
 
   bool get isCustomSelected => _selectors.getFilterType(state) == FilterTypeEnum.custom;
 
   bool get isNowSelected => _selectors.getFilterType(state) == FilterTypeEnum.now;
+
+  bool get isDartSelected => _selectors.isSectionSelected(state, _dartSectionId);
+
+  bool get isFlutterSelected => _selectors.isSectionSelected(state, _flutterSectionId);
 
   String get filterTitle {
     if (_filtersCount == 1) {
@@ -93,9 +109,42 @@ class FiltersComponent {
     _dispatcher.dispatch(FilterLecturesAction(filterType: FilterTypeEnum.now));
   }
 
+  void onAllClick() {
+    _dispatcher.dispatch(UpdateSelectedSectionsAction(
+      sectionIds: [],
+      languages: [],
+      isCustomSectionMode: true,
+    ));
+    _dispatcher.dispatch(FilterLecturesAction(filterType: FilterTypeEnum.all));
+    _dispatcher.dispatch(ScrollToCurrentTimeAction());
+  }
+
+  void onDartClick() {
+    _dispatcher.dispatch(UpdateSelectedSectionsAction(
+      sectionIds: [_dartSectionId],
+      languages: [],
+      isCustomSectionMode: true,
+    ));
+    _dispatcher.dispatch(FilterLecturesAction(filterType: FilterTypeEnum.all));
+    _dispatcher.dispatch(ScrollToCurrentTimeAction());
+  }
+
+  void onFlutterClick() {
+    _dispatcher.dispatch(UpdateSelectedSectionsAction(
+      sectionIds: [_flutterSectionId],
+      languages: [],
+      isCustomSectionMode: true,
+    ));
+    _dispatcher.dispatch(FilterLecturesAction(filterType: FilterTypeEnum.all));
+    _dispatcher.dispatch(ScrollToCurrentTimeAction());
+  }
+
   /// I18n
   String get allTitle => IntlService.allFilter();
+
   String get favoritesTitle => IntlService.favoritesFilter();
+
   String get eventsTitle => IntlService.customEventsFilter();
+
   String get liveTitle => IntlService.liveFilter();
 }
