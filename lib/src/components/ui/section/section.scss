@@ -33,7 +33,7 @@
 
   .section__input:checked + .section__box {
     background: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZmlsbD0ibm9uZSIgZD0iTS0xLTFoNTgydjQwMkgtMXoiLz48Zz48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTAgMThhMiAyIDAgMCAxLTEuNC0uNmwtNC00YTIgMiAwIDAgMSAwLTIuOGMuOC0uOCAyLjEtLjggMi44IDBsMi42IDIuNiA2LjYtNi42YTIgMiAwIDAgMSAyLjggMGMuOC44LjggMiAwIDIuOGwtOCA4YTIgMiAwIDAgMS0xLjQuNnoiLz48L2c+PC9zdmc+") no-repeat center center,
-                linear-gradient(to right, #33a7d8, #62d3ee); // todo
+                linear-gradient(to right, $dartup-color-secondary, $dartup-color-primary); // todo
     background-size: 12px auto, 100% auto;
   }
 
