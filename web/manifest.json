@@ -1,7 +1,0 @@
-{
-  "name": "CodeFest X",
-  "short_name": "codefest",
-  "gcm_sender_id": "377773685293",
-  "display": "standalone",
-  "gcm_user_visible_only": true
-}

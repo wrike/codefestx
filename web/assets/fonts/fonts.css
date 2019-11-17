@@ -1,0 +1,15 @@
+@font-face {
+  font-style: normal;
+  font-weight: 400;
+  font-family: "Manrope";
+  src: url("manrope-regular.woff2") format("woff2"), url("manrope-regular.woff") format("woff");
+  font-display: fallback;
+}
+
+@font-face {
+  font-style: normal;
+  font-weight: 600;
+  font-family: "Manrope";
+  src: url("manrope-bold.woff2") format("woff2"), url("manrope-bold.woff") format("woff");
+  font-display: fallback;
+}
