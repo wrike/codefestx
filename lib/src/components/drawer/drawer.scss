@@ -17,30 +17,43 @@
     }
   }
 
-  .drawer__header {
-    flex-shrink: 0;
-    padding: 48px 32px 0;
-    text-align: center;
-  }
-
   .drawer__body {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: center;
+  }
+
+  .drawer__nav {
+    margin-top: 32px;
+    width: 100%;
   }
 
   .drawer__footer {
     flex-shrink: 0;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 20px 16px;
+    padding: 16px;
     color: $fg-color-secondary;
   }
 
-  .drawer__footer-icon {
-    margin-right: 4px;
+  .drawer__switch-language {
+    @include button-reset;
+    color: $link-color;
+    @include font-main;
+    cursor: pointer;
+  }
+
+  .drawer__credits {
+    margin-top: 8px;
+  }
+
+  .drawer__credits-icon {
+    margin: -4px 4px 0 0;
+    vertical-align: middle;
   }
 
   ::ng-deep {
@@ -53,13 +66,26 @@
       border-radius: 0 8px 8px;
       box-shadow: none;
       overflow-y: auto;
+      background-image:
+        url("/assets/images/background/bg-figure-1.png"),
+        url("/assets/images/background/bg-figure-2.png"),
+        url("/assets/images/background/bg-figure-3.png");
+      background-repeat: no-repeat;
+      background-position:
+        left 10% top 5%,
+        right 5% top 20%,
+        right 20% bottom 15%;
+      background-size:
+        44px 45px,
+        35px 56px,
+        105px 62px;
     }
   }
   // --- end drawer
 
   // nav ---
 
-  .nav {
+  .nav__list {
     padding: 0;
     margin: 0;
     list-style: none;
@@ -85,7 +111,7 @@
         display: block;
         width: 4px;
         height: 4px;
-        background-color: $link-color;
+        background-color: $dartup-color-primary;
         border-radius: 50%;
         position: absolute;
         bottom: 15px;

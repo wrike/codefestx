@@ -60,7 +60,7 @@ $button-tag-padding-vertical: round(($button-tag-height - $font-line-box-main) /
 }
 
 :host(.button-primary) {
-  background-image: linear-gradient(to right, #33a7d8, #62d3ee); // todo
+  background-image: linear-gradient(to right, $dartup-color-secondary, $dartup-color-primary); // todo
   background-size: 103% auto; // todo
   box-shadow: 0 0 40px 0 rgba(51, 167, 216, 0.56); // todo
   color: #ffffff; // todo

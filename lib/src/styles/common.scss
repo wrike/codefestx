@@ -25,9 +25,9 @@
 
       &.info-item__media-container--placeholder {
         border-color: transparent;
-        background-color: #e7f0f8; // todo
+        background-color: rgba($dartup-color-primary, .12); // todo
         background-origin: border-box;
-        color: #5faed9; // todo
+        color: $dartup-color-primary; // todo
       }
     }
 
