@@ -1,6 +1,7 @@
 import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:codefest/src/components/ui/button/button.dart';
+import 'package:codefest/src/models/_types.dart';
 import 'package:codefest/src/models/section.dart';
 import 'package:codefest/src/redux/actions/actions.dart';
 import 'package:codefest/src/redux/actions/effects/actions.dart';
@@ -55,7 +56,6 @@ class FiltersComponent implements OnInit {
   }
 
   String _dartSectionId = '';
-
   String _flutterSectionId = '';
 
   bool get isAllSelected => _selectors.getFilterType(state) == FilterTypeEnum.all;
@@ -71,6 +71,10 @@ class FiltersComponent implements OnInit {
   bool get isDartSelected => _selectors.isSectionSelected(state, _dartSectionId);
 
   bool get isFlutterSelected => _selectors.isSectionSelected(state, _flutterSectionId);
+
+  bool get isRuSelected => _selectors.isLanguageSelected(state, LanguageType.ru);
+
+  bool get isEnSelected => _selectors.isLanguageSelected(state, LanguageType.en);
 
   String get filterTitle {
     if (_filtersCount == 1) {
@@ -133,6 +137,26 @@ class FiltersComponent implements OnInit {
     _dispatcher.dispatch(UpdateSelectedSectionsAction(
       sectionIds: [_flutterSectionId],
       languages: [],
+      isCustomSectionMode: true,
+    ));
+    _dispatcher.dispatch(FilterLecturesAction(filterType: FilterTypeEnum.all));
+    _dispatcher.dispatch(ScrollToCurrentTimeAction());
+  }
+
+  void onRuClick() {
+    _dispatcher.dispatch(UpdateSelectedSectionsAction(
+      sectionIds: [],
+      languages: [LanguageType.ru],
+      isCustomSectionMode: true,
+    ));
+    _dispatcher.dispatch(FilterLecturesAction(filterType: FilterTypeEnum.all));
+    _dispatcher.dispatch(ScrollToCurrentTimeAction());
+  }
+
+  void onEnClick() {
+    _dispatcher.dispatch(UpdateSelectedSectionsAction(
+      sectionIds: [],
+      languages: [LanguageType.en],
       isCustomSectionMode: true,
     ));
     _dispatcher.dispatch(FilterLecturesAction(filterType: FilterTypeEnum.all));

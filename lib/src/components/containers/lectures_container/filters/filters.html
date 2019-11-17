@@ -95,5 +95,21 @@
       class="tags__item button-tag">
       Flutter
     </button>
+
+    <button
+      cf-button
+      (click)="onRuClick()"
+      [class.button-primary]="isRuSelected"
+      class="tags__item button-tag">
+      Ru
+    </button>
+
+    <button
+      cf-button
+      (click)="onEnClick()"
+      [class.button-primary]="isEnSelected"
+      class="tags__item button-tag">
+      En
+    </button>
   </div>
 </nav>

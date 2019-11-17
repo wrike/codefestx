@@ -138,6 +138,8 @@ class Selectors {
 
   bool isSectionSelected(CodefestState state, String sectionId) => getSelectedSectionIds(state).contains(sectionId);
 
+  bool isLanguageSelected(CodefestState state, LanguageType lang) => getSelectedLanguages(state).contains(lang);
+
   bool isUpdateAvailable(CodefestState state) => state.releaseNote.isNotEmpty;
 
   String releaseNote(CodefestState state) => state.releaseNote;
