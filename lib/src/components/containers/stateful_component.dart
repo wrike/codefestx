@@ -26,6 +26,7 @@ abstract class StatefulComponent implements OnDestroy {
       _subscriptions.addAll([
         _store.onChange.listen((state) {
           onStateChange(state);
+          detectChanges();
         }),
       ]);
     });

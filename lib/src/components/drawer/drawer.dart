@@ -36,6 +36,7 @@ class DrawerComponent {
   final Dispatcher _dispatcher;
   final Selectors _selectors;
   final AuthService _authService;
+  final Router _router;
 
   @Input()
   RoutePath currentPath;
@@ -52,6 +53,7 @@ class DrawerComponent {
     this._selectors,
     this._zone,
     this._cdr,
+    this._router,
   );
 
   bool isActive(RoutePath item) => item.path == currentPath?.path;
@@ -70,6 +72,7 @@ class DrawerComponent {
 
   void changeLanguage() {
     _dispatcher.dispatch(ChangeLocaleAction(locale: state.locale == IntlService.ruLang ? IntlService.enLang : IntlService.ruLang));
+    _router.navigateByUrl(currentPath.toUrl(), reload: true);
   }
 
   void onLogout() {
