@@ -1,0 +1,115 @@
+<nav>
+
+  <div
+    class="tags__wrapper">
+
+    <!-- buttons group -->
+    <div
+      *ngIf="isCustomFiltersAvailable"
+      [class.buttons-group--selected]="isAllSelected"
+      class="tags__item buttons-group">
+
+      <!-- filters -->
+      <button
+        cf-button
+        (click)="onFilter()"
+        class="button-tag button-icon-only">
+
+        <svg
+          aria-hidden="true"
+          width="16" height="14" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+          <path
+            d="M8.17 10a3 3 0 0 1 5.66 0H15a1 1 0 0 1 0 2h-1.17a3 3 0 0 1-5.66 0H1a1 1 0 0 1 0-2h7.17zm-6-8a3 3 0 0 1 5.66 0H15a1 1 0 0 1 0 2H7.83a3 3 0 0 1-5.66 0H1a1 1 0 1 1 0-2h1.17zM5 2a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm6 10a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"
+            fill-rule="evenodd"/>
+        </svg>
+
+        <span
+          class="visually-hidden">
+          Set up filters:
+        </span>
+      </button>
+
+      <!-- all -->
+      <button
+        cf-button
+        (click)="isAllSelected ? onFilter() : onShowAllClick()"
+        class="button-tag">
+
+            <span
+              class="visually-hidden">
+              Selected:
+            </span>
+
+        &ngsp;{{ filterTitle }}
+      </button>
+    </div>
+
+    <button
+      *ngIf="!isCustomFiltersAvailable"
+      cf-button
+      (click)="onAllClick()"
+      [class.button-primary]="isAll"
+      class="tags__item button-tag">
+      {{ allTitle }}
+    </button>
+
+    <button
+      *ngIf="isFavoritesFiltersAvailable"
+      cf-button
+      (click)="onShowFavoriteClick()"
+      [class.button-primary]="isFavoriteSelected"
+      class="tags__item button-tag">
+      {{ favoritesTitle }}
+    </button>
+
+    <button
+      *ngIf="isEventsFiltersAvailable"
+      cf-button
+      (click)="onShowCustomClick()"
+      [class.button-primary]="isCustomSelected"
+      class="tags__item button-tag">
+      {{ eventsTitle }}
+    </button>
+
+    <button
+      *ngIf="isLiveFiltersAvailable"
+      cf-button
+      (click)="onShowNowClick()"
+      [class.button-primary]="isNowSelected"
+      class="tags__item button-tag">
+      {{ liveTitle }}
+    </button>
+
+    <button
+      cf-button
+      (click)="onDartClick()"
+      [class.button-primary]="isDartSelected"
+      class="tags__item button-tag">
+      Dart
+    </button>
+
+    <button
+      cf-button
+      (click)="onFlutterClick()"
+      [class.button-primary]="isFlutterSelected"
+      class="tags__item button-tag">
+      Flutter
+    </button>
+
+    <button
+      cf-button
+      (click)="onRuClick()"
+      [class.button-primary]="isRuSelected"
+      class="tags__item button-tag">
+      Ru
+    </button>
+
+    <button
+      cf-button
+      (click)="onEnClick()"
+      [class.button-primary]="isEnSelected"
+      class="tags__item button-tag">
+      En
+    </button>
+  </div>
+</nav>

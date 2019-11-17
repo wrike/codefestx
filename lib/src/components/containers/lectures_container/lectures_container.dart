@@ -2,6 +2,7 @@ import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:codefest/src/components/containers/lectures_container/actions/actions.dart';
 import 'package:codefest/src/components/containers/lectures_container/favorite_empty_state/favorite_empty_state.dart';
+import 'package:codefest/src/components/containers/lectures_container/filters/filters.dart';
 import 'package:codefest/src/components/containers/lectures_container/layout_actions/layout_actions.dart';
 import 'package:codefest/src/components/containers/lectures_container/now_empty_state/now_empty_state.dart';
 import 'package:codefest/src/components/containers/lectures_container/search_empty_state/search_empty_state.dart';
@@ -11,11 +12,9 @@ import 'package:codefest/src/components/loader/loader.dart';
 import 'package:codefest/src/components/ui/button/button.dart';
 import 'package:codefest/src/models/_types.dart';
 import 'package:codefest/src/models/lecture.dart';
-import 'package:codefest/src/models/section.dart';
 import 'package:codefest/src/redux/actions/effects/init_action.dart';
 import 'package:codefest/src/redux/actions/effects/scroll_to_current_time_action.dart';
 import 'package:codefest/src/redux/actions/effects/update_lecture_favorite_action.dart';
-import 'package:codefest/src/redux/actions/filter_lectures_action.dart';
 import 'package:codefest/src/redux/actions/search_lectures_action.dart';
 import 'package:codefest/src/redux/actions/set_search_mode_action.dart';
 import 'package:codefest/src/redux/selectors/selectors.dart';
@@ -40,6 +39,7 @@ import 'package:codefest/src/services/intl_service.dart';
     FavoriteEmptyStateComponent,
     NowEmptyStateComponent,
     SearchEmptyStateComponent,
+    FiltersComponent,
   ],
   preserveWhitespace: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -58,27 +58,13 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
     this._selectors,
   ) : super(zone, cdr, storeFactory);
 
-  String get filterTitle {
-    if (_filtersCount == 1) {
-      return '1 filter';
-    } else if (_filtersCount > 1) {
-      return '${_filtersCount} filters';
-    } else {
-      return 'All';
-    }
-  }
-
   List<List<List<Lecture>>> get groupedLectures => _selectors.getGroupedVisibleLectures(state);
-
-  bool get isAllSelected => _selectors.getFilterType(state) == FilterTypeEnum.all;
-
-  bool get isCustomSelected => _selectors.getFilterType(state) == FilterTypeEnum.custom;
 
   bool get isFavoriteEmptyStateVisible => lectures.isEmpty && isFavoriteSelected && !isSearchMode;
 
   bool get isFavoriteSelected => _selectors.getFilterType(state) == FilterTypeEnum.favorite;
 
-  bool get isFiltersVisible => !isSearchMode;
+  bool get isFiltersVisible => _selectors.isLoaded(state) && !isSearchMode;
 
   bool get isNowEmptyStateVisible => lectures.isEmpty && isNowSelected && !isSearchMode;
 
@@ -97,10 +83,6 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
   DateTime get now => _selectors.getDateNow();
 
   String get searchText => _selectors.getSearchText(state);
-
-  Iterable<Section> get sections => _selectors.getSelectedSections(state);
-
-  int get _filtersCount => sections.length + _selectors.getSelectedLanguages(state).length;
 
   int get maxPopularity => state.maxFavorites;
 
@@ -121,7 +103,7 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
       return '';
     }
 
-    return '19 July';
+    return '23 November';
   }
 
   String getFigure(int number) => '#figure-${number}';
@@ -155,10 +137,6 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
     _dispatcher.dispatch(UpdateLectureFavoriteAction(lectureId: lecture.id, isFavorite: value));
   }
 
-  void onFilter() {
-    _router.navigateByUrl(RoutePaths.sections.toUrl());
-  }
-
   void onLectureSelect(Lecture lecture) {
     final url = RoutePaths.lecture.toUrl(
       parameters: {idParam: lecture.id},
@@ -173,25 +151,6 @@ class LecturesContainerComponent extends StatefulComponent implements OnInit {
 
   void onSearchModeChange(bool isSearchMode) {
     _dispatcher.dispatch(SetSearchModeAction(isSearchMode: isSearchMode));
-  }
-
-  void onShowAllClick() {
-    _dispatcher.dispatch(FilterLecturesAction(filterType: FilterTypeEnum.all));
-    _dispatcher.dispatch(ScrollToCurrentTimeAction());
-  }
-
-  void onShowCustomClick() {
-    _dispatcher.dispatch(FilterLecturesAction(filterType: FilterTypeEnum.custom));
-    _dispatcher.dispatch(ScrollToCurrentTimeAction());
-  }
-
-  void onShowFavoriteClick() {
-    _dispatcher.dispatch(FilterLecturesAction(filterType: FilterTypeEnum.favorite));
-    _dispatcher.dispatch(ScrollToCurrentTimeAction());
-  }
-
-  void onShowNowClick() {
-    _dispatcher.dispatch(FilterLecturesAction(filterType: FilterTypeEnum.now));
   }
 
   String startTime(Lecture lecture) => _selectors.getStartTimeText(lecture);

@@ -113,5 +113,29 @@
     "description": "Switch to English",
     "type": "text",
     "placeholders": {}
+  },
+  "IntlService_allFilter": "Все",
+  "@IntlService_allFilter": {
+    "description": "All",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_favoritesFilter": "Избранное",
+  "@IntlService_favoritesFilter": {
+    "description": "Favorites",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_customEventsFilter": "События",
+  "@IntlService_customEventsFilter": {
+    "description": "Events",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_liveFilter": "Сейчас",
+  "@IntlService_liveFilter": {
+    "description": "Live",
+    "type": "text",
+    "placeholders": {}
   }
 }

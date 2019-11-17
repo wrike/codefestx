@@ -1,10 +1,12 @@
 import 'package:angular_router/angular_router.dart';
 
 class MenuRoutePath extends RoutePath {
-  final String title;
+  String get title => titleFunc();
+
+  final Function titleFunc;
 
   MenuRoutePath({
-    this.title,
+    this.titleFunc,
     String path,
     RoutePath parent,
     bool useAsDefault = false,

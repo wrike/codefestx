@@ -28,7 +28,6 @@ class HttpProxy {
     await _http.delete(_fullPath(path), headers: _getHeaders());
   }
 
-
   Future<Iterable<T>> getList<T>(String path, Decoder<T> decoder) async {
     final response = await _http.get(_fullPath(path), headers: _getHeaders());
     return (_extractData(response) as List).map(decoder).toList();

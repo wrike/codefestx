@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2019-11-04T18:22:47.340804",
+  "@@last_modified": "2019-11-17T16:13:06.620547",
   "@@locale": "en_US",
   "IntlService_ratingEmptyTitle": "No one voted yet",
   "@IntlService_ratingEmptyTitle": {
@@ -112,6 +112,30 @@
   "IntlService_changeLanguageButton": "Перейти на русский",
   "@IntlService_changeLanguageButton": {
     "description": "Switch to English",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_allFilter": "All",
+  "@IntlService_allFilter": {
+    "description": "All",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_favoritesFilter": "Favorites",
+  "@IntlService_favoritesFilter": {
+    "description": "Favorites",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_customEventsFilter": "Events",
+  "@IntlService_customEventsFilter": {
+    "description": "Events",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_liveFilter": "Live",
+  "@IntlService_liveFilter": {
+    "description": "Live",
     "type": "text",
     "placeholders": {}
   }

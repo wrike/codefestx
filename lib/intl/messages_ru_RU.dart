@@ -20,12 +20,16 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
+    "IntlService_allFilter" : MessageLookupByLibrary.simpleMessage("Все"),
     "IntlService_changeLanguageButton" : MessageLookupByLibrary.simpleMessage("Switch to English"),
     "IntlService_currentTalksEmptyMessage" : MessageLookupByLibrary.simpleMessage("Вернись сюда, когда будут доклады"),
     "IntlService_currentTalksEmptyTitle" : MessageLookupByLibrary.simpleMessage("Сейчас ничего не происходит"),
+    "IntlService_customEventsFilter" : MessageLookupByLibrary.simpleMessage("События"),
     "IntlService_favoriteEmptyMessage" : MessageLookupByLibrary.simpleMessage("Добавьте доклады в избранное, и они появятся здесь"),
     "IntlService_favoriteEmptyTitle" : MessageLookupByLibrary.simpleMessage("Пока ничего нет"),
+    "IntlService_favoritesFilter" : MessageLookupByLibrary.simpleMessage("Избранное"),
     "IntlService_goToScheduleButton" : MessageLookupByLibrary.simpleMessage("Перейти к расписанию"),
+    "IntlService_liveFilter" : MessageLookupByLibrary.simpleMessage("Сейчас"),
     "IntlService_mapRoute" : MessageLookupByLibrary.simpleMessage("Карта"),
     "IntlService_pageNotFoundEmptyMessage" : MessageLookupByLibrary.simpleMessage("404 - Страница не найдена"),
     "IntlService_pageNotFoundEmptyTitle" : MessageLookupByLibrary.simpleMessage("Упс!"),

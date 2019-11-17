@@ -48,8 +48,6 @@ class LayoutComponent implements OnInit, OnDestroy {
   @HostBinding('class.layout')
   final bool isHostMarked = true;
 
-  List<MenuRoutePath> _menu = RoutePaths.menu;
-
   @Input()
   String title;
 
@@ -86,7 +84,7 @@ class LayoutComponent implements OnInit, OnDestroy {
 
   bool get isTitleShown => !titleHidden;
 
-  List<MenuRoutePath> get menu => _menu;
+  List<MenuRoutePath> get menu => RoutePaths.menu;
 
   void goBack() {
     _router.navigateByUrl(RoutePaths.lectures.toUrl());

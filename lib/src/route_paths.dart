@@ -14,12 +14,11 @@ class RoutePaths {
   static final about = RoutePath(parent: what, path: 'is_this');
 
   // Menu route paths
-  static final lectures = MenuRoutePath(title: IntlService.scheduleRoute(), path: 'lectures');
-  static final rating = MenuRoutePath(title: IntlService.ratingRoute(), path: 'rating');
-  static final map = MenuRoutePath(title: IntlService.mapRoute(), path: 'map');
-  static final what = MenuRoutePath(title: 'Что происходит', path: 'what');
+  static final lectures = MenuRoutePath(titleFunc: IntlService.scheduleRoute, path: 'lectures');
+  static final rating = MenuRoutePath(titleFunc: IntlService.ratingRoute, path: 'rating');
+  static final map = MenuRoutePath(titleFunc: IntlService.mapRoute, path: 'map');
+  static final what = MenuRoutePath(titleFunc: () => 'Что происходит', path: 'what');
 //  static final login = MenuRoutePath(title: 'Войти', path: 'login');
-
 //  static final logout = MenuRoutePath(title: 'Выйти', path: 'logout');
 
   static final List<MenuRoutePath> _menu = [
