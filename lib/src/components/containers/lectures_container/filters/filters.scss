@@ -1,12 +1,16 @@
 :host {
-  display: block;
+  display: flex;
+  overflow-x: auto;
+  z-index: 0;
+  -webkit-overflow-scrolling: touch;
+  margin: 0 -24px 0 -8px;
 
   .tags__wrapper {
     flex-shrink: 0;
     flex-grow: 1;
     display: flex;
     flex-wrap: nowrap;
-    padding: 12px 8px 12px 24px;
+    padding: 12px 8px 12px 0;
   }
 
   .tags__item {

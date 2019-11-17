@@ -5,34 +5,6 @@
   display: block;
   height: 100%;
 
-  // tags ---
-
-  .tags {
-    grid-row: pre-content;
-    display: flex;
-    overflow-x: auto;
-    z-index: 0;
-    -webkit-overflow-scrolling: touch;
-    margin: 0 -24px 0 -8px;
-  }
-
-  .tags__wrapper {
-    flex-shrink: 0;
-    flex-grow: 1;
-    display: flex;
-    flex-wrap: nowrap;
-    padding: 12px 8px 12px 0;
-  }
-
-  .tags__item {
-    flex-shrink: 0;
-
-    + .tags__item {
-      margin-left: 8px;
-    }
-  }
-  // --- end tags
-
   .buttons-group {
     display: flex;
     border-radius: 4px; // todo
