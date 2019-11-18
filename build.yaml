@@ -10,4 +10,4 @@ targets:
             - --minify
             - --omit-implicit-checks
             - --trust-primitives
-            - -DapiHost=https://api.kickoff.wrike.tech
+            - -DapiHost=https://api.dartup.wrike.tech
