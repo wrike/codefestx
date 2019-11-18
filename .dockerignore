@@ -3,4 +3,5 @@
 .dart_tool/
 .packages
 build/
+arb/
 **/*.g.dart
