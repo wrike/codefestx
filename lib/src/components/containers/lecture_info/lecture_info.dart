@@ -32,6 +32,9 @@ class LectureInfoComponent extends StatefulComponent {
   @Input()
   Lecture lecture;
 
+  @Input()
+  bool isShowDate = false;
+
   LectureInfoComponent(
     NgZone zone,
     ChangeDetectorRef cdr,
@@ -39,7 +42,11 @@ class LectureInfoComponent extends StatefulComponent {
     this._router,
     this._selectors,
     this._dispatcher,
-  ) : super(zone, cdr, storeFactory);
+  ) : super(
+          zone,
+          cdr,
+          storeFactory,
+        );
 
   String get endTime => _selectors.getEndTimeText(lecture);
 

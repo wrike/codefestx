@@ -240,7 +240,7 @@ class Selectors {
   String _getDateText(DateTime date) {
     final currentTimeZoneDate = getCurrentTimeZoneDate(date);
 
-    return '${currentTimeZoneDate.day} July';
+    return '${currentTimeZoneDate.day} November';
   }
 
   Iterable<Lecture> _getVisibleLectures(
