@@ -53,10 +53,12 @@ class FiltersComponent implements OnInit {
   void ngOnInit() {
     _dartSectionId = state.sections.firstWhere((s) => s.title == 'Dart')?.id;
     _flutterSectionId = state.sections.firstWhere((s) => s.title == 'Flutter')?.id;
+    _dartAndFlutterSectionId = state.sections.firstWhere((s) => s.title == 'Dart+Flutter')?.id;
   }
 
   String _dartSectionId = '';
   String _flutterSectionId = '';
+  String _dartAndFlutterSectionId = '';
 
   bool get isAllSelected => _selectors.getFilterType(state) == FilterTypeEnum.all;
 
@@ -100,6 +102,11 @@ class FiltersComponent implements OnInit {
   }
 
   void onShowFavoriteClick() {
+    _dispatcher.dispatch(UpdateSelectedSectionsAction(
+      sectionIds: [],
+      languages: [],
+      isCustomSectionMode: true,
+    ));
     _dispatcher.dispatch(FilterLecturesAction(filterType: FilterTypeEnum.favorite));
     _dispatcher.dispatch(ScrollToCurrentTimeAction());
   }
@@ -110,6 +117,11 @@ class FiltersComponent implements OnInit {
   }
 
   void onShowNowClick() {
+    _dispatcher.dispatch(UpdateSelectedSectionsAction(
+      sectionIds: [],
+      languages: [],
+      isCustomSectionMode: true,
+    ));
     _dispatcher.dispatch(FilterLecturesAction(filterType: FilterTypeEnum.now));
   }
 
@@ -125,7 +137,7 @@ class FiltersComponent implements OnInit {
 
   void onDartClick() {
     _dispatcher.dispatch(UpdateSelectedSectionsAction(
-      sectionIds: [_dartSectionId],
+      sectionIds: [_dartSectionId, _dartAndFlutterSectionId],
       languages: [],
       isCustomSectionMode: true,
     ));
@@ -135,7 +147,7 @@ class FiltersComponent implements OnInit {
 
   void onFlutterClick() {
     _dispatcher.dispatch(UpdateSelectedSectionsAction(
-      sectionIds: [_flutterSectionId],
+      sectionIds: [_flutterSectionId, _dartAndFlutterSectionId],
       languages: [],
       isCustomSectionMode: true,
     ));
