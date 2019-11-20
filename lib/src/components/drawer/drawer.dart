@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:angular_router/angular_router.dart';
@@ -74,7 +72,7 @@ class DrawerComponent {
 
   void changeLanguage() {
     _dispatcher.dispatch(ChangeLocaleAction(locale: state.locale == IntlService.ruLang ? IntlService.enLang : IntlService.ruLang));
-    window.location.reload();
+    _router.navigateByUrl(currentPath.toUrl(), reload: true);
   }
 
   void onLogout() {

@@ -4,9 +4,9 @@
 
 <talk-post
   *ngFor="let post of posts"
+  [post]="post"
   (onDelete)="onPostDelete($event)"
   (onReply)="onPostReply($event)"
-  [post]="post"
   class="messages__item">
 </talk-post>
 

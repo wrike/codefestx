@@ -8,6 +8,7 @@ import 'package:codefest/src/redux/actions/effects/actions.dart';
 import 'package:codefest/src/redux/selectors/selectors.dart';
 import 'package:codefest/src/redux/services/dispatcher.dart';
 import 'package:codefest/src/redux/services/store_factory.dart';
+import 'package:codefest/src/services/intl_service.dart';
 
 @Component(
   selector: 'lecture-info',
@@ -69,4 +70,11 @@ class LectureInfoComponent extends StatefulComponent {
       _dispatcher.dispatch(UpdateLectureLikeAction(lectureId: lecture.id, isLiked: !isLiked));
     }
   }
+
+  /// I18n
+  String get votingMainTitle => IntlService.votingMainTitle();
+  String get votingMainSubtitle => IntlService.votingMainSubtitle();
+  String get voteButton => IntlService.voteButton();
+  String get voteDoneButton => IntlService.voteDoneButton();
+  String get votingNotice => IntlService.votingNotice();
 }

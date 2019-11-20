@@ -20,8 +20,8 @@
 
       <!-- Section -->
       <span
-        class="event__meta-item"
-        [style.color]="lecture.section.color">
+        [style.color]="lecture.section.color"
+        class="event__meta-item">
         {{ lecture.section.title }}
       </span>
     </div>
@@ -139,19 +139,22 @@
     class="event__vote">
     <!-- Vote -->
     <h3
-      class="event__vote-title">Do you like the talk? Vote!</h3>
+      class="event__vote-title">
+      {{ votingMainTitle }}
+    </h3>
 
     <p
       class="event__vote-description">
-      We will award the best speaker
+      {{ votingMainSubtitle }}
     </p>
 
     <button
       cf-button
       [disabled]="!isLectureStarted"
       (click)="onLikeClick()"
-      class="event__vote-button button-full-width"
-      [class.button-primary]="!isLiked">
+      [class.button-primary]="!isLiked"
+      class="event__vote-button button-full-width">
+
       <ng-container
         *ngIf="!isLiked">
 
@@ -163,7 +166,7 @@
                 fill-rule="evenodd"/>
         </svg>
 
-        Vote
+        {{ voteButton }}
       </ng-container>
 
       <ng-container
@@ -176,14 +179,14 @@
                 fill-rule="evenodd"/>
         </svg>
 
-        You voted
+        {{ voteDoneButton }}
       </ng-container>
     </button>
 
     <p
       *ngIf="!isLectureStarted"
       class="event__vote-disabled-info">
-      Voting will be available 5 minutes after the talk starts
+      {{ votingNotice }}
     </p>
   </section>
 </div>

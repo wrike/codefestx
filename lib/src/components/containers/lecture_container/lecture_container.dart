@@ -22,6 +22,7 @@ import 'package:codefest/src/redux/state/codefest_state.dart';
 import 'package:codefest/src/route_paths.dart';
 import 'package:codefest/src/routes.dart';
 import 'package:codefest/src/services/dom_service.dart';
+import 'package:codefest/src/services/intl_service.dart';
 
 @Component(
   selector: 'lecture-container',
@@ -73,8 +74,6 @@ class LectureContainerComponent extends StatefulComponent implements OnInit, OnD
       ]);
     });
   }
-
-  String get title => !lecture.section.isCustom ? 'Talk' : 'Event';
 
   String getFigure(int number) => '#figure-${number}';
 
@@ -151,4 +150,10 @@ class LectureContainerComponent extends StatefulComponent implements OnInit, OnD
       _isActivated = false;
     }
   }
+
+  /// I18n
+  String get title => !lecture.section.isCustom ? IntlService.talkTitle() : IntlService.eventTitle();
+
+  String get infoTabTitle => IntlService.infoTabTitle();
+  String get discussionTabTitle => IntlService.discussionTabTitle();
 }
