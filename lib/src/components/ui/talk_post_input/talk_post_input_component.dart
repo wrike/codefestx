@@ -6,6 +6,7 @@ import 'package:angular_forms/angular_forms.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:codefest/src/components/ui/button/button.dart';
 import 'package:codefest/src/services/auth_store.dart';
+import 'package:codefest/src/services/intl_service.dart';
 
 @Component(
   selector: 'talk-post-input',
@@ -67,4 +68,7 @@ class TalkPostInputComponent {
   void onLoginButtonClick() {
     // _router.navigateByUrl(RoutePaths.login.toUrl());
   }
+
+  /// I18n
+  String get discussionPlaceholder => IntlService.discussionPlaceholder();
 }

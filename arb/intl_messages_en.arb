@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2019-11-17T16:13:06.620547",
+  "@@last_modified": "2019-11-20T20:21:19.412548",
   "@@locale": "en_US",
   "IntlService_ratingEmptyTitle": "No one voted yet",
   "@IntlService_ratingEmptyTitle": {
@@ -136,6 +136,78 @@
   "IntlService_liveFilter": "Live",
   "@IntlService_liveFilter": {
     "description": "Live",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_eventTitle": "Event",
+  "@IntlService_eventTitle": {
+    "description": "Event",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_talkTitle": "Talk",
+  "@IntlService_talkTitle": {
+    "description": "Talk",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_infoTabTitle": "Info",
+  "@IntlService_infoTabTitle": {
+    "description": "Info",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_discussionTabTitle": "Discussion",
+  "@IntlService_discussionTabTitle": {
+    "description": "Discussion",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_votingMainTitle": "Do you like the talk? Vote!",
+  "@IntlService_votingMainTitle": {
+    "description": "Do you like the talk? Vote!",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_votingMainSubtitle": "We will award the best speaker",
+  "@IntlService_votingMainSubtitle": {
+    "description": "We will award the best speaker",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_voteButton": "Vote",
+  "@IntlService_voteButton": {
+    "description": "Vote",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_voteDoneButton": "You voted",
+  "@IntlService_voteDoneButton": {
+    "description": "You voted",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_votingNotice": "Voting will be available 5 minutes after the talk starts",
+  "@IntlService_votingNotice": {
+    "description": "Voting will be available 5 minutes after the talk starts",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_discussionPlaceholder": "Write something...",
+  "@IntlService_discussionPlaceholder": {
+    "description": "Write something...",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_replyButton": "Reply",
+  "@IntlService_replyButton": {
+    "description": "Reply",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_deleteButton": "Delete",
+  "@IntlService_deleteButton": {
+    "description": "Delete",
     "type": "text",
     "placeholders": {}
   }

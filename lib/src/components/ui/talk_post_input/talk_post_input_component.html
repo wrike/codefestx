@@ -21,9 +21,9 @@
   class="message-send__container">
 
   <input
-    #input
     [(ngModel)]="newPostText"
-    placeholder="Write something..."
+    #input
+    [attr.placeholder]="discussionPlaceholder"
     class="message-send__input">
 
   <button

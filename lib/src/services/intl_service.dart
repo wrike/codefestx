@@ -168,4 +168,91 @@ class IntlService {
         args: [],
         desc: 'Live',
       );
+
+  /// Talk card
+  static String eventTitle() => Intl.message(
+        'Event',
+        name: 'IntlService_eventTitle',
+        args: [],
+        desc: 'Event',
+      );
+
+  static String talkTitle() => Intl.message(
+        'Talk',
+        name: 'IntlService_talkTitle',
+        args: [],
+        desc: 'Talk',
+      );
+
+  static String infoTabTitle() => Intl.message(
+        'Info',
+        name: 'IntlService_infoTabTitle',
+        args: [],
+        desc: 'Info',
+      );
+
+  static String discussionTabTitle() => Intl.message(
+        'Discussion',
+        name: 'IntlService_discussionTabTitle',
+        args: [],
+        desc: 'Discussion',
+      );
+
+  /// Voting
+  static String votingMainTitle() => Intl.message(
+        'Do you like the talk? Vote!',
+        name: 'IntlService_votingMainTitle',
+        args: [],
+        desc: 'Do you like the talk? Vote!',
+      );
+
+  static String votingMainSubtitle() => Intl.message(
+        'We will award the best speaker',
+        name: 'IntlService_votingMainSubtitle',
+        args: [],
+        desc: 'We will award the best speaker',
+      );
+
+  static String voteButton() => Intl.message(
+        'Vote',
+        name: 'IntlService_voteButton',
+        args: [],
+        desc: 'Vote',
+      );
+
+  static String voteDoneButton() => Intl.message(
+        'You voted',
+        name: 'IntlService_voteDoneButton',
+        args: [],
+        desc: 'You voted',
+      );
+
+  static String votingNotice() => Intl.message(
+        'Voting will be available 5 minutes after the talk starts',
+        name: 'IntlService_votingNotice',
+        args: [],
+        desc: 'Voting will be available 5 minutes after the talk starts',
+      );
+
+  /// Discussion
+  static String discussionPlaceholder() => Intl.message(
+        'Write something...',
+        name: 'IntlService_discussionPlaceholder',
+        args: [],
+        desc: 'Write something...',
+      );
+
+  static String replyButton() => Intl.message(
+        'Reply',
+        name: 'IntlService_replyButton',
+        args: [],
+        desc: 'Reply',
+      );
+
+  static String deleteButton() => Intl.message(
+        'Delete',
+        name: 'IntlService_deleteButton',
+        args: [],
+        desc: 'Delete',
+      );
 }

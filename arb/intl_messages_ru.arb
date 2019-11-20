@@ -1,6 +1,6 @@
 {
-  "IntlService_ratingEmptyTitle": "Никто еще не голосовал",
   "@@locale": "ru_RU",
+  "IntlService_ratingEmptyTitle": "Никто еще не голосовал",
   "@IntlService_ratingEmptyTitle": {
     "description": "No one voted yet",
     "type": "text",
@@ -135,6 +135,78 @@
   "IntlService_liveFilter": "Сейчас",
   "@IntlService_liveFilter": {
     "description": "Live",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_eventTitle": "Событие",
+  "@IntlService_eventTitle": {
+    "description": "Event",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_talkTitle": "Доклад",
+  "@IntlService_talkTitle": {
+    "description": "Talk",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_infoTabTitle": "Информация",
+  "@IntlService_infoTabTitle": {
+    "description": "Info",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_discussionTabTitle": "Обсуждение",
+  "@IntlService_discussionTabTitle": {
+    "description": "Discussion",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_votingMainTitle": "Понравилось выступление? Голосуй!",
+  "@IntlService_votingMainTitle": {
+    "description": "Do you like the talk? Vote!",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_votingMainSubtitle": "Мы наградим лучшего докладчика",
+  "@IntlService_votingMainSubtitle": {
+    "description": "We will award the best speaker",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_voteButton": "Голосовать",
+  "@IntlService_voteButton": {
+    "description": "Vote",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_voteDoneButton": "Проголосовано",
+  "@IntlService_voteDoneButton": {
+    "description": "You voted",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_votingNotice": "Голосовать можно будет через 5 минут после начала доклада",
+  "@IntlService_votingNotice": {
+    "description": "Voting will be available 5 minutes after the talk starts",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_discussionPlaceholder": "Напиши что-нибудь...",
+  "@IntlService_discussionPlaceholder": {
+    "description": "Write something...",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_replyButton": "Ответить",
+  "@IntlService_replyButton": {
+    "description": "Reply",
+    "type": "text",
+    "placeholders": {}
+  },
+  "IntlService_deleteButton": "Удалить",
+  "@IntlService_deleteButton": {
+    "description": "Delete",
     "type": "text",
     "placeholders": {}
   }

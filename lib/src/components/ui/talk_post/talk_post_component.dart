@@ -5,6 +5,7 @@ import 'package:codefest/src/components/containers/stateful_component.dart';
 import 'package:codefest/src/models/talk_post.dart';
 import 'package:codefest/src/redux/services/store_factory.dart';
 import 'package:codefest/src/services/auth_store.dart';
+import 'package:codefest/src/services/intl_service.dart';
 import 'package:intl/intl.dart';
 
 @Component(
@@ -63,4 +64,8 @@ class TalkPostComponent extends StatefulComponent {
   bool get canDelete => post.authorId == _authStore.userId;
 
   bool get canReply => _authStore.isAuth;
+
+  /// I18n
+  String get replyButton => IntlService.replyButton();
+  String get deleteButton => IntlService.deleteButton();
 }

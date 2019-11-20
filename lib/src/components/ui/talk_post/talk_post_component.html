@@ -49,14 +49,14 @@
       *ngIf="canReply"
       (click)="onPostReply()"
       class="message-balloon__actions-button">
-      Reply
+      {{ replyButton }}
     </button>
 
     <button
       *ngIf="canDelete"
       (click)="onPostDelete()"
       class="message-balloon__actions-button">
-      Delete
+      {{ deleteButton }}
     </button>
   </div>
 </div>
