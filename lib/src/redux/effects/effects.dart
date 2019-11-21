@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:html';
 
 import 'package:codefest/intl/messages_all.dart';
+import 'package:codefest/src/models/lecture_data.dart';
 import 'package:codefest/src/models/user.dart';
 import 'package:codefest/src/redux/actions/actions.dart';
 import 'package:codefest/src/redux/actions/authorize_action.dart';
@@ -97,7 +98,7 @@ class Effects {
           ]);
 
           yield SetDataAction(
-            lectures: apiData[0],
+            lectures: (apiData[0] as Iterable<LectureData>).toList()..sort(_lecturesSorter),
             locations: apiData[1],
             sections: apiData[2],
             speakers: apiData[3],
@@ -249,4 +250,17 @@ class Effects {
         await initializeDateFormatting(Intl.defaultLocale);
         await initializeMessages(Intl.defaultLocale);
       });
+
+  int _lecturesSorter(LectureData one, LectureData two) {
+    final start = one.startTime - two.startTime;
+    if (start == 0) {
+      final duration = one.duration - two.duration;
+      if (duration == 0) {
+        final location = one.locationId.compareTo(two.locationId);
+        return location == 0 ? one.title.compareTo(two.title) : location;
+      }
+      return duration;
+    }
+    return start;
+  }
 }
