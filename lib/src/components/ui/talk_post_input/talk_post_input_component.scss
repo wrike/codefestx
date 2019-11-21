@@ -43,6 +43,15 @@
       color: #444 !important;
       background: #ffffff !important;
     }
+
+    &[placeholder]:empty:before {
+      content: attr(placeholder);
+      color: #a3a3a3;
+    }
+
+    &[placeholder]:empty:focus:before {
+      content: "";
+    }
   }
 
   .message-send__button {
