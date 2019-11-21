@@ -143,7 +143,10 @@
                         {{ lecture.location.title }}
                       </span>
 
-                      &ngsp;•&ngsp;
+                      <template
+                        [ngIf]="lecture.section.title.isNotEmpty">
+                        &ngsp;•&ngsp;
+                      </template>
 
                       <!-- section -->
                       <span

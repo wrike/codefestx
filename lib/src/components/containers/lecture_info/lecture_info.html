@@ -13,12 +13,14 @@
 
       <!-- Location -->
       <span
+        *ngIf="lecture.location.title.isNotEmpty"
         class="event__meta-item">
         {{ lecture.location.title }}
       </span>
 
       <!-- Section -->
       <span
+        *ngIf="lecture.section.title.isNotEmpty"
         [style.color]="lecture.section.color"
         class="event__meta-item">
         {{ lecture.section.title }}
