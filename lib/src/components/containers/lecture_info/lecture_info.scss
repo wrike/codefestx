@@ -103,3 +103,8 @@
     }
   }
 }
+
+.event__meta-item + .event__meta-item::before {
+  content: " • ";
+  color: #898a92;
+}
