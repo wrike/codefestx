@@ -5,6 +5,7 @@ import 'package:angular/angular.dart';
 import 'package:angular_forms/angular_forms.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:codefest/src/components/ui/button/button.dart';
+import 'package:codefest/src/redux/state/codefest_state.dart';
 import 'package:codefest/src/services/auth_store.dart';
 import 'package:codefest/src/services/intl_service.dart';
 
@@ -33,6 +34,9 @@ class TalkPostInputComponent {
   @HostBinding('class.message-send')
   final bool isHostMarked = true;
 
+  @Input()
+  CodefestState state;
+
   @ViewChild('input')
   DivElement input;
 
@@ -47,6 +51,8 @@ class TalkPostInputComponent {
   bool get canCreatePost => _authStore.isAuth;
 
   String get userName => _authStore.userName;
+
+  String get userAvatar => state.user.avatarPath;
 
   TalkPostInputComponent(this._authStore, this._router);
 
