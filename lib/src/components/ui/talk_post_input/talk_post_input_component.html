@@ -20,11 +20,15 @@
   *ngIf="canCreatePost"
   class="message-send__container">
 
-  <input
-    [(ngModel)]="newPostText"
-    #input
-    [attr.placeholder]="discussionPlaceholder"
-    class="message-send__input">
+  <img
+    src
+    alt
+    class="message-send__avatar">
+
+  <div
+    contentEditable="true"
+    class="message-send__container message-input">
+  </div>
 
   <button
     cf-button
@@ -42,4 +46,10 @@
         fill-rule="evenodd"/>
     </svg>
   </button>
+
+<!--  <input-->
+<!--    [(ngModel)]="newPostText"-->
+<!--    #input-->
+<!--    [attr.placeholder]="discussionPlaceholder"-->
+<!--    class="message-send__input">-->
 </div>
