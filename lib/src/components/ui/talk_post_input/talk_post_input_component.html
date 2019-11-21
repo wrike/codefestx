@@ -21,12 +21,15 @@
   class="message-send__container">
 
   <img
-    src
+    src=""
     alt
     class="message-send__avatar">
 
   <div
+    #input
     contentEditable="true"
+    (input)="onInput()"
+    (paste)="onPaste($event)"
     class="message-send__container message-input">
   </div>
 
@@ -46,10 +49,4 @@
         fill-rule="evenodd"/>
     </svg>
   </button>
-
-<!--  <input-->
-<!--    [(ngModel)]="newPostText"-->
-<!--    #input-->
-<!--    [attr.placeholder]="discussionPlaceholder"-->
-<!--    class="message-send__input">-->
 </div>

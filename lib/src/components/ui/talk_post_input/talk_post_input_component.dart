@@ -34,7 +34,7 @@ class TalkPostInputComponent {
   final bool isHostMarked = true;
 
   @ViewChild('input')
-  InputElement input;
+  DivElement input;
 
   @ViewChild('loginButton')
   ButtonComponent loginButton;
@@ -50,9 +50,20 @@ class TalkPostInputComponent {
 
   TalkPostInputComponent(this._authStore, this._router);
 
+  void onInput() {
+    newPostText = input.text;
+  }
+
+  void onPaste(ClipboardEvent event) {
+    event.preventDefault();
+    final text = event.clipboardData.getData('text/plain');
+    document.execCommand("insertHTML", false, text);
+  }
+
   void send() {
     if (isAllowToSend) {
-      _onSend.add(newPostText);
+      _onSend.add(input.text);
+      input.text = '';
       newPostText = '';
     }
   }
