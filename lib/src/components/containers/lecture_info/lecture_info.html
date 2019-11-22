@@ -1,5 +1,6 @@
 <div
   content
+  style="width: 100%;"
   class="event">
 
   <!-- Event -->
@@ -12,12 +13,14 @@
 
       <!-- Location -->
       <span
+        *ngIf="lecture.location.title.isNotEmpty"
         class="event__meta-item">
         {{ lecture.location.title }}
       </span>
 
       <!-- Section -->
       <span
+        *ngIf="lecture.section.title.isNotEmpty"
         [style.color]="lecture.section.color"
         class="event__meta-item">
         {{ lecture.section.title }}
@@ -26,7 +29,7 @@
       <!-- Language  -->
       <span
         class="event__meta-item">
-        <!-- language here -->
+        {{ lang }}
       </span>
     </div>
 

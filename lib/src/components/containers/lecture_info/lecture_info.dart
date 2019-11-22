@@ -3,6 +3,7 @@ import 'package:angular_router/angular_router.dart';
 import 'package:codefest/src/components/containers/stateful_component.dart';
 import 'package:codefest/src/components/layout/navigation_type.dart';
 import 'package:codefest/src/components/ui/button/button.dart';
+import 'package:codefest/src/models/_types.dart';
 import 'package:codefest/src/models/lecture.dart';
 import 'package:codefest/src/redux/actions/effects/actions.dart';
 import 'package:codefest/src/redux/selectors/selectors.dart';
@@ -63,6 +64,8 @@ class LectureInfoComponent extends StatefulComponent {
 
   String get startTime => _selectors.getStartTimeText(lecture);
 
+  String get lang => lecture.language == LanguageType.en ? 'en' : 'ru';
+
   void onLikeClick() {
     if (!isAuthorized) {
       //_router.navigateByUrl(RoutePaths.login.toUrl());
@@ -73,8 +76,12 @@ class LectureInfoComponent extends StatefulComponent {
 
   /// I18n
   String get votingMainTitle => IntlService.votingMainTitle();
+
   String get votingMainSubtitle => IntlService.votingMainSubtitle();
+
   String get voteButton => IntlService.voteButton();
+
   String get voteDoneButton => IntlService.voteDoneButton();
+
   String get votingNotice => IntlService.votingNotice();
 }

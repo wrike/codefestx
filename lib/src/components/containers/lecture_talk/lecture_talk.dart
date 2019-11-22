@@ -38,6 +38,7 @@ class LectureTalkComponent extends StatefulComponent {
 
   @Input()
   Lecture lecture;
+
   @Input()
   List<TalkPost> posts;
 

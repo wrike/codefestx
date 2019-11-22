@@ -20,11 +20,20 @@
   *ngIf="canCreatePost"
   class="message-send__container">
 
-  <input
-    [(ngModel)]="newPostText"
+  <img
+    [src]="userAvatar"
+    alt
+    class="message-send__avatar">
+
+  <div
     #input
+    (input)="onInput()"
+    (keyup.enter)="send()"
+    (paste)="onPaste($event)"
     [attr.placeholder]="discussionPlaceholder"
-    class="message-send__input">
+    contentEditable="true"
+    class="message-send__container message-input">
+  </div>
 
   <button
     cf-button

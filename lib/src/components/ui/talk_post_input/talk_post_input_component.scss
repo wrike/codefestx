@@ -7,27 +7,56 @@
     position: relative;
   }
 
-  .message-send__input {
+  .message-send__avatar {
+    display: block;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    z-index: 999;
+  }
+
+  .message-input {
     display: block;
     border: none;
     resize: none;
     font-size: 12px;
     line-height: 20px;
-    height: 48px;
+    min-height: 48px;
+    max-height: 88px;
+    overflow: auto;
     margin: 0;
-    padding: 0 48px 0 24px;
+    padding: 14px 56px 4px 48px;
     color: #444;
     background: #ffffff;
     width: 100%;
     position: relative;
     box-shadow: 0 2px 23px 0 rgba(0, 0, 0, 0.06);
     border-radius: 8px;
+
+    > * {
+      font-size: 12px !important;
+      line-height: 20px !important;
+      font-family: $font-family-default !important;
+      color: #444 !important;
+      background: #ffffff !important;
+    }
+
+    &[placeholder]:empty:before {
+      content: attr(placeholder);
+      color: #a3a3a3;
+    }
+
+    &[placeholder]:empty:focus:before {
+      content: "";
+    }
   }
 
   .message-send__button {
     position: absolute;
-    top: 50%;
+    bottom: 8px;
     right: 8px;
-    transform: translateY(-50%);
   }
 }

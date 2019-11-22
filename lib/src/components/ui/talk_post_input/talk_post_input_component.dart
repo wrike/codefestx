@@ -5,6 +5,7 @@ import 'package:angular/angular.dart';
 import 'package:angular_forms/angular_forms.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:codefest/src/components/ui/button/button.dart';
+import 'package:codefest/src/redux/state/codefest_state.dart';
 import 'package:codefest/src/services/auth_store.dart';
 import 'package:codefest/src/services/intl_service.dart';
 
@@ -33,8 +34,11 @@ class TalkPostInputComponent {
   @HostBinding('class.message-send')
   final bool isHostMarked = true;
 
+  @Input()
+  CodefestState state;
+
   @ViewChild('input')
-  InputElement input;
+  DivElement input;
 
   @ViewChild('loginButton')
   ButtonComponent loginButton;
@@ -48,11 +52,24 @@ class TalkPostInputComponent {
 
   String get userName => _authStore.userName;
 
+  String get userAvatar => state.user.avatarPath;
+
   TalkPostInputComponent(this._authStore, this._router);
+
+  void onInput() {
+    newPostText = input.text;
+  }
+
+  void onPaste(ClipboardEvent event) {
+    event.preventDefault();
+    final text = event.clipboardData.getData('text/plain');
+    document.execCommand("insertHTML", false, text);
+  }
 
   void send() {
     if (isAllowToSend) {
-      _onSend.add(newPostText);
+      _onSend.add(input.text);
+      input.text = '';
       newPostText = '';
     }
   }
