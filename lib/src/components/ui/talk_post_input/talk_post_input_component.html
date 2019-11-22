@@ -21,16 +21,17 @@
   class="message-send__container">
 
   <img
-    alt
     [src]="userAvatar"
+    alt
     class="message-send__avatar">
 
   <div
     #input
-    contentEditable="true"
-    [attr.placeholder]="discussionPlaceholder"
     (input)="onInput()"
+    (keyup.enter)="send()"
     (paste)="onPaste($event)"
+    [attr.placeholder]="discussionPlaceholder"
+    contentEditable="true"
     class="message-send__container message-input">
   </div>
 
