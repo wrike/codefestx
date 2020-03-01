@@ -8,8 +8,8 @@ import 'package:http/http.dart';
 typedef T Decoder<T>(dynamic item);
 
 class HttpProxy {
-  static const host = String.fromEnvironment('apiHost', defaultValue: 'https://api.dartup.wrike.tech');
-  // static const host = String.fromEnvironment('apiHost', defaultValue: 'http://localhost:8088');
+//  static const host = String.fromEnvironment('apiHost', defaultValue: 'https://api.dartup.wrike.tech');
+   static const host = String.fromEnvironment('apiHost', defaultValue: 'http://localhost:8095');
 
   final Client _http;
   final AuthStore _authStore;
